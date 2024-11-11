@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -6,18 +7,27 @@ function Header() {
   return (
     <header className="bg-gradient-to-r from-black via-gray-900 to-black p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <h1 className="text-3xl font-extrabold text-white tracking-wider">AINOR</h1>
+        {/* Logo - Redirect to Homepage */}
+        <Link to="/" className="text-3xl font-extrabold text-white tracking-wider">
+          AINOR
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6">
-          <a href="#features" className="text-white hover:text-indigo-400 transition duration-300">Features</a>
-          <a href="#about" className="text-white hover:text-indigo-400 transition duration-300">About</a>
-          <a href="#contact" className="text-white hover:text-indigo-400 transition duration-300">Contact</a>
+          <a href="features" className="text-white hover:text-indigo-400 transition duration-300">Features</a>
+          <a href="about" className="text-white hover:text-indigo-400 transition duration-300">About</a>
+          <a href="contact" className="text-white hover:text-indigo-400 transition duration-300">Contact</a>
         </div>
-        <button className="hidden md:block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full shadow-md transform transition duration-500 hover:scale-105">
-          Get Started
-        </button>
+        
+        {/* Updated "Try AINOR" Button */}
+        <a
+          href="https://ainorchat.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full shadow-md transform transition duration-500 hover:scale-105"
+        >
+          Try AINOR
+        </a>
 
         {/* Burger Icon */}
         <div className="md:hidden flex items-center">
@@ -47,12 +57,17 @@ function Header() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden mt-4 space-y-4 text-center">
-          <a href="#features" className="block text-white hover:text-indigo-400 transition duration-300">Features</a>
-          <a href="#about" className="block text-white hover:text-indigo-400 transition duration-300">About</a>
-          <a href="#contact" className="block text-white hover:text-indigo-400 transition duration-300">Contact</a>
-          <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full shadow-md transform transition duration-500 hover:scale-105">
-            Get Started
-          </button>
+          <a href="features" className="block text-white hover:text-indigo-400 transition duration-300">Features</a>
+          <a href="about" className="block text-white hover:text-indigo-400 transition duration-300">About</a>
+          <a href="contact" className="block text-white hover:text-indigo-400 transition duration-300">Contact</a>
+          <a
+            href="https://ainorchat.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full shadow-md transform transition duration-500 hover:scale-105"
+          >
+            Try AINOR
+          </a>
         </div>
       )}
     </header>
