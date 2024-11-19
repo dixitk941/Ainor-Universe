@@ -87,7 +87,3 @@ Have questions or suggestions? Reach out to us:
 - **Website**: [AINOR Universe](https://ainoruniverse.vercel.app)  
 
 ---
-
-> **"AINOR: Your AI companion for a smarter tomorrow."**  
-
-```  
