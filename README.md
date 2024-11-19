@@ -84,7 +84,7 @@ Our design blends futuristic elements with sleek, modern interfaces to reflect t
 
 Have questions or suggestions? Reach out to us:  
 - **Email**: dixitk941@gmail.com  
-- **Website**: [AINOR Universe](https://ainoruniverse.com)  
+- **Website**: [AINOR Universe](https://ainoruniverse.vercel.app)  
 
 ---
 
