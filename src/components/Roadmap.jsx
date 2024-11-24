@@ -32,9 +32,9 @@ function Roadmap() {
         </p>
 
         {/* Roadmap Timeline */}
-        <div className="relative flex justify-between items-center pt-16 pb-20 space-x-8">
+        <div className="relative flex flex-wrap justify-center items-start pt-16 pb-20 space-x-8 space-y-8 sm:space-y-0">
           {/* December 2024 - AINOR Universe Launch */}
-          <div className="relative flex flex-col items-center w-1/5">
+          <div className="relative flex flex-col items-center w-full sm:w-1/5">
             <div className="w-20 h-20 rounded-full bg-gradient-to-r from-pink-500 to-indigo-600 text-white flex items-center justify-center shadow-xl">
               🚀
             </div>
@@ -45,7 +45,7 @@ function Roadmap() {
           </div>
 
           {/* January 2025 - AINOR Launch */}
-          <div className="relative flex flex-col items-center w-1/5">
+          <div className="relative flex flex-col items-center w-full sm:w-1/5">
             <div className="w-20 h-20 rounded-full bg-gradient-to-r from-indigo-600 to-purple-500 text-white flex items-center justify-center shadow-xl">
               🤖
             </div>
@@ -56,7 +56,7 @@ function Roadmap() {
           </div>
 
           {/* February 2025 - AINOR Chatbot */}
-          <div className="relative flex flex-col items-center w-1/5">
+          <div className="relative flex flex-col items-center w-full sm:w-1/5">
             <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white flex items-center justify-center shadow-xl">
               💬
             </div>
@@ -67,7 +67,7 @@ function Roadmap() {
           </div>
 
           {/* March 2025 - HiiHive Launch */}
-          <div className="relative flex flex-col items-center w-1/5">
+          <div className="relative flex flex-col items-center w-full sm:w-1/5">
             <div className="w-20 h-20 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white flex items-center justify-center shadow-xl">
               🌐
             </div>
@@ -78,7 +78,7 @@ function Roadmap() {
           </div>
 
           {/* April 2025 - HiiHive V-2 */}
-          <div className="relative flex flex-col items-center w-1/5">
+          <div className="relative flex flex-col items-center w-full sm:w-1/5">
             <div className="w-20 h-20 rounded-full bg-gradient-to-r from-indigo-600 to-pink-500 text-white flex items-center justify-center shadow-xl">
               🔄
             </div>
