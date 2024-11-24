@@ -4,6 +4,7 @@ import HeroSection from '../components/HeroSection';
 import About from '../components/About';
 import Features from '../components/Features';
 import CTA from '../components/CTA';
+import Roadmap from '../components/Roadmap';
 // import Footer from '../components/Footer';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       {/* <Header /> */}
       <HeroSection />
       <About />
+      <Roadmap />
       <Features />
       <CTA />
       {/* <Footer /> */}
