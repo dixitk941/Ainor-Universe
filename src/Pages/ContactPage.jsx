@@ -89,9 +89,9 @@ const ContactPage = () => {
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">Email Us</h3>
                     <p className="text-gray-600 mb-1">General Inquiries:</p>
-                    <a href="mailto:info@ainor.com" className="text-gray-800 hover:text-black font-medium transition-colors">info@ainor.com</a>
+                    <a href="mailto:info@ainor.com" className="text-gray-800 hover:text-black font-medium transition-colors">neocodenex@gmail.com</a>
                     <p className="text-gray-600 mt-3 mb-1">Support:</p>
-                    <a href="mailto:support@ainor.com" className="text-gray-800 hover:text-black font-medium transition-colors">support@ainor.com</a>
+                    <a href="mailto:support@ainor.com" className="text-gray-800 hover:text-black font-medium transition-colors">neocodenex@gmail.com</a>
                   </div>                </div>
               </div>
               
@@ -103,14 +103,14 @@ const ContactPage = () => {
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">Call Us</h3>
                     <p className="text-gray-600 mb-1">Sales Department:</p>
-                    <p className="text-gray-800 font-medium">+1 (555) 123-4567</p>
+                    <p className="text-gray-800 font-medium">+919528202892</p>
                     <p className="text-gray-600 mt-3 mb-1">Technical Support:</p>
-                    <p className="text-gray-800 font-medium">+1 (555) 987-6543</p>
+                    <p className="text-gray-800 font-medium">+919528202892</p>
                   </div>
                 </div>
               </div>
               
-              <div className="bg-gray-100 p-6 rounded-xl border border-gray-200 shadow-md">
+              {/* <div className="bg-gray-100 p-6 rounded-xl border border-gray-200 shadow-md">
                 <div className="flex items-start">
                   <div className="bg-gray-200 p-3 rounded-lg mr-4">
                     <FaMapMarkerAlt className="h-6 w-6 text-gray-700" />
@@ -125,7 +125,7 @@ const ContactPage = () => {
                     <p className="text-gray-600 mt-3">Monday - Friday: 9:00 AM - 6:00 PM</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </motion.div>          </div>
         </Container>
       </Section>      

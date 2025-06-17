@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaHome, FaLaptopCode, FaBriefcase, FaInfoCircle, FaBookOpen, FaTag, FaUserTie, FaQuestion, FaEnvelope, FaEllipsisH } from 'react-icons/fa';
+import { FaHome, FaLaptopCode, FaBriefcase, FaInfoCircle, FaBookOpen, FaTag, FaUserTie, FaQuestion, FaEnvelope } from 'react-icons/fa';
+import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import Container from './Container';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuExpanded, setMobileMenuExpanded] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   // Handle scroll events
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -21,7 +22,7 @@ const Navbar = () => {
 
   // Close expanded mobile menu when route changes
   useEffect(() => {
-    setMobileMenuExpanded(false);
+    setMobileMenuOpen(false);
   }, [location.pathname]);
 
   // Main navigation items with icons for mobile
@@ -36,59 +37,68 @@ const Navbar = () => {
     { path: '/faq', label: 'FAQ', icon: <FaQuestion /> },
     { path: '/contact', label: 'Contact', icon: <FaEnvelope /> },
   ];
-
-  // For mobile tab bar, use only the primary 4 items plus a "more" option
-  const primaryNavItems = navItems.slice(0, 4);
-  const secondaryNavItems = navItems.slice(4);
+  // For mobile menu, primary items shown directly
+  const primaryNavItems = navItems.slice(0, 5);
 
   return (
     <>
-      {/* Desktop & Mobile Top Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+      {/* Main Navbar - One UI 7 Inspired */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-1' : 'py-3'}`}>
         <Container>
-          <div className={`floating-header mx-auto my-3 rounded-xl ${isScrolled ? 'bg-white/90 shadow-lg' : 'bg-gray-900/75'} backdrop-blur-md border border-gray-200/20 max-w-[96%] md:max-w-none`}>
-            <div className="flex justify-between items-center h-16 px-4 md:px-6">
-              {/* Logo */}
+          <div className={`rounded-[2rem] transition-all duration-300 ${
+            isScrolled 
+              ? 'bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md' 
+              : 'bg-gray-900/70 backdrop-blur-md border border-gray-800/30'
+          }`}>
+            <div className="flex justify-between items-center h-16 px-5 md:px-7">
+              {/* Logo - One UI style with minimal design */}
               <div className="flex items-center">
                 <Link to="/" className="flex items-center">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500 font-bold text-2xl md:text-3xl">
-                    AINOR
+                  <span className={`font-bold text-2xl md:text-2xl transition-colors duration-300 ${
+                    isScrolled ? 'text-gray-900' : 'text-white'
+                  }`}>
+                    <span className="text-blue-500">A</span>INOR
                   </span>
                 </Link>
               </div>
               
-              {/* Mobile Get in Touch Button */}
-              <div className="md:hidden">
-                <Link 
-                  to="/contact" 
-                  className={`inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-300 
-                    ${isScrolled 
-                      ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm' 
-                      : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20'
-                    }`}
+              {/* Mobile Menu Toggle - One UI style with rounded button */}
+              <div className="flex md:hidden items-center">
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className={`p-2 rounded-full ${
+                    isScrolled 
+                      ? 'text-gray-900 hover:bg-gray-100' 
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                  aria-label="Toggle menu"
                 >
-                  Get in Touch
-                </Link>
+                  {mobileMenuOpen ? (
+                    <IoCloseOutline className="h-6 w-6" />
+                  ) : (
+                    <IoMenuOutline className="h-6 w-6" />
+                  )}
+                </button>
               </div>
               
-              {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-1">
+              {/* Desktop Navigation - One UI style with clean spacing */}
+              <div className="hidden md:flex items-center gap-1">
                 {navItems.map((item) => (
                   <NavLink 
                     key={item.path}
                     to={item.path} 
-                    isPageLink={item.path !== '/'} 
                     isScrolled={isScrolled}
                   >
                     {item.label}
                   </NavLink>
                 ))}
-                <div className="ml-4">
+                
+                <div className="ml-3">
                   <Link 
                     to="/contact" 
-                    className={`inline-flex items-center justify-center px-5 py-2 font-medium rounded-lg transition-all duration-300 
+                    className={`inline-flex items-center justify-center px-6 py-2.5 font-medium rounded-full transition-all duration-300 
                       ${isScrolled 
-                        ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md hover:shadow-indigo-500/30' 
+                        ? 'bg-blue-500 text-white hover:bg-blue-600 shadow-md' 
                         : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20'
                       }`}
                   >
@@ -98,34 +108,58 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-        </Container>
-      </nav>
-
-      {/* Mobile Bottom Tab Navigation - Floating Style */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe px-4">
-        <div className="mx-auto my-3 rounded-xl bg-gray-900/95 backdrop-blur-lg border border-gray-800 shadow-lg max-w-[96%]">
+          
+          {/* Mobile Menu - One UI 7 style with rounded card */}
           <AnimatePresence>
-            {mobileMenuExpanded && (
-              <motion.div 
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
+            {mobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="px-2 pb-2 grid grid-cols-4 gap-1"
+                className={`mt-2 rounded-[1.5rem] overflow-hidden ${
+                  isScrolled 
+                    ? 'bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md' 
+                    : 'bg-gray-900/90 backdrop-blur-md border border-gray-800/30'
+                }`}
               >
-                {secondaryNavItems.map((item) => (
-                  <MobileNavTab 
-                    key={item.path}
-                    to={item.path}
-                    icon={item.icon}
-                    label={item.label}
-                  />
-                ))}
+                <div className="py-4 px-2">
+                  <div className="grid grid-cols-1 gap-1">
+                    {navItems.map((item) => (
+                      <MobileNavLink 
+                        key={item.path}
+                        to={item.path}
+                        icon={item.icon}
+                        label={item.label}
+                        isScrolled={isScrolled}
+                      />
+                    ))}
+                  </div>
+                  
+                  {/* One UI style call-to-action */}
+                  <div className="mt-4 px-3">
+                    <Link 
+                      to="/contact" 
+                      className={`flex items-center justify-center w-full py-3 font-medium rounded-full transition-all duration-300 
+                        ${isScrolled 
+                          ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                          : 'bg-white/10 text-white hover:bg-white/20'
+                        }`}
+                    >
+                      Get in Touch
+                    </Link>
+                  </div>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
+        </Container>
+      </nav>
 
-          <div className="grid grid-cols-5 gap-1 py-1">
+      {/* Bottom Tab Bar for Mobile - One UI 7 Style */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe px-4">
+        <div className="mx-auto my-3 rounded-[1.5rem] bg-gray-900/95 backdrop-blur-lg border border-gray-800/30 shadow-lg">
+          <div className="grid grid-cols-5 gap-1 py-2">
             {primaryNavItems.map((item) => (
               <MobileNavTab 
                 key={item.path}
@@ -134,15 +168,6 @@ const Navbar = () => {
                 label={item.label}
               />
             ))}
-            <button
-              onClick={() => setMobileMenuExpanded(!mobileMenuExpanded)}
-              className="flex flex-col items-center justify-center py-2 text-white transition-colors"
-            >
-              <div className={`p-1.5 rounded-full transition-colors ${mobileMenuExpanded ? 'bg-indigo-600/30 text-indigo-300' : ''}`}>
-                <FaEllipsisH className="h-5 w-5" />
-              </div>
-              <span className="text-xs mt-1 font-medium">More</span>
-            </button>
           </div>
         </div>
       </div>
@@ -153,19 +178,41 @@ const Navbar = () => {
   );
 };
 
-const NavLink = ({ to, children, isPageLink = false, isScrolled = false }) => {
+const NavLink = ({ to, children, isScrolled = false }) => {
   const location = useLocation();
-  const isActive = location.pathname === to || (to.includes('#') && location.hash === to.substring(to.indexOf('#')));
+  const isActive = location.pathname === to;
   
   return (
     <Link 
       to={to} 
-      className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-indigo-600/10 hover:text-indigo-400 hover:scale-105 
-      ${isScrolled ? 'text-gray-800' : 'text-white'} 
-      ${isActive ? 'bg-indigo-600/10 text-indigo-400' : ''}
-      ${isPageLink ? 'border-b-2 border-indigo-500/30' : ''}`}
+      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 
+      ${isScrolled 
+        ? `text-gray-700 hover:bg-gray-100 ${isActive ? 'bg-blue-50 text-blue-600' : ''}` 
+        : `text-gray-100 hover:bg-white/10 ${isActive ? 'bg-white/10 text-white' : ''}`
+      }`}
     >
       {children}
+    </Link>
+  );
+};
+
+const MobileNavLink = ({ to, icon, label, isScrolled = false }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+  
+  return (
+    <Link 
+      to={to} 
+      className={`flex items-center px-4 py-3 rounded-xl transition-all duration-300
+      ${isScrolled 
+        ? `text-gray-800 ${isActive ? 'bg-blue-50' : 'hover:bg-gray-100'}` 
+        : `text-white ${isActive ? 'bg-white/10' : 'hover:bg-white/5'}`
+      }`}
+    >
+      <div className={`mr-4 ${isActive ? (isScrolled ? 'text-blue-500' : 'text-blue-400') : ''}`}>
+        {React.cloneElement(icon, { className: "h-5 w-5" })}
+      </div>
+      <span className="font-medium">{label}</span>
     </Link>
   );
 };
@@ -179,7 +226,7 @@ const MobileNavTab = ({ to, icon, label }) => {
       to={to} 
       className="flex flex-col items-center justify-center py-2 text-white transition-colors"
     >
-      <div className={`p-1.5 rounded-full transition-colors ${isActive ? 'bg-indigo-600/30 text-indigo-300' : ''}`}>
+      <div className={`p-2 rounded-xl transition-colors ${isActive ? 'bg-blue-500/20 text-blue-300' : ''}`}>
         {React.cloneElement(icon, { className: "h-5 w-5" })}
       </div>
       <span className="text-xs mt-1 font-medium">{label}</span>

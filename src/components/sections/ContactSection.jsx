@@ -24,21 +24,21 @@ const ContactSection = () => {
             Ready to elevate your digital presence? Get in touch with our team to discuss your project and discover how we can help you achieve your business goals.
           </p>
           
-          <div className="space-y-6 mb-10">
-            <ContactInfo 
+          <div className="space-y-4 mb-10">
+            {/* <ContactInfo 
               icon={<FaMapMarkerAlt />} 
               title="Our Location" 
               content="123 Innovation Street, San Francisco, CA 94103" 
-            />
+            /> */}
             <ContactInfo 
               icon={<FaEnvelope />} 
               title="Email Us" 
-              content="contact@ainoruniverse.com" 
+              content="dixitk941@gmail.com" 
             />
             <ContactInfo 
               icon={<FaPhone />} 
               title="Call Us" 
-              content="+1 (555) 123-4567" 
+              content="+919528202892" 
             />
           </div>
           
