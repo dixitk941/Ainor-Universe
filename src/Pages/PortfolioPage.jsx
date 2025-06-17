@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaExternalLinkAlt, FaCode, FaMobileAlt, FaDesktop, FaShoppingCart, FaChartLine } from 'react-icons/fa';
 import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
@@ -338,9 +337,9 @@ const PortfolioPage = () => {
         </Container>
       </Section>
       
-      <Footer />
-    </div>
+          </div>
   );
 };
 
 export default PortfolioPage;
+

@@ -8,6 +8,7 @@ const Button = ({
   className = '', 
   href, 
   is3D = false,
+  fadeIn = false,
   ...props 
 }) => {
   const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out rounded-lg focus:outline-none';
@@ -61,7 +62,20 @@ const Button = ({
       boxShadow: "0 0 5px rgba(99, 102, 241, 0.6), 0 0 10px rgba(99, 102, 241, 0.4)"
     }
   };
-    if (is3D) {
+
+  // Fade in animation variant
+  const fadeInVariant = {
+    initial: { opacity: 0, y: 10 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.4
+      }
+    }
+  };
+    
+  if (is3D) {
     const currentVariants = variant === 'cyber' || variant === 'neon' ? cyberButtonVariants : buttonVariants;
     
     if (href) {
@@ -71,6 +85,8 @@ const Button = ({
           className={`${buttonClasses} preserve-3d`}
           whileHover={currentVariants.hover}
           whileTap={currentVariants.tap}
+          initial={fadeIn ? fadeInVariant.initial : undefined}
+          animate={fadeIn ? fadeInVariant.animate : undefined}
           {...props}
         >
           <span className="relative z-10">{children}</span>
@@ -83,6 +99,8 @@ const Button = ({
         className={`${buttonClasses} preserve-3d`}
         whileHover={currentVariants.hover}
         whileTap={currentVariants.tap}
+        initial={fadeIn ? fadeInVariant.initial : undefined}
+        animate={fadeIn ? fadeInVariant.animate : undefined}
         {...props}
       >
         <span className="relative z-10">{children}</span>
@@ -94,16 +112,31 @@ const Button = ({
   // Non-3D buttons
   if (href) {
     return (
-      <a href={href} className={buttonClasses} {...props}>
+      <motion.a 
+        href={href} 
+        className={buttonClasses}
+        initial={fadeIn ? fadeInVariant.initial : undefined}
+        animate={fadeIn ? fadeInVariant.animate : undefined}
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.98 }}
+        {...props}
+      >
         {children}
-      </a>
+      </motion.a>
     );
   }
   
   return (
-    <button className={buttonClasses} {...props}>
+    <motion.button 
+      className={buttonClasses}
+      initial={fadeIn ? fadeInVariant.initial : undefined}
+      animate={fadeIn ? fadeInVariant.animate : undefined}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.98 }}
+      {...props}
+    >
       {children}
-    </button>
+    </motion.button>
   );
 };
 

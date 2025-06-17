@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaLaptopCode, FaMobileAlt, FaShoppingCart, FaSearch, FaCode } from 'react-icons/fa';
 import { BiCodeAlt, BiMobileAlt, BiShoppingBag, BiSearchAlt, BiGlobe } from 'react-icons/bi';
-import { BsCheck2Circle } from 'react-icons/bs';
-import AnimatedImage from '../components/ui/AnimatedImage';
+import { BsCheck2Circle, BsChevronDown } from 'react-icons/bs';
 import Button from '../components/ui/Button';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 
@@ -156,262 +153,447 @@ const servicesData = [
 
 const ServiceDetailPage = () => {
   const [selectedService, setSelectedService] = useState(servicesData[0]);
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'features', 'process', 'tech'
+  const [expandedFeature, setExpandedFeature] = useState(null);
   
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
+  // Check for mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  const handleFeatureToggle = (index) => {
+    if (expandedFeature === index) {
+      setExpandedFeature(null);
+    } else {
+      setExpandedFeature(index);
     }
   };
-  
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.5 }
-    }
-  };  return (
+
+  return (
     <div className="bg-white text-gray-900 min-h-screen">
-      <Navbar />
+      {/* Subtle background pattern */}
+      <div className="fixed inset-0 bg-grid-pattern opacity-5 pointer-events-none z-0"></div>
       
-      {/* Header Section */}
-      <Section className="pt-32 pb-16 relative bg-gradient-to-b from-white to-gray-100">
+      {/* Gradient orbs for subtle background interest */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full opacity-30 blur-3xl transform translate-x-1/2 -translate-y-1/4"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-100 rounded-full opacity-30 blur-3xl transform -translate-x-1/3 translate-y-1/4"></div>
+      </div>
+      
+      {/* Hero Section - Mobile First */}
+      <Section className="pt-24 md:pt-32 pb-8 md:pb-16 relative">
         <Container>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center px-4 md:px-0"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-black">
+            <div className="inline-block px-3 py-1 rounded-full bg-gray-100 text-gray-800 text-xs font-medium mb-4 shadow-sm border border-gray-200">
+              Our Expertise
+            </div>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-black">
               Our Services
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover our comprehensive range of digital services designed to transform your business. 
-              Each service is tailored to deliver exceptional results and drive your success.
+            <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover our comprehensive range of digital solutions designed to transform your business and drive success in the digital landscape.
             </p>
           </motion.div>
         </Container>
       </Section>
-        {/* 3D Decorative Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <motion.div 
-          className="absolute top-0 right-0 w-96 h-96 bg-gray-200 rounded-full opacity-50 blur-3xl"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            x: [0, 30, 0]
-          }}
-          transition={{ 
-            repeat: Infinity,
-            duration: 20,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-0 left-0 w-80 h-80 bg-gray-300 rounded-full opacity-40 blur-3xl"
-          animate={{ 
-            scale: [1, 1.3, 1],
-            y: [0, 40, 0]
-          }}
-          transition={{ 
-            repeat: Infinity,
-            duration: 25,
-            ease: "easeInOut"
-          }}
-        />
-      </div><div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center mb-16 relative">
-          <motion.span            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block px-3 py-1 rounded-full bg-gray-100 text-gray-800 text-sm font-medium mb-4 shadow-sm border border-gray-200"
+      
+      {/* Service Navigation - Mobile First */}
+      <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm py-3 mb-6 md:mb-10">
+        <Container>
+          <div className="flex overflow-x-auto hide-scrollbar gap-2 px-4 md:px-0 md:justify-center">
+            {servicesData.map((service) => (
+              <button
+                key={service.id}
+                onClick={() => {
+                  setSelectedService(service);
+                  setActiveTab('overview');
+                  setExpandedFeature(null);
+                }}
+                className={`whitespace-nowrap px-4 py-2 rounded-full flex items-center space-x-2 transition-all duration-300 text-sm md:text-base flex-shrink-0 ${
+                  selectedService.id === service.id 
+                    ? `bg-gray-900 text-white shadow-md` 
+                    : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                }`}
+              >
+                <span className="text-lg">{service.icon}</span>
+                <span className="font-medium">{service.title}</span>
+              </button>
+            ))}
+          </div>
+        </Container>
+      </div>
+      
+      {/* Selected Service Content - Mobile First */}
+      <Container>
+        <div className="px-4 md:px-0">
+          {/* Service Header with Image */}
+          <motion.div 
+            key={`${selectedService.id}-header`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="mb-8 md:mb-12"
           >
-            Our Services
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-black"
-          >
-            Comprehensive Digital Solutions
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto"
-          >
-            Transforming ideas into digital reality with cutting-edge technology and exceptional design
-          </motion.p>
-        </div>
-        
-        {/* Service navigation */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
-          {servicesData.map((service) => (
-            <motion.button
-              key={service.id}
-              onClick={() => setSelectedService(service)}
-              className={`px-5 py-3 rounded-lg flex items-center space-x-2 transition-all duration-300 ${
-                selectedService.id === service.id 
-                  ? `bg-gradient-to-r from-gray-800 to-black text-white shadow-lg` 
-                  : 'bg-gray-100 text-gray-800 hover:bg-gray-200 hover:shadow-md border border-gray-200'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className="text-lg">{service.icon}</span>
-              <span className="font-medium">{service.title}</span>
-            </motion.button>
-          ))}
-        </div>
-        
-        {/* Selected service details */}
-        <motion.div 
-          key={selectedService.id}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20"
-        >
-          <div className="order-2 lg:order-1">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl mb-6 md:mb-10 aspect-[16/9] md:aspect-[21/9]">
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80 z-10"></div>
+              <img 
+                src={selectedService.image} 
+                alt={selectedService.title} 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 z-20 text-white">
+                <div className="flex items-center mb-2">
+                  <div className="bg-white/20 backdrop-blur-sm rounded-full p-2 mr-3">
+                    {selectedService.bigIcon}
+                  </div>
+                  <h2 className="text-2xl md:text-4xl font-bold">{selectedService.title}</h2>
+                </div>
+                <p className="text-white/90 text-sm md:text-base max-w-3xl">
+                  {selectedService.shortDesc}
+                </p>
+              </div>
+            </div>
+          
+            {/* Mobile Tab Navigation */}
+            <div className="grid grid-cols-4 gap-2 mb-6 md:hidden">
+              <button 
+                onClick={() => setActiveTab('overview')}
+                className={`py-2 px-1 text-xs font-medium rounded-lg text-center transition-colors ${
+                  activeTab === 'overview' 
+                    ? 'bg-gray-900 text-white' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Overview
+              </button>
+              <button 
+                onClick={() => setActiveTab('features')}
+                className={`py-2 px-1 text-xs font-medium rounded-lg text-center transition-colors ${
+                  activeTab === 'features' 
+                    ? 'bg-gray-900 text-white' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Features
+              </button>
+              <button 
+                onClick={() => setActiveTab('process')}
+                className={`py-2 px-1 text-xs font-medium rounded-lg text-center transition-colors ${
+                  activeTab === 'process' 
+                    ? 'bg-gray-900 text-white' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Process
+              </button>
+              <button 
+                onClick={() => setActiveTab('tech')}
+                className={`py-2 px-1 text-xs font-medium rounded-lg text-center transition-colors ${
+                  activeTab === 'tech' 
+                    ? 'bg-gray-900 text-white' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Tech
+              </button>
+            </div>
+          </motion.div>
+          
+          {/* Service Content Sections - Mobile First */}
+          <div className="grid md:grid-cols-12 gap-8 md:gap-12">
+            {/* Main Content */}
             <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >              <motion.div variants={itemVariants} className="mb-8">
-                <div className={`inline-block p-3 rounded-2xl bg-gradient-to-r from-gray-800 to-black text-white mb-4`}>
-                  {selectedService.bigIcon}
+              key={`${selectedService.id}-content-${activeTab}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="md:col-span-7"
+            >
+              {/* Overview Tab (Default) */}
+              {(activeTab === 'overview' || !isMobile) && (
+                <div className={`${isMobile ? '' : 'mb-10'}`}>
+                  {isMobile && <h3 className="text-lg font-bold mb-3 text-gray-900">Overview</h3>}
+                  <div className="prose prose-gray max-w-none">
+                    <p className="text-gray-700">{selectedService.description}</p>
+                  </div>
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">{selectedService.title}</h2>
-                <p className="text-xl text-gray-600">{selectedService.description}</p>
-              </motion.div>
+              )}
               
-              <motion.div variants={itemVariants}>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Key Features</h3>
-                <ul className="space-y-3 mb-8">
-                  {selectedService.features.map((feature, index) => (
-                    <motion.li 
-                      key={index}
-                      className="flex items-start"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + (index * 0.1) }}
-                    >
-                      <span className="mr-2 mt-1 flex-shrink-0 text-gray-800">
-                        <BsCheck2Circle size={20} />
-                      </span>
-                      <span className="text-gray-700">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-              
-              <motion.div variants={itemVariants} className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Technologies We Use</h3>
-                <div className="flex flex-wrap gap-2">
-                  {selectedService.technologies.map((tech, index) => (
-                    <span 
-                      key={index}
-                      className="inline-block px-3 py-1 rounded-full bg-gray-100 text-gray-800 text-sm font-medium border border-gray-200"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              {/* Features Tab */}
+              {(activeTab === 'features' || !isMobile) && (
+                <div className={`${isMobile ? '' : 'mb-10'}`}>
+                  {isMobile && <h3 className="text-lg font-bold mb-3 text-gray-900">Key Features</h3>}
+                  {!isMobile && <h3 className="text-xl font-bold mb-4 text-gray-900">Key Features</h3>}
+                  
+                  <div className="space-y-3">
+                    {selectedService.features.map((feature, index) => (
+                      <motion.div 
+                        key={index}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.1 * index }}
+                        className="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden"
+                      >
+                        <button 
+                          onClick={() => handleFeatureToggle(index)}
+                          className="w-full p-3 flex items-start justify-between text-left"
+                        >
+                          <div className="flex items-start">
+                            <span className="mr-3 mt-1 flex-shrink-0 text-indigo-600">
+                              <BsCheck2Circle size={18} />
+                            </span>
+                            <span className="text-gray-800 font-medium">{feature}</span>
+                          </div>
+                          <BsChevronDown 
+                            className={`text-gray-500 transition-transform ${expandedFeature === index ? 'rotate-180' : ''}`} 
+                          />
+                        </button>
+                        
+                        {expandedFeature === index && (
+                          <div className="px-4 pb-3 pt-1">
+                            <p className="text-sm text-gray-600">
+                              {/* Feature details would go here */}
+                              This feature helps your business increase efficiency and improve customer satisfaction.
+                            </p>
+                          </div>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
+              )}
               
-              <motion.div variants={itemVariants}>                <Button href="#contact" variant="dark" is3D={true}>
-                  Discuss Your Project
-                </Button>
-              </motion.div>
+              {/* Process Tab */}
+              {(activeTab === 'process' || !isMobile) && (
+                <div className={`${isMobile ? '' : 'mb-10'}`}>
+                  {isMobile && <h3 className="text-lg font-bold mb-3 text-gray-900">Our Process</h3>}
+                  {!isMobile && <h3 className="text-xl font-bold mb-4 text-gray-900">Our Process</h3>}
+                  
+                  <div className="relative">
+                    {/* Process Steps - Connected Timeline */}
+                    <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 z-0"></div>
+                    
+                    <div className="space-y-6 relative z-10">
+                      {selectedService.process.map((step, index) => (
+                        <motion.div 
+                          key={index}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.15 * index }}
+                          className="flex"
+                        >
+                          <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-medium z-10">
+                            {index + 1}
+                          </div>
+                          <div className="ml-4">
+                            <h4 className="text-base font-semibold text-gray-900 mb-1">{step}</h4>
+                            <p className="text-sm text-gray-600">
+                              {/* Step details would go here */}
+                              This step ensures your project is {index === 0 ? 'properly defined' : index === 1 ? 'well-designed' : index === 2 ? 'expertly developed' : index === 3 ? 'thoroughly tested' : 'successfully delivered'}.
+                            </p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Technologies Tab */}
+              {(activeTab === 'tech' || !isMobile) && (
+                <div>
+                  {isMobile && <h3 className="text-lg font-bold mb-3 text-gray-900">Technologies</h3>}
+                  {!isMobile && <h3 className="text-xl font-bold mb-4 text-gray-900">Technologies We Use</h3>}
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {selectedService.technologies.map((tech, index) => (
+                      <motion.div 
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.05 * index }}
+                        className="px-3 py-2 bg-white border border-gray-200 rounded-lg shadow-sm text-sm font-medium text-gray-800"
+                      >
+                        {tech}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </motion.div>
+            
+            {/* Sidebar Content - Hidden on Mobile */}
+            <div className="hidden md:block md:col-span-5">
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 sticky top-24">
+                <h3 className="text-xl font-bold mb-4 text-gray-900">Ready to start your project?</h3>
+                <p className="text-gray-600 mb-6">
+                  Get in touch with our team to discuss how our {selectedService.title} service can help your business grow.
+                </p>
+                
+                <div className="space-y-4">
+                  <Button href="/contact" variant="dark" is3D={true} className="w-full">
+                    Request a Quote
+                  </Button>
+                  
+                  <div className="text-center">
+                    <span className="text-sm text-gray-500">or</span>
+                  </div>
+                  
+                  <Button href="tel:+15551234567" variant="outline" className="w-full">
+                    Call Us Directly
+                  </Button>
+                </div>
+                
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <h4 className="font-medium text-gray-900 mb-2">Why choose our {selectedService.title} service:</h4>
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    <li className="flex items-start">
+                      <BsCheck2Circle className="text-green-500 mt-1 mr-2" />
+                      <span>Expert team with years of experience</span>
+                    </li>
+                    <li className="flex items-start">
+                      <BsCheck2Circle className="text-green-500 mt-1 mr-2" />
+                      <span>Transparent project management</span>
+                    </li>
+                    <li className="flex items-start">
+                      <BsCheck2Circle className="text-green-500 mt-1 mr-2" />
+                      <span>Ongoing support and maintenance</span>
+                    </li>
+                    <li className="flex items-start">
+                      <BsCheck2Circle className="text-green-500 mt-1 mr-2" />
+                      <span>Satisfaction guarantee</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
           
-          <div className="order-1 lg:order-2">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-gray-300 blur-3xl opacity-30 rounded-full transform -translate-y-1/4 scale-150"></div>
-              <AnimatedImage
-                src={selectedService.image}
-                alt={selectedService.title}
-                className="rounded-2xl shadow-2xl"
-                tiltEnable={true}
-                glareEnable={true}
-                glareMaxOpacity={0.2}
-                tiltMaxAngleX={10}
-                tiltMaxAngleY={10}
-                scale={1.05}
-                gyroscope={true}
-              />
-              
-              {/* Process Steps as circles around the image */}
-              {selectedService.process.map((step, index) => {
-                const angle = (index * (360 / selectedService.process.length)) * (Math.PI / 180);
-                const radius = 200; // distance from center
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                
-                return (
-                  <motion.div
-                    key={index}
-                    className="absolute w-32 h-32 transform -translate-x-1/2 -translate-y-1/2"
-                    style={{ 
-                      left: `calc(50% + ${x}px)`, 
-                      top: `calc(50% + ${y}px)`,
-                      zIndex: 20
-                    }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 + (index * 0.1), duration: 0.5 }}
-                  >
-                    <div className="relative bg-white/90 border border-gray-200 p-2 rounded-full w-full h-full flex items-center justify-center text-center text-xs font-medium shadow-md transform rotate-0">
-                      <span>{index + 1}. {step}</span>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+          {/* Mobile CTA - Visible only on mobile */}
+          <div className="mt-8 md:hidden">
+            <Button href="/contact" variant="dark" is3D={true} className="w-full">
+              Get Started with {selectedService.title}
+            </Button>
           </div>
-        </motion.div>
-          {/* Service comparison table */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Service Comparison</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 bg-white rounded-xl overflow-hidden shadow-xl border border-gray-200">
+        </div>
+      </Container>
+      
+      {/* Comparison Section - Mobile First */}
+      <Section className="py-12 md:py-20 bg-gray-50 mt-12 md:mt-20">
+        <Container>
+          <div className="text-center mb-8 md:mb-12 px-4 md:px-0">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Compare Our Services</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Find the perfect service that aligns with your business goals and requirements.
+            </p>
+          </div>
+          
+          {/* Mobile Comparison Cards */}
+          <div className="md:hidden px-4">
+            <div className="space-y-6">
+              {servicesData.map((service) => (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4 }}
+                  className={`bg-white rounded-xl shadow-md overflow-hidden border-2 ${
+                    selectedService.id === service.id ? 'border-indigo-500' : 'border-transparent'
+                  }`}
+                >
+                  <div className="p-4 border-b border-gray-100 flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="h-10 w-10 rounded-lg bg-gray-900 flex items-center justify-center text-white mr-3">
+                        {service.icon}
+                      </div>
+                      <h3 className="font-medium text-gray-900">{service.title}</h3>
+                    </div>
+                    {selectedService.id !== service.id && (
+                      <button 
+                        onClick={() => {
+                          setSelectedService(service);
+                          setActiveTab('overview');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="text-xs font-medium text-indigo-600 px-2 py-1 rounded border border-indigo-200 bg-indigo-50"
+                      >
+                        View
+                      </button>
+                    )}
+                    {selectedService.id === service.id && (
+                      <span className="text-xs font-medium text-white px-2 py-1 rounded bg-indigo-500">
+                        Selected
+                      </span>
+                    )}
+                  </div>
+                  <div className="p-4 space-y-3">
+                    <div className="flex">
+                      <span className="w-1/3 text-xs uppercase text-gray-500 font-medium">Ideal For:</span>
+                      <span className="w-2/3 text-sm text-gray-800">
+                        {service.id === 1 && "Businesses needing an online presence"}
+                        {service.id === 2 && "Companies with unique operational needs"}
+                        {service.id === 3 && "Brands targeting Android mobile users"}
+                        {service.id === 4 && "Retailers looking to sell products online"}
+                        {service.id === 5 && "Businesses seeking better online visibility"}
+                      </span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-1/3 text-xs uppercase text-gray-500 font-medium">Timeline:</span>
+                      <span className="w-2/3 text-sm text-gray-800">
+                        {service.id === 1 && "4-8 weeks"}
+                        {service.id === 2 && "8-16 weeks"}
+                        {service.id === 3 && "6-12 weeks"}
+                        {service.id === 4 && "4-10 weeks"}
+                        {service.id === 5 && "Ongoing (3+ months)"}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Desktop Comparison Table */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full divide-y divide-gray-200 bg-white rounded-xl overflow-hidden shadow-xl border border-gray-200">
               <thead className="bg-gray-50">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ideal For</th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timeline</th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Key Benefit</th>
+                  <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {servicesData.map((service) => (
-                  <tr key={service.id} className="hover:bg-gray-50 transition-colors duration-200">
+                  <tr key={service.id} className={selectedService.id === service.id ? 'bg-indigo-50' : 'hover:bg-gray-50 transition-colors duration-200'}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10">
-                          <div className="h-10 w-10 rounded-md bg-gradient-to-r from-gray-800 to-black flex items-center justify-center text-white">
+                          <div className={`h-10 w-10 rounded-lg flex items-center justify-center text-white ${
+                            selectedService.id === service.id ? 'bg-indigo-600' : 'bg-gray-900'
+                          }`}>
                             {service.icon}
                           </div>
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">{service.title}</div>
+                          <div className="text-xs text-gray-500">{service.shortDesc}</div>
                         </div>
                       </div>
                     </td>
@@ -438,15 +620,70 @@ const ServiceDetailPage = () => {
                       {service.id === 4 && "Direct revenue generation"}
                       {service.id === 5 && "Increased organic traffic and leads"}
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      {selectedService.id !== service.id ? (
+                        <button 
+                          onClick={() => {
+                            setSelectedService(service);
+                            setActiveTab('overview');
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
+                          className="text-indigo-600 hover:text-indigo-900 text-sm font-medium"
+                        >
+                          Select
+                        </button>
+                      ) : (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                          Selected
+                        </span>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </motion.div>
-      </div>
+        </Container>
+      </Section>
       
-      <Footer />
+      {/* Final CTA Section */}
+      <Section className="py-12 md:py-20 bg-white">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto px-4 md:px-0">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-2xl md:text-4xl font-bold mb-4 text-gray-900"
+            >
+              Ready to Transform Your Business?
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-base md:text-lg text-gray-600 mb-8"
+            >
+              Let's work together to bring your vision to life with our {selectedService.title} service.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Button href="/contact" variant="dark" is3D={true} size="lg">
+                Get Started Today
+              </Button>
+            </motion.div>
+          </div>
+        </Container>
+      </Section>
+      
+      {/* Extra padding for mobile navigation */}
+      <div className="md:hidden h-16"></div>
     </div>
   );
 };

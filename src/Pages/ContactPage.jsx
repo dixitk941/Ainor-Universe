@@ -1,16 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 import Button from '../components/ui/Button';
 import Section from '../components/layout/Section';
 import Container from '../components/layout/Container';
 
 const ContactPage = () => {
   return (    <div className="min-h-screen bg-white text-gray-900">
-      <Navbar />
-      
       {/* Header Section */}
       <Section className="pt-32 pb-20 relative bg-gradient-to-b from-white to-gray-100">
         <Container>
@@ -130,11 +126,11 @@ const ContactPage = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </motion.div>          </div>
         </Container>
       </Section>      
-      <Footer />
+      {/* Extra padding for mobile navigation */}
+      <div className="md:hidden h-16"></div>
     </div>
   );
 };

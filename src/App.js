@@ -9,6 +9,11 @@ import BlogPage from './Pages/BlogPage';
 import CareersPage from './Pages/CareersPage';
 import FAQPage from './Pages/FAQPage';
 import PricingPage from './Pages/PricingPage';
+import SplashScreen from './components/ui/SplashScreen';
+import CookieConsent from './components/ui/CookieConsent';
+import BackToTop from './components/ui/BackToTop';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 
 import './App.css';
 
@@ -16,6 +21,8 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <SplashScreen />
+        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServiceDetailPage />} />
@@ -27,10 +34,12 @@ function App() {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/pricing" element={<PricingPage />} />
         </Routes>
+        <Footer />
+        <BackToTop />
+        <CookieConsent />
       </div>
     </Router>
   );
 }
-
 
 export default App;

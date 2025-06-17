@@ -41,6 +41,16 @@ A hub tailored for Gen Z, bringing innovation, resources, and community to the f
 
 ---
 
+## 📱 Website Features
+
+- **Modern 3D Interactions**: Interactive 3D elements and animations using Three.js
+- **Responsive Design**: Fully responsive for all device sizes with a mobile-first approach
+- **Component-Based**: Built with reusable React components for better maintainability
+- **Advanced UI Effects**: Particle backgrounds, glitch text, animated images, and more
+- **Complete Business Site**: Includes Home, Services, Contact, About, Portfolio, Blog, Careers, FAQ, and Pricing pages
+
+---
+
 ## 📖 How to Get Started  
 
 1. Clone this repository:  
@@ -49,13 +59,33 @@ A hub tailored for Gen Z, bringing innovation, resources, and community to the f
    cd ainor-universe
    ```  
 
-2. Install dependencies for each component. Example for React apps:  
+2. Install dependencies:  
    ```bash
    npm install
+   ```  
+
+3. Start the development server:  
+   ```bash
    npm start
    ```  
 
-3. Explore individual components and customize them as needed.  
+4. Build for production:  
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 📦 Dependencies
+
+- React 18
+- React Router 6
+- Framer Motion
+- TailwindCSS
+- Three.js
+- React Icons
+- React Intersection Observer
+- React Parallax Tilt
 
 ---
 

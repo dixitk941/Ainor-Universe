@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
@@ -279,9 +278,9 @@ const BlogPage = () => {
         </Container>
       </Section>
 
-      <Footer />
-    </>
+          </>
   );
 };
 
 export default BlogPage;
+

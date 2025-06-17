@@ -6,21 +6,37 @@ const ParticleBackground = () => {
   const [particles, setParticles] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  const [devicePerformance, setDevicePerformance] = useState('high'); // 'low', 'medium', 'high'
+  
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
-        setDimensions({
-          width: window.innerWidth,
-          height: window.innerHeight
-        });
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        
+        setDimensions({ width, height });
+        setIsMobile(width < 768);
+        
+        // Estimate device performance based on screen size
+        // This is a simple heuristic - in a production app you might use more sophisticated detection
+        if (width < 480) {
+          setDevicePerformance('low');
+        } else if (width < 768) {
+          setDevicePerformance('medium');
+        } else {
+          setDevicePerformance('high');
+        }
       }
     };
 
     const handleMouseMove = (e) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY
-      });
+      if (!isMobile) {
+        setMousePosition({
+          x: e.clientX,
+          y: e.clientY
+        });
+      }
     };
 
     updateDimensions();
@@ -34,17 +50,32 @@ const ParticleBackground = () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isMobile]);
+  
   // Regenerate particles when dimensions change
   useEffect(() => {
     if (dimensions.width > 0 && dimensions.height > 0) {
       generateParticles();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dimensions]);
+  }, [dimensions, devicePerformance]);
 
   const generateParticles = () => {
-    const particleCount = 50;
+    // Adjust particle count based on device performance
+    let particleCount;
+    switch (devicePerformance) {
+      case 'low':
+        particleCount = 10;
+        break;
+      case 'medium':
+        particleCount = 20;
+        break;
+      case 'high':
+      default:
+        particleCount = 50;
+        break;
+    }
+    
     const newParticles = [];
 
     for (let i = 0; i < particleCount; i++) {
@@ -52,9 +83,9 @@ const ParticleBackground = () => {
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: Math.random() * 6 + 2,
+        size: Math.random() * (isMobile ? 4 : 6) + (isMobile ? 1 : 2), // Smaller particles on mobile
         color: getRandomColor(),
-        duration: Math.random() * 20 + 10,
+        duration: Math.random() * (isMobile ? 30 : 20) + (isMobile ? 15 : 10), // Slower animation on mobile
         delay: Math.random() * 5
       });
     }
@@ -73,8 +104,21 @@ const ParticleBackground = () => {
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
-  // Calculate influence from mouse position
+  // Calculate influence from mouse position - reduced on mobile
   const getParticleStyle = (particle) => {
+    // Skip complex calculations on mobile for better performance
+    if (isMobile) {
+      return {
+        left: `${particle.x}%`,
+        top: `${particle.y}%`,
+        width: `${particle.size}px`,
+        height: `${particle.size}px`,
+        backgroundColor: particle.color,
+        boxShadow: `0 0 ${particle.size}px ${particle.color.replace('0.3', '0.5')}`, // Reduced glow on mobile
+      };
+    }
+    
+    // Full effect on desktop
     const distanceX = (mousePosition.x / window.innerWidth * 100) - particle.x;
     const distanceY = (mousePosition.y / window.innerHeight * 100) - particle.y;
     const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
@@ -91,30 +135,58 @@ const ParticleBackground = () => {
     };
   };
 
+  // Simplified animation variants for mobile
+  const getAnimationVariants = (particle) => {
+    if (isMobile) {
+      return {
+        animate: {
+          y: [0, -15, 0, 15, 0],
+          x: [0, 7, 0, -7, 0],
+          opacity: [0.3, 0.6, 0.3],
+        },
+        transition: {
+          duration: particle.duration,
+          repeat: Infinity,
+          delay: particle.delay,
+          ease: "linear" // Linear is less CPU intensive
+        }
+      };
+    }
+    
+    // Full animation on desktop
+    return {
+      animate: {
+        y: [0, -30, 0, 30, 0],
+        x: [0, 15, 0, -15, 0],
+        scale: [1, 1.2, 1, 0.8, 1],
+        opacity: [0.4, 0.8, 0.4, 0.6, 0.4],
+      },
+      transition: {
+        duration: particle.duration,
+        repeat: Infinity,
+        delay: particle.delay,
+        ease: "easeInOut"
+      }
+    };
+  };
+
   return (
     <div 
       ref={containerRef} 
       className="fixed inset-0 overflow-hidden pointer-events-none z-10"
     >
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full blur-sm"
-          style={getParticleStyle(particle)}
-          animate={{
-            y: [0, -30, 0, 30, 0],
-            x: [0, 15, 0, -15, 0],
-            scale: [1, 1.2, 1, 0.8, 1],
-            opacity: [0.4, 0.8, 0.4, 0.6, 0.4],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
+      {particles.map((particle) => {
+        const { animate, transition } = getAnimationVariants(particle);
+        return (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full blur-sm"
+            style={getParticleStyle(particle)}
+            animate={animate}
+            transition={transition}
+          />
+        );
+      })}
     </div>
   );
 };
