@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaHome, FaLaptopCode, FaBriefcase, FaInfoCircle, FaBookOpen, FaTag, FaUserTie, FaQuestion, FaEnvelope } from 'react-icons/fa';
 import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
-import Container from './Container';
 import logo from '../../assets/logo.png';
 
 const Navbar = () => {
@@ -39,16 +38,18 @@ const Navbar = () => {
     { path: '/contact', label: 'Contact', icon: <FaEnvelope /> },
   ];
   // For mobile menu, primary items shown directly
-  const primaryNavItems = navItems.slice(0, 5);
-
-  return (    <>      {/* Main Navbar - Fixed positioning with no extra spacing */}
-      <nav className="fixed top-0 left-0 right-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`rounded-[2rem] transition-all duration-300 ${
+  const primaryNavItems = navItems.slice(0, 5);  return (    <>      {/* Main Navbar - Attached to top initially, floating on scroll */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 ${isScrolled ? '' : 'bg-gray-900'}`} style={{ margin: 0, padding: 0 }}>
+        {/* When scrolled: add margin and padding for floating effect. When not scrolled: flush with top of screen */}
+        <div className={`max-w-7xl mx-auto ${isScrolled ? 'px-4 sm:px-6 lg:px-8 mt-3' : 'px-0'}`}>
+          <div 
+            className={`transition-all duration-300 ${
             isScrolled 
-              ? 'bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md' 
-              : 'bg-gray-900/70 backdrop-blur-md border border-gray-800/30'
-          }`}>
+              ? 'bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md rounded-2xl' 
+              : 'bg-gray-900/70 backdrop-blur-md border-0 rounded-b-2xl'
+          }`}
+            style={{ margin: 0 }}
+          >
             <div className="flex justify-between items-center h-14 md:h-16 px-4 md:px-5 lg:px-7">              {/* Logo - One UI style with logo image and text */}
               <div className="flex items-center">
                 <Link 

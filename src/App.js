@@ -19,13 +19,28 @@ import Footer from './components/layout/Footer';
 import './App.css';
 
 function App() {
+  // Add a useEffect to set basic body style
+  React.useEffect(() => {
+    // Just ensure no margin/padding for body
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.body.style.backgroundColor = '#1f2937';
+    
+    // Cleanup function
+    return () => {
+      document.body.style.margin = '';
+      document.body.style.padding = '';
+      document.body.style.backgroundColor = '';
+    };
+  }, []);
+
   return (
     <HelmetProvider>
       <Router>
-        <div className="App relative min-h-screen">
+        <div className="bg-gray-900 min-h-screen relative m-0 p-0">
           <SplashScreen />
           <Navbar />
-          <main>
+          <main className="bg-white pt-0">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/services" element={<ServiceDetailPage />} />
