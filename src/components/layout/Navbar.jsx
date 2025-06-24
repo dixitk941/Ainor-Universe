@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaHome, FaLaptopCode, FaBriefcase, FaInfoCircle, FaBookOpen, FaTag, FaUserTie, FaQuestion, FaEnvelope } from 'react-icons/fa';
 import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import Container from './Container';
+import logo from '../../assets/logo.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,7 +51,7 @@ const Navbar = () => {
               ? 'bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md' 
               : 'bg-gray-900/70 backdrop-blur-md border border-gray-800/30'
           }`}>
-            <div className="flex justify-between items-center h-16 px-5 md:px-7">              {/* Logo - One UI style with minimal design */}
+            <div className="flex justify-between items-center h-16 px-5 md:px-7">              {/* Logo - One UI style with logo image and text */}
               <div className="flex items-center">
                 <Link 
                   to="/" 
@@ -59,8 +60,13 @@ const Navbar = () => {
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }, 100);
                   }}
-                  className="flex items-center"
+                  className="flex items-center space-x-3"
                 >
+                  <img 
+                    src={logo} 
+                    alt="AINOR Logo" 
+                    className="h-8 w-auto md:h-10 transition-all duration-300"
+                  />
                   <span className={`font-bold text-2xl md:text-2xl transition-colors duration-300 ${
                     isScrolled ? 'text-gray-900' : 'text-white'
                   }`}>
