@@ -12,7 +12,8 @@ const AboutPage = () => {// Company milestones with updated timeline
     {
       year: '2023',
       title: 'Our Beginning',
-      description: 'AINOR was founded with a vision to bridge technology and business needs, starting as a passionate team of developers focused on delivering exceptional digital solutions.',
+      description: 'What started in a hostel room with one developer and a big dream is now AINOR — building smart solutions where tech meets business.'
+,
       image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
     },
     {
@@ -24,7 +25,7 @@ const AboutPage = () => {// Company milestones with updated timeline
     {
       year: '2024',
       title: 'Remote Excellence',
-      description: 'Embraced a fully remote-first approach, building a distributed team that collaborates seamlessly across different time zones while maintaining exceptional quality.',
+      description: 'Started solo with a remote-first mindset, now growing into a distributed team delivering high-quality solutions across time zones.',      
       image: 'https://images.unsplash.com/photo-1587560699334-cc4ff634909a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
     },
     {
@@ -286,11 +287,13 @@ const AboutPage = () => {// Company milestones with updated timeline
                           <>
                             <li className="flex items-start">
                               <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoRocketOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Founded with just 3 team members and a vision</span>
+                            <span className="text-gray-700">Built alone from scratch, driven by passion and purpose</span>
+
                             </li>
                             <li className="flex items-start">
                               <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoBusinessOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">First office in downtown technology district</span>
+                             <span className="text-gray-700">First office? Just a laptop and a dream in my hostel room</span>
+
                             </li>
                           </>
                         )}
@@ -326,7 +329,8 @@ const AboutPage = () => {// Company milestones with updated timeline
                             </li>
                             <li className="flex items-start">
                               <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoPeopleOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Added team members from 5 different countries</span>
+                             <span className="text-gray-700">No international team — just local passion and global ambition</span>
+
                             </li>
                           </>
                         )}
@@ -346,7 +350,7 @@ const AboutPage = () => {// Company milestones with updated timeline
                           <>
                             <li className="flex items-start">
                               <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoCalendarOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Celebrating 5 years of continuous growth</span>
+                              <span className="text-gray-700">Celebrating 3 years of continuous growth</span>
                             </li>
                             <li className="flex items-start">
                               <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoRocketOutline className="w-5 h-5" /></span>
