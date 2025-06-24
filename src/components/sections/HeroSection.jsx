@@ -223,7 +223,7 @@ const HeroSection = () => {
         >
           <p className="text-center text-white/60 text-sm mb-6">Trusted by innovative companies worldwide</p>
           <div className="flex flex-wrap justify-center gap-x-12 gap-y-6">
-            {['Google', 'Microsoft', 'Airbnb', 'Uber', 'Amazon'].map((client, index) => (
+            {['GoForCab', 'BgCut', 'Sttrika'].map((client, index) => (
               <motion.div 
                 key={client} 
                 className="text-white/60 font-semibold text-xl glassmorphism-ultra px-5 py-3 rounded-lg cyber-panel"
