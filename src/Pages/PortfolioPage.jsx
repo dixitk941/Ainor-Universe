@@ -145,7 +145,7 @@ const PortfolioPage = () => {
       <Navbar />
       
       {/* Header Section */}
-      <Section className="pt-32 pb-16 relative bg-gradient-to-b from-white to-gray-100">
+      <Section className="pb-16 relative bg-gradient-to-b from-white to-gray-100">
         <Container>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

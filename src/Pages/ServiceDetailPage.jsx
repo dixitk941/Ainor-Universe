@@ -187,7 +187,7 @@ const ServiceDetailPage = () => {
       </div>
       
       {/* Hero Section - Mobile First */}
-      <Section className="pt-24 md:pt-32 pb-8 md:pb-16 relative">
+      <Section className="pb-8 md:pb-16 relative">
         <Container>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

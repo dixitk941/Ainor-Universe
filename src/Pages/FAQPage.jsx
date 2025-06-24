@@ -174,7 +174,7 @@ const FAQPage = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <Section className="pt-32 pb-16 bg-gradient-to-b from-gray-50 to-white">
+      <Section className="pb-16 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <div className="text-center mb-12">
             <motion.div

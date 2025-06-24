@@ -76,9 +76,8 @@ const ContactPage = () => {
         }}
       />
       
-      <div className="min-h-screen bg-white text-gray-900">
-      {/* Header Section */}
-      <Section className="pt-32 pb-20 relative bg-gradient-to-b from-white to-gray-100">
+      <div className="min-h-screen bg-white text-gray-900">      {/* Header Section */}
+      <Section className="pb-20 relative bg-gradient-to-b from-white to-gray-100">
         <Container>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Button from '../ui/Button';
 import AnimatedImage from '../ui/AnimatedImage';
-import { BsArrowRightShort } from 'react-icons/bs';
 
 const HeroSection = () => {
   // Animation variants
@@ -25,7 +24,7 @@ const HeroSection = () => {
       transition: { type: "spring", stiffness: 100 }
     }
   };  return (
-    <div className="relative min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-950 overflow-hidden flex items-center pt-20 z-30 digital-rain">
+    <div className="relative min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-950 overflow-hidden flex items-center z-30 digital-rain mobile-no-top-space pt-0 mt-0">
       {/* 3D Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Animated 3D Shapes */}
@@ -98,7 +97,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-8 sm:pb-12 md:pb-16">
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
           variants={containerVariants}
@@ -106,14 +105,14 @@ const HeroSection = () => {
           animate="visible"
         >
           <div className="text-center lg:text-left">            <motion.div 
-              className="inline-block px-3 py-1 mb-6 rounded-full bg-white/10 backdrop-filter backdrop-blur-sm border border-white/20 text-white text-sm font-medium cyber-panel"
+              className="inline-block px-3 py-1 mb-4 sm:mb-6 rounded-full bg-white/10 backdrop-filter backdrop-blur-sm border border-white/20 text-white text-sm font-medium cyber-panel"
               variants={itemVariants}
             >
               <span className="mr-2 inline-block h-2 w-2 rounded-full bg-indigo-400 animate-pulse"></span>
               Digital Innovation Studio
             </motion.div>
               <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight"
               variants={itemVariants}
             >
               We Create <br/>
@@ -122,16 +121,16 @@ const HeroSection = () => {
               </span>
             </motion.h1>
               <motion.p 
-              className="mt-6 text-xl text-indigo-100 max-w-lg mx-auto lg:mx-0 opacity-80 glassmorphism-text"
+              className="mt-4 sm:mt-6 text-lg sm:text-xl text-indigo-100 max-w-lg mx-auto lg:mx-0 opacity-80 glassmorphism-text"
               variants={itemVariants}
             >
               Transforming ideas into cutting-edge digital experiences with futuristic designs and advanced technologies.
             </motion.p>
             
             <motion.div 
-              className="mt-10 flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4"
+              className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4"
               variants={itemVariants}
-            >              <Button href="#contact" size="lg" variant="cyber" className="group" is3D={true}>
+            ><Button href="#contact" size="lg" variant="cyber" className="group" is3D={true}>
                 Start Your Project
                 {/* <BsArrowRightShort className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" /> */}
               </Button>
@@ -214,19 +213,18 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
         </motion.div>
-        
-        {/* Clients - with 3D effect */}        <motion.div 
-          className="mt-20 pt-10 border-t border-white/10"
+          {/* Clients - with 3D effect */}        <motion.div 
+          className="mt-12 sm:mt-16 md:mt-20 pt-8 sm:pt-10 border-t border-white/10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
         >
-          <p className="text-center text-white/60 text-sm mb-6">Trusted by innovative companies worldwide</p>
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-6">
+          <p className="text-center text-white/60 text-sm mb-4 sm:mb-6">Trusted by innovative companies worldwide</p>
+          <div className="flex flex-wrap justify-center gap-x-8 sm:gap-x-12 gap-y-4 sm:gap-y-6">
             {['GoForCab', 'BgCut', 'Sttrika'].map((client, index) => (
               <motion.div 
                 key={client} 
-                className="text-white/60 font-semibold text-xl glassmorphism-ultra px-5 py-3 rounded-lg cyber-panel"
+                className="text-white/60 font-semibold text-lg sm:text-xl glassmorphism-ultra px-4 sm:px-5 py-2 sm:py-3 rounded-lg cyber-panel"
                 whileHover={{ 
                   scale: 1.05, 
                   color: "rgba(255, 255, 255, 0.9)",

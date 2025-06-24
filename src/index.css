@@ -2,8 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Ensure no top spacing on mobile */
+@media (max-width: 768px) {
+  body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: relative;
+  }
+  
+  #root {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: relative;
+  }
+  
+  .App {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: relative;
+  }
+  
+  /* Fix mobile viewport height issues */
+  .min-h-screen, .h-screen {
+    min-height: 100vh !important;
+    height: 100vh !important;
+  }
+  
+  /* Override any Tailwind margins on mobile */
+  section:first-child,
+  div:first-child {
+    margin-top: 0 !important;
+  }
+  
+  /* Force content to start from top on mobile */
+  main, .main-content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -57,4 +107,17 @@ button:hover {
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
                     linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+/* Mobile-first utility to ensure content starts from top */
+.mobile-no-top-space {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-no-top-space {
+    position: relative;
+    top: 0;
+  }
 }

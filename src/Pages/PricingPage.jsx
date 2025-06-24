@@ -354,7 +354,7 @@ const PricingPage = () => {
         <Navbar />
         
         {/* Header Section */}
-        <Section className="pt-32 pb-16 relative bg-gradient-to-b from-blue-50 to-white">
+        <Section className="pb-16 relative bg-gradient-to-b from-blue-50 to-white">
           <Container>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

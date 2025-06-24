@@ -22,23 +22,25 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
-        <div className="App">
+        <div className="App mobile-no-top-space">
           <SplashScreen />
           <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServiceDetailPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/careers" element={<CareersPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-          </Routes>
-          <Footer />
-          <BackToTop />
-          <CookieConsent />
+          <div className="page-content mobile-no-top-space">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services" element={<ServiceDetailPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/careers" element={<CareersPage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/pricing" element={<PricingPage />} />
+            </Routes>
+            <Footer />
+            <BackToTop />
+            <CookieConsent />
+          </div>
         </div>
       </Router>
     </HelmetProvider>
