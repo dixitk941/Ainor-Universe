@@ -1,32 +1,10 @@
 .App {
   text-align: center;
-  margin: 0;
-  padding: 0;
 }
 
-/* Mobile-specific styles to remove top spacing */
-.mobile-no-top-space {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-.page-content {
-  position: relative;
-}
-
-@media (max-width: 768px) {
-  .mobile-no-top-space {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-  
-  .page-content {
-    margin-top: -56px !important; /* Negative margin to offset navbar height */
-  }
-  
-  section:first-child {
-    padding-top: 56px !important; /* Add padding to first section to account for navbar */
-  }
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {

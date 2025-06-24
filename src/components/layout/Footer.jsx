@@ -6,9 +6,8 @@ import { IoMailOutline, IoCallOutline, IoChevronForward } from 'react-icons/io5'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
-  return (
-    <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-white pt-24 pb-10 rounded-t-[2.5rem] shadow-lg">
+    return (
+    <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-white pt-24 pb-10 rounded-t-[2.5rem] shadow-lg relative z-10">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 px-4 md:px-8">
           {/* Company Info - One UI inspired with rounded elements */}

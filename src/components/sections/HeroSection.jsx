@@ -24,7 +24,7 @@ const HeroSection = () => {
       transition: { type: "spring", stiffness: 100 }
     }
   };  return (
-    <div className="relative min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-950 overflow-hidden flex items-center z-30 digital-rain mobile-no-top-space pt-0 mt-0">
+    <div className="relative min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-950 overflow-hidden flex items-center z-20 digital-rain">
       {/* 3D Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Animated 3D Shapes */}
@@ -238,8 +238,7 @@ const HeroSection = () => {
               </motion.div>
             ))}
           </div>
-        </motion.div>
-      </div>
+        </motion.div>      </div>
       
       {/* 3D Wave Separator */}
       
