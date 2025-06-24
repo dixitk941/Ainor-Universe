@@ -1,87 +1,62 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { FaLightbulb, FaHandshake, FaTrophy } from 'react-icons/fa';
 import { BsArrowRight } from 'react-icons/bs';
 import { IoBusinessOutline, IoPeopleOutline, IoRocketOutline, IoTimeOutline, IoCalendarOutline, IoGlobeOutline } from 'react-icons/io5';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
-import Button from '../components/ui/Button';
 
-const AboutPage = () => {  // Refs for section scrolling
-  const storyRef = useRef(null);
-  const valuesRef = useRef(null);
-  const teamRef = useRef(null);
-  const achievementsRef = useRef(null);
-
-  // Company milestones with added images
+const AboutPage = () => {// Company milestones with updated timeline
   const milestones = [
     {
-      year: '2018',
+      year: '2023',
       title: 'Our Beginning',
-      description: 'AINOR was founded with a vision to bridge technology and business needs, starting with just three developers working from a small office.',
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      year: '2019',
-      title: 'First Major Client',
-      description: 'Secured our first enterprise client and expanded the team to 10 members, adding design and project management expertise.',
-      image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      year: '2020',
-      title: 'Remote Transformation',
-      description: 'Successfully pivoted to a fully remote model during the pandemic, maintaining productivity and client satisfaction.',
-      image: 'https://images.unsplash.com/photo-1600172454172-594ae98d6646?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      year: '2021',
-      title: 'International Expansion',
-      description: 'Opened our first international office and began serving clients across Europe and Asia, growing our team to 15 people.',
-      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      year: '2022',
-      title: 'Technology Innovation',
-      description: 'Launched our proprietary development framework and expanded services to include AI and machine learning solutions.',
-      image: 'https://images.unsplash.com/photo-1581091224003-3075cb8aba13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+      description: 'AINOR was founded with a vision to bridge technology and business needs, starting as a passionate team of developers focused on delivering exceptional digital solutions.',
+      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
     },
     {
       year: '2023',
+      title: 'First Major Project',
+      description: 'Successfully launched our first major project, establishing our reputation for delivering high-quality, innovative solutions that exceed client expectations.',
+      image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+    },
+    {
+      year: '2024',
+      title: 'Remote Excellence',
+      description: 'Embraced a fully remote-first approach, building a distributed team that collaborates seamlessly across different time zones while maintaining exceptional quality.',
+      image: 'https://images.unsplash.com/photo-1587560699334-cc4ff634909a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+    },
+    {
+      year: '2024',
+      title: 'International Expansion',
+      description: 'Expanded our reach to serve clients internationally, bringing our innovative digital solutions to businesses across different markets and industries.',
+      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+    },
+    {
+      year: '2025',
       title: 'Today & Beyond',
-      description: 'Now a team of 20+ professionals, we continue to innovate and help businesses of all sizes achieve digital excellence.',
-      image: 'https://images.unsplash.com/photo-1496065187959-7f07b8353c55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+      description: 'Continuing to innovate and grow, we focus on emerging technologies and sustainable solutions that help businesses thrive in the digital future.',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
     }
-  ];
-
-  // Team members data with expanded information
-  const teamMembers = [
-    {
-      name: "Alex Richardson",
+  ];// Team members data with updated information
+  const teamMembers = [    {
+      name: "Karan Dixit",
       position: "Founder & CEO",
-      bio: "With over 15 years of experience in software development, Alex founded AINOR with a vision to create digital solutions that truly impact businesses. His leadership has guided the company from a small startup to an established digital agency.",
-      expertise: ["Strategic Planning", "Business Development", "Tech Leadership"],
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80"
+      bio: "A visionary entrepreneur and dedicated technology student, Karan combines academic excellence with practical innovation. His deep passion for coding and web development drives AINOR's mission to deliver cutting-edge digital solutions. As founder and CEO, he leads the company's strategic vision while actively exploring emerging technologies to create meaningful projects that transform businesses and user experiences.",
+      expertise: ["Strategic Planning", "Web Development", "Tech Leadership"],
+      image: "https://genzconnect.vercel.app/assets/KaranDixit.jpg"
+    },    {
+      name: "Mayank Sharma",
+      position: "Cyber Security Expert",
+      bio: "A dedicated cybersecurity specialist and technology student, Mayank brings expertise in protecting digital infrastructure and sensitive data. His passion for coding and cybersecurity ensures that all AINOR projects meet the highest security standards. He specializes in implementing robust security protocols and staying ahead of emerging cyber threats to safeguard our clients' digital assets.",      expertise: ["Cybersecurity", "Network Security", "Threat Analysis"],
+      image: "https://neocodenex.tech/static/img/team/Team2.jpg"
     },
     {
-      name: "Samantha Chen",
-      position: "Chief Technology Officer",
-      bio: "Leading our technical strategy, Samantha brings expertise from top tech companies and ensures we're always using cutting-edge technologies. She oversees all technical aspects of our projects and mentors our development team.",
-      expertise: ["System Architecture", "Cloud Infrastructure", "Technical Strategy"],
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80"
-    },
-    {
-      name: "Marcus Johnson",
-      position: "Creative Director",
-      bio: "With an eye for design and user experience, Marcus leads our creative team in developing visually stunning and intuitive interfaces. His background in both design and psychology helps create experiences that users love.",
-      expertise: ["UX/UI Design", "Brand Identity", "Interactive Experiences"],
-      image: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80"
-    },
-    {
-      name: "Priya Sharma",
-      position: "Head of Project Management",
-      bio: "Priya ensures every project is delivered on time and exceeds client expectations through her methodical and client-focused approach. Her expertise in agile methodologies keeps our projects running smoothly.",
-      expertise: ["Agile/Scrum", "Resource Planning", "Client Relations"],
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80"
+      name: "Aakash Dixit",
+      position: "Business Development & Web Developer",
+      bio: "A strategic business expert and skilled web developer, Aakash brings a unique combination of technical expertise and business acumen to AINOR. His comprehensive understanding of market dynamics and development processes enables him to bridge the gap between client requirements and technical solutions. He specializes in business planning, client relations, and delivering web solutions that drive business growth.",
+      expertise: ["Business Development", "Web Development", "Strategic Planning"],
+      image: "/assets/IMG_8027.JPG"
     }
   ];
 
@@ -124,19 +99,18 @@ const AboutPage = () => {  // Refs for section scrolling
       description: "We operate with honesty, transparency, and strong ethical principles in all our business dealings."
     }
   ];
-
   // Company achievements data
   const companyAchievements = {
     awards: [
       {
-        title: "Best Tech Innovator 2022",
+        title: "Best Tech Innovator 2024",
         organization: "Tech Excellence Awards",
         description: "Recognized for our innovative approach to solving complex business challenges through technology."
       },
       {
         title: "Top Web Development Agency",
         organization: "Digital Design Awards",
-        description: "Ranked among the top 10 web development agencies for creating high-impact digital experiences."
+        description: "Ranked among the top web development agencies for creating high-impact digital experiences."
       },
       {
         title: "Best Workplace Culture",
@@ -145,18 +119,12 @@ const AboutPage = () => {  // Refs for section scrolling
       }
     ],
     stats: [
-      { number: "50+", label: "Clients Worldwide" },
-      { number: "120+", label: "Projects Completed" },
-      { number: "98%", label: "Client Satisfaction" },
-      { number: "15+", label: "Industry Partnerships" }
-    ],
-    clientLogos: [
-      "https://images.unsplash.com/photo-1603731568139-70a936caeafe?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
-      "https://images.unsplash.com/photo-1563302111-eab6d75288c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
-      "https://images.unsplash.com/photo-1600959907489-e50d01d0c11b?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
-      "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
+      { number: "20+", label: "Projects Completed" },
+      { number: "15+", label: "Happy Clients" },
+      { number: "100%", label: "Client Satisfaction" },
+      { number: "2+", label: "Years Experience" }
     ]
-  };  // Animation variants for One UI 7 style
+  };// Animation variants for One UI 7 style
   const fadeIn = {
     hidden: { opacity: 0, y: 15 },
     visible: { 
@@ -195,35 +163,39 @@ const AboutPage = () => {  // Refs for section scrolling
                 </h1>
                 <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl font-light">
                   Discover the passionate team behind AINOR and our journey to redefine what's possible in the digital world.
-                </p>
-                <div className="flex flex-wrap gap-5">
-                  <Button 
-                    variant="light" 
-                    is3D={true}
-                    className="rounded-full px-8 py-4 text-gray-900 font-medium"
-                    onClick={() => storyRef.current.scrollIntoView({ behavior: 'smooth' })}
+                </p>                <div className="flex flex-wrap gap-5">
+                  <button 
+                    className="inline-flex items-center px-8 py-4 bg-white text-gray-900 font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                    onClick={() => {
+                      const storySection = document.getElementById('story');
+                      if (storySection) {
+                        storySection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                   >
                     Our Story
-                  </Button>
-                  <Button 
-                    variant="outline-light" 
-                    is3D={false}
-                    className="rounded-full px-8 py-4 font-medium border-2"
+                  </button>
+                  <a 
                     href="/contact"
+                    className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300"
                   >
                     Work With Us
-                  </Button>
+                  </a>
                 </div>
               </motion.div>
             </div>
           </Container>
-          
-          {/* Scroll indicator - One UI style with subtle animation */}
+            {/* Scroll indicator - One UI style with subtle animation */}
           <motion.div 
             className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center cursor-pointer"
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            onClick={() => storyRef.current.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              const storySection = document.getElementById('story');
+              if (storySection) {
+                storySection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
           >
             <span className="text-white/70 text-sm mb-2 font-light">Scroll to explore</span>
             <BsArrowRight className="rotate-90 w-5 h-5 text-white/70" />
@@ -234,7 +206,7 @@ const AboutPage = () => {  // Refs for section scrolling
       {/* Main content with seamless scroll sections - One UI 7 style */}
       <div className="bg-white">
         {/* Our Story Section - With timeline cards */}
-        <Section className="py-24 md:py-32" id="story" ref={storyRef}>
+        <Section className="py-24 md:py-32" id="story">
           <Container>
             <motion.div
               variants={fadeIn}
@@ -366,7 +338,7 @@ const AboutPage = () => {  // Refs for section scrolling
         </Section>
         
         {/* Our Values Section - One UI 7-style with rounded cards */}
-        <Section className="py-24 md:py-32 bg-gray-50" id="values" ref={valuesRef}>
+        <Section className="py-24 md:py-32 bg-gray-50" id="values">
           <Container>
             <motion.div
               variants={fadeIn}
@@ -408,7 +380,7 @@ const AboutPage = () => {  // Refs for section scrolling
         </Section>
         
         {/* Our Team Section - One UI 7-style team cards */}
-        <Section className="py-24 md:py-32" id="team" ref={teamRef}>
+        <Section className="py-24 md:py-32" id="team">
           <Container>
             <motion.div
               variants={fadeIn}
@@ -425,9 +397,8 @@ const AboutPage = () => {  // Refs for section scrolling
                 The talented professionals who bring creativity, expertise, and passion to every project.
               </p>
             </motion.div>
-          
             {/* One UI 7-style team cards with large rounded corners */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 md:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 md:px-8">
               {teamMembers.map((member, index) => (
                 <motion.div
                   key={index}
@@ -467,22 +438,19 @@ const AboutPage = () => {  // Refs for section scrolling
                 </motion.div>
               ))}
             </div>
-            
-            <div className="text-center mt-16 px-4 md:px-0">
-              <Button 
+              <div className="text-center mt-16 px-4 md:px-0">
+              <a 
                 href="/careers" 
-                variant="primary" 
-                is3D={true}
-                className="rounded-full px-8 py-4 font-medium"
+                className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-medium rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all duration-300"
               >
                 Join Our Team
-              </Button>
+              </a>
             </div>
           </Container>
         </Section>
           
         {/* Achievements Section - One UI 7-style stats and awards */}
-        <Section className="py-24 md:py-32 bg-gray-50" id="achievements" ref={achievementsRef}>
+        <Section className="py-24 md:py-32 bg-gray-50" id="achievements">
           <Container>
             <motion.div
               variants={fadeIn}
@@ -544,32 +512,7 @@ const AboutPage = () => {  // Refs for section scrolling
                     </div>
                   </motion.div>
                 ))}
-              </div>
-            </div>
-            
-            {/* Client logos - One UI 7 style simplified layout */}
-            <div className="px-4 md:px-8">
-              <h3 className="text-2xl font-bold mb-10 text-center text-gray-900">Trusted By Leading Companies</h3>
-              <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
-                {companyAchievements.clientLogos.map((logo, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    <div className="bg-white p-4 rounded-[1.5rem] shadow-md">
-                      <img 
-                        src={logo} 
-                        alt="Client logo" 
-                        className="h-12 md:h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300" 
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+              </div>            </div>
           </Container>
         </Section>
         
@@ -587,18 +530,15 @@ const AboutPage = () => {  // Refs for section scrolling
                 <div className="mb-10 md:mb-0 md:max-w-xl">
                   <h2 className="text-3xl md:text-4xl font-bold mb-5">Ready to transform your digital presence?</h2>
                   <p className="text-xl text-blue-100">Let's discuss how we can help bring your vision to life with innovative solutions.</p>
-                </div>
-                <div>
-                  <Button 
+                </div>                <div>
+                  <a 
                     href="/contact" 
-                    variant="light" 
-                    is3D={true}
-                    className="text-lg px-8 py-4 rounded-full text-gray-900 font-medium"
+                    className="inline-flex items-center text-lg px-8 py-4 bg-white text-gray-900 font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     <span className="flex items-center">
                       Get Started <BsArrowRight className="ml-2" />
                     </span>
-                  </Button>
+                  </a>
                 </div>
               </div>
             </motion.div>

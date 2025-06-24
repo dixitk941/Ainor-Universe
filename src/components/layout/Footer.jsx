@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Container from './Container';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa';
-import { IoMailOutline, IoCallOutline, IoLocationOutline, IoChevronForward } from 'react-icons/io5';
+import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import { IoMailOutline, IoCallOutline, IoChevronForward } from 'react-icons/io5';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -18,13 +19,9 @@ const Footer = () => {
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Creating innovative digital solutions that transform businesses and drive growth in the digital landscape.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <SocialLink href="https://facebook.com" icon={<FaFacebookF />} />
-              <SocialLink href="https://twitter.com" icon={<FaTwitter />} />
-              <SocialLink href="https://instagram.com" icon={<FaInstagram />} />
-              <SocialLink href="https://linkedin.com" icon={<FaLinkedinIn />} />
-              <SocialLink href="https://github.com" icon={<FaGithub />} />
+            </p>            <div className="flex flex-wrap gap-4">
+              <SocialLink href="https://linkedin.com/in/dixitk941" icon={<FaLinkedinIn />} />
+              <SocialLink href="https://github.com/dixitk941" icon={<FaGithub />} />
             </div>
           </div>
           
@@ -35,13 +32,12 @@ const Footer = () => {
                 <IoChevronForward className="text-blue-400" />
               </span>
               Quick Links
-            </h3>
-            <ul className="space-y-4 pl-1">
-              <FooterLink href="#services">Services</FooterLink>
-              <FooterLink href="#work">Our Work</FooterLink>
-              <FooterLink href="#about">About Us</FooterLink>
-              <FooterLink href="#testimonials">Testimonials</FooterLink>
-              <FooterLink href="#contact">Contact</FooterLink>
+            </h3>            <ul className="space-y-4 pl-1">
+              <FooterLink to="/services">Services</FooterLink>
+              <FooterLink to="/portfolio">Our Work</FooterLink>
+              <FooterLink to="/about">About Us</FooterLink>
+              <FooterAnchorLink to="/" anchor="testimonials">Testimonials</FooterAnchorLink>
+              <FooterLink to="/contact">Contact</FooterLink>
             </ul>
           </div>
           
@@ -52,13 +48,12 @@ const Footer = () => {
                 <IoChevronForward className="text-purple-400" />
               </span>
               Services
-            </h3>
-            <ul className="space-y-4 pl-1">
-              <FooterLink href="#services">Web Development</FooterLink>
-              <FooterLink href="#services">Mobile Apps</FooterLink>
-              <FooterLink href="#services">UI/UX Design</FooterLink>
-              <FooterLink href="#services">Digital Marketing</FooterLink>
-              <FooterLink href="#services">E-commerce Solutions</FooterLink>
+            </h3>            <ul className="space-y-4 pl-1">
+              <FooterLink to="/services">Web Development</FooterLink>
+              <FooterLink to="/services">Mobile Apps</FooterLink>
+              <FooterLink to="/services">UI/UX Design</FooterLink>
+              <FooterLink to="/services">Digital Marketing</FooterLink>
+              <FooterLink to="/services">E-commerce Solutions</FooterLink>
             </ul>
           </div>
           
@@ -143,16 +138,47 @@ const SocialLink = ({ href, icon }) => {
   );
 };
 
-const FooterLink = ({ href, children }) => {
+const FooterLink = ({ to, children }) => {
+  const handleClick = () => {
+    // Scroll to top when navigating
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <li>
-      <a 
-        href={href} 
+      <Link 
+        to={to} 
+        onClick={handleClick}
         className="text-gray-300 hover:text-blue-400 transition-colors duration-300 text-sm flex items-center group"
       >
         <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 mr-2 group-hover:bg-blue-400 transition-colors"></span>
         {children}
-      </a>
+      </Link>
+    </li>
+  );
+};
+
+const FooterAnchorLink = ({ to, anchor, children }) => {
+  const handleClick = () => {
+    // Navigate to page first, then scroll to anchor
+    setTimeout(() => {
+      const element = document.getElementById(anchor);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  return (
+    <li>
+      <Link 
+        to={to} 
+        onClick={handleClick}
+        className="text-gray-300 hover:text-blue-400 transition-colors duration-300 text-sm flex items-center group"
+      >
+        <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 mr-2 group-hover:bg-blue-400 transition-colors"></span>
+        {children}
+      </Link>
     </li>
   );
 };

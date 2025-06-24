@@ -19,10 +19,10 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Close expanded mobile menu when route changes
+  // Close expanded mobile menu when route changes and scroll to top
   useEffect(() => {
     setMobileMenuOpen(false);
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   // Main navigation items with icons for mobile
@@ -50,10 +50,17 @@ const Navbar = () => {
               ? 'bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md' 
               : 'bg-gray-900/70 backdrop-blur-md border border-gray-800/30'
           }`}>
-            <div className="flex justify-between items-center h-16 px-5 md:px-7">
-              {/* Logo - One UI style with minimal design */}
+            <div className="flex justify-between items-center h-16 px-5 md:px-7">              {/* Logo - One UI style with minimal design */}
               <div className="flex items-center">
-                <Link to="/" className="flex items-center">
+                <Link 
+                  to="/" 
+                  onClick={() => {
+                    setTimeout(() => {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className="flex items-center"
+                >
                   <span className={`font-bold text-2xl md:text-2xl transition-colors duration-300 ${
                     isScrolled ? 'text-gray-900' : 'text-white'
                   }`}>
@@ -92,10 +99,14 @@ const Navbar = () => {
                     {item.label}
                   </NavLink>
                 ))}
-                
-                <div className="ml-3">
+                  <div className="ml-3">
                   <Link 
                     to="/contact" 
+                    onClick={() => {
+                      setTimeout(() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }, 100);
+                    }}
                     className={`inline-flex items-center justify-center px-6 py-2.5 font-medium rounded-full transition-all duration-300 
                       ${isScrolled 
                         ? 'bg-blue-500 text-white hover:bg-blue-600 shadow-md' 
@@ -135,11 +146,15 @@ const Navbar = () => {
                       />
                     ))}
                   </div>
-                  
-                  {/* One UI style call-to-action */}
+                    {/* One UI style call-to-action */}
                   <div className="mt-4 px-3">
                     <Link 
                       to="/contact" 
+                      onClick={() => {
+                        setTimeout(() => {
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }, 100);
+                      }}
                       className={`flex items-center justify-center w-full py-3 font-medium rounded-full transition-all duration-300 
                         ${isScrolled 
                           ? 'bg-blue-500 text-white hover:bg-blue-600' 
@@ -182,9 +197,17 @@ const NavLink = ({ to, children, isScrolled = false }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
   
+  const handleClick = () => {
+    // Scroll to top when navigating to a new page
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+  
   return (
     <Link 
       to={to} 
+      onClick={handleClick}
       className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 
       ${isScrolled 
         ? `text-gray-700 hover:bg-gray-100 ${isActive ? 'bg-blue-50 text-blue-600' : ''}` 
@@ -200,9 +223,17 @@ const MobileNavLink = ({ to, icon, label, isScrolled = false }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
   
+  const handleClick = () => {
+    // Scroll to top when navigating to a new page
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+  
   return (
     <Link 
       to={to} 
+      onClick={handleClick}
       className={`flex items-center px-4 py-3 rounded-xl transition-all duration-300
       ${isScrolled 
         ? `text-gray-800 ${isActive ? 'bg-blue-50' : 'hover:bg-gray-100'}` 
@@ -221,9 +252,17 @@ const MobileNavTab = ({ to, icon, label }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
   
+  const handleClick = () => {
+    // Scroll to top when navigating to a new page
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+  
   return (
     <Link 
       to={to} 
+      onClick={handleClick}
       className="flex flex-col items-center justify-center py-2 text-white transition-colors"
     >
       <div className={`p-2 rounded-xl transition-colors ${isActive ? 'bg-blue-500/20 text-blue-300' : ''}`}>

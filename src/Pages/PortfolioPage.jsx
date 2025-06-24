@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaExternalLinkAlt, FaCode, FaMobileAlt, FaDesktop, FaShoppingCart, FaChartLine } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaMobileAlt, FaDesktop, FaShoppingCart, FaChartLine } from 'react-icons/fa';
 import Navbar from '../components/layout/Navbar';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
-import AnimatedImage from '../components/ui/AnimatedImage';
 
 const PortfolioPage = () => {
   // Categories for filtering
@@ -16,97 +15,95 @@ const PortfolioPage = () => {
     { id: 'ecommerce', name: 'E-Commerce', icon: <FaShoppingCart /> },
     { id: 'seo', name: 'SEO & Marketing', icon: <FaChartLine /> },
   ];
-  
-  // Project data
+    // Project data
   const projects = [
     {
       id: 1,
-      title: "FreshMart E-Commerce Platform",
+      title: "Sttrika E-Commerce Platform",
       category: "ecommerce",
-      description: "A comprehensive e-commerce solution for a grocery delivery service with integrated inventory management, payment processing, and real-time delivery tracking.",
-      challenges: "Creating a seamless mobile-first shopping experience while handling complex inventory management for perishable goods.",
+      description: "A comprehensive e-commerce platform for fashion and lifestyle products with modern design, secure payment integration, and advanced inventory management.",
+      challenges: "Creating a seamless mobile-first shopping experience while handling complex fashion product variants and sizes.",
       solution: "We developed a custom inventory system with real-time updates and integrated it with a React-based frontend for a smooth shopping experience across all devices.",
       technologies: ["React", "Node.js", "MongoDB", "Stripe API", "AWS"],
       image: "https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      link: "#"
+      link: "https://sttrika.com"
     },
     {
       id: 2,
-      title: "MediConnect Patient Portal",
-      category: "web",
-      description: "A secure patient management portal for a network of medical clinics, allowing patients to schedule appointments, access records, and communicate with healthcare providers.",
-      challenges: "Building a highly secure system that complies with healthcare regulations while maintaining excellent usability.",
-      solution: "We implemented enterprise-grade security features and designed an intuitive interface that makes complex healthcare processes simple for patients and providers.",
-      technologies: ["Angular", "Java Spring Boot", "PostgreSQL", "OAuth 2.0", "Azure"],
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      link: "#"
+      title: "GoForCab Mobility Solution",
+      category: "mobile",
+      description: "Complete mobility package including Android apps, iOS apps, admin panel, and driver app for affordable cab services with real-time tracking and payment integration.",
+      challenges: "Building a comprehensive ecosystem with multiple apps while ensuring seamless communication between drivers, passengers, and admin systems.",
+      solution: "We developed a unified backend system with real-time WebSocket connections and implemented native mobile apps for optimal performance and user experience.",
+      technologies: ["React Native", "Flutter", "Node.js", "Socket.io", "Google Maps API", "Firebase"],
+      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      link: "https://goforcab.com"
     },
     {
       id: 3,
-      title: "TravelBuddy Mobile App",
-      category: "mobile",
-      description: "A feature-rich travel companion app that helps users plan trips, discover local attractions, and share experiences with friends and family.",
-      challenges: "Creating a seamless offline experience while handling location-based services across different device capabilities.",
-      solution: "We built a sophisticated caching system for offline access and optimized location services to minimize battery drain while providing accurate information.",
-      technologies: ["React Native", "Firebase", "Google Maps API", "Redux", "Node.js"],
-      image: "https://images.unsplash.com/photo-1504542982118-59308b40fe0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      link: "#"
+      title: "HiiHive Student Platform",
+      category: "web",
+      description: "A powerful student-first platform where collaboration, leadership, and learning thrive together. Features include study groups, project collaboration, and skill development tracking.",
+      challenges: "Creating an engaging platform that promotes genuine collaboration while maintaining user privacy and data security.",
+      solution: "We implemented a modular design with role-based access controls and gamification elements to encourage active participation and meaningful connections.",
+      technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth.js"],
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      link: "https://hiihive.vercel.app"
     },
     {
       id: 4,
-      title: "UrbanPulse Real Estate Platform",
-      category: "web",
-      description: "A modern real estate platform that connects property buyers with sellers and provides advanced search, virtual tours, and mortgage calculation tools.",
-      challenges: "Handling large volumes of property data and creating an intuitive search experience with multiple filtering options.",
-      solution: "We implemented an advanced search algorithm with machine learning components to provide personalized property recommendations and optimized database queries for performance.",
-      technologies: ["Next.js", "Python", "ElasticSearch", "PostgreSQL", "AWS"],
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      link: "#"
+      title: "HB Web E-commerce",
+      category: "ecommerce",
+      description: "Modern e-commerce solution with advanced features including product customization, wishlist management, and integrated inventory tracking.",
+      challenges: "Building a scalable e-commerce platform that can handle high traffic loads while maintaining fast page load times.",
+      solution: "We implemented server-side rendering with Next.js and optimized database queries to ensure excellent performance even during peak traffic periods.",
+      technologies: ["Next.js", "React", "Node.js", "MongoDB", "Stripe API"],
+      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      link: "https://hbweb.vercel.app"
     },
     {
       id: 5,
-      title: "FitTrack Fitness App",
+      title: "GoForCab Driver App",
       category: "mobile",
-      description: "A comprehensive fitness tracking application that helps users monitor workouts, nutrition, and progress with personalized coaching and analytics.",
-      challenges: "Integrating with various fitness wearables and creating meaningful visualizations of complex health data.",
-      solution: "We developed a unified API layer to handle data from multiple devices and created intuitive, actionable dashboards that make fitness data easy to understand and act upon.",
-      technologies: ["Kotlin", "Swift", "Firebase", "HealthKit", "Google Fit API"],
-      image: "https://images.unsplash.com/photo-1575908539614-ff89490f4a78?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      description: "Dedicated driver application for the GoForCab ecosystem with real-time ride requests, navigation integration, and earnings tracking.",
+      challenges: "Optimizing battery usage while maintaining real-time location tracking and ensuring reliable notification delivery.",
+      solution: "We implemented intelligent location batching and background processing to minimize battery drain while maintaining service reliability.",
+      technologies: ["React Native", "Firebase", "Google Maps API", "Redux", "Push Notifications"],
+      image: "https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       link: "#"
     },
     {
       id: 6,
-      title: "EcoShop Sustainable Marketplace",
-      category: "ecommerce",
-      description: "An e-commerce platform focused on sustainable and eco-friendly products, featuring carbon footprint tracking and ethical sourcing information.",
-      challenges: "Creating a transparent supply chain tracking system while maintaining an engaging shopping experience.",
-      solution: "We developed a blockchain-based supply chain verification system and designed an intuitive interface that highlights sustainability without compromising on user experience.",
-      technologies: ["React", "Node.js", "MongoDB", "Blockchain", "PayPal API"],
-      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      title: "GoForCab Customer App",
+      category: "mobile",
+      description: "Customer-facing mobile application for booking rides, tracking drivers, and managing payments with an intuitive and user-friendly interface.",
+      challenges: "Creating a seamless booking experience while handling real-time updates and ensuring accurate location services.",
+      solution: "We developed a robust state management system and implemented efficient caching strategies for offline functionality and improved performance.",
+      technologies: ["React Native", "Redux", "Firebase", "Google Maps API", "Stripe SDK"],
+      image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       link: "#"
     },
     {
       id: 7,
-      title: "LocalBiz SEO Optimization",
-      category: "seo",
-      description: "A comprehensive SEO strategy and implementation for a network of local businesses, resulting in significant improvements in search rankings and organic traffic.",
-      challenges: "Optimizing for local search across multiple business locations with different service offerings.",
-      solution: "We developed location-specific content strategies and implemented technical SEO improvements that boosted visibility in local search results across all target markets.",
-      technologies: ["Google Analytics", "SEMrush", "WordPress", "Schema Markup", "Content Strategy"],
-      image: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      title: "HiTownBears E-commerce App",
+      category: "mobile",
+      description: "Mobile e-commerce application for fashion and lifestyle products with advanced search, wishlist features, and seamless checkout experience.",
+      challenges: "Creating a mobile-first shopping experience with complex product catalogs and multiple payment options.",
+      solution: "We implemented advanced search algorithms and optimized image loading to create a fast, engaging mobile shopping experience.",
+      technologies: ["React Native", "Node.js", "MongoDB", "Payment Gateway Integration", "Push Notifications"],
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       link: "#"
     },
     {
       id: 8,
-      title: "FinEdge Banking Dashboard",
+      title: "GenZConnect Social Platform",
       category: "web",
-      description: "A secure and intuitive banking dashboard that provides customers with real-time financial insights, transaction management, and financial planning tools.",
-      challenges: "Creating a highly secure environment while delivering real-time data and maintaining excellent performance.",
-      solution: "We implemented a microservices architecture with real-time data processing and designed a security system that exceeds banking industry standards.",
-      technologies: ["Vue.js", ".NET Core", "SQL Server", "Redis", "Docker"],
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      link: "#"
-    }
+      description: "A social networking platform designed specifically for Gen Z users with focus on authentic connections, content sharing, and community building.",
+      challenges: "Building a platform that encourages genuine social interaction while implementing robust content moderation and user safety features.",
+      solution: "We developed an AI-powered content moderation system and implemented privacy-first design principles to create a safe and engaging social environment.",
+      technologies: ["React", "Node.js", "PostgreSQL", "Redis", "WebSocket", "AI/ML APIs"],
+      image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      link: "https://genzconnect.vercel.app"    }
   ];
   
   // State for filtering
@@ -334,10 +331,9 @@ const PortfolioPage = () => {
               Start Your Project
             </Button>
           </motion.div>
-        </Container>
-      </Section>
+        </Container>      </Section>
       
-          </div>
+    </div>
   );
 };
 

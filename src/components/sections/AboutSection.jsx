@@ -39,7 +39,7 @@ const AboutSection = () => {
             <p className="text-gray-800 dark:text-white font-medium">
               "We don't just build websites and apps. We create digital experiences that transform businesses."
             </p>
-            <p className="mt-2 text-indigo-600 dark:text-indigo-400 font-bold">- CEO, Ainor Universe</p>
+            <p className="mt-2 text-indigo-600 dark:text-indigo-400 font-bold">- CEO, Ainor </p>
           </div>
         </motion.div>
 
@@ -53,10 +53,10 @@ const AboutSection = () => {
             About Us
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Digital Excellence <br />Since 2010
+            Digital Excellence <br />Since 2023
           </h2>
           <p className="text-lg text-gray-600 mb-8">
-            At Ainor Universe, we're passionate about creating digital experiences that transform businesses. Our team of experts combines technical skill with creative innovation to deliver solutions that not only meet but exceed client expectations.
+            At Ainor , we're passionate about creating digital experiences that transform businesses. Our team of experts combines technical skill with creative innovation to deliver solutions that not only meet but exceed client expectations.
           </p>
           <p className="text-lg text-gray-600 mb-10">
             We believe in a collaborative approach, working closely with our clients to understand their unique challenges and goals. This partnership allows us to create tailored solutions that drive real business results.

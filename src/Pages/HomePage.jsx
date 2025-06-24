@@ -40,9 +40,10 @@ const HomePage = () => {
       
       {/* About Us Section */}
       <AboutSection />
-      
-      {/* Testimonials Section */}
-      <TestimonialsSection />
+        {/* Testimonials Section */}
+      <div id="testimonials">
+        <TestimonialsSection />
+      </div>
       
       {/* Contact Section */}
       <ContactSection />

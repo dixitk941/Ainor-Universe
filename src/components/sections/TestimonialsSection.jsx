@@ -6,24 +6,24 @@ import { motion } from 'framer-motion';
 const testimonials = [
   {
     id: 1,
-    content: "Ainor Universe transformed our online presence. Their team delivered a stunning website that perfectly captures our brand and has significantly increased our customer engagement.",
-    author: "Sarah Johnson",
-    position: "Marketing Director, TechCorp",
-    avatar: "https://randomuser.me/api/portraits/women/32.jpg"
+    content: "AINOR delivered an exceptional cab booking platform for GoForCab. Their innovative approach and technical expertise transformed our vision into a user-friendly, scalable solution that has revolutionized our business operations.",
+    author: "Chetan Aggarwal",
+    position: "CEO, GoForCab",
+    avatar: "https://images.unsplash.com/photo-150700321169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
   },
   {
     id: 2,
-    content: "The mobile application Ainor Universe developed for us exceeded our expectations. Their attention to detail and commitment to quality is impressive.",
-    author: "Michael Chen",
-    position: "CEO, FitLife Inc.",
-    avatar: "https://randomuser.me/api/portraits/men/45.jpg"
+    content: "Working with AINOR on Sttrika's digital platform was an outstanding experience. Their team's dedication to quality and attention to detail helped us create a sophisticated solution that perfectly serves our customers' needs.",
+    author: "Kajal Dixit",
+    position: "CEO, Sttrika",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
   },
   {
     id: 3,
-    content: "Working with Ainor Universe on our e-commerce platform was a game-changer for our business. Sales have increased by 45% since launch.",
-    author: "Emma Rodriguez",
-    position: "Founder, Boutique Emporium",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg"
+    content: "AINOR's expertise in web development and digital solutions helped us launch our fintech platform successfully. Their professional approach and timely delivery made the entire process seamless and efficient.",
+    author: "Arjun Sharma",
+    position: "Founder, FinTech Solutions India",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
   },
 ];
 

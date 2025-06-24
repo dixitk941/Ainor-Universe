@@ -7,38 +7,38 @@ import Button from '../ui/Button';
 const projects = [
   {
     id: 1,
-    title: 'E-commerce Platform',
+    title: 'Sttrika E-commerce Platform',
     category: 'Web Development',
-    description: 'A full-featured online store with inventory management and payment integration.',
+    description: 'A comprehensive e-commerce platform for fashion and lifestyle products with advanced features.',
     image: 'https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    link: '#',
+    link: 'https://sttrika.com',
     accent: 'from-blue-600 to-indigo-600'
   },
   {
     id: 2,
-    title: 'Fitness Mobile App',
+    title: 'GoForCab Mobility Solution',
     category: 'Mobile Development',
-    description: 'A cross-platform mobile application for tracking fitness goals and workouts.',
+    description: 'Complete package - Android apps, iOS apps, admin panel and driver app for affordable cab services.',
     image: 'https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    link: '#',
+    link: 'https://goforcab.com',
     accent: 'from-purple-600 to-pink-600'
   },
   {
     id: 3,
-    title: 'Business Dashboard',
+    title: 'HiiHive Student Platform',
     category: 'Web Application',
-    description: 'A comprehensive analytics dashboard for real-time business intelligence.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    link: '#',
+    description: 'A powerful student-first platform where collaboration, leadership, and learning thrive together.',
+    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    link: 'https://hiihive.vercel.app',
     accent: 'from-cyan-600 to-teal-600'
   },
   {
     id: 4,
-    title: 'Social Networking Platform',
-    category: 'Web & Mobile',
-    description: 'A community platform with real-time messaging and content sharing capabilities.',
-    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    link: '#',
+    title: 'HB Web E-commerce',
+    category: 'E-commerce',
+    description: 'Modern e-commerce solution with advanced features and seamless user experience.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    link: 'https://hbweb.vercel.app',
     accent: 'from-amber-600 to-orange-600'
   },
 ];
