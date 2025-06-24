@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const SEOHead = ({ 
   title = "AINOR - Digital Solutions & Web Development Company",
@@ -6,81 +7,57 @@ const SEOHead = ({
   keywords = "AINOR, web development, digital solutions, mobile apps, custom software, React development, website design, digital transformation, technology company, software development",
   canonicalUrl = "https://myainor.com/",
   ogImage = "https://myainor.com/logo512.png",
-  structuredData = null
+  structuredData = null,
+  noindex = false
 }) => {
-  useEffect(() => {
-    // Update document title
-    document.title = title;
-    
-    // Update meta description
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', description);
-    }
-    
-    // Update meta keywords
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', keywords);
-    }
-    
-    // Update canonical URL
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link');
-      canonicalLink.rel = 'canonical';
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.href = canonicalUrl;
-    
-    // Update Open Graph tags
-    const updateOGTag = (property, content) => {
-      let tag = document.querySelector(`meta[property="${property}"]`);
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('property', property);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute('content', content);
-    };
-    
-    updateOGTag('og:title', title);
-    updateOGTag('og:description', description);
-    updateOGTag('og:url', canonicalUrl);
-    updateOGTag('og:image', ogImage);
-    
-    // Update Twitter tags
-    const updateTwitterTag = (name, content) => {
-      let tag = document.querySelector(`meta[name="${name}"]`);
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('name', name);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute('content', content);
-    };
-    
-    updateTwitterTag('twitter:title', title);
-    updateTwitterTag('twitter:description', description);
-    updateTwitterTag('twitter:image', ogImage);
-    
-    // Add structured data if provided
-    if (structuredData) {
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.innerHTML = JSON.stringify(structuredData);
-      document.head.appendChild(script);
+  return (
+    <Helmet>
+      {/* Basic Meta Tags */}
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      {noindex ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : (
+        <meta name="robots" content="index, follow" />
+      )}
       
-      // Cleanup function to remove the script when component unmounts
-      return () => {
-        if (script && script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
-      };
-    }
-  }, [title, description, keywords, canonicalUrl, ogImage, structuredData]);
-
-  return null; // This component doesn't render anything
+      {/* Canonical URL */}
+      <link rel="canonical" href={canonicalUrl} />
+      
+      {/* Open Graph Tags */}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="AINOR" />
+      <meta property="og:locale" content="en_US" />
+      
+      {/* Twitter Card Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:site" content="@ainor" />
+      <meta name="twitter:creator" content="@ainor" />
+      
+      {/* Additional SEO Meta Tags */}
+      <meta name="geo.region" content="IN" />
+      <meta name="geo.placename" content="India" />
+      <meta name="language" content="English" />
+      <meta name="author" content="AINOR" />
+      <meta name="publisher" content="AINOR" />
+      <meta name="copyright" content="AINOR" />
+      
+      {/* Structured Data */}
+      {structuredData && (
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      )}
+    </Helmet>
+  );
 };
 
 export default SEOHead;

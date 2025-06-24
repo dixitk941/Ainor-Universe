@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "AINOR",
+  "name": "AINOR - Digital Solutions & Web Development Company",
+  "description": "Professional digital solutions, web development, and custom software services by AINOR",
   "icons": [
     {
       "src": "favicon.ico",
@@ -14,12 +15,14 @@
     },
     {
       "src": "logo512.png",
-      "type": "image/png",
+      "type": "image/png", 
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#3B82F6",
+  "background_color": "#ffffff",
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "en"
 }

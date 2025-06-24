@@ -2,6 +2,7 @@ import React from 'react';
 
 // SEO Component
 import SEOHead from '../components/seo/SEOHead';
+import ServiceSchema from '../components/seo/ServiceSchema';
 
 // UI Components
 import Scene3D from '../components/ui/Scene3D';
@@ -48,10 +49,10 @@ const HomePage = () => {
       <SEOHead 
         title="AINOR - Digital Solutions & Web Development Company | Transform Your Business"
         description="Leading digital solutions company specializing in web development, mobile apps, and custom software development. Transform your business with innovative technology solutions by AINOR."
-        keywords="AINOR, digital solutions, web development, mobile apps, custom software, React development, JavaScript, website design, digital transformation, technology company, software development, business automation"
-        canonicalUrl="https://myainor.com/"
+        keywords="AINOR, digital solutions, web development, mobile apps, custom software, React development, JavaScript, website design, digital transformation, technology company, software development, business automation"        canonicalUrl="https://myainor.com/"
         structuredData={homePageStructuredData}
       />
+      <ServiceSchema />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       {/* 3D Scene - This will overlay the entire page */}
