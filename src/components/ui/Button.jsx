@@ -11,7 +11,9 @@ const Button = ({
   fadeIn = false,
   ...props 
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out rounded-lg focus:outline-none';    const variants = {
+  const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out rounded-lg focus:outline-none';
+  
+  const variants = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-blue-500/50',
     secondary: 'bg-white text-blue-700 hover:bg-blue-50 border border-transparent',
     outline: 'bg-transparent border border-blue-600 text-blue-600 hover:bg-blue-50',
@@ -31,47 +33,48 @@ const Button = ({
   };
   
   const buttonClasses = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
-    // 3D animation variants
+  
+  // 3D animation variants - optimized for performance
   const buttonVariants = {
     hover: {
-      scale: 1.05,
-      y: -5,
+      scale: 1.03,
+      y: -3,
       boxShadow: "0 10px 20px rgba(99, 102, 241, 0.3)",
-      transition: { type: "spring", stiffness: 400 }
+      transition: { type: "spring", stiffness: 300, damping: 15 }
     },
     tap: {
-      scale: 0.95,
+      scale: 0.97,
       y: 0,
       boxShadow: "0 5px 10px rgba(99, 102, 241, 0.2)"
     }
   };
   
-  // Cyber button variants
+  // Cyber button variants - optimized for performance
   const cyberButtonVariants = {
     hover: {
-      scale: 1.03,
-      y: -3,
-      boxShadow: "0 0 15px rgba(99, 102, 241, 0.6), 0 0 30px rgba(99, 102, 241, 0.4), 0 0 45px rgba(99, 102, 241, 0.2)",
+      scale: 1.02,
+      y: -2,
+      boxShadow: "0 0 15px rgba(99, 102, 241, 0.6), 0 0 30px rgba(99, 102, 241, 0.4)",
       transition: { 
         type: "spring", 
-        stiffness: 400,
-        duration: 0.3
+        stiffness: 300,
+        damping: 15,
+        duration: 0.2
       }
     },
     tap: {
       scale: 0.98,
-      boxShadow: "0 0 5px rgba(99, 102, 241, 0.6), 0 0 10px rgba(99, 102, 241, 0.4)"
+      boxShadow: "0 0 5px rgba(99, 102, 241, 0.6)"
     }
   };
-
-  // Fade in animation variant
+  // Fade in animation variant - optimized for performance
   const fadeInVariant = {
-    initial: { opacity: 0, y: 10 },
+    initial: { opacity: 0, y: 5 },
     animate: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.4
+        duration: 0.3
       }
     }
   };
@@ -91,11 +94,11 @@ const Button = ({
           {...props}
         >
           <span className="relative z-10">{children}</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 hover:opacity-30 rounded-lg blur -z-10"></span>
+          {/* Reduced blur complexity */}
+          <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 hover:opacity-20 rounded-lg -z-10"></span>
         </motion.a>
       );
-    }
-      return (
+    }      return (
       <motion.button 
         className={`${buttonClasses} preserve-3d`}
         whileHover={currentVariants.hover}
@@ -105,12 +108,13 @@ const Button = ({
         {...props}
       >
         <span className="relative z-10">{children}</span>
-        <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 hover:opacity-30 rounded-lg blur -z-10"></span>
+        {/* Reduced blur complexity */}
+        <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 hover:opacity-20 rounded-lg -z-10"></span>
       </motion.button>
     );
   }
   
-  // Non-3D buttons
+  // Non-3D buttons - optimized for performance
   if (href) {
     return (
       <motion.a 
@@ -118,8 +122,9 @@ const Button = ({
         className={buttonClasses}
         initial={fadeIn ? fadeInVariant.initial : undefined}
         animate={fadeIn ? fadeInVariant.animate : undefined}
-        whileHover={{ scale: 1.03 }}
+        whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 300, damping: 15 }}
         {...props}
       >
         {children}
@@ -132,8 +137,9 @@ const Button = ({
       className={buttonClasses}
       initial={fadeIn ? fadeInVariant.initial : undefined}
       animate={fadeIn ? fadeInVariant.animate : undefined}
-      whileHover={{ scale: 1.03 }}
+      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 300, damping: 15 }}
       {...props}
     >
       {children}
@@ -141,4 +147,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default React.memo(Button);

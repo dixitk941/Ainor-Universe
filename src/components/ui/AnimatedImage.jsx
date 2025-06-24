@@ -19,7 +19,7 @@ const AnimatedImage = ({
     return (
       <motion.div
         whileHover={{ scale: 1.03 }}
-        transition={{ duration: 0.5, type: "spring", stiffness: 300 }}
+        transition={{ duration: 0.5, type: "spring", stiffness: 300, damping: 15 }}
       >
         <Tilt
           className="will-change-transform"
@@ -28,18 +28,20 @@ const AnimatedImage = ({
           perspective={1000}
           transitionSpeed={1500}
           scale={scale}
-          gyroscope={gyroscope}
+          gyroscope={false} // Disable gyroscope for better performance
           glareEnable={glareEnable}
           glareMaxOpacity={glareMaxOpacity}
           glareColor="rgba(255, 255, 255, 0.5)"
           glarePosition="all"
+          tiltAngleYInitial={0}
+          tiltAngleXInitial={0}
         >
           <div className="relative overflow-hidden rounded-2xl shadow-2xl">
             <img 
               src={src} 
               alt={alt} 
               loading="lazy"
-              className={`w-full h-auto object-cover transition-transform duration-700 hover:scale-105 ${className}`}
+              className={`w-full h-auto object-cover ${className}`}
               {...props}
             />
             {/* 3D-like border effect */}
@@ -48,19 +50,18 @@ const AnimatedImage = ({
         </Tilt>
       </motion.div>
     );
-  }
-  
+  }  
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.5, type: "spring", stiffness: 300 }}
+      whileHover={{ scale: 1.03 }}
+      transition={{ duration: 0.4, type: "spring", stiffness: 300, damping: 15 }}
     >
       <div className="relative overflow-hidden rounded-2xl shadow-2xl">
         <img 
           src={src} 
           alt={alt} 
           loading="lazy"
-          className={`w-full h-auto object-cover transition-transform duration-700 hover:scale-105 ${className}`}
+          className={`w-full h-auto object-cover ${className}`}
           {...props}
         />
         {/* 3D-like border effect */}
@@ -70,4 +71,4 @@ const AnimatedImage = ({
   );
 };
 
-export default AnimatedImage;
+export default React.memo(AnimatedImage);

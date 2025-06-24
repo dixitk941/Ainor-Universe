@@ -1,19 +1,36 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import Typewriter from 'typewriter-effect';
+import { Link } from 'react-router-dom';
+
+import Section from '../layout/Section';
 import Button from '../ui/Button';
-import AnimatedImage from '../ui/AnimatedImage';
 
 const HeroSection = () => {
-  // Animation variants
+  const [ref, inView] = useInView({
+    triggerOnce: false,
+    threshold: 0.1,
+  });
+
+  const controls = useAnimation();
+  const [hovered, setHovered] = useState(false);
+  
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.3,
-      }
-    }
+        duration: 0.8,
+      },
+    },
   };
   
   const itemVariants = {
@@ -21,228 +38,300 @@ const HeroSection = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { type: "spring", stiffness: 100 }
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+  
+  const floatingAnimation = {
+    y: [0, -10, 0],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
     }
-  };  return (
-    <div className="relative min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-950 overflow-hidden flex items-center z-20 digital-rain">
-      {/* 3D Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Animated 3D Shapes */}
+  };
+  
+  const highlightVariants = {
+    initial: { backgroundPosition: "0% 0%" },
+    animate: { 
+      backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+      transition: { 
+        duration: 10, 
+        repeat: Infinity,
+        ease: "linear" 
+      }
+    }
+  };
+
+  return (    <Section 
+      id="hero" 
+      className="min-h-[90vh] flex items-center relative overflow-hidden"
+      bgColor="bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50"
+      spacing="py-12 md:py-28"
+    >      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {/* Background shapes - visible on both mobile and desktop */}
         <motion.div 
-          className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-indigo-500 opacity-20 blur-3xl"
-          animate={{ 
+          className="absolute -top-40 -left-40 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 z-0"
+          animate={{
+            x: [0, 10, 0],
+            y: [0, 15, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute -bottom-40 -right-40 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 z-0"
+          animate={{
+            x: [0, -10, 0],
+            y: [0, -15, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+        
+        {/* Mobile floating elements - only visible on mobile */}
+        <motion.div 
+          className="absolute top-10 right-10 w-16 h-16 bg-blue-400 rounded-full filter blur-xl opacity-30 z-0 md:hidden"
+          animate={{
+            y: [0, -15, 0],
             scale: [1, 1.2, 1],
-            rotate: [0, 10, 0]
+            opacity: [0.3, 0.5, 0.3]
           }}
-          transition={{ 
+          transition={{
+            duration: 6,
             repeat: Infinity,
-            duration: 15,
             ease: "easeInOut"
           }}
         />
-        
         <motion.div 
-          className="absolute top-1/4 left-1/3 h-60 w-60 rounded-full bg-purple-500 opacity-20 blur-3xl"
-          animate={{ 
-            scale: [1, 1.3, 1],
-            rotate: [0, -10, 0]
+          className="absolute bottom-20 left-5 w-20 h-20 bg-indigo-500 rounded-full filter blur-xl opacity-20 z-0 md:hidden"
+          animate={{
+            y: [0, 15, 0],
+            scale: [1, 1.1, 1],
+            opacity: [0.2, 0.4, 0.2]
           }}
-          transition={{ 
+          transition={{
+            duration: 7,
             repeat: Infinity,
-            duration: 20,
-            ease: "easeInOut"
+            ease: "easeInOut",
+            delay: 1
           }}
         />
         
-        <motion.div 
-          className="absolute bottom-1/3 right-1/4 h-40 w-40 rounded-full bg-pink-500 opacity-20 blur-3xl"
-          animate={{ 
-            scale: [1, 1.4, 1],
-            x: [0, 30, 0]
-          }}
-          transition={{ 
-            repeat: Infinity,
-            duration: 18,
-            ease: "easeInOut"
-          }}
-        />
-
-        <div className="absolute bottom-0 left-0 h-40 w-full bg-gradient-to-t from-black/30 to-transparent"></div>
-        
-        {/* 3D Grid Pattern */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMSI+PHBhdGggZD0iTTM2IDM0aDR2MWgtNHYtMXptMC0yaDF2NGgtMXYtNHptMi0yaDF2MWgtMXYtMXptLTItNGg0djFoLTR2LTF6bTAtMmgxdjRoLTF2LTR6bTItMmgxdjFoLTF2LTF6TTM0IDM0aDR2MWgtNHYtMXptMC0yaDF2NGgtMXYtNHptMi0yaDF2MWgtMXYtMXptLTItNGg0djFoLTR2LTF6bTAtMmgxdjRoLTF2LTR6bTItMmgxdjFoLTF2LTF6TTQwIDM0aDR2MWgtNHYtMXptMC0yaDF2NGgtMXYtNHptMi0yaDF2MWgtMXYtMXptLTItNGg0djFoLTR2LTF6bTAtMmgxdjRoLTF2LTR6bTItMmgxdjFoLTF2LTF6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30 perspective-1000"></div>
-        
-        {/* 3D Floating Particles */}
-        <div className="absolute inset-0">
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute h-2 w-2 rounded-full bg-white/30"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.1, 0.5, 0.1],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 5,
-                repeat: Infinity,
-                delay: Math.random() * 5,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-8 sm:pb-12 md:pb-16">
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        {/* Content Column */}
+        <motion.div
+          ref={ref}
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          animate={controls}
+          className="max-w-xl relative z-10"
         >
-          <div className="text-center lg:text-left">            <motion.div 
-              className="inline-block px-3 py-1 mb-4 sm:mb-6 rounded-full bg-white/10 backdrop-filter backdrop-blur-sm border border-white/20 text-white text-sm font-medium cyber-panel"
-              variants={itemVariants}
-            >
-              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-indigo-400 animate-pulse"></span>
-              Digital Innovation Studio
-            </motion.div>
-              <motion.h1 
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight"
-              variants={itemVariants}
-            >
-              We Create <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 text-3d ">
-                Digital Experiences
-              </span>
-            </motion.h1>
-              <motion.p 
-              className="mt-4 sm:mt-6 text-lg sm:text-xl text-indigo-100 max-w-lg mx-auto lg:mx-0 opacity-80 glassmorphism-text"
-              variants={itemVariants}
-            >
-              Transforming ideas into cutting-edge digital experiences with futuristic designs and advanced technologies.
-            </motion.p>
-            
-            <motion.div 
-              className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4"
-              variants={itemVariants}
-            ><Button href="#contact" size="lg" variant="cyber" className="group" is3D={true}>
-                Start Your Project
-                {/* <BsArrowRightShort className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" /> */}
-              </Button>
-              <Button href="#work" size="lg" variant="neon" className="text-white" is3D={true}>
-                View Our Work
-              </Button>
-            </motion.div>
-          </div>
-          
-          <motion.div 
-            className="relative perspective-1000"
+          <motion.div
+            className="absolute -z-10 inset-0 overflow-hidden"
             variants={itemVariants}
           >
-            {/* 3D Glowing Circle */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500 rounded-full blur-3xl opacity-20"></div>
-            
-            {/* 3D floating image with glare effect */}            <div className="relative z-10 float">
-              <AnimatedImage
-                src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                alt="Digital Experiences"
-                className="rounded-2xl shadow-2xl"
-                tiltEnable={true}
-                glareEnable={true}
-                glareMaxOpacity={0.3}
-                tiltMaxAngleX={20}
-                tiltMaxAngleY={20}
-                scale={1.08}
-                gyroscope={true}
-              />
+            <div className="w-full h-full opacity-10">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <div 
+                  key={index}
+                  className="absolute h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"
+                  style={{ 
+                    top: `${Math.random() * 100}%`,
+                    left: 0,
+                    width: '100%',
+                    opacity: Math.random() * 0.3 + 0.1,
+                    transform: `rotate(${Math.random() * 5 - 2.5}deg)`,
+                    filter: 'blur(1px)'
+                  }}
+                />
+              ))}
             </div>
+          </motion.div>
+        
+          <motion.p 
+            variants={itemVariants}
+            className="inline-block px-4 py-1 mb-6 bg-blue-50 text-blue-600 font-semibold rounded-full border border-blue-100 shadow-sm"
+          >
+            Digital Solutions for Modern Businesses
+          </motion.p>
+          
+          <motion.h1 
+            variants={itemVariants}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+          >
+            We Build
+            <span className="block mt-2">
+              <motion.span 
+                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 inline-block"
+                animate={{
+                  backgroundPosition: ['0% center', '100% center', '0% center'],
+                }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              >
+                <Typewriter
+                  options={{
+                    strings: [
+                      'Innovative Websites',
+                      'Powerful Applications',
+                      'Digital Experiences',
+                      'Business Solutions'
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    delay: 70,
+                    deleteSpeed: 40,
+                  }}
+                />
+              </motion.span>
+            </span>
+          </motion.h1>
+          
+          <motion.p 
+            variants={itemVariants}
+            className="text-lg text-gray-600 mb-8 leading-relaxed"
+          >
+            Transform your digital presence with our expert team. We deliver 
+            <motion.span 
+              className="font-medium text-blue-800 mx-1"
+              animate={{ opacity: [1, 0.8, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              cutting-edge solutions
+            </motion.span> 
+            that help your business thrive in the digital world.
+          </motion.p>
+          
+          <motion.div 
+            variants={itemVariants}
+            className="flex flex-wrap gap-4"
+          >
+            <Button 
+              variant="primary" 
+              size="lg"
+              as={Link}
+              to="/contact"
+              className="group relative overflow-hidden shadow-lg transition-all hover:shadow-blue-500/30 hover:-translate-y-1"
+            >
+              <span className="relative z-10">Get Started</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 transition-all duration-300 group-hover:scale-105"></span>
+            </Button>
             
-            {/* Decorative 3D elements */}
+            <Button 
+              variant="outline" 
+              size="lg"
+              as={Link}
+              to="/services"
+              className="relative overflow-hidden transition-all hover:-translate-y-1 hover:shadow-md hover:shadow-blue-500/10 group"
+            >
+              <span className="relative z-10">Our Services</span>
+              <span className="absolute bottom-0 left-0 h-[2px] w-full bg-blue-500 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+            </Button>
+          </motion.div>
+        </motion.div>
+        
+        {/* Image Column */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="hidden md:block relative z-10"
+          whileHover={{ scale: 1.02 }}
+          onHoverStart={() => setHovered(true)}
+          onHoverEnd={() => setHovered(false)}
+        >          
+          <div className="relative overflow-hidden rounded-xl shadow-2xl">
+            {/* Animated border */}
             <motion.div 
-              className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-to-br from-pink-500 to-purple-500 rounded-xl rotate-12 blur-xl opacity-70"
-              animate={{
-                rotate: [12, 20, 12],
-                scale: [1, 1.1, 1],
+              className="absolute -inset-[2px] rounded-xl z-20 pointer-events-none"
+              initial={{ background: "linear-gradient(90deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0) 100%)" }}
+              animate={{ 
+                background: ["linear-gradient(0deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
+                             "linear-gradient(90deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
+                             "linear-gradient(180deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
+                             "linear-gradient(270deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
+                             "linear-gradient(0deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)"]
               }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut"
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            />
+            
+            {/* Decorative elements */}
+            <motion.div 
+              className="absolute -top-4 -left-4 w-24 h-24 bg-blue-100 rounded-full opacity-60 z-10"
+              animate={floatingAnimation}
+            />
+            <motion.div 
+              className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-200 rounded-full opacity-60 z-10"
+              animate={{
+                ...floatingAnimation,
+                transition: { ...floatingAnimation.transition, delay: 1.5 }
               }}
             />
             
-            {/* Floating tech icons */}
-            <motion.div
-              className="absolute -top-5 -left-5 h-20 w-20 rounded-lg bg-white/10 backdrop-filter backdrop-blur-lg border border-white/20 flex items-center justify-center shadow-xl"
-              animate={{
-                y: [0, -10, 0],
-                rotate: [0, 5, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <svg className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.775-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            {/* Tech pattern overlay */}
+            <div className="absolute inset-0 z-20 mix-blend-overlay opacity-20 pointer-events-none">
+              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
               </svg>
-            </motion.div>
+            </div>
             
-            <motion.div
-              className="absolute -bottom-5 left-20 h-16 w-16 rounded-lg bg-white/10 backdrop-filter backdrop-blur-lg border border-white/20 flex items-center justify-center shadow-xl"
-              animate={{
-                y: [0, 10, 0],
-                rotate: [0, -5, 0],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1
-              }}
+            {/* Main image with fallback */}            
+            <motion.img 
+              src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+              alt="Digital Solutions Visualization" 
+              className="w-full h-[450px] object-cover relative z-0 transition-all duration-700"
+              loading="lazy"
+              animate={{ scale: hovered ? 1.05 : 1 }}
+              transition={{ duration: 0.5 }}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80";
+              }}            
+            />
+            
+            {/* Overlay gradient for better text visibility if needed */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 to-transparent z-0"></div>
+            
+            {/* Interactive elements */}
+            <motion.div 
+              className="absolute bottom-5 right-5 flex space-x-2 z-30"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 }}
             >
-              <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
+              {[1, 2, 3].map((i) => (
+                <motion.div 
+                  key={i}
+                  className="w-3 h-3 rounded-full bg-white/70"
+                  animate={{ opacity: [0.4, 1, 0.4] }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity, 
+                    delay: i * 0.3,
+                    ease: "easeInOut"
+                  }}
+                />
+              ))}
             </motion.div>
-          </motion.div>
-        </motion.div>
-          {/* Clients - with 3D effect */}        <motion.div 
-          className="mt-12 sm:mt-16 md:mt-20 pt-8 sm:pt-10 border-t border-white/10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-        >
-          <p className="text-center text-white/60 text-sm mb-4 sm:mb-6">Trusted by innovative companies worldwide</p>
-          <div className="flex flex-wrap justify-center gap-x-8 sm:gap-x-12 gap-y-4 sm:gap-y-6">
-            {['GoForCab', 'BgCut', 'Sttrika'].map((client, index) => (
-              <motion.div 
-                key={client} 
-                className="text-white/60 font-semibold text-lg sm:text-xl glassmorphism-ultra px-4 sm:px-5 py-2 sm:py-3 rounded-lg cyber-panel"
-                whileHover={{ 
-                  scale: 1.05, 
-                  color: "rgba(255, 255, 255, 0.9)",
-                  boxShadow: "0 0 15px rgba(99, 102, 241, 0.5), 0 0 30px rgba(99, 102, 241, 0.3)"
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 + (index * 0.1), duration: 0.5 }}
-              >
-                {client}
-              </motion.div>
-            ))}
           </div>
-        </motion.div>      </div>
-      
-      {/* 3D Wave Separator */}
-      
-    </div>
+        </motion.div>
+      </div>
+    </Section>
   );
 };
 
