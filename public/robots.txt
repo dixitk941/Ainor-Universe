@@ -1,3 +1,18 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# Allow search engines to access important resources
+Allow: /static/
+Allow: /assets/
+Allow: /images/
+
+# Disallow admin or private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://myainor.com/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

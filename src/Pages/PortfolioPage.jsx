@@ -5,6 +5,7 @@ import Navbar from '../components/layout/Navbar';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
+import SEOHead from '../components/seo/SEOHead';
 
 const PortfolioPage = () => {
   // Categories for filtering
@@ -124,9 +125,23 @@ const PortfolioPage = () => {
   const closeProjectDetail = () => {
     setSelectedProject(null);
   };
-
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <>
+      <SEOHead 
+        title="AINOR Portfolio - Our Web Development & Digital Solution Projects"
+        description="Explore AINOR's portfolio showcasing our web development projects, mobile apps, and digital solutions including GoForCab, Sttrika, HiiHive, and HB Web. See our expertise in action."
+        keywords="AINOR portfolio, web development projects, GoForCab, Sttrika, HiiHive, HB Web, mobile apps, digital solutions, project showcase, client work"
+        canonicalUrl="https://myainor.com/portfolio"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "AINOR Portfolio",
+          "description": "Portfolio showcasing AINOR's web development projects and digital solutions.",
+          "url": "https://myainor.com/portfolio"
+        }}
+      />
+      
+      <div className="min-h-screen bg-white text-gray-900">
       <Navbar />
       
       {/* Header Section */}
@@ -330,10 +345,10 @@ const PortfolioPage = () => {
             <Button href="/contact" variant="dark" is3D={true}>
               Start Your Project
             </Button>
-          </motion.div>
-        </Container>      </Section>
+          </motion.div>        </Container>      </Section>
       
     </div>
+    </>
   );
 };
 

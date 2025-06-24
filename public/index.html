@@ -4,40 +4,117 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <meta name="theme-color" content="#3B82F6" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>AINOR - Digital Solutions & Web Development Company</title>
+    <meta name="title" content="AINOR - Digital Solutions & Web Development Company" />
+    <meta name="description" content="AINOR delivers innovative digital solutions, web development, mobile apps, and custom software. Transform your business with cutting-edge technology and expert development services." />    <meta name="keywords" content="AINOR, web development, digital solutions, mobile apps, custom software, React development, website design, digital transformation, technology company, software development" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="author" content="AINOR" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://myainor.com/" />
+    <meta property="og:title" content="AINOR - Digital Solutions & Web Development Company" />
+    <meta property="og:description" content="AINOR delivers innovative digital solutions, web development, mobile apps, and custom software. Transform your business with cutting-edge technology." />
+    <meta property="og:image" content="https://myainor.com/logo512.png" />
+    <meta property="og:site_name" content="AINOR" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://myainor.com/" />
+    <meta property="twitter:title" content="AINOR - Digital Solutions & Web Development Company" />
+    <meta property="twitter:description" content="AINOR delivers innovative digital solutions, web development, mobile apps, and custom software. Transform your business with cutting-edge technology." />
+    <meta property="twitter:image" content="https://myainor.com/logo512.png" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="geo.region" content="IN" />
+    <meta name="geo.placename" content="India" />
+    <meta name="geo.position" content="28.6139;77.2090" />
+    <meta name="ICBM" content="28.6139, 77.2090" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://myainor.com/" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//images.unsplash.com" />
+      <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/logo192.png" />
+    
+    <!-- Manifest -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>AINOR</title>
+    
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AINOR",
+      "alternateName": "AINOR Digital Solutions",
+      "url": "https://myainor.com",
+      "logo": "https://myainor.com/logo512.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+919528202892",
+        "contactType": "customer service",
+        "availableLanguage": "English"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://linkedin.com/in/dixitk941",
+        "https://github.com/dixitk941"
+      ],
+      "foundingDate": "2023",
+      "founders": [
+        {
+          "@type": "Person",
+          "name": "Karan Dixit"
+        }
+      ],
+      "description": "AINOR delivers innovative digital solutions, web development, mobile apps, and custom software to transform businesses worldwide."
+    }
+    </script>
+    
+    <!-- Structured Data - WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "AINOR",
+      "url": "https://myainor.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://myainor.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- Google Analytics (replace with your actual GA4 tracking ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
   </head>
   <body>
-    <noscript>Welcome the World Of AINOR </noscript>
+    <noscript>
+      Welcome to the World of AINOR - Your trusted partner for digital solutions and web development services.
+    </noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

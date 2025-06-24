@@ -5,6 +5,7 @@ import { BsArrowRight } from 'react-icons/bs';
 import { IoBusinessOutline, IoPeopleOutline, IoRocketOutline, IoTimeOutline, IoCalendarOutline, IoGlobeOutline } from 'react-icons/io5';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
+import SEOHead from '../components/seo/SEOHead';
 
 const AboutPage = () => {// Company milestones with updated timeline
   const milestones = [
@@ -134,9 +135,35 @@ const AboutPage = () => {// Company milestones with updated timeline
         duration: 0.5, 
         ease: [0.25, 0.1, 0.25, 1] // custom cubic bezier for One UI feel
       }
-    }
-  };return (
-    <div className="bg-white text-gray-900">
+    }  };return (
+    <>
+      <SEOHead 
+        title="About AINOR - Our Story, Team & Mission | Digital Solutions Company"
+        description="Learn about AINOR's journey, meet our expert team, and discover our mission to transform businesses through innovative digital solutions and cutting-edge technology."
+        keywords="AINOR about, company story, development team, Karan Dixit, Mayank Sharma, Aakash Dixit, digital agency history, technology expertise, business transformation"
+        canonicalUrl="https://myainor.com/about"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "name": "About AINOR",
+          "description": "Learn about AINOR's journey, team, and mission to transform businesses through innovative digital solutions.",
+          "url": "https://myainor.com/about",
+          "mainEntity": {
+            "@type": "Organization",
+            "name": "AINOR",
+            "foundingDate": "2023",
+            "founders": [
+              {
+                "@type": "Person",
+                "name": "Karan Dixit",
+                "jobTitle": "Founder & CEO"
+              }
+            ]
+          }
+        }}
+      />
+      
+      <div className="bg-white text-gray-900">
       {/* Hero Section with One UI 7 inspiration - full-width, large, bold typography */}
       <section className="relative h-[85vh] overflow-hidden">
         {/* Full width background image with overlay */}
@@ -539,13 +566,13 @@ const AboutPage = () => {// Company milestones with updated timeline
                       Get Started <BsArrowRight className="ml-2" />
                     </span>
                   </a>
-                </div>
-              </div>
+                </div>              </div>
             </motion.div>
           </Container>
         </section>
       </div>
     </div>
+    </>
   );
 };
 

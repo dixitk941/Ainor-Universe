@@ -4,6 +4,7 @@ import { FaEnvelope, FaPhone } from 'react-icons/fa';
 import Button from '../components/ui/Button';
 import Section from '../components/layout/Section';
 import Container from '../components/layout/Container';
+import SEOHead from '../components/seo/SEOHead';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -59,7 +60,23 @@ const ContactPage = () => {
       setIsSubmitting(false);
     }
   };
-  return (    <div className="min-h-screen bg-white text-gray-900">
+  return (    
+    <>
+      <SEOHead 
+        title="Contact AINOR - Get in Touch for Digital Solutions | Web Development Services"
+        description="Contact AINOR for professional web development, digital solutions, and custom software services. Get in touch with our expert team to transform your business ideas into reality."
+        keywords="contact AINOR, web development services, digital solutions contact, custom software inquiry, business consultation, project quote, technology services"
+        canonicalUrl="https://myainor.com/contact"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "name": "Contact AINOR",
+          "description": "Get in touch with AINOR for professional digital solutions and web development services.",
+          "url": "https://myainor.com/contact"
+        }}
+      />
+      
+      <div className="min-h-screen bg-white text-gray-900">
       {/* Header Section */}
       <Section className="pt-32 pb-20 relative bg-gradient-to-b from-white to-gray-100">
         <Container>
@@ -222,10 +239,10 @@ const ContactPage = () => {
               </div> */}
             </motion.div>          </div>
         </Container>
-      </Section>      
-      {/* Extra padding for mobile navigation */}
+      </Section>        {/* Extra padding for mobile navigation */}
       <div className="md:hidden h-16"></div>
     </div>
+    </>
   );
 };
 
