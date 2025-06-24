@@ -164,7 +164,7 @@ const AboutPage = () => {// Company milestones with updated timeline
       />
       
       <div className="bg-white text-gray-900">      {/* Hero Section with One UI 7 inspiration - full-width, large, bold typography */}
-      <section className="relative h-screen overflow-hidden mobile-no-top-space pt-0 mt-0">
+      <section className="relative h-screen overflow-hidden mobile-no-top-space">
         {/* Full width background image with overlay */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30 z-10"></div>

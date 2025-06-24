@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Navbar from '../components/layout/Navbar';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
@@ -92,10 +91,8 @@ const BlogPage = () => {
     { id: 'ai', name: 'Artificial Intelligence' },
     { id: 'security', name: 'Security' }
   ];
-
   return (
     <>
-      <Navbar />
       
       {/* Hero Section */}
       <Section className="pb-16 bg-gradient-to-b from-gray-50 to-white">

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../components/layout/Navbar';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
@@ -348,10 +347,7 @@ const PricingPage = () => {
           "description": "Transparent pricing for professional web development and digital solutions in India.",
           "url": "https://myainor.com/pricing"
         }}
-      />
-
-      <div className="min-h-screen bg-white text-gray-900">
-        <Navbar />
+      />      <div className="min-h-screen bg-white text-gray-900">
         
         {/* Header Section */}
         <Section className="pt-32 pb-16 relative bg-gradient-to-b from-blue-50 to-white">

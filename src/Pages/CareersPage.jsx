@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../components/layout/Navbar';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
@@ -150,10 +149,8 @@ const CareersPage = () => {
       description: "Generous PTO policy, paid holidays, and parental leave."
     }
   ];
-
   return (
     <>
-      <Navbar />
       
       {/* Hero Section */}
       <Section className="pb-16 bg-gradient-to-b from-gray-50 to-white">

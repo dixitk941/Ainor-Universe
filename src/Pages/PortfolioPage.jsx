@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaExternalLinkAlt, FaMobileAlt, FaDesktop, FaShoppingCart, FaChartLine } from 'react-icons/fa';
-import Navbar from '../components/layout/Navbar';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
@@ -140,9 +139,7 @@ const PortfolioPage = () => {
           "url": "https://myainor.com/portfolio"
         }}
       />
-      
-      <div className="min-h-screen bg-white text-gray-900">
-      <Navbar />
+        <div className="min-h-screen bg-white text-gray-900">
       
       {/* Header Section */}
       <Section className="pb-16 relative bg-gradient-to-b from-white to-gray-100">

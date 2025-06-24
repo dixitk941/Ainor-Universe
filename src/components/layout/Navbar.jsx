@@ -41,11 +41,10 @@ const Navbar = () => {
   // For mobile menu, primary items shown directly
   const primaryNavItems = navItems.slice(0, 5);
 
-  return (
-    <>      {/* Main Navbar - One UI 7 Inspired */}
+  return (    <>      {/* Main Navbar - Fixed positioning with no extra spacing */}
       <nav className="fixed top-0 left-0 right-0 z-50">
-        <Container>
-          <div className={`mt-0 rounded-[2rem] transition-all duration-300 ${
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className={`rounded-[2rem] transition-all duration-300 ${
             isScrolled 
               ? 'bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md' 
               : 'bg-gray-900/70 backdrop-blur-md border border-gray-800/30'
@@ -167,13 +166,12 @@ const Navbar = () => {
                     >
                       Get in Touch
                     </Link>
-                  </div>
-                </div>
+                  </div>                </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </Container>
-      </nav>      {/* Bottom Tab Bar for Mobile - One UI 7 Style */}
+        </div>
+      </nav>{/* Bottom Tab Bar for Mobile - One UI 7 Style */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe px-2 sm:px-3">
         <div className="mx-auto my-1.5 sm:my-2 rounded-[1.5rem] bg-gray-900/95 backdrop-blur-lg border border-gray-800/30 shadow-lg">
           <div className="grid grid-cols-5 gap-0.5 sm:gap-1 py-1 sm:py-1.5">
