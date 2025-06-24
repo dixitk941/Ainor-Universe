@@ -6,7 +6,9 @@ const Button = ({
   variant = 'primary', 
   size = 'md', 
   className = '', 
-  href, 
+  href,
+  as: Component,
+  to,
   is3D = false,
   fadeIn = false,
   ...props 
@@ -78,6 +80,35 @@ const Button = ({
       }
     }
   };
+
+  // For custom component (like React Router's Link)
+  if (Component) {
+    return (
+      <motion.div
+        className="inline-block" 
+        initial={fadeIn ? fadeInVariant.initial : undefined}
+        animate={fadeIn ? fadeInVariant.animate : undefined}
+        whileHover={is3D ? (variant === 'cyber' || variant === 'neon' ? cyberButtonVariants.hover : buttonVariants.hover) : { scale: 1.02 }}
+        whileTap={is3D ? (variant === 'cyber' || variant === 'neon' ? cyberButtonVariants.tap : buttonVariants.tap) : { scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+      >
+        <Component
+          className={`${buttonClasses} ${is3D ? 'preserve-3d' : ''}`}
+          to={to}
+          {...props}
+        >
+          {is3D ? (
+            <>
+              <span className="relative z-10">{children}</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 hover:opacity-20 rounded-lg -z-10"></span>
+            </>
+          ) : (
+            children
+          )}
+        </Component>
+      </motion.div>
+    );
+  }
     
   if (is3D) {
     const currentVariants = variant === 'cyber' || variant === 'neon' ? cyberButtonVariants : buttonVariants;
@@ -98,7 +129,9 @@ const Button = ({
           <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 hover:opacity-20 rounded-lg -z-10"></span>
         </motion.a>
       );
-    }      return (
+    }
+    
+    return (
       <motion.button 
         className={`${buttonClasses} preserve-3d`}
         whileHover={currentVariants.hover}
