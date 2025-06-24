@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Section from '../layout/Section';
 import AnimatedImage from '../ui/AnimatedImage';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Button from '../ui/Button';
 import { Link } from 'react-router-dom';
 
@@ -51,6 +51,98 @@ const projects = [
 const WorkSection = () => {
   // State for active mobile tab
   const [activeTab, setActiveTab] = useState(0);
+  // Auto-slide interval reference
+  const intervalRef = useRef(null);
+  // Pause auto-slide when user interacts
+  const [isPaused, setIsPaused] = useState(false);
+  // Progress timer for visual feedback
+  const [progress, setProgress] = useState(0);
+  // Progress interval reference
+  const progressIntervalRef = useRef(null);
+  
+  // Slide container ref for handling hover events
+  const slideContainerRef = useRef(null);
+  
+  // Auto-slide functionality
+  useEffect(() => {
+    // Clear any existing intervals
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+    }
+    
+    // Reset progress when slide changes
+    setProgress(0);
+    
+    // Only set up auto-slide if not paused
+    if (!isPaused) {
+      // Update progress every 50ms for smooth animation
+      progressIntervalRef.current = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) return 0;
+          return prev + (50 / 5000) * 100; // 5000ms (5s) is the slide duration
+        });
+      }, 50);
+      
+      // Change slide every 5 seconds
+      intervalRef.current = setInterval(() => {
+        setActiveTab((prevTab) => (prevTab + 1) % projects.length);
+      }, 5000);
+    }
+    
+    // Clean up intervals on component unmount
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+    };
+  }, [activeTab, isPaused]);
+    // Toggle pause/resume on clicking the indicator
+  const togglePauseResume = () => {
+    setIsPaused(prev => !prev);
+  };
+  
+  // Pause auto-slide on user interaction and resume after delay
+  const handleManualChange = (index) => {
+    setIsPaused(true);
+    setActiveTab(index);
+    
+    // Resume auto-slide after 10 seconds of inactivity
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 10000);
+  };
+  
+  // Pause on hover
+  const handleMouseEnter = () => {
+    setIsPaused(true);
+  };
+    // Resume on mouse leave
+  const handleMouseLeave = () => {
+    // Give a small delay before resuming to prevent accidental resumption
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 1000);
+  };
+  
+  // Handle touch events for mobile
+  const handleTouchStart = () => {
+    setIsPaused(true);
+  };
+  
+  const handleTouchEnd = () => {
+    // Give a longer delay for touch devices to ensure user has finished interaction
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 5000);
+  };
 
   return (
     <Section id="work" bgColor="bg-white dark:bg-gray-900 relative overflow-hidden">
@@ -160,46 +252,88 @@ const WorkSection = () => {
             transition={{ duration: 0.5 }}
           >
             {projects.map((project, index) => (
-              <motion.button
-                key={`tab-${project.id}`}
+              <motion.button                key={`tab-${project.id}`}
                 className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
                   activeTab === index 
                     ? `${project.color} text-white shadow-md` 
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300'
                 }`}
-                onClick={() => setActiveTab(index)}
+                onClick={() => handleManualChange(index)}
                 whileTap={{ scale: 0.95 }}
               >
                 {project.category}
               </motion.button>
             ))}
-          </motion.div>
-          
-          {/* Mobile project card slider */}
-          <div className="relative mt-3 pb-10">
-            {projects.map((project, index) => (
-              <MobileProjectCard 
-                key={`mobile-${project.id}`}
-                project={project}
-                index={index}
-                isActive={activeTab === index}
-                setActiveTab={setActiveTab}
-              />
-            ))}
+          </motion.div>          {/* Mobile project card slider */}
+          <div 
+            ref={slideContainerRef}            className="relative mt-3 pb-10"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <AnimatePresence mode="wait">
+              {projects.map((project, index) => 
+                activeTab === index && (
+                  <MobileProjectCard 
+                    key={`mobile-${project.id}`}
+                    project={project}
+                    index={index}
+                    isActive={true}
+                    setActiveTab={setActiveTab}
+                    handleManualChange={handleManualChange}
+                  />
+                )
+              )}
+            </AnimatePresence>
             
             {/* Progress indicator dots */}
-            <div className="flex justify-center space-x-2 mt-4">
+            <div className="flex justify-center items-center space-x-2 mt-4">
               {projects.map((_, index) => (
-                <button
-                  key={`indicator-${index}`}
+                <button                key={`indicator-${index}`}
                   className={`w-2 h-2 rounded-full transition-all ${
                     activeTab === index 
                       ? 'bg-indigo-600 w-6' 
                       : 'bg-gray-300 dark:bg-gray-700'
                   }`}
-                  onClick={() => setActiveTab(index)}
+                  onClick={() => handleManualChange(index)}
                 />
-              ))}
+              ))}              {/* Auto-slide status indicator */}
+              <button 
+                onClick={togglePauseResume}
+                className={`relative ml-4 w-6 h-6 rounded-full flex items-center justify-center transition-all ${isPaused ? 'bg-amber-100 text-amber-600' : 'bg-green-100 text-green-600'} hover:scale-110`}
+                title={isPaused ? "Resume auto-slide" : "Pause auto-slide"}
+              >
+                {/* Circular progress indicator */}
+                {!isPaused && (
+                  <svg className="absolute inset-0 w-6 h-6">
+                    <circle 
+                      className="text-green-300" 
+                      strokeWidth="2" 
+                      stroke="currentColor" 
+                      fill="transparent" 
+                      r="10" 
+                      cx="12" 
+                      cy="12"
+                      style={{
+                        strokeDasharray: 63, // 2 * PI * r (10)
+                        strokeDashoffset: 63 - (63 * progress / 100),
+                        transformOrigin: 'center',
+                        transform: 'rotate(-90deg)'
+                      }}
+                    />
+                  </svg>
+                )}
+                
+                {isPaused ? (
+                  <svg className="w-3 h-3 z-10" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                ) : (                  <svg className="w-3 h-3 z-10" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -334,16 +468,12 @@ const DesktopProjectCard = ({ project, index }) => {
 };
 
 // Mobile project card component with modern design
-const MobileProjectCard = ({ project, index, isActive, setActiveTab }) => {
+const MobileProjectCard = ({ project, index, isActive, setActiveTab, handleManualChange }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ 
-        opacity: isActive ? 1 : 0,
-        scale: isActive ? 1 : 0.92,
-        zIndex: isActive ? 10 : 0,
-        display: isActive ? 'block' : 'none',
-      }}
+      initial={{ opacity: 0, x: 20, scale: 0.95 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, x: -20, scale: 0.95 }}
       transition={{ duration: 0.4 }}
       className="w-full"
     >
@@ -393,11 +523,10 @@ const MobileProjectCard = ({ project, index, isActive, setActiveTab }) => {
               </svg>
             </a>
             
-            <div className="flex space-x-1">
-              {index > 0 && (
+            <div className="flex space-x-1">              {index > 0 && (
                 <button 
-                  onClick={() => setActiveTab(index - 1)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300"
+                  onClick={() => handleManualChange(index - 1)}
+                  className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -407,8 +536,8 @@ const MobileProjectCard = ({ project, index, isActive, setActiveTab }) => {
               
               {index < projects.length - 1 && (
                 <button 
-                  onClick={() => setActiveTab(index + 1)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300"
+                  onClick={() => handleManualChange(index + 1)}
+                  className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
