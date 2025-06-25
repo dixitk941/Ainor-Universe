@@ -10,68 +10,63 @@ import AnimatedImage from '../components/ui/AnimatedImage';
 const BlogPage = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
-  // Blog post data
+  // Blog post data (user's original blogs, using previous images)
   const blogPosts = [
     {
       id: 1,
-      title: "Revolutionizing User Experience with AI-Powered Interfaces",
-      excerpt: "Discover how artificial intelligence is transforming the way users interact with modern applications.",
-      date: "June 15, 2023",
-      author: "Alex Johnson",
-      category: "ai",
-      readTime: "8 min read",
+      title: "Reflecting on My 2024 Journey: A Year of Growth, Challenges, and Innovation",
+      excerpt: "2024 has been a year of transformation for me, both personally and professionally. From diving into new technologies and building multiple projects to pushing the boundaries of my potential, this year has been a rollercoaster of learning and growth.",
+      date: "Jan 1, 2025",
+      author: "Karan Dixit (dixitk941)",
+      category: "reflection",
+      readTime: "7 min read",
       image: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2025/01/reflecting-on-my-2024-journey-year-of.html",
       featured: true
     },
     {
       id: 2,
-      title: "The Future of Web Development: WebAssembly and Beyond",
-      excerpt: "Exploring how WebAssembly is changing the landscape of web applications and what's coming next.",
-      date: "May 28, 2023",
-      author: "Maria Chen",
-      category: "web",
+      title: "Crafting the Ultimate GitHub Portfolio: A Developer’s Guide",
+      excerpt: "Your GitHub profile is your most important developer asset, acting as your living portfolio. In this guide, I cover the best ways to showcase your work, organize your projects, and impress potential employers. Is your GitHub ready to stand out?",
+      date: "Oct 10, 2024",
+      author: "Karan Dixit (dixitk941)",
+      category: "github",
       readTime: "6 min read",
-      image: "https://images.unsplash.com/photo-1581276879432-15e50529f34b?auto=format&fit=crop&q=80&w=1000"
+      image: "https://images.unsplash.com/photo-1581276879432-15e50529f34b?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2024/10/crafting-ultimate-github-portfolio.html"
     },
     {
       id: 3,
-      title: "Mobile App Performance Optimization Techniques",
-      excerpt: "Learn practical strategies to enhance your mobile app's speed and responsiveness.",
-      date: "April 10, 2023",
-      author: "James Wilson",
-      category: "mobile",
-      readTime: "10 min read",
-      image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&q=80&w=1000"
+      title: "Demystifying AI and Machine Learning for Beginners",
+      excerpt: "Explore the core concepts, techniques, and future of AI. Ready to dive into the world of intelligent systems?",
+      date: "Sep 20, 2024",
+      author: "Karan Dixit (dixitk941)",
+      category: "ai",
+      readTime: "8 min read",
+      image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2024/09/demystifying-ai-and-machine-learning.html"
     },
     {
       id: 4,
-      title: "Building Secure Web Applications: Best Practices",
-      excerpt: "Essential security measures every developer should implement to protect web applications.",
-      date: "March 22, 2023",
-      author: "Sophia Rodriguez",
-      category: "security",
-      readTime: "12 min read",
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000"
+      title: "Unlocking 2024: Programming Languages to Watch",
+      excerpt: "I break down the languages that are set to dominate the programming world in 2024. What will you be coding in next?",
+      date: "Sep 10, 2024",
+      author: "Karan Dixit (dixitk941)",
+      category: "languages",
+      readTime: "5 min read",
+      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2024/09/unlocking-2024-programming-languages.html"
     },
     {
       id: 5,
-      title: "The Rise of Headless CMS in Modern Web Development",
-      excerpt: "Why more businesses are adopting headless content management systems for their digital presence.",
-      date: "February 15, 2023",
-      author: "David Kim",
-      category: "web",
-      readTime: "7 min read",
-      image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=1000"
-    },
-    {
-      id: 6,
-      title: "AR Integration in Mobile Apps: A Comprehensive Guide",
-      excerpt: "Step-by-step approach to implementing augmented reality features in your mobile applications.",
-      date: "January 30, 2023",
-      author: "Emily Zhang",
-      category: "mobile",
-      readTime: "9 min read",
-      image: "https://images.unsplash.com/photo-1544256718-3bcf237f3974?auto=format&fit=crop&q=80&w=1000"
+      title: "Introducing A.I.N.O.R: A Revolutionary AI Assistant by NeoCodeNex",
+      excerpt: "Discover how A.I.N.O.R is set to revolutionize the way we interact with technology. What will your next conversation with AI be like?",
+      date: "Sep 1, 2024",
+      author: "Karan Dixit (dixitk941)",
+      category: "ai",
+      readTime: "6 min read",
+      image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2024/09/introducing-ainor-revolutionary-ai.html"
     }
   ];
 
@@ -86,10 +81,10 @@ const BlogPage = () => {
   // Categories
   const categories = [
     { id: 'all', name: 'All Posts' },
-    { id: 'web', name: 'Web Development' },
-    { id: 'mobile', name: 'Mobile Development' },
+    { id: 'reflection', name: 'Reflections' },
+    { id: 'github', name: 'GitHub & Portfolio' },
     { id: 'ai', name: 'Artificial Intelligence' },
-    { id: 'security', name: 'Security' }
+    { id: 'languages', name: 'Programming Languages' }
   ];
   return (
     <>
@@ -230,12 +225,14 @@ const BlogPage = () => {
                         </div>
                         <span className="text-sm text-gray-700">{post.author}</span>
                       </div>
-                      <Link 
-                        to={`/blog/${post.id}`}
+                      <a 
+                        href={post.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-indigo-600 font-medium text-sm hover:text-indigo-800 transition-colors"
                       >
                         Read More →
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </Card>
