@@ -63,7 +63,7 @@ const Navbar = () => {
                 >                  <img 
                     src={logo} 
                     alt="AINOR Logo" 
-                    className="h-6 w-auto md:h-8 lg:h-10 transition-all duration-300"
+                    className="h-10 w-auto md:h-14 lg:h-16 transition-all duration-300"
                   />
                   <span className={`font-bold text-xl md:text-2xl transition-colors duration-300 ${
                     isScrolled ? 'text-gray-900' : 'text-white'
