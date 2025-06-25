@@ -9,103 +9,10 @@ const CareersPage = () => {
   const [selectedDepartment, setSelectedDepartment] = useState('all');
 
   // Job listing data
-  const jobListings = [
-    {
-      id: 1,
-      title: "Senior Frontend Developer",
-      department: "engineering",
-      location: "San Francisco, CA (Remote Option)",
-      type: "Full-time",
-      posted: "2 days ago",
-      description: "We're looking for an experienced Frontend Developer to join our team and help build beautiful, responsive web applications.",
-      requirements: [
-        "5+ years of experience with React, Redux, and modern JavaScript",
-        "Strong understanding of web performance optimization",
-        "Experience with responsive design and cross-browser compatibility",
-        "Proficient in HTML5, CSS3 (Sass/SCSS), and modern CSS frameworks"
-      ]
-    },
-    {
-      id: 2,
-      title: "Backend Engineer",
-      department: "engineering",
-      location: "New York, NY (Remote Option)",
-      type: "Full-time",
-      posted: "1 week ago",
-      description: "Join our backend team to develop scalable and maintainable APIs and services that power our applications.",
-      requirements: [
-        "3+ years experience with Node.js and Express",
-        "Experience with database design and optimization (SQL and NoSQL)",
-        "Understanding of RESTful API design principles",
-        "Knowledge of cloud services (AWS, Azure, or GCP)"
-      ]
-    },
-    {
-      id: 3,
-      title: "UI/UX Designer",
-      department: "design",
-      location: "Remote",
-      type: "Full-time",
-      posted: "3 days ago",
-      description: "We're seeking a talented UI/UX Designer to create engaging and intuitive user experiences for our web and mobile products.",
-      requirements: [
-        "3+ years of UI/UX design experience for digital products",
-        "Proficiency in design tools like Figma, Sketch, or Adobe XD",
-        "Strong portfolio demonstrating user-centered design process",
-        "Experience with design systems and component libraries"
-      ]
-    },
-    {
-      id: 4,
-      title: "DevOps Engineer",
-      department: "engineering",
-      location: "Boston, MA (Remote Option)",
-      type: "Full-time",
-      posted: "2 weeks ago",
-      description: "Help us build and maintain our infrastructure, CI/CD pipelines, and deployment processes.",
-      requirements: [
-        "3+ years experience in DevOps or SRE roles",
-        "Experience with containerization (Docker) and orchestration (Kubernetes)",
-        "Knowledge of infrastructure as code (Terraform, CloudFormation)",
-        "Experience with CI/CD tools (Jenkins, GitHub Actions, CircleCI)"
-      ]
-    },
-    {
-      id: 5,
-      title: "Product Manager",
-      department: "product",
-      location: "Remote",
-      type: "Full-time",
-      posted: "1 week ago",
-      description: "We're looking for a Product Manager to help define our product strategy and roadmap, working closely with engineering and design teams.",
-      requirements: [
-        "3+ years of experience in product management for SaaS or web applications",
-        "Strong analytical skills and data-driven decision making",
-        "Excellent communication and stakeholder management",
-        "Experience with agile methodologies"
-      ]
-    },
-    {
-      id: 6,
-      title: "Digital Marketing Specialist",
-      department: "marketing",
-      location: "Remote",
-      type: "Full-time",
-      posted: "5 days ago",
-      description: "Join our marketing team to help drive growth through digital channels and campaigns.",
-      requirements: [
-        "2+ years experience in digital marketing",
-        "Experience with SEO, SEM, and social media marketing",
-        "Knowledge of analytics tools (Google Analytics, HubSpot)",
-        "Strong content creation and copywriting skills"
-      ]
-    }
-  ];
+  const jobListings = [];
 
   // Filter jobs based on department
-  const filteredJobs = selectedDepartment === 'all' 
-    ? jobListings 
-    : jobListings.filter(job => job.department === selectedDepartment);
+  const filteredJobs = [];
 
   // Departments for filter
   const departments = [
@@ -273,109 +180,22 @@ const CareersPage = () => {
               transition={{ duration: 0.5 }}
             >
               <h2 className="text-3xl font-bold mb-4 text-gray-900">
-                Open Positions
+                Open for Contributors & Project-Based Freelancers
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Find your next career opportunity. We're always looking for talented individuals to join our team.
+                We are not hiring for full-time roles at the moment, but we welcome passionate contributors and skilled freelancers for project-based collaborations. If you love open source, want to contribute to our products, or are interested in freelance opportunities, we'd love to hear from you!
               </p>
             </motion.div>
-          </div>
-
-          {/* Department Filter */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
-            {departments.map((department) => (
-              <button
-                key={department.id}
-                onClick={() => setSelectedDepartment(department.id)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  selectedDepartment === department.id
-                    ? 'bg-indigo-600 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+            <div className="mt-8 flex flex-col items-center gap-4">
+              <Button 
+                href="/contact" 
+                variant="primary" 
+                size="lg"
               >
-                {department.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Jobs List */}
-          <div className="space-y-6">
-            {filteredJobs.length > 0 ? (
-              filteredJobs.map((job, index) => (
-                <motion.div
-                  key={job.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Card className="p-0 overflow-hidden hover:shadow-lg transition-all duration-300">
-                    <div className="p-6">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div>
-                          <div className="flex items-center mb-2">
-                            <h3 className="text-xl font-bold text-gray-900 mr-3">{job.title}</h3>
-                            <span className="bg-indigo-100 text-indigo-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                              {job.type}
-                            </span>
-                          </div>
-                          <div className="flex flex-wrap items-center text-gray-500 text-sm gap-x-4 gap-y-1">
-                            <span className="flex items-center">
-                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                              </svg>
-                              {job.location}
-                            </span>
-                            <span className="flex items-center">
-                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                              </svg>
-                              Posted {job.posted}
-                            </span>
-                            <span className="flex items-center">
-                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
-                              </svg>
-                              {departments.find(d => d.id === job.department)?.name.replace(' Departments', '')}
-                            </span>
-                          </div>
-                        </div>
-                        <Button 
-                          href={`/careers/${job.id}`} 
-                          variant="outline" 
-                          className="mt-4 md:mt-0"
-                        >
-                          View Details
-                        </Button>
-                      </div>
-                      <div className="mt-4">
-                        <p className="text-gray-600 mb-4">{job.description}</p>
-                        <div className="mt-4">
-                          <h4 className="text-sm font-semibold text-gray-700 mb-2">Requirements:</h4>
-                          <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
-                            {job.requirements.map((req, idx) => (
-                              <li key={idx}>{req}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-gray-50 p-4 border-t border-gray-100">
-                      <Button 
-                        href={`/careers/apply/${job.id}`} 
-                        className="w-full md:w-auto"
-                      >
-                        Apply Now
-                      </Button>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500">No positions available in this department at the moment.</p>
-              </div>
-            )}
+                Contact Us to Collaborate
+              </Button>
+              <span className="text-sm text-gray-500">Or reach out on <a href="https://github.com/dixitk941" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">Github</a></span>
+            </div>
           </div>
         </Container>
       </Section>

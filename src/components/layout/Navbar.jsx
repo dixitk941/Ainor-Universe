@@ -51,7 +51,12 @@ const Navbar = () => {
             style={{ margin: 0 }}
           >
             <div className="flex justify-between items-center h-14 md:h-16 px-4 md:px-5 lg:px-7">              {/* Logo - One UI style with logo image and text */}
-              <div className="flex items-center">
+              <motion.div
+                initial={false}
+                animate={isScrolled ? { scale: 1.08, y: 2, boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)' } : { scale: 1, y: 0, boxShadow: '0 0px 0px 0 rgba(0,0,0,0)' }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                className="flex items-center"
+              >
                 <Link 
                   to="/" 
                   onClick={() => {
@@ -60,18 +65,23 @@ const Navbar = () => {
                     }, 100);
                   }}
                   className="flex items-center space-x-3"
-                >                  <img 
+                >
+                  <motion.img 
                     src={logo} 
                     alt="AINOR Logo" 
                     className="h-10 w-auto md:h-14 lg:h-16 transition-all duration-300"
+                    animate={isScrolled ? { scale: 1.15, filter: 'drop-shadow(0 2px 8px #3b82f6aa)' } : { scale: 1, filter: 'none' }}
+                    transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 0.7 }}
                   />
-                  <span className={`font-bold text-xl md:text-2xl transition-colors duration-300 ${
-                    isScrolled ? 'text-gray-900' : 'text-white'
-                  }`}>
+                  <motion.span
+                    className={`font-bold text-xl md:text-2xl transition-colors duration-300 ${isScrolled ? 'text-gray-900' : 'text-white'}`}
+                    animate={isScrolled ? { color: '#1e293b' } : { color: '#fff' }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                  >
                     <span className="text-blue-500">A</span>INOR
-                  </span>
+                  </motion.span>
                 </Link>
-              </div>
+              </motion.div>
               
               {/* Mobile Menu Toggle - One UI style with rounded button */}
               <div className="flex md:hidden items-center">
