@@ -59,6 +59,13 @@ const AboutPage = () => {// Company milestones with updated timeline
       bio: "A strategic business expert and skilled web developer, Aakash brings a unique combination of technical expertise and business acumen to AINOR. His comprehensive understanding of market dynamics and development processes enables him to bridge the gap between client requirements and technical solutions. He specializes in business planning, client relations, and delivering web solutions that drive business growth.",
       expertise: ["Business Development", "Web Development", "Strategic Planning"],
       image: "/assets/IMG_8027.JPG"
+    },
+    {
+      name: "Kushal Sharma",
+      position: "Cyber Security & Web Developer (Freelancer)",
+      bio: "Kushal joined us as a freelancer, bringing strong skills in both cybersecurity and web development. His expertise helps us deliver secure and robust digital solutions for our clients, and his flexible approach makes him a valuable addition to the team.",
+      expertise: ["Cybersecurity", "Web Development", "Freelance Projects"],
+      image: "https://genzconnect.vercel.app/assets/kushal.jpg"
     }
   ];
 
@@ -428,7 +435,7 @@ const AboutPage = () => {// Company milestones with updated timeline
               </p>
             </motion.div>
             {/* One UI 7-style team cards with large rounded corners */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 md:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto px-4 md:px-8">
               {teamMembers.map((member, index) => (
                 <motion.div
                   key={index}

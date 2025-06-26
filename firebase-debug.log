@@ -1,0 +1,81 @@
+[debug] [2025-06-26T11:43:36.419Z] ----------------------------------------------------------------------
+[debug] [2025-06-26T11:43:36.421Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dixit\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting
+[debug] [2025-06-26T11:43:36.421Z] CLI Version:   14.2.0
+[debug] [2025-06-26T11:43:36.421Z] Platform:      win32
+[debug] [2025-06-26T11:43:36.421Z] Node Version:  v22.13.1
+[debug] [2025-06-26T11:43:36.422Z] Time:          Thu Jun 26 2025 17:13:36 GMT+0530 (India Standard Time)
+[debug] [2025-06-26T11:43:36.422Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-06-26T11:43:36.567Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-06-26T11:43:36.567Z] > authorizing via signed-in user (dixitk941@gmail.com)
+[debug] [2025-06-26T11:43:36.567Z] [iam] checking project ainor-wolf for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-06-26T11:43:36.568Z] Checked if tokens are valid: false, expires at: 1750868353057
+[debug] [2025-06-26T11:43:36.568Z] Checked if tokens are valid: false, expires at: 1750868353057
+[debug] [2025-06-26T11:43:36.568Z] > refreshing access token with scopes: []
+[debug] [2025-06-26T11:43:36.574Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-06-26T11:43:36.574Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-06-26T11:43:37.143Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-06-26T11:43:37.143Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-06-26T11:43:37.153Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ainor-wolf:testIamPermissions [none]
+[debug] [2025-06-26T11:43:37.153Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ainor-wolf:testIamPermissions x-goog-quota-user=projects/ainor-wolf
+[debug] [2025-06-26T11:43:37.153Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ainor-wolf:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-06-26T11:43:38.947Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ainor-wolf:testIamPermissions 200
+[debug] [2025-06-26T11:43:38.947Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ainor-wolf:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-06-26T11:43:38.947Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:38.947Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:38.948Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ainor-wolf [none]
+[debug] [2025-06-26T11:43:39.571Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ainor-wolf 200
+[debug] [2025-06-26T11:43:39.571Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ainor-wolf {"projectId":"ainor-wolf","projectNumber":"617708130006","displayName":"AINOR","name":"projects/ainor-wolf","resources":{"hostingSite":"ainor-wolf"},"state":"ACTIVE","etag":"1_783b0d1c-e140-4307-839d-37243a6eb965"}
+[info] 
+[info] === Deploying to 'ainor-wolf'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-06-26T11:43:39.582Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:39.582Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:39.582Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ainor-wolf/versions [none]
+[debug] [2025-06-26T11:43:39.582Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ainor-wolf/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-06-26T11:43:42.338Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ainor-wolf/versions 200
+[debug] [2025-06-26T11:43:42.338Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ainor-wolf/versions {"name":"projects/617708130006/sites/ainor-wolf/versions/c46de1d782295e6d","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[ainor-wolf]: beginning deploy... 
+[info] i  hosting[ainor-wolf]: found 20 files in build 
+[debug] [2025-06-26T11:43:42.360Z] [hosting] uploading with 200 concurrency
+[debug] [2025-06-26T11:43:42.782Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:42.782Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:42.783Z] [hosting] hash cache [YnVpbGQ] stored for 20 files
+[debug] [2025-06-26T11:43:42.783Z] [hosting][hash queue][FINAL] {"max":413,"min":0,"avg":30.35,"active":0,"complete":20,"success":20,"errored":0,"retried":0,"total":20,"elapsed":418}
+[debug] [2025-06-26T11:43:42.783Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/617708130006/sites/ainor-wolf/versions/c46de1d782295e6d:populateFiles [none]
+[debug] [2025-06-26T11:43:42.783Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/617708130006/sites/ainor-wolf/versions/c46de1d782295e6d:populateFiles {"files":{"/sitemap.xml":"096a9056223fc01d5f4cf0185ed2cb527a14299d8e9f18bdf72f3fa4456e5c10","/robots.txt":"4ecd7fa28253304f5f8b2f75909b00d94e5fbf8efc0dd999a98336feddee7e3c","/manifest.json":"c1ae330460e629b9bf0e7705eff712d6f034be3895b5913ad4f21f0f50bcfd12","/logo512.png":"2c3153d8bb3b8699c74852a6d19dc687c8562ac226e2d2d5bdca50530bcf20a0","/logo192.png":"20cce25cea2c2763eba4a85687f9fe39694214d1f308a88def929297579b267d","/logo.PNG":"d0ee298a973d6d6d717aac771cac0b9a65458c1b3113cec0f211c1038313011c","/google-site-verification-placeholder.html":"9e73e68e8dfed33f94e9d434d6627fe876158504029f94c589154895e0c54da9","/favicon.ico":"fff33a18476a115e5487fdfdfe34e83344d0adc55039941f0dad6fafcaa137c6","/assets/logo.png":"d0ee298a973d6d6d717aac771cac0b9a65458c1b3113cec0f211c1038313011c","/assets/IMG_8027.JPG":"bc1f896661af303e4d25ccab634f00094d4c2cc132490d708b2a85218e336b9d","/index.html":"0c91221da3eb724c72c9cf9a997fd579e6f65f4a190c617f184c35b5d62ee382","/asset-manifest.json":"bdd86be298edbac082804d15dd55b23ac623b4afb6b9ea16d8f99ce6c353a428","/static/js/main.8dac02ee.js.LICENSE.txt":"00ced397c27422a7eda8dc3e3d191134aada5c108887abb84948ce1bacd27bce","/static/js/453.1cf82409.chunk.js":"0626249e5f8b8ad8bea124719f7fe9e79fd9e0bd59c93c8a015069859278105d","/static/js/453.1cf82409.chunk.js.map":"89417445f447367bfcd220e36d9ce85d38d99df294ae2f7386d38973093f7a5f","/static/css/main.bdea8dc7.css.map":"70dae5d7705713e84afb3f33781b5511d0277c525a6be9c5a35f2f768ca6be58","/static/css/main.bdea8dc7.css":"2f26d13f8418f4e02ac3953691fbb6e807c4e47187c6481aa80fc35db9622dc5","/static/media/logo.c92b5ed7b4da99c99764.png":"d0ee298a973d6d6d717aac771cac0b9a65458c1b3113cec0f211c1038313011c","/static/js/main.8dac02ee.js":"6ad1eeb9c4111109b0a60dc51d37877f419fec42ae6fc9ef247fe5f787471c32","/static/js/main.8dac02ee.js.map":"941742534028a6decde22fd9794e4a0f4a4140d12666899b588bf645d9ccca5d"}}
+[debug] [2025-06-26T11:43:43.421Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/617708130006/sites/ainor-wolf/versions/c46de1d782295e6d:populateFiles 200
+[debug] [2025-06-26T11:43:43.422Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/617708130006/sites/ainor-wolf/versions/c46de1d782295e6d:populateFiles {"uploadRequiredHashes":["941742534028a6decde22fd9794e4a0f4a4140d12666899b588bf645d9ccca5d","0c91221da3eb724c72c9cf9a997fd579e6f65f4a190c617f184c35b5d62ee382","6ad1eeb9c4111109b0a60dc51d37877f419fec42ae6fc9ef247fe5f787471c32","bdd86be298edbac082804d15dd55b23ac623b4afb6b9ea16d8f99ce6c353a428","2f26d13f8418f4e02ac3953691fbb6e807c4e47187c6481aa80fc35db9622dc5","70dae5d7705713e84afb3f33781b5511d0277c525a6be9c5a35f2f768ca6be58"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files"}
+[debug] [2025-06-26T11:43:43.423Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.424Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.424Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.424Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.425Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.425Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.425Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.425Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.426Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.426Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.426Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.426Z] Checked if tokens are valid: true, expires at: 1750941816143
+[debug] [2025-06-26T11:43:43.426Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/941742534028a6decde22fd9794e4a0f4a4140d12666899b588bf645d9ccca5d [none]
+[debug] [2025-06-26T11:43:43.427Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/941742534028a6decde22fd9794e4a0f4a4140d12666899b588bf645d9ccca5d [stream]
+[debug] [2025-06-26T11:43:43.429Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/0c91221da3eb724c72c9cf9a997fd579e6f65f4a190c617f184c35b5d62ee382 [none]
+[debug] [2025-06-26T11:43:43.429Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/0c91221da3eb724c72c9cf9a997fd579e6f65f4a190c617f184c35b5d62ee382 [stream]
+[debug] [2025-06-26T11:43:43.431Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/6ad1eeb9c4111109b0a60dc51d37877f419fec42ae6fc9ef247fe5f787471c32 [none]
+[debug] [2025-06-26T11:43:43.431Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/6ad1eeb9c4111109b0a60dc51d37877f419fec42ae6fc9ef247fe5f787471c32 [stream]
+[debug] [2025-06-26T11:43:43.432Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/bdd86be298edbac082804d15dd55b23ac623b4afb6b9ea16d8f99ce6c353a428 [none]
+[debug] [2025-06-26T11:43:43.432Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/bdd86be298edbac082804d15dd55b23ac623b4afb6b9ea16d8f99ce6c353a428 [stream]
+[debug] [2025-06-26T11:43:43.434Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/2f26d13f8418f4e02ac3953691fbb6e807c4e47187c6481aa80fc35db9622dc5 [none]
+[debug] [2025-06-26T11:43:43.434Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/2f26d13f8418f4e02ac3953691fbb6e807c4e47187c6481aa80fc35db9622dc5 [stream]
+[debug] [2025-06-26T11:43:43.435Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/70dae5d7705713e84afb3f33781b5511d0277c525a6be9c5a35f2f768ca6be58 [none]
+[debug] [2025-06-26T11:43:43.435Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/70dae5d7705713e84afb3f33781b5511d0277c525a6be9c5a35f2f768ca6be58 [stream]
+[debug] [2025-06-26T11:43:43.436Z] [hosting][populate queue][FINAL] {"max":645,"min":645,"avg":645,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":655}
+[debug] [2025-06-26T11:43:43.436Z] [hosting] uploads queued: 6
+[debug] [2025-06-26T11:43:47.125Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/0c91221da3eb724c72c9cf9a997fd579e6f65f4a190c617f184c35b5d62ee382 200
+[debug] [2025-06-26T11:43:47.126Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/0c91221da3eb724c72c9cf9a997fd579e6f65f4a190c617f184c35b5d62ee382 [stream]
+[debug] [2025-06-26T11:43:47.406Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/70dae5d7705713e84afb3f33781b5511d0277c525a6be9c5a35f2f768ca6be58 200
+[debug] [2025-06-26T11:43:47.406Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/70dae5d7705713e84afb3f33781b5511d0277c525a6be9c5a35f2f768ca6be58 [stream]
+[debug] [2025-06-26T11:43:47.654Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/2f26d13f8418f4e02ac3953691fbb6e807c4e47187c6481aa80fc35db9622dc5 200
+[debug] [2025-06-26T11:43:47.654Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ainor-wolf/versions/c46de1d782295e6d/files/2f26d13f8418f4e02ac3953691fbb6e807c4e47187c6481aa80fc35db9622dc5 [stream]
