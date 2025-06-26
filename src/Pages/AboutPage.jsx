@@ -237,6 +237,69 @@ const AboutPage = () => {// Company milestones with updated timeline
         </div>
       </section>
       
+      {/* SEO-Optimized Company Overview Section */}
+      <Section className="py-20 md:py-28 bg-gradient-to-b from-blue-50 to-white" id="company-overview">
+        <Container>
+          <motion.div
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center mb-16 md:mb-24 px-4 md:px-0"
+          >
+            <span className="inline-block text-blue-700 font-semibold mb-3 tracking-wide text-lg">ABOUT AINOR</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-6 text-gray-900 leading-tight">
+              Your Trusted Partner for Digital Transformation, Web Development, and Business Growth
+            </h2>
+            <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto mb-6">
+              AINOR is a leading digital solutions company based in India, specializing in web development, mobile app development, custom software, cybersecurity, and business consulting. Our mission is to empower startups, enterprises, and global brands with innovative, scalable, and secure technology solutions that drive measurable business results.
+            </p>
+            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto mb-4">
+              With a team of experienced developers, designers, and cybersecurity experts, we deliver end-to-end digital services including responsive website design, e-commerce platforms, SaaS solutions, UI/UX design, SEO, cloud integration, and IT consulting. Our client-centric approach, transparent communication, and commitment to quality have earned us recognition as one of the top web development agencies in India and Europe.
+            </p>
+            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+              Whether you are a startup looking to launch your first product, an established business seeking digital transformation, or an enterprise aiming for global expansion, AINOR is your partner for success. We combine creativity, technology, and strategy to help you achieve your business goals and stand out in the digital world.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+            <div className="bg-white rounded-2xl shadow-md p-8 text-left">
+              <h3 className="text-xl font-bold mb-3 text-blue-700">Why Choose AINOR?</h3>
+              <ul className="list-disc list-inside text-gray-700 space-y-2">
+                <li>Proven track record of delivering high-quality, innovative digital solutions</li>
+                <li>Expertise in the latest web, mobile, and cloud technologies</li>
+                <li>Dedicated cybersecurity and data protection for every project</li>
+                <li>Transparent, client-focused communication and project management</li>
+                <li>Flexible engagement models for startups, SMBs, and enterprises</li>
+                <li>Global experience with clients in India, Europe, and beyond</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-2xl shadow-md p-8 text-left">
+              <h3 className="text-xl font-bold mb-3 text-blue-700">Our Services</h3>
+              <ul className="list-disc list-inside text-gray-700 space-y-2">
+                <li>Custom Web & Mobile App Development</li>
+                <li>UI/UX Design & Branding</li>
+                <li>Cloud Solutions & SaaS Platforms</li>
+                <li>Cybersecurity & Data Protection</li>
+                <li>SEO & Digital Marketing</li>
+                <li>Business Consulting & IT Strategy</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-2xl shadow-md p-8 text-left">
+              <h3 className="text-xl font-bold mb-3 text-blue-700">Industries We Serve</h3>
+              <ul className="list-disc list-inside text-gray-700 space-y-2">
+                <li>Startups & Entrepreneurs</li>
+                <li>SMBs & Enterprises</li>
+                <li>E-commerce & Retail</li>
+                <li>Healthcare & Wellness</li>
+                <li>Education & E-learning</li>
+                <li>Finance & Fintech</li>
+                <li>Travel, Hospitality & More</li>
+              </ul>
+            </div>
+          </div>
+        </Container>
+      </Section>
+      
       {/* Main content with seamless scroll sections - One UI 7 style */}
       <div className="bg-white">
         {/* Our Story Section - With timeline cards */}

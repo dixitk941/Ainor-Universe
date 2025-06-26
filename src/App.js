@@ -15,6 +15,7 @@ import CookieConsent from './components/ui/CookieConsent';
 import BackToTop from './components/ui/BackToTop';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import AiServicesPage from './Pages/AiServicesPage';
 
 import './App.css';
 
@@ -51,6 +52,7 @@ function App() {
               <Route path="/careers" element={<CareersPage />} />
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/ai-services" element={<AiServicesPage />} />
             </Routes>
           </main>
           <Footer />

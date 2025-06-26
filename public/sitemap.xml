@@ -78,4 +78,12 @@
     <priority>0.7</priority>
   </url>
   
+  <!-- AI Services Page -->
+  <url>
+    <loc>https://myainor.com/ai-services</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
 </urlset>
