@@ -7,6 +7,7 @@ import ContactPage from './Pages/ContactPage';
 import AboutPage from './Pages/AboutPage';
 import PortfolioPage from './Pages/PortfolioPage';
 import BlogPage from './Pages/BlogPage';
+import BlogPostPage from './Pages/BlogPostPage';
 import CareersPage from './Pages/CareersPage';
 import FAQPage from './Pages/FAQPage';
 import PricingPage from './Pages/PricingPage';
@@ -49,6 +50,7 @@ function App() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/portfolio" element={<PortfolioPage />} />
               <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path="/careers" element={<CareersPage />} />
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/pricing" element={<PricingPage />} />
