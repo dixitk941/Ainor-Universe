@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
+import { motion }     {
+      id: 6,
+      slug: "crafting-ultimate-github-portfolio-developers-guide",
+      title: "Crafting the Ultimate GitHub Portfolio: A Developer's Guide",
+      excerpt: "Your GitHub profile is your most important developer asset, acting as your living portfolio. In this guide, I cover the best ways to showcase your work, organize your projects, and impress potential employers. Is your GitHub ready to stand out?", 'framer-motion';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';

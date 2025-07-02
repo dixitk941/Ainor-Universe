@@ -49,10 +49,23 @@
   <!-- Blog Page -->
   <url>
     <loc>https://myainor.com/blog</loc>
-    <lastmod>2025-06-24</lastmod>
+    <lastmod>2025-07-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://myainor.com/blog/why-every-creator-needs-personal-website-2025</loc>
+    <lastmod>2025-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&amp;fit=crop&amp;q=80&amp;w=1000</image:loc>
+      <image:title>Why Every Creator Needs a Personal Website in 2025</image:title>
+    </image:image>
+  </url>
+  
   
   <!-- Careers Page -->
   <url>

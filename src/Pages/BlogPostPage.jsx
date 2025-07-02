@@ -129,8 +129,67 @@ const BlogPostPage = () => {
           <p class="italic text-gray-600">About the Author: Karan Dixit is the founder of AINOR, delivering innovative digital solutions including personal websites for creators. With years of experience in web development and digital strategy, he helps creators establish powerful online presences that drive growth and opportunity.</p>
         </div>
       </div>`
+    },
+    {
+      id: 2,
+      slug: "reflecting-on-my-2024-journey",
+      title: "Reflecting on My 2024 Journey: A Year of Growth, Challenges, and Innovation",
+      excerpt: "2024 has been a year of transformation for me, both personally and professionally. From diving into new technologies and building multiple projects to pushing the boundaries of my potential, this year has been a rollercoaster of learning and growth.",
+      date: "Jan 1, 2025",
+      author: "Karan Dixit (dixitk941)",
+      category: "reflection",
+      readTime: "7 min read",
+      image: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2025/01/reflecting-on-my-2024-journey-year-of.html"
+    },
+    {
+      id: 6,
+      slug: "crafting-ultimate-github-portfolio-developers-guide",
+      title: "Crafting the Ultimate GitHub Portfolio: A Developer's Guide",
+      excerpt: "Your GitHub profile is your most important developer asset, acting as your living portfolio. In this guide, I cover the best ways to showcase your work, organize your projects, and impress potential employers. Is your GitHub ready to stand out?",
+      date: "Oct 10, 2024",
+      author: "Karan Dixit (dixitk941)",
+      category: "github",
+      readTime: "6 min read",
+      image: "https://images.unsplash.com/photo-1581276879432-15e50529f34b?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2024/10/crafting-ultimate-github-portfolio.html"
+    },
+    {
+      id: 3,
+      slug: "demystifying-ai-and-machine-learning-for-beginners",
+      title: "Demystifying AI and Machine Learning for Beginners",
+      excerpt: "Explore the core concepts, techniques, and future of AI. Ready to dive into the world of intelligent systems?",
+      date: "Sep 20, 2024",
+      author: "Karan Dixit (dixitk941)",
+      category: "ai",
+      readTime: "8 min read",
+      image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2024/09/demystifying-ai-and-machine-learning.html"
+    },
+    {
+      id: 4,
+      slug: "unlocking-2024-programming-languages-to-watch",
+      title: "Unlocking 2024: Programming Languages to Watch",
+      excerpt: "I break down the languages that are set to dominate the programming world in 2024. What will you be coding in next?",
+      date: "Sep 10, 2024",
+      author: "Karan Dixit (dixitk941)",
+      category: "languages",
+      readTime: "5 min read",
+      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2024/09/unlocking-2024-programming-languages.html"
+    },
+    {
+      id: 5,
+      slug: "introducing-ainor-revolutionary-ai-assistant",
+      title: "Introducing A.I.N.O.R: A Revolutionary AI Assistant by NeoCodeNex",
+      excerpt: "Discover how A.I.N.O.R is set to revolutionize the way we interact with technology. What will your next conversation with AI be like?",
+      date: "Sep 1, 2024",
+      author: "Karan Dixit (dixitk941)",
+      category: "ai",
+      readTime: "6 min read",
+      image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=1000",
+      url: "https://dixitk941.blogspot.com/2024/09/introducing-ainor-revolutionary-ai.html"
     }
-    // Other blog posts would be here
   ];
   
   const post = blogPosts.find(post => post.slug === slug);
