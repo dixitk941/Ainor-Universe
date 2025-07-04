@@ -14,6 +14,261 @@ const BlogPostPage = () => {
   // In a real app, you might want to use a context or fetch this data
   const blogPosts = [
     {
+      id: 7,
+      slug: "influencer-website-case-study",
+      title: "How an Instagram Influencer Got 3x More Leads With a Website",
+      excerpt: "Learn how a beauty influencer transformed her business by moving beyond Instagram's limitations with a strategic website that tripled her lead generation and sponsorship opportunities.",
+      date: "July 4, 2025",
+      author: "Karan Dixit (dixitk941)",
+      category: "personal-branding",
+      readTime: "6 min read",
+      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000",
+      content: `<div class="blog-content">
+        <h1 class="text-3xl font-bold mb-6">How an Instagram Influencer Got 3x More Leads With a Website</h1>
+        
+        <div class="mb-4 flex items-center text-gray-600">
+          <span>July 4, 2025</span>
+          <span class="mx-2">•</span>
+          <span>6 min read</span>
+        </div>
+        
+        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000" alt="Social media influencer with website on multiple devices" class="w-full h-64 object-cover rounded-lg mb-8" />
+        
+        <p class="mb-6">In today's creator economy, having a substantial social media following is valuable, but it's just the beginning. This case study explores how Sarah Chen, a beauty and lifestyle influencer with 175,000 Instagram followers, transformed her business by launching a strategic website that tripled her lead generation.</p>
+        
+        <div class="bg-indigo-50 p-6 rounded-lg mb-8">
+          <h3 class="text-xl font-semibold mb-2">Key Results:</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>3x increase in qualified brand partnership inquiries</li>
+            <li>68% higher average deal value for sponsored content</li>
+            <li>1,200+ email subscribers in first month</li>
+            <li>42% conversion rate on digital makeup tutorial templates</li>
+            <li>2.5x more press and interview opportunities</li>
+          </ul>
+        </div>
+        
+        <h2 class="text-2xl font-bold mb-4">The Challenge: Instagram's Limitations</h2>
+        
+        <p class="mb-6">Despite her impressive following and engagement rates, Sarah faced significant challenges that limited her growth:</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-gray-50 p-5 rounded-lg">
+            <h3 class="text-lg font-semibold mb-3 text-red-600">Before: Instagram-Only Presence</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>Limited to a single link in bio</li>
+              <li>Followers had to DM for collaboration details</li>
+              <li>No way to showcase her full portfolio</li>
+              <li>Difficult to present her service packages</li>
+              <li>Brand kit was a PDF that quickly became outdated</li>
+              <li>No email capture or retargeting capabilities</li>
+              <li>Algorithm changes regularly affected reach</li>
+            </ul>
+          </div>
+          <div class="bg-blue-50 p-5 rounded-lg">
+            <h3 class="text-lg font-semibold mb-3 text-green-600">After: Strategic Website Implementation</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>Comprehensive media kit and portfolio</li>
+              <li>Direct booking system for consultations</li>
+              <li>Automated lead qualification forms</li>
+              <li>WhatsApp integration for instant communication</li>
+              <li>Digital product storefront</li>
+              <li>Email newsletter with exclusive content</li>
+              <li>SEO-optimized content hub</li>
+            </ul>
+          </div>
+        </div>
+        
+        <blockquote class="border-l-4 border-indigo-500 pl-4 italic text-gray-700 my-8">
+          "I was initially hesitant to invest in a website because I thought Instagram was enough. Now I realize my website is the foundation of my business, not just a complement to social media. It's completely transformed how brands perceive me and how I connect with my audience." — Sarah Chen
+        </blockquote>
+        
+        <h2 class="text-2xl font-bold mb-4">The Strategic Approach</h2>
+        
+        <p class="mb-6">Working with AINOR, Sarah developed a three-phase strategy:</p>
+        
+        <h3 class="text-xl font-semibold mb-3">1. Foundation: Brand-Focused Portfolio</h3>
+        
+        <p class="mb-6">The first phase focused on creating a professional presence that would appeal to brands:</p>
+        
+        <div class="mb-6">
+          <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=1000" alt="Professional portfolio website mockup" class="w-full rounded-lg mb-3" />
+          <p class="text-sm text-gray-500 text-center">Sarah's portfolio page showcasing her previous brand collaborations</p>
+        </div>
+        
+        <ul class="list-disc pl-6 mb-6">
+          <li><strong>Dynamic portfolio</strong> — Case studies of previous brand collaborations with metrics and results</li>
+          <li><strong>Media kit</strong> — Interactive presentation of audience demographics, engagement rates, and content specialties</li>
+          <li><strong>Collaboration packages</strong> — Clear pricing and deliverables for different partnership options</li>
+          <li><strong>Testimonials</strong> — Social proof from previous brand partners</li>
+        </ul>
+        
+        <h3 class="text-xl font-semibold mb-3">2. Connection: Lead Generation Systems</h3>
+        
+        <p class="mb-6">The second phase implemented multiple touchpoints for capturing and qualifying leads:</p>
+        
+        <div class="mb-6">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" alt="Lead capture form and WhatsApp integration" class="w-full rounded-lg mb-3" />
+          <p class="text-sm text-gray-500 text-center">The integrated WhatsApp Business platform streamlined communications</p>
+        </div>
+        
+        <ul class="list-disc pl-6 mb-6">
+          <li><strong>Brand inquiry form</strong> — Custom form that pre-qualifies potential partners based on budget, timeline, and campaign goals</li>
+          <li><strong>WhatsApp Business integration</strong> — Direct connection to Sarah's business WhatsApp for immediate communication</li>
+          <li><strong>Appointment scheduler</strong> — Automated system for booking discovery calls</li>
+          <li><strong>Lead magnet</strong> — "The Influencer Collaboration Guide" PDF offered in exchange for email signup</li>
+        </ul>
+        
+        <h3 class="text-xl font-semibold mb-3">3. Monetization: Multiple Revenue Streams</h3>
+        
+        <p class="mb-6">The final phase expanded Sarah's business model beyond brand deals:</p>
+        
+        <div class="mb-6">
+          <img src="https://images.unsplash.com/photo-1555421689-3f034debb7a6?auto=format&fit=crop&q=80&w=1000" alt="Digital product storefront" class="w-full rounded-lg mb-3" />
+          <p class="text-sm text-gray-500 text-center">Sarah's digital product storefront featuring makeup tutorials and templates</p>
+        </div>
+        
+        <ul class="list-disc pl-6 mb-6">
+          <li><strong>Digital product store</strong> — Makeup tutorial templates, photo presets, and beauty guides</li>
+          <li><strong>Membership area</strong> — Exclusive content for monthly subscribers</li>
+          <li><strong>Affiliate marketing</strong> — Organized product recommendations with tracking links</li>
+          <li><strong>Virtual masterclass registration</strong> — Landing pages for her online classes</li>
+        </ul>
+        
+        <h2 class="text-2xl font-bold mb-4">The Technology Stack</h2>
+        
+        <p class="mb-6">Sarah's website was built using a modern, scalable tech stack designed for performance and flexibility:</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+            <div class="text-indigo-600 font-bold mb-2">Core Platform</div>
+            <div>React.js + Next.js</div>
+          </div>
+          <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+            <div class="text-indigo-600 font-bold mb-2">Design System</div>
+            <div>Tailwind CSS</div>
+          </div>
+          <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+            <div class="text-indigo-600 font-bold mb-2">CMS</div>
+            <div>Headless Strapi</div>
+          </div>
+          <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+            <div class="text-indigo-600 font-bold mb-2">E-Commerce</div>
+            <div>Stripe + Snipcart</div>
+          </div>
+        </div>
+        
+        <p class="mb-6">Additional tools integrated into the website:</p>
+        
+        <ul class="list-disc pl-6 mb-8">
+          <li><strong>Chatbot</strong> — AI-powered assistant to answer common questions and direct visitors</li>
+          <li><strong>Analytics</strong> — Custom dashboard showing traffic sources, conversion rates, and user behavior</li>
+          <li><strong>Email marketing</strong> — ConvertKit integration with automated workflows</li>
+          <li><strong>SEO toolkit</strong> — Content optimization and performance tracking</li>
+        </ul>
+        
+        <h2 class="text-2xl font-bold mb-4">Implementation Timeline</h2>
+        
+        <div class="bg-gray-50 p-6 rounded-lg mb-8">
+          <ol class="list-decimal pl-6 space-y-3">
+            <li><strong>Week 1-2:</strong> Strategy, wireframing, and brand alignment</li>
+            <li><strong>Week 3-4:</strong> Design and development of core pages</li>
+            <li><strong>Week 5:</strong> Integration of lead generation systems</li>
+            <li><strong>Week 6:</strong> E-commerce setup and product uploads</li>
+            <li><strong>Week 7:</strong> Testing, optimization, and analytics configuration</li>
+            <li><strong>Week 8:</strong> Launch and promotion campaign</li>
+          </ol>
+        </div>
+        
+        <h2 class="text-2xl font-bold mb-4">Key Insights and Learnings</h2>
+        
+        <h3 class="text-xl font-semibold mb-3">What Made the Difference</h3>
+        
+        <div class="mb-8">
+          <p class="mb-4">Several factors contributed to the exceptional results:</p>
+          
+          <ol class="list-decimal pl-6 space-y-2">
+            <li><strong>Strategic approach vs. template site</strong> — Rather than using a generic template, Sarah's website was strategically designed around her business goals and audience needs.</li>
+            <li><strong>Conversion-focused design</strong> — Every page was optimized with clear calls-to-action and intuitive user journeys.</li>
+            <li><strong>Brand positioning</strong> — The professional presentation elevated her from "Instagram influencer" to "beauty content creator and consultant."</li>
+            <li><strong>Integrated systems</strong> — The seamless connection between her website, WhatsApp, email marketing, and e-commerce created an efficient business ecosystem.</li>
+            <li><strong>Data collection</strong> — Valuable insights about her audience helped refine her content strategy and improve brand pitches.</li>
+          </ol>
+        </div>
+        
+        <h2 class="text-2xl font-bold mb-4">Results in Detail</h2>
+        
+        <div class="overflow-x-auto mb-8">
+          <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+            <thead>
+              <tr>
+                <th class="py-3 px-4 bg-gray-50 text-left">Metric</th>
+                <th class="py-3 px-4 bg-gray-50 text-left">Before Website</th>
+                <th class="py-3 px-4 bg-gray-50 text-left">After Website (3 Months)</th>
+                <th class="py-3 px-4 bg-gray-50 text-left">Improvement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t border-gray-200">
+                <td class="py-3 px-4 font-medium">Monthly Brand Inquiries</td>
+                <td class="py-3 px-4">12-15</td>
+                <td class="py-3 px-4">38-45</td>
+                <td class="py-3 px-4 text-green-600">+200%</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-3 px-4 font-medium">Average Deal Value</td>
+                <td class="py-3 px-4">$1,200</td>
+                <td class="py-3 px-4">$2,100</td>
+                <td class="py-3 px-4 text-green-600">+68%</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-3 px-4 font-medium">Conversion to Paid Deals</td>
+                <td class="py-3 px-4">20%</td>
+                <td class="py-3 px-4">35%</td>
+                <td class="py-3 px-4 text-green-600">+75%</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-3 px-4 font-medium">Direct Product Revenue</td>
+                <td class="py-3 px-4">$0</td>
+                <td class="py-3 px-4">$4,500/month</td>
+                <td class="py-3 px-4 text-green-600">New Revenue Stream</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-3 px-4 font-medium">Email Subscribers</td>
+                <td class="py-3 px-4">0</td>
+                <td class="py-3 px-4">3,800</td>
+                <td class="py-3 px-4 text-green-600">New Asset</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <h2 class="text-2xl font-bold mb-4">Conclusion: Beyond Social Media</h2>
+        
+        <p class="mb-6">Sarah's case demonstrates that for influencers looking to build sustainable businesses, relying solely on social media platforms is a limiting strategy. A strategically designed website serves as both a professional anchor and a powerful business tool that can:</p>
+        
+        <ul class="list-disc pl-6 mb-6">
+          <li>Transform how brands perceive and value your work</li>
+          <li>Create multiple channels for lead generation</li>
+          <li>Establish direct connections with your audience</li>
+          <li>Enable diverse revenue streams beyond sponsored content</li>
+          <li>Protect your business from algorithm changes and platform policies</li>
+        </ul>
+        
+        <p class="mb-8">While social media remains important for discovery and engagement, Sarah's website has become the foundation of her business operations and the key driver of her revenue growth.</p>
+        
+        <div class="bg-indigo-50 p-6 rounded-lg mb-6">
+          <h3 class="text-xl font-semibold mb-3">Want similar results for your influence business?</h3>
+          <p class="mb-4">AINOR specializes in creating strategic websites for creators and influencers that generate leads and revenue, not just look pretty. Contact us to discuss how we can help transform your social media following into a thriving business.</p>
+          <a href="/contact" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors">Schedule a Strategy Call</a>
+        </div>
+        
+        <div class="border-t border-gray-200 pt-6">
+          <p class="italic text-gray-600">About the Author: Karan Dixit is the founder of AINOR, delivering innovative digital solutions including strategic websites for influencers and creators. With years of experience in web development and digital strategy, he helps creators establish powerful online presences that drive growth and opportunity.</p>
+        </div>
+      </div>`,
+      featured: true
+    },
+    {
       id: 1,
       slug: "why-every-creator-needs-personal-website-2025",
       title: "Why Every Creator Needs a Personal Website in 2025",
