@@ -49,12 +49,23 @@
   <!-- Blog Page -->
   <url>
     <loc>https://myainor.com/blog</loc>
-    <lastmod>2025-07-02</lastmod>
+    <lastmod>2025-08-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <!-- Blog Posts -->
+  <url>
+    <loc>https://myainor.com/blog/future-of-web-development-2025</loc>
+    <lastmod>2025-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;q=80&amp;w=1000</image:loc>
+      <image:title>The Future of Web Development: Trends Shaping 2025</image:title>
+    </image:image>
+  </url>
+  
   <url>
     <loc>https://myainor.com/blog/influencer-website-case-study</loc>
     <lastmod>2025-07-04</lastmod>

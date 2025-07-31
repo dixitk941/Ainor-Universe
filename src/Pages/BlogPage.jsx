@@ -387,6 +387,40 @@ const BlogPage = () => {
       featured: false
     },
     {
+  id: 8,
+  slug: "future-of-web-development-2025",
+  title: "The Future of Web Development: Trends Shaping 2025",
+  excerpt: "Explore the cutting-edge technologies and methodologies that are revolutionizing web development in 2025, from AI-powered coding assistants to advanced frontend frameworks.",
+  date: "August 1, 2025",
+  author: "Karan Dixit (dixitk941)",
+  category: "web-development",
+  readTime: "9 min read",
+  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+  content: `<div class="blog-content">
+    <h1 class="text-3xl font-bold mb-6">The Future of Web Development: Trends Shaping 2025</h1>
+    
+    <div class="mb-4 flex items-center text-gray-600">
+      <span>August 1, 2025</span>
+      <span class="mx-2">•</span>
+      <span>9 min read</span>
+    </div>
+    
+    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000" alt="Future of web development" class="w-full h-64 object-cover rounded-lg mb-8" />
+    
+    <p class="mb-6">As we progress through 2025, the web development landscape continues to evolve at an unprecedented pace. New technologies, frameworks, and methodologies are reshaping how we build digital experiences.</p>
+    
+    <h2 class="text-2xl font-bold mb-4">Key Trends Defining 2025</h2>
+    
+    <h3 class="text-xl font-semibold mb-3">1. AI-Powered Development Tools</h3>
+    <p class="mb-6">Artificial intelligence has become an integral part of the development workflow, with tools like GitHub Copilot, Cursor, and AI-powered testing frameworks revolutionizing how we write and maintain code.</p>
+    
+    <!-- Add more content sections as needed -->
+    
+  </div>`,
+  featured: false
+}
+,
+    {
       id: 2,
       slug: "reflecting-on-my-2024-journey",
       title: "Reflecting on My 2024 Journey: A Year of Growth, Challenges, and Innovation",
