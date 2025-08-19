@@ -14,6 +14,7 @@ import PricingPage from './Pages/PricingPage';
 import SplashScreen from './components/ui/SplashScreen';
 import CookieConsent from './components/ui/CookieConsent';
 import BackToTop from './components/ui/BackToTop';
+import WolfChatbot from './components/ui/WolfChatbot';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import AiServicesPage from './Pages/AiServicesPage';
@@ -60,6 +61,7 @@ function App() {
           <Footer />
           <BackToTop />
           <CookieConsent />
+          <WolfChatbot />
         </div>
       </Router>
     </HelmetProvider>
