@@ -1,18 +1,72 @@
 # https://www.robotstxt.org/robotstxt.html
+# AINOR Digital Solutions - Robots.txt Configuration
+# Updated: 2025-09-04
+
 User-agent: *
 Allow: /
 
-# Allow search engines to access important resources
+# Allow search engines to access important resources and pages
 Allow: /static/
 Allow: /assets/
 Allow: /images/
+Allow: /blog/
+Allow: /blog/ai-powered-web-development-2025-trends
+Allow: /services/
+Allow: /portfolio/
+Allow: /about/
+Allow: /contact/
+Allow: /pricing/
+Allow: /ai-services/
 
-# Disallow admin or private areas (if any)
+# Explicitly allow important JavaScript and CSS files
+Allow: *.js
+Allow: *.css
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.gif
+Allow: *.svg
+Allow: *.webp
+
+# Disallow admin, private, or sensitive areas
 Disallow: /admin/
 Disallow: /private/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /node_modules/
+Disallow: /build/
+Disallow: /src/
 
-# Sitemap location
+# Disallow query parameters that don't add SEO value
+Disallow: /*?utm_*
+Disallow: /*?ref=*
+Disallow: /*?fbclid=*
+
+# Allow Google-specific bots enhanced access
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Allow Bing bot enhanced access  
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Allow social media crawlers for rich previews
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Sitemap locations
 Sitemap: https://myainor.com/sitemap.xml
 
-# Crawl delay (optional)
+# General crawl delay for respectful crawling
 Crawl-delay: 1
+
+# Cache directive for better performance
+Cache-delay: 1
