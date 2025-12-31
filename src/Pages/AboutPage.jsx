@@ -2,7 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaLightbulb, FaHandshake, FaTrophy } from 'react-icons/fa';
 import { BsArrowRight } from 'react-icons/bs';
-import { IoBusinessOutline, IoPeopleOutline, IoRocketOutline, IoTimeOutline, IoCalendarOutline, IoGlobeOutline } from 'react-icons/io5';
+import { IoBusinessOutline, IoPeopleOutline, IoRocketOutline, IoTimeOutline, IoCalendarOutline, IoGlobeOutline, IoShieldCheckmarkOutline } from 'react-icons/io5';
+import { HiOutlineBadgeCheck } from 'react-icons/hi';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import SEOHead from '../components/seo/SEOHead';
@@ -51,13 +52,13 @@ const AboutPage = () => {// Company milestones with updated timeline
       name: "Mayank Sharma",
       position: "Cyber Security Expert",
       bio: "A dedicated cybersecurity specialist and technology student, Mayank brings expertise in protecting digital infrastructure and sensitive data. His passion for coding and cybersecurity ensures that all AINOR projects meet the highest security standards. He specializes in implementing robust security protocols and staying ahead of emerging cyber threats to safeguard our clients' digital assets.",      expertise: ["Cybersecurity", "Network Security", "Threat Analysis"],
-      image: "https://neocodenex.tech/static/img/team/Team2.jpg"
+      image: "/assets/IMG20231016135628.jpg"
     },
     {
       name: "Aakash Dixit",
-      position: "Business Development & Web Developer",
-      bio: "A strategic business expert and skilled web developer, Aakash brings a unique combination of technical expertise and business acumen to AINOR. His comprehensive understanding of market dynamics and development processes enables him to bridge the gap between client requirements and technical solutions. He specializes in business planning, client relations, and delivering web solutions that drive business growth.",
-      expertise: ["Business Development", "Web Development", "Strategic Planning"],
+      position: "Business Development, Web Developer & Graphic Designer",
+      bio: "A strategic business expert, skilled web developer, and creative graphic designer, Aakash brings a unique combination of technical expertise, design sensibility, and business acumen to AINOR. His comprehensive understanding of market dynamics, development processes, and visual communication enables him to bridge the gap between client requirements and creative solutions. He specializes in business planning, client relations, brand identity design, and delivering web solutions that drive business growth.",
+      expertise: ["Business Development", "Web Development", "Graphic Design", "Strategic Planning"],
       image: "/assets/IMG_8027.JPG"
     },
     {
@@ -237,66 +238,267 @@ const AboutPage = () => {// Company milestones with updated timeline
         </div>
       </section>
       
-      {/* SEO-Optimized Company Overview Section */}
-      <Section className="py-20 md:py-28 bg-gradient-to-b from-blue-50 to-white" id="company-overview">
+      {/* Redesigned About AINOR Section */}
+      <Section className="py-20 md:py-32 bg-white relative overflow-hidden" id="company-overview">
+        {/* Background decoration */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-purple-100 to-pink-100 rounded-full blur-3xl opacity-50"></div>
+        </div>
+        
         <Container>
+          {/* MSME Recognition Badge - Floating Style */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center mb-12"
+          >
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-full shadow-lg shadow-green-500/25">
+              <IoShieldCheckmarkOutline className="w-5 h-5" />
+              <span className="font-semibold text-sm">MSME Registered</span>
+              <span className="text-white/80 text-sm">|</span>
+              <span className="text-sm font-medium">UDYAM-UP-36-0033877</span>
+              <HiOutlineBadgeCheck className="w-5 h-5 text-green-200" />
+            </div>
+          </motion.div>
+
+          {/* Main About Content - Two Column Layout */}
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+            {/* Left Column - Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="px-4 md:px-0"
+            >
+              <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <IoBusinessOutline className="w-4 h-4" />
+                About AINOR
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Crafting Digital 
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> Excellence</span> 
+                <br />Since 2023
+              </h2>
+              
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                What started in a hostel room with just a laptop and a dream has grown into <strong className="text-gray-900">AINOR</strong> — a Government of India recognized MSME dedicated to transforming businesses through innovative digital solutions.
+              </p>
+              
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                We specialize in web development, mobile applications, UI/UX design, and cybersecurity. Our mission is to empower startups, enterprises, and global brands with scalable, secure technology solutions that drive real business results.
+              </p>
+
+              {/* Key Highlights */}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-2xl border border-blue-100">
+                  <div className="text-3xl font-bold text-blue-600 mb-1">20+</div>
+                  <div className="text-gray-600 text-sm">Projects Delivered</div>
+                </div>
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-2xl border border-green-100">
+                  <div className="text-3xl font-bold text-green-600 mb-1">100%</div>
+                  <div className="text-gray-600 text-sm">Client Satisfaction</div>
+                </div>
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-2xl border border-purple-100">
+                  <div className="text-3xl font-bold text-purple-600 mb-1">15+</div>
+                  <div className="text-gray-600 text-sm">Happy Clients</div>
+                </div>
+                <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-5 rounded-2xl border border-amber-100">
+                  <div className="text-3xl font-bold text-amber-600 mb-1">2+</div>
+                  <div className="text-gray-600 text-sm">Years Experience</div>
+                </div>
+              </div>
+
+              <a 
+                href="/contact" 
+                className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              >
+                Start Your Project
+                <BsArrowRight className="w-4 h-4" />
+              </a>
+            </motion.div>
+
+            {/* Right Column - Visual Element */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="relative px-4 md:px-0"
+            >
+              {/* Main Image */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl transform rotate-3 scale-105 opacity-10"></div>
+                <img 
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="AINOR Team collaborating on digital solutions"
+                  className="relative rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]"
+                />
+                
+                {/* Floating Cards */}
+                <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                      <IoShieldCheckmarkOutline className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-gray-900">Govt. Recognized</div>
+                      <div className="text-xs text-gray-500">MSME Registered</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute -top-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                      <IoGlobeOutline className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-gray-900">Global Reach</div>
+                      <div className="text-xs text-gray-500">India & Europe</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Services & Industries Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="px-4 md:px-0"
+          >
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Why Choose Us */}
+              <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8 rounded-3xl">
+                <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
+                  <FaTrophy className="w-6 h-6 text-yellow-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-4">Why Choose AINOR?</h3>
+                <ul className="space-y-3 text-gray-300">
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-400 mt-1">✓</span>
+                    <span>Proven track record of innovative solutions</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-400 mt-1">✓</span>
+                    <span>Expert team with diverse tech skills</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-400 mt-1">✓</span>
+                    <span>Dedicated cybersecurity for every project</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-400 mt-1">✓</span>
+                    <span>Transparent pricing & communication</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-400 mt-1">✓</span>
+                    <span>Global experience with local expertise</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Our Services */}
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl border border-blue-100">
+                <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                  <IoRocketOutline className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Our Services</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    Custom Web & Mobile Development
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    UI/UX Design & Branding
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    Cloud Solutions & SaaS
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    Cybersecurity & Protection
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    SEO & Digital Marketing
+                  </li>
+                </ul>
+              </div>
+
+              {/* Industries */}
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-3xl border border-purple-100">
+                <div className="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                  <IoPeopleOutline className="w-6 h-6 text-purple-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Industries We Serve</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    Startups & Entrepreneurs
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    E-commerce & Retail
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    Healthcare & Education
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    Finance & Fintech
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    Travel & Hospitality
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Detailed MSME Info Box */}
           <motion.div
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="text-center mb-16 md:mb-24 px-4 md:px-0"
+            className="mt-16 px-4 md:px-0"
           >
-            <span className="inline-block text-blue-700 font-semibold mb-3 tracking-wide text-lg">ABOUT AINOR</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-6 text-gray-900 leading-tight">
-              Your Trusted Partner for Digital Transformation, Web Development, and Business Growth
-            </h2>
-            <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto mb-6">
-              AINOR is a leading digital solutions company based in India, specializing in web development, mobile app development, custom software, cybersecurity, and business consulting. Our mission is to empower startups, enterprises, and global brands with innovative, scalable, and secure technology solutions that drive measurable business results.
-            </p>
-            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto mb-4">
-              With a team of experienced developers, designers, and cybersecurity experts, we deliver end-to-end digital services including responsive website design, e-commerce platforms, SaaS solutions, UI/UX design, SEO, cloud integration, and IT consulting. Our client-centric approach, transparent communication, and commitment to quality have earned us recognition as one of the top web development agencies in India and Europe.
-            </p>
-            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
-              Whether you are a startup looking to launch your first product, an established business seeking digital transformation, or an enterprise aiming for global expansion, AINOR is your partner for success. We combine creativity, technology, and strategy to help you achieve your business goals and stand out in the digital world.
-            </p>
+            <div className="bg-gradient-to-r from-green-50 via-emerald-50 to-teal-50 border border-green-200 rounded-3xl p-8 md:p-10 shadow-sm">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div className="flex items-center gap-5">
+                  <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-2xl shadow-lg shadow-green-500/20">
+                    <IoShieldCheckmarkOutline className="w-10 h-10 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                      Government of India Recognized MSME
+                      <HiOutlineBadgeCheck className="text-green-500 w-6 h-6" />
+                    </h3>
+                    <p className="text-gray-600 mt-1">
+                      AINOR is officially registered under the Ministry of Micro, Small and Medium Enterprises
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center lg:items-end gap-2 bg-white px-8 py-4 rounded-2xl shadow-sm">
+                  <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Udyam Registration Number</span>
+                  <span className="text-green-700 font-bold text-xl tracking-wide">UDYAM-UP-36-0033877</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
-            <div className="bg-white rounded-2xl shadow-md p-8 text-left">
-              <h3 className="text-xl font-bold mb-3 text-blue-700">Why Choose AINOR?</h3>
-              <ul className="list-disc list-inside text-gray-700 space-y-2">
-                <li>Proven track record of delivering high-quality, innovative digital solutions</li>
-                <li>Expertise in the latest web, mobile, and cloud technologies</li>
-                <li>Dedicated cybersecurity and data protection for every project</li>
-                <li>Transparent, client-focused communication and project management</li>
-                <li>Flexible engagement models for startups, SMBs, and enterprises</li>
-                <li>Global experience with clients in India, Europe, and beyond</li>
-              </ul>
-            </div>
-            <div className="bg-white rounded-2xl shadow-md p-8 text-left">
-              <h3 className="text-xl font-bold mb-3 text-blue-700">Our Services</h3>
-              <ul className="list-disc list-inside text-gray-700 space-y-2">
-                <li>Custom Web & Mobile App Development</li>
-                <li>UI/UX Design & Branding</li>
-                <li>Cloud Solutions & SaaS Platforms</li>
-                <li>Cybersecurity & Data Protection</li>
-                <li>SEO & Digital Marketing</li>
-                <li>Business Consulting & IT Strategy</li>
-              </ul>
-            </div>
-            <div className="bg-white rounded-2xl shadow-md p-8 text-left">
-              <h3 className="text-xl font-bold mb-3 text-blue-700">Industries We Serve</h3>
-              <ul className="list-disc list-inside text-gray-700 space-y-2">
-                <li>Startups & Entrepreneurs</li>
-                <li>SMBs & Enterprises</li>
-                <li>E-commerce & Retail</li>
-                <li>Healthcare & Wellness</li>
-                <li>Education & E-learning</li>
-                <li>Finance & Fintech</li>
-                <li>Travel, Hospitality & More</li>
-              </ul>
-            </div>
-          </div>
         </Container>
       </Section>
       

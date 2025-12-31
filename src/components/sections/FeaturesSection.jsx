@@ -78,14 +78,14 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <Section bgColor="bg-gray-900 text-white" spacing="py-24 md:py-32">
+    <Section bgColor="bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 text-white" spacing="py-24 md:py-32">
       <div className="text-center mb-16">
         <motion.span 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="inline-block px-3 py-1 rounded-full bg-indigo-900 text-indigo-300 text-sm font-medium mb-4"
+          className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-900/80 to-blue-900/80 text-indigo-300 text-sm font-semibold mb-4 border border-indigo-700/50"
         >
           Why Choose Us
         </motion.span>
@@ -94,7 +94,7 @@ const FeaturesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-white"
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight"
         >
           What Sets Us Apart
         </motion.h2>
@@ -103,13 +103,13 @@ const FeaturesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
-          className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto"
+          className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
         >
           Our approach combines technical expertise, creative innovation, and business acumen
         </motion.p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {features.map((feature, index) => (
           <FeatureCard key={feature.id} feature={feature} index={index} />
         ))}
@@ -127,12 +127,12 @@ const FeatureCard = ({ feature, index }) => {
       viewport={{ once: true }}
       className="group"
     >
-      <div className="p-6 rounded-2xl border border-gray-800 bg-gradient-to-br from-gray-800 to-gray-900 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/10 hover:-translate-y-2">
-        <div className="p-3 bg-indigo-900/50 rounded-xl w-16 h-16 flex items-center justify-center text-indigo-400 mb-6 group-hover:text-indigo-300 group-hover:bg-indigo-900 transition-all duration-300">
+      <div className="p-7 rounded-2xl border border-gray-800/80 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-2 hover:border-indigo-500/30 h-full">
+        <div className="p-3 bg-gradient-to-br from-indigo-600/20 to-blue-600/20 rounded-xl w-14 h-14 flex items-center justify-center text-indigo-400 mb-5 group-hover:text-indigo-300 group-hover:from-indigo-600/30 group-hover:to-blue-600/30 transition-all duration-300">
           {feature.icon}
         </div>
-        <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-        <p className="text-gray-400 group-hover:text-gray-300 transition-colors">{feature.description}</p>
+        <h3 className="text-lg font-bold text-white mb-2 tracking-tight">{feature.title}</h3>
+        <p className="text-gray-400 group-hover:text-gray-300 transition-colors text-sm leading-relaxed">{feature.description}</p>
       </div>
     </motion.div>
   );

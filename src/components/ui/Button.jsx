@@ -13,25 +13,26 @@ const Button = ({
   fadeIn = false,
   ...props 
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out rounded-lg focus:outline-none';
+  const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500';
   
   const variants = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-blue-500/50',
-    secondary: 'bg-white text-blue-700 hover:bg-blue-50 border border-transparent',
-    outline: 'bg-transparent border border-blue-600 text-blue-600 hover:bg-blue-50',
+    primary: 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40',
+    secondary: 'bg-white text-blue-700 hover:bg-blue-50 border border-gray-200 hover:border-blue-200',
+    outline: 'bg-transparent border-2 border-blue-600 text-blue-600 hover:bg-blue-50 hover:border-blue-700',
     ghost: 'bg-transparent text-blue-600 hover:bg-blue-50',
-    white: 'bg-white text-gray-900 hover:bg-gray-100 shadow-lg hover:shadow-xl',
+    white: 'bg-white text-gray-900 hover:bg-gray-50 shadow-lg hover:shadow-xl border border-gray-100',
     'outline-white': 'bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900',
     dark: 'bg-gray-900 text-white hover:bg-gray-800 shadow-lg hover:shadow-gray-800/30',
     glass: 'backdrop-filter backdrop-blur-lg bg-white/10 border border-white/20 text-white hover:bg-white/20',
     cyber: 'bg-black text-white border border-indigo-500 shadow-glow hover:shadow-glow-blue',
-    neon: 'bg-black text-white neon-text border border-pink-500/50 hover:border-pink-500'
+    neon: 'bg-black text-white neon-text border border-pink-500/50 hover:border-pink-500',
+    professional: 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 font-semibold',
   };
   
   const sizes = {
     sm: 'text-sm px-4 py-2',
     md: 'text-base px-6 py-3',
-    lg: 'text-lg px-8 py-4',
+    lg: 'text-lg px-8 py-3.5',
   };
   
   const buttonClasses = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;

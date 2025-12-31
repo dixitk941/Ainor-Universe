@@ -60,7 +60,7 @@ const ContactSection = () => {
     }
   };
   return (
-    <Section id="contact" bgColor="bg-white">
+    <Section id="contact" bgColor="bg-gradient-to-b from-white to-gray-50">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -68,13 +68,13 @@ const ContactSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <span className="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-50 to-blue-50 text-indigo-700 text-sm font-semibold mb-4 border border-indigo-100">
             Get In Touch
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
             Let's Discuss Your Project
           </h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-lg">
+          <p className="text-lg text-gray-600 mb-8 max-w-lg leading-relaxed">
             Ready to elevate your digital presence? Get in touch with our team to discuss your project and discover how we can help you achieve your business goals.
           </p>
           
@@ -96,7 +96,7 @@ const ContactSection = () => {
             />
           </div>
           
-          <div className="bg-gray-100 p-6 rounded-2xl">
+          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-2xl border border-gray-200/50">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Our Business Hours</h3>
             <ul className="space-y-2 text-gray-700">
               <li className="flex justify-between">

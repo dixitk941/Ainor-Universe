@@ -38,82 +38,132 @@ const Navbar = () => {
     { path: '/contact', label: 'Contact', icon: <FaEnvelope /> },
   ];
   // For mobile menu, primary items shown directly
-  const primaryNavItems = navItems.slice(0, 5);  return (    <>      {/* Main Navbar - Attached to top initially, floating on scroll */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 ${isScrolled ? '' : 'bg-gray-900'}`} style={{ margin: 0, padding: 0 }}>
-        {/* When scrolled: add margin and padding for floating effect. When not scrolled: flush with top of screen */}
-        <div className={`max-w-7xl mx-auto ${isScrolled ? 'px-4 sm:px-6 lg:px-8 mt-3' : 'px-0'}`}>
-          <div 
-            className={`transition-all duration-300 ${
-            isScrolled 
-              ? 'bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md rounded-2xl' 
-              : 'bg-gray-900/70 backdrop-blur-md border-0 rounded-b-2xl'
-          }`}
-            style={{ margin: 0 }}
-          >
-            <div className="flex justify-between items-center h-14 md:h-16 px-4 md:px-5 lg:px-7">              {/* Logo - One UI style with logo image and text */}
-              <motion.div
-                initial={false}
-                animate={isScrolled ? { scale: 1.08, y: 2, boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)' } : { scale: 1, y: 0, boxShadow: '0 0px 0px 0 rgba(0,0,0,0)' }}
-                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                className="flex items-center"
+  const primaryNavItems = navItems.slice(0, 5);
+
+  // Smooth spring config for animations
+  const smoothSpring = {
+    type: "spring",
+    stiffness: 100,
+    damping: 20,
+    mass: 0.5
+  };
+
+  const smootherSpring = {
+    type: "spring", 
+    stiffness: 80,
+    damping: 15,
+    mass: 0.8
+  };
+
+  return (    <>      {/* Main Navbar - Attached to top initially, floating on scroll */}
+      <motion.nav 
+        className="fixed top-0 left-0 right-0 z-50"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {/* Full-width background layer - Always white */}
+        <div
+          className="absolute inset-0 backdrop-blur-md bg-white/95"
+        />
+        
+        {/* Content container */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 md:h-18">
+            {/* Logo */}
+            <motion.div
+              initial={false}
+              animate={isScrolled 
+                ? { scale: 1.02 } 
+                : { scale: 1 }
+              }
+              transition={smoothSpring}
+              className="flex items-center"
+            >
+              <Link 
+                to="/" 
+                onClick={() => {
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }, 100);
+                }}
+                className="flex items-center space-x-3"
               >
-                <Link 
-                  to="/" 
-                  onClick={() => {
-                    setTimeout(() => {
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }, 100);
-                  }}
-                  className="flex items-center space-x-3"
+                <motion.img 
+                  src={logo} 
+                  alt="AINOR Logo" 
+                  className="h-10 w-auto md:h-12 lg:h-14"
+                  animate={isScrolled 
+                    ? { filter: 'drop-shadow(0 2px 8px rgba(59, 130, 246, 0.3))' } 
+                    : { filter: 'drop-shadow(0 0px 0px transparent)' }
+                  }
+                  transition={{ duration: 0.3 }}
+                />
+                <span
+                  className="font-bold text-xl md:text-2xl tracking-tight text-slate-800"
                 >
-                  <motion.img 
-                    src={logo} 
-                    alt="AINOR Logo" 
-                    className="h-10 w-auto md:h-14 lg:h-16 transition-all duration-300"
-                    animate={isScrolled ? { scale: 1.15, filter: 'drop-shadow(0 2px 8px #3b82f6aa)' } : { scale: 1, filter: 'none' }}
-                    transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 0.7 }}
-                  />
-                  <motion.span
-                    className={`font-bold text-xl md:text-2xl transition-colors duration-300 ${isScrolled ? 'text-gray-900' : 'text-white'}`}
-                    animate={isScrolled ? { color: '#1e293b' } : { color: '#fff' }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                  >
-                    <span className="text-blue-500">A</span>INOR
-                  </motion.span>
-                </Link>
-              </motion.div>
+                  <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">A</span>INOR
+                </span>
+              </Link>
+            </motion.div>
               
               {/* Mobile Menu Toggle - One UI style with rounded button */}
               <div className="flex md:hidden items-center">
-                <button
+                <motion.button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className={`p-2 rounded-full ${
-                    isScrolled 
-                      ? 'text-gray-900 hover:bg-gray-100' 
-                      : 'text-white hover:bg-white/10'
-                  }`}
+                  className="p-2 rounded-full text-gray-900 hover:bg-gray-100"
                   aria-label="Toggle menu"
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.15 }}
                 >
-                  {mobileMenuOpen ? (
-                    <IoCloseOutline className="h-6 w-6" />
-                  ) : (
-                    <IoMenuOutline className="h-6 w-6" />
-                  )}
-                </button>
+                  <AnimatePresence mode="wait">
+                    {mobileMenuOpen ? (
+                      <motion.div
+                        key="close"
+                        initial={{ rotate: -90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        exit={{ rotate: 90, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <IoCloseOutline className="h-6 w-6" />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="menu"
+                        initial={{ rotate: 90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        exit={{ rotate: -90, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <IoMenuOutline className="h-6 w-6" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
               </div>
               
-              {/* Desktop Navigation - One UI style with clean spacing */}
-              <div className="hidden md:flex items-center gap-1">
-                {navItems.map((item) => (
-                  <NavLink 
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex items-center gap-0.5 lg:gap-1">
+                {navItems.map((item, index) => (
+                  <motion.div
                     key={item.path}
-                    to={item.path} 
-                    isScrolled={isScrolled}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05, duration: 0.3, ease: "easeOut" }}
                   >
-                    {item.label}
-                  </NavLink>
+                    <NavLink 
+                      to={item.path}
+                    >
+                      {item.label}
+                    </NavLink>
+                  </motion.div>
                 ))}
-                  <div className="ml-3">
+                <motion.div 
+                  className="ml-2 lg:ml-4"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4, duration: 0.3 }}
+                >
                   <Link 
                     to="/contact" 
                     onClick={() => {
@@ -121,68 +171,68 @@ const Navbar = () => {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }, 100);
                     }}
-                    className={`inline-flex items-center justify-center px-6 py-2.5 font-medium rounded-full transition-all duration-300 
-                      ${isScrolled 
-                        ? 'bg-blue-500 text-white hover:bg-blue-600 shadow-md' 
-                        : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20'
-                      }`}
+                    className="inline-flex items-center justify-center px-5 py-2 font-medium rounded-lg text-sm transition-all duration-300 bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 shadow-md shadow-blue-500/20"
                   >
                     Get in Touch
                   </Link>
-                </div>
+                </motion.div>
               </div>
-            </div>
           </div>
-          
-          {/* Mobile Menu - One UI 7 style with rounded card */}
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className={`mt-2 rounded-[1.5rem] overflow-hidden ${
-                  isScrolled 
-                    ? 'bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md' 
-                    : 'bg-gray-900/90 backdrop-blur-md border border-gray-800/30'
-                }`}
-              >
-                <div className="py-4 px-2">
-                  <div className="grid grid-cols-1 gap-1">
-                    {navItems.map((item) => (
+        </div>
+        
+        {/* Mobile Menu - One UI 7 style with rounded card */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.98 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-4 mt-2 rounded-2xl overflow-hidden md:hidden bg-white/95 shadow-lg border border-gray-200/20 backdrop-blur-md"
+            >
+              <div className="py-4 px-2">
+                <div className="grid grid-cols-1 gap-1">
+                  {navItems.map((item, index) => (
+                    <motion.div
+                      key={item.path}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05, duration: 0.3, ease: "easeOut" }}
+                    >
                       <MobileNavLink 
-                        key={item.path}
                         to={item.path}
                         icon={item.icon}
                         label={item.label}
-                        isScrolled={isScrolled}
                       />
-                    ))}
-                  </div>
-                    {/* One UI style call-to-action */}
-                  <div className="mt-4 px-3">
-                    <Link 
-                      to="/contact" 
-                      onClick={() => {
-                        setTimeout(() => {
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }, 100);
-                      }}
-                      className={`flex items-center justify-center w-full py-3 font-medium rounded-full transition-all duration-300 
-                        ${isScrolled 
-                          ? 'bg-blue-500 text-white hover:bg-blue-600' 
-                          : 'bg-white/10 text-white hover:bg-white/20'
-                        }`}
-                    >
-                      Get in Touch
-                    </Link>
-                  </div>                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </nav>{/* Bottom Tab Bar for Mobile - One UI 7 Style */}
+                    </motion.div>
+                  ))}
+                </div>
+                {/* One UI style call-to-action */}
+                <motion.div 
+                  className="mt-4 px-3"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.3 }}
+                >
+                  <Link 
+                    to="/contact" 
+                    onClick={() => {
+                      setTimeout(() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }, 100);
+                    }}
+                    className="flex items-center justify-center w-full py-3 font-medium rounded-full transition-all duration-300 bg-blue-500 text-white hover:bg-blue-600"
+                  >
+                    Get in Touch
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
+
+      {/* Bottom Tab Bar for Mobile - One UI 7 Style */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe px-2 sm:px-3">
         <div className="mx-auto my-1.5 sm:my-2 rounded-[1.5rem] bg-gray-900/95 backdrop-blur-lg border border-gray-800/30 shadow-lg">
           <div className="grid grid-cols-5 gap-0.5 sm:gap-1 py-1 sm:py-1.5">
@@ -196,13 +246,15 @@ const Navbar = () => {
             ))}
           </div>
         </div>
-      </div>      {/* Add bottom padding to content to accommodate the mobile nav bar */}
+      </div>
+
+      {/* Add bottom padding to content to accommodate the mobile nav bar */}
       <div className="md:hidden h-14"></div>
     </>
   );
 };
 
-const NavLink = ({ to, children, isScrolled = false }) => {
+const NavLink = ({ to, children }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
   
@@ -217,18 +269,39 @@ const NavLink = ({ to, children, isScrolled = false }) => {
     <Link 
       to={to} 
       onClick={handleClick}
-      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 
-      ${isScrolled 
-        ? `text-gray-700 hover:bg-gray-100 ${isActive ? 'bg-blue-50 text-blue-600' : ''}` 
-        : `text-gray-100 hover:bg-white/10 ${isActive ? 'bg-white/10 text-white' : ''}`
-      }`}
+      className="relative"
     >
-      {children}
+      <motion.div
+        className={`px-3 lg:px-4 py-2 rounded-lg text-sm font-medium relative text-gray-700 ${isActive ? 'text-blue-600 font-semibold' : ''}`}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.15 }}
+      >
+        {/* Background hover effect */}
+        <motion.div
+          className="absolute inset-0 rounded-lg bg-gray-100/80"
+          initial={{ opacity: isActive ? 1 : 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+          style={{ opacity: isActive ? 0.6 : 0 }}
+        />
+        <span className="relative z-10">{children}</span>
+        {/* Active indicator dot */}
+        {isActive && (
+          <motion.span 
+            className="absolute bottom-0.5 left-1/2 w-1 h-1 rounded-full bg-blue-500"
+            layoutId="activeIndicator"
+            initial={{ scale: 0, x: '-50%' }}
+            animate={{ scale: 1, x: '-50%' }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
+        )}
+      </motion.div>
     </Link>
   );
 };
 
-const MobileNavLink = ({ to, icon, label, isScrolled = false }) => {
+const MobileNavLink = ({ to, icon, label }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
   
@@ -243,16 +316,25 @@ const MobileNavLink = ({ to, icon, label, isScrolled = false }) => {
     <Link 
       to={to} 
       onClick={handleClick}
-      className={`flex items-center px-4 py-3 rounded-xl transition-all duration-300
-      ${isScrolled 
-        ? `text-gray-800 ${isActive ? 'bg-blue-50' : 'hover:bg-gray-100'}` 
-        : `text-white ${isActive ? 'bg-white/10' : 'hover:bg-white/5'}`
-      }`}
     >
-      <div className={`mr-4 ${isActive ? (isScrolled ? 'text-blue-500' : 'text-blue-400') : ''}`}>
-        {React.cloneElement(icon, { className: "h-5 w-5" })}
-      </div>
-      <span className="font-medium">{label}</span>
+      <motion.div
+        className={`flex items-center px-4 py-3 rounded-xl text-gray-800 ${isActive ? 'bg-blue-50' : ''}`}
+        whileHover={{ 
+          backgroundColor: isActive ? 'rgba(239, 246, 255, 1)' : 'rgba(243, 244, 246, 1)',
+          x: 4
+        }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+      >
+        <motion.div 
+          className={`mr-4 ${isActive ? 'text-blue-500' : ''}`}
+          animate={isActive ? { scale: [1, 1.1, 1] } : { scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          {React.cloneElement(icon, { className: "h-5 w-5" })}
+        </motion.div>
+        <span className="font-medium">{label}</span>
+      </motion.div>
     </Link>
   );
 };
@@ -271,12 +353,26 @@ const MobileNavTab = ({ to, icon, label }) => {
     <Link 
       to={to} 
       onClick={handleClick}
-      className="flex flex-col items-center justify-center py-1.5 text-white transition-colors"
+      className="flex flex-col items-center justify-center py-1.5 text-white"
     >
-      <div className={`p-1.5 rounded-xl transition-colors ${isActive ? 'bg-blue-500/20 text-blue-300' : ''}`}>
+      <motion.div 
+        className={`p-1.5 rounded-xl ${isActive ? 'bg-blue-500/20 text-blue-300' : ''}`}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      >
         {React.cloneElement(icon, { className: "h-4 w-4" })}
-      </div>
-      <span className="text-xs mt-0.5 font-medium">{label}</span>
+      </motion.div>
+      <motion.span 
+        className="text-xs mt-0.5 font-medium"
+        animate={{ 
+          scale: isActive ? 1.05 : 1,
+          fontWeight: isActive ? 600 : 500
+        }}
+        transition={{ duration: 0.2 }}
+      >
+        {label}
+      </motion.span>
     </Link>
   );
 };

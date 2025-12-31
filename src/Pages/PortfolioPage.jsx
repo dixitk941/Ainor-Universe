@@ -18,6 +18,17 @@ const PortfolioPage = () => {
     // Project data
   const projects = [
     {
+      id: 9,
+      title: "Mohan G Enterprises",
+      category: "web",
+      description: "A professional static website for Mohan G Enterprises, showcasing premium organic fertilizers and exquisite marble handicrafts from the culturally rich Braj region. The website highlights their cow dung manure products for sustainable farming and stunning traditional Indian marble artistry for global export markets.",
+      challenges: "Creating a visually appealing website that effectively showcases two distinct product lines - organic fertilizers and marble handicrafts - while maintaining a cohesive brand identity and appealing to international B2B buyers.",
+      solution: "We designed a clean, elegant website with separate product sections, high-quality imagery, and clear calls-to-action. The site features WhatsApp integration for instant communication, SEO optimization for international keywords, and a mobile-first responsive design.",
+      technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "WhatsApp Business API"],
+      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      link: "https://mohangenterprices.com"
+    },
+    {
       id: 1,
       title: "Sttrika E-Commerce Platform",
       category: "ecommerce",

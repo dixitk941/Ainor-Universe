@@ -2,11 +2,11 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEOHead = ({ 
-  title = "AINOR - Digital Solutions & Web Development Company",
-  description = "AINOR delivers innovative digital solutions, web development, mobile apps, and custom software. Transform your business with cutting-edge technology and expert development services.",
-  keywords = "AINOR, web development, digital solutions, mobile apps, custom software, React development, website design, digital transformation, technology company, software development",
+  title = "AINOR - MSME Registered Digital Solutions & Web Development Company",
+  description = "AINOR is a Government of India recognized MSME (UDYAM-UP-36-0033877) delivering innovative digital solutions, web development, mobile apps, and custom software. Transform your business with cutting-edge technology.",
+  keywords = "AINOR, MSME registered, Udyam certified, Government of India recognized, web development, digital solutions, mobile apps, custom software, React development, website design, digital transformation, technology company, software development, India",
   canonicalUrl = "https://myainor.com/",
-  ogImage = "https://myainor.com/logo512.png",
+  ogImage = "https://myainor.com/hero-image.jpg",
   structuredData = null,
   noindex = false
 }) => {

@@ -9,7 +9,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://myainor.com/</loc>
-    <lastmod>2025-06-24</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -17,7 +17,7 @@
   <!-- About Page -->
   <url>
     <loc>https://myainor.com/about</loc>
-    <lastmod>2025-06-24</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -25,7 +25,7 @@
   <!-- Services Page -->
   <url>
     <loc>https://myainor.com/services</loc>
-    <lastmod>2025-06-24</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -33,7 +33,7 @@
   <!-- Portfolio Page -->
   <url>
     <loc>https://myainor.com/portfolio</loc>
-    <lastmod>2025-06-24</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -41,7 +41,7 @@
   <!-- Contact Page -->
   <url>
     <loc>https://myainor.com/contact</loc>
-    <lastmod>2025-06-24</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -49,12 +49,24 @@
   <!-- Blog Page -->
   <url>
     <loc>https://myainor.com/blog</loc>
-    <lastmod>2025-09-04</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <!-- Blog Posts -->
+  <url>
+    <loc>https://myainor.com/blog/sustainable-agriculture-digital-transformation-2025</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&amp;fit=crop&amp;q=80&amp;w=1000</image:loc>
+      <image:title>How Digital Transformation is Revolutionizing Sustainable Agriculture and Traditional Crafts Export</image:title>
+      <image:caption>Sustainable organic farming and traditional handicrafts digital transformation in India</image:caption>
+    </image:image>
+  </url>
+  
   <url>
     <loc>https://myainor.com/blog/ai-powered-web-development-2025-trends</loc>
     <lastmod>2025-09-04</lastmod>
@@ -100,11 +112,56 @@
     </image:image>
   </url>
   
+  <url>
+    <loc>https://myainor.com/blog/from-idea-to-launch-first-website</loc>
+    <lastmod>2025-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&amp;fit=crop&amp;q=80&amp;w=1000</image:loc>
+      <image:title>From Idea to Launch: How We Built Your First Website</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://myainor.com/blog/seo-basics-beginners</loc>
+    <lastmod>2025-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1562577309-4932fdd64cd1?auto=format&amp;fit=crop&amp;q=80&amp;w=1000</image:loc>
+      <image:title>SEO Basics: A Beginner's Guide to Ranking Higher</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://myainor.com/blog/why-every-business-needs-website</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&amp;fit=crop&amp;q=80&amp;w=1000</image:loc>
+      <image:title>Why Every Business Needs a Website in 2025</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Portfolio Projects -->
+  <url>
+    <loc>https://myainor.com/portfolio/mohan-g-enterprises</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&amp;fit=crop&amp;q=80&amp;w=1000</image:loc>
+      <image:title>Mohan G Enterprises - Premium Organic Fertilizers and Marble Handicrafts</image:title>
+      <image:caption>Static website for organic fertilizers and marble handicrafts export business</image:caption>
+    </image:image>
+  </url>
   
   <!-- Careers Page -->
   <url>
     <loc>https://myainor.com/careers</loc>
-    <lastmod>2025-06-24</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -112,7 +169,7 @@
   <!-- FAQ Page -->
   <url>
     <loc>https://myainor.com/faq</loc>
-    <lastmod>2025-06-24</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -120,7 +177,7 @@
   <!-- Pricing Page -->
   <url>
     <loc>https://myainor.com/pricing</loc>
-    <lastmod>2025-06-24</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -128,7 +185,7 @@
   <!-- AI Services Page -->
   <url>
     <loc>https://myainor.com/ai-services</loc>
-    <lastmod>2025-06-26</lastmod>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

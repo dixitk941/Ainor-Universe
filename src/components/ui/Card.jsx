@@ -11,17 +11,18 @@ const Card = ({
   className = '',
   ...props 
 }) => {
-  const baseStyles = 'rounded-2xl transition-all duration-300 ease-in-out overflow-hidden group';
+  const baseStyles = 'rounded-2xl transition-all duration-300 ease-in-out overflow-hidden group border';
   
   const variants = {
-    default: 'bg-white shadow-md',
-    dark: 'bg-gray-900 text-white',
-    gradient: 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white',
-    transparent: 'bg-transparent',
-    glass: 'backdrop-filter backdrop-blur-lg bg-white/10 border border-white/20',
+    default: 'bg-white shadow-lg shadow-gray-100/50 border-gray-100',
+    dark: 'bg-gray-900 text-white border-gray-800',
+    gradient: 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white border-transparent',
+    transparent: 'bg-transparent border-transparent',
+    glass: 'backdrop-filter backdrop-blur-lg bg-white/10 border-white/20',
+    professional: 'bg-white shadow-professional border-gray-100 hover:shadow-professional-lg',
   };
   
-  const hoverStyles = hoverEffect ? 'hover:shadow-xl hover:-translate-y-1' : '';
+  const hoverStyles = hoverEffect ? 'hover:shadow-xl hover:-translate-y-1 hover:border-gray-200' : '';
   const threeDStyles = is3D ? 'preserve-3d perspective-1000 backface-hidden' : '';
   
   const cardClasses = `${baseStyles} ${variants[variant]} ${hoverStyles} ${threeDStyles} ${className}`;

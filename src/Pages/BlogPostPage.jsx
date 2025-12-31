@@ -13,6 +13,161 @@ const BlogPostPage = () => {
   // For now, we'll import it from the same data in BlogPage
   // In a real app, you might want to use a context or fetch this data
   const blogPosts = [
+    {
+      id: 9,
+      slug: "sustainable-agriculture-digital-transformation-2025",
+      title: "How Digital Transformation is Revolutionizing Sustainable Agriculture and Traditional Crafts Export",
+      excerpt: "Discover how businesses in India's culturally rich regions are leveraging digital platforms to export organic fertilizers and traditional handicrafts to global markets.",
+      date: "December 31, 2025",
+      author: "Karan Dixit (dixitk941)",
+      category: "business",
+      readTime: "10 min read",
+      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=1000",
+      featured: true,
+      keywords: ["sustainable agriculture", "organic fertilizers", "marble handicrafts", "digital transformation", "export business", "traditional crafts"],
+      content: `<div class="blog-content">
+        <h1 class="text-4xl font-bold mb-6 text-gray-900">How Digital Transformation is Revolutionizing Sustainable Agriculture and Traditional Crafts Export</h1>
+        
+        <div class="mb-6 flex items-center text-gray-600">
+          <span>December 31, 2025</span>
+          <span class="mx-2">•</span>
+          <span>10 min read</span>
+          <span class="mx-2">•</span>
+          <span>Business & Technology</span>
+        </div>
+        
+        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=1000" alt="Sustainable organic farming in India" class="w-full h-64 object-cover rounded-xl mb-8 shadow-lg" />
+        
+        <p class="text-xl leading-relaxed mb-8 text-gray-700">In the heart of India's culturally rich Braj region, a quiet revolution is taking place. Traditional businesses that have operated for generations are now discovering the power of digital transformation to reach global markets. From premium organic cow dung manure for sustainable farming to exquisite marble handicrafts showcasing traditional Indian artistry, these enterprises are proving that heritage and innovation can work hand in hand.</p>
+        
+        <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl mb-8 border-l-4 border-green-500">
+          <h3 class="text-xl font-semibold mb-3 text-green-900">Key Insights:</h3>
+          <ul class="list-disc pl-6 space-y-2 text-green-800">
+            <li>Global organic fertilizer market projected to reach $15.2 billion by 2027</li>
+            <li>Indian handicraft exports growing at 12% annually</li>
+            <li>Digital platforms enabling 300% increase in international buyer reach</li>
+            <li>Sustainable products commanding 20-35% premium pricing</li>
+            <li>Traditional artisan communities finding new global markets</li>
+          </ul>
+        </div>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">The Rise of Organic Fertilizers in Global Agriculture</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">As the world increasingly embraces sustainable farming practices, organic fertilizers have emerged as a crucial component of modern agriculture. Cow dung manure, a traditional Indian farming input, is now in high demand across European, American, and Asian markets for its exceptional soil-enriching properties.</p>
+        
+        <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8 shadow-sm">
+          <h4 class="text-lg font-semibold mb-3 text-gray-900">Why Organic Cow Dung Manure?</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-green-50 p-4 rounded-lg">
+              <h5 class="font-semibold text-green-800 mb-2">Environmental Benefits</h5>
+              <ul class="text-sm text-green-700 space-y-1">
+                <li>• 100% natural and biodegradable</li>
+                <li>• Improves soil structure and water retention</li>
+                <li>• Promotes beneficial microbial activity</li>
+                <li>• Reduces chemical dependency</li>
+              </ul>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg">
+              <h5 class="font-semibold text-blue-800 mb-2">Agricultural Advantages</h5>
+              <ul class="text-sm text-blue-700 space-y-1">
+                <li>• Rich in essential nutrients (NPK)</li>
+                <li>• Slow-release fertilization</li>
+                <li>• Enhances crop yield and quality</li>
+                <li>• Ideal for organic certification</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Marble Handicrafts: Preserving Heritage Through Digital Channels</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">The Braj region has been home to master marble craftsmen for centuries. These artisans create stunning pieces that blend traditional Mughal and Rajasthani design elements with contemporary aesthetics. From intricately carved figurines to elegant home décor pieces, these handicrafts tell stories of India's rich cultural heritage.</p>
+        
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1000" alt="Traditional Indian marble handicrafts" class="w-full h-48 object-cover rounded-lg mb-6" />
+        
+        <blockquote class="border-l-4 border-indigo-500 pl-6 italic text-xl text-gray-700 my-8 bg-gray-50 p-6 rounded-r-lg">
+          "A simple website transformed our family business. What was once limited to local markets now reaches customers in 15 countries. Digital presence has given our traditional craft a global stage." — Local Artisan from Braj Region
+        </blockquote>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Case Study: Mohan G Enterprises</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">One inspiring example of this digital transformation is Mohan G Enterprises, a business rooted in the Braj region that has successfully bridged traditional commerce with modern digital marketing. By creating a professional online presence, they've been able to showcase their premium organic fertilizers and exquisite marble handicrafts to international buyers.</p>
+        
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8 rounded-xl mb-8">
+          <h3 class="text-2xl font-bold mb-4">Key Success Factors</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div>
+              <h4 class="font-semibold mb-2 text-indigo-100">Digital Strategy</h4>
+              <ul class="text-sm text-indigo-100 space-y-1">
+                <li>• Professional website showcasing products</li>
+                <li>• SEO optimization for global reach</li>
+                <li>• WhatsApp Business integration</li>
+                <li>• Multi-language product descriptions</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-2 text-indigo-100">Business Impact</h4>
+              <ul class="text-sm text-indigo-100 space-y-1">
+                <li>• 5x increase in international inquiries</li>
+                <li>• Direct B2B connections with importers</li>
+                <li>• Enhanced brand credibility</li>
+                <li>• Streamlined order management</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">How AINOR Helps Traditional Businesses Go Digital</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">At AINOR, we specialize in helping traditional businesses establish their digital presence. Our approach combines modern web development with deep understanding of traditional business models:</p>
+        
+        <div class="space-y-4 mb-8">
+          <div class="bg-white border-l-4 border-green-500 p-4 rounded-r-lg shadow-sm">
+            <h4 class="font-semibold text-green-800 mb-2">1. Custom Website Development</h4>
+            <p class="text-green-700 text-sm">We create responsive, SEO-optimized websites that showcase products beautifully while ensuring fast loading times and mobile compatibility.</p>
+          </div>
+          <div class="bg-white border-l-4 border-blue-500 p-4 rounded-r-lg shadow-sm">
+            <h4 class="font-semibold text-blue-800 mb-2">2. E-commerce Integration</h4>
+            <p class="text-blue-700 text-sm">From product catalogs to secure payment gateways, we enable seamless online transactions for both B2B and B2C customers.</p>
+          </div>
+          <div class="bg-white border-l-4 border-purple-500 p-4 rounded-r-lg shadow-sm">
+            <h4 class="font-semibold text-purple-800 mb-2">3. Digital Marketing Strategy</h4>
+            <p class="text-purple-700 text-sm">Our SEO and content marketing services help traditional businesses rank for relevant international keywords.</p>
+          </div>
+          <div class="bg-white border-l-4 border-orange-500 p-4 rounded-r-lg shadow-sm">
+            <h4 class="font-semibold text-orange-800 mb-2">4. Communication Tools</h4>
+            <p class="text-orange-700 text-sm">WhatsApp Business integration and chatbots ensure instant communication with potential buyers across time zones.</p>
+          </div>
+        </div>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">The Future of Traditional Business in the Digital Age</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">The convergence of traditional craftsmanship and digital technology represents one of the most exciting opportunities for small businesses in India. As global consumers increasingly seek authentic, sustainable, and culturally rich products, businesses that can effectively tell their story online will thrive.</p>
+        
+        <div class="bg-gray-50 p-8 rounded-xl mb-8">
+          <h3 class="text-2xl font-bold mb-4 text-gray-900">Ready to Transform Your Traditional Business?</h3>
+          <p class="mb-4 text-gray-700">Whether you're an artisan, farmer, or traditional manufacturer, AINOR can help you establish a powerful digital presence that connects you with customers worldwide.</p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors text-center">Get Free Consultation</a>
+            <a href="/portfolio" class="border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-colors text-center">View Our Projects</a>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-200 pt-8">
+          <h3 class="text-xl font-bold mb-4 text-gray-900">About the Author</h3>
+          <div class="flex items-start space-x-4">
+            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center">
+              <span class="text-indigo-600 font-bold text-lg">KD</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Karan Dixit</h4>
+              <p class="text-gray-600 text-sm mb-2">Founder & CEO at AINOR</p>
+              <p class="text-gray-700 text-sm">Karan is passionate about helping traditional businesses embrace digital transformation. With expertise in web development and digital marketing, he has helped numerous businesses from India's heartland reach global markets.</p>
+            </div>
+          </div>
+        </div>
+      </div>`
+    },
    {
   id: 8,
   slug: "ai-powered-web-development-2025-trends",

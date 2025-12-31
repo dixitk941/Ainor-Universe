@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import Section from '../layout/Section';
 import Button from '../ui/Button';
+import heroImage from '../../assets/hero-image.jpg';
 
 const HeroSection = () => {
   const [ref, inView] = useInView({
@@ -226,19 +227,26 @@ const HeroSection = () => {
         
           <motion.p 
             variants={itemVariants}
-            className="inline-block px-4 py-1 mb-6 bg-blue-50 text-blue-600 font-semibold rounded-full border border-blue-100 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-semibold rounded-full border border-blue-100 shadow-sm"
           >
+            <span className="flex items-center gap-1">
+              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span className="text-green-600 text-xs">MSME Registered</span>
+            </span>
+            <span className="w-px h-4 bg-blue-200"></span>
             Digital Solutions for Modern Businesses
           </motion.p>
           
           <motion.h1 
             variants={itemVariants}
-            className="text-3xl md:text-3xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight tracking-tight"
           >
             We Build
             <span className="block mt-2">
               <motion.span 
-                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 inline-block"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 inline-block"
                 animate={{
                   backgroundPosition: ['0% center', '100% center', '0% center'],
                 }}
@@ -268,11 +276,11 @@ const HeroSection = () => {
           
           <motion.p 
             variants={itemVariants}
-            className="text-lg text-gray-600 mb-8 leading-relaxed"
+            className="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg"
           >
             Transform your digital presence with our expert team. We deliver 
             <motion.span 
-              className="font-medium text-blue-800 mx-1"
+              className="font-semibold text-blue-700 mx-1"
               animate={{ opacity: [1, 0.8, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -349,14 +357,10 @@ const HeroSection = () => {
               </div>
               
               <img 
-                src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" 
-                alt="Digital Solutions Visualization" 
-                className="w-full h-[220px] object-cover"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70";
-                }}            
+                src={heroImage} 
+                alt="AINOR Digital Solutions Team" 
+                className="w-full h-[220px] object-cover object-center"
+                loading="lazy"            
               />
               
               {/* Overlay gradient for better text visibility */}
@@ -437,18 +441,14 @@ const HeroSection = () => {
               </svg>
             </div>
             
-            {/* Main image with fallback */}            
+            {/* Main image - Team Photo */}            
             <motion.img 
-              src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-              alt="Digital Solutions Visualization" 
-              className="w-full h-[450px] object-cover relative z-0 transition-all duration-700"
+              src={heroImage} 
+              alt="AINOR Digital Solutions Team" 
+              className="w-full h-[450px] object-cover object-center relative z-0 transition-all duration-700"
               loading="lazy"
               animate={{ scale: hovered ? 1.05 : 1 }}
-              transition={{ duration: 0.5 }}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80";
-              }}            
+              transition={{ duration: 0.5 }}            
             />
             
             {/* Overlay gradient for better text visibility if needed */}
