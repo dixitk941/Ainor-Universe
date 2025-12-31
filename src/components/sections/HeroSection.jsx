@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Typewriter from 'typewriter-effect';
 import { Link } from 'react-router-dom';
+import FloatingElements from '../ui/FloatingElements';
 
 // Color palette:
 // Dark: #1a1a1a (text)
@@ -37,6 +38,8 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen pt-32 pb-20 overflow-hidden">
+      {/* Floating 3D Elements - Tasks variant */}
+      <FloatingElements variant="tasks" />
       {/* Decorative connecting arrows for hero */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Rotating connection arrows - top right */}

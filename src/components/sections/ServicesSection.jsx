@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaLaptopCode, FaMobileAlt, FaShoppingCart, FaSearch, FaCode } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import FloatingElements from '../ui/FloatingElements';
 
 // Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
@@ -72,6 +73,9 @@ const ServicesSection = () => {
 
   return (
     <section id="services" className="py-20 md:py-32 relative overflow-hidden">
+      {/* Floating 3D Elements - Services variant */}
+      <FloatingElements variant="services" />
+      
       {/* Decorative connecting arrows */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Vertical connecting arrows - services flow */}

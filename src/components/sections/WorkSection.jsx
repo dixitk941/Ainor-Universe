@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import FloatingElements from '../ui/FloatingElements';
 
 // Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
@@ -68,6 +69,9 @@ const WorkSection = () => {
 
   return (
     <section id="work" className="py-20 md:py-32 relative overflow-hidden">
+      {/* Floating 3D Elements - Portfolio variant */}
+      <FloatingElements variant="portfolio" />
+      
       {/* Decorative connecting arrows - project flow */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Project connection network */}

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaRupeeSign, FaServer, FaSync, FaHeadset, FaChartLine, FaRocket } from 'react-icons/fa';
 import { BsStars } from 'react-icons/bs';
+import FloatingElements from '../ui/FloatingElements';
 
 // Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
@@ -80,6 +81,9 @@ const SubscriptionBenefitsSection = () => {
 
   return (
     <section className="py-20 md:py-32 relative overflow-hidden">
+      {/* Floating 3D Elements - Tasks variant */}
+      <FloatingElements variant="tasks" />
+      
       {/* Decorative connecting arrows - showing subscription cycle */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Circular arrows - subscription cycle visual */}
