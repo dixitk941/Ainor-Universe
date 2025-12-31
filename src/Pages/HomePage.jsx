@@ -3,6 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 // SEO Component
 import SEOHead from '../components/seo/SEOHead';
 import ServiceSchema from '../components/seo/ServiceSchema';
+import SEOText from '../components/seo/SEOText';
 
 // UI Components
 import TechLinesBackground from '../components/ui/TechLinesBackground';
@@ -15,6 +16,7 @@ import WorkSection from '../components/sections/WorkSection';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
 import ContactSection from '../components/sections/ContactSection';
 import FeaturesSection from '../components/sections/FeaturesSection';
+import SubscriptionBenefitsSection from '../components/sections/SubscriptionBenefitsSection';
 
 const HomePage = () => {
   const [isDesktop, setIsDesktop] = useState(false);
@@ -82,6 +84,7 @@ const HomePage = () => {
         
         {/* Optimized page sections - load in sequence */}
         <HeroSection />
+        <SubscriptionBenefitsSection />
         <ServicesSection />
         <FeaturesSection />
         <WorkSection />
@@ -89,6 +92,7 @@ const HomePage = () => {
         <div id="testimonials">
           <TestimonialsSection />
         </div>
+        <SEOText page="home" />
         <ContactSection />
       </div>
     </>

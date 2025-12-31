@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -132,6 +133,9 @@ const AiServicesPage = () => (
           </div>
         </Container>
       </Section>
+      
+      {/* SEO Content Section */}
+      <SEOText page="services" />
     </div>
   </>
 );

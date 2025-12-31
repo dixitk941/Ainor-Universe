@@ -1,323 +1,471 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaCheck, FaTimes, FaRocket, FaStar, FaCrown, FaInfoCircle, FaDownload } from 'react-icons/fa';
+import { IoSparkles, IoShieldCheckmark, IoRocket, IoHeadset } from 'react-icons/io5';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
-import Card from '../components/ui/Card';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 
 const PricingPage = () => {
-  const [billingCycle, setBillingCycle] = useState('project');
+  const [billingCycle, setBillingCycle] = useState('subscription'); // 'subscription' or 'onetime'
   const [selectedService, setSelectedService] = useState('web');
 
   // Service types
   const services = [
-    { id: 'web', name: 'Web Development' },
-    { id: 'mobile', name: 'Mobile Development' },
-    { id: 'design', name: 'UI/UX Design' },
-    { id: 'ecommerce', name: 'E-Commerce' },
-    { id: 'custom', name: 'Custom Software' },
+    { id: 'web', name: 'Web Development', icon: '🌐' },
+    { id: 'mobile', name: 'Mobile Apps', icon: '📱' },
+    { id: 'ecommerce', name: 'E-Commerce', icon: '🛒' },
+    { id: 'custom', name: 'Custom Software', icon: '⚙️' },
+    { id: 'design', name: 'UI/UX Design', icon: '🎨' },
   ];
 
-  // Pricing data with Indian pricing
+  // Comprehensive pricing with one-time and subscription models (with setup fees)
   const pricingPlans = {
     web: [
       {
-        id: 'basic',
-        name: 'Starter Website',
-        description: 'Perfect for small businesses just getting started online',
-        projectPrice: 15000,
-        maintenancePrice: 2000,
+        id: 'starter',
+        name: 'Starter',
+        tagline: 'For small businesses',
+        icon: <FaRocket className="w-6 h-6" />,
+        oneTime: {
+          price: 15000,
+          deliveryDays: 7,
+        },
+        subscription: {
+          setupFee: 5000,
+          monthly: 2499,
+          includes: ['Hosting', 'SSL Certificate', 'Basic Support', '2 Content Updates/month']
+        },
         features: [
-          'Responsive website design',
-          'Up to 5 pages',
-          'Contact form integration',
-          'Basic SEO setup',
-          'Mobile-friendly design',
-          '1 round of revisions',
-          '30 days of support',
-          'Basic CMS integration'
+          { name: 'Responsive website (up to 5 pages)', included: true },
+          { name: 'Mobile-friendly design', included: true },
+          { name: 'Contact form', included: true },
+          { name: 'Basic SEO setup', included: true },
+          { name: 'Social media links', included: true },
+          { name: 'Google Analytics', included: true },
+          { name: 'Blog integration', included: false },
+          { name: 'Custom animations', included: false },
+          { name: 'E-commerce features', included: false },
+          { name: 'Priority support', included: false },
         ],
-        popular: false
+        popular: false,
+        color: 'blue'
       },
       {
-        id: 'pro',
-        name: 'Professional Website',
-        description: 'Ideal for growing businesses with specific needs',
-        projectPrice: 35000,
-        maintenancePrice: 4000,
+        id: 'professional',
+        name: 'Professional',
+        tagline: 'Most popular choice',
+        icon: <FaStar className="w-6 h-6" />,
+        oneTime: {
+          price: 35000,
+          deliveryDays: 14,
+        },
+        subscription: {
+          setupFee: 10000,
+          monthly: 4999,
+          includes: ['Premium Hosting', 'SSL Certificate', 'Priority Support', '5 Content Updates/month', 'Monthly Backup', 'Performance Monitoring']
+        },
         features: [
-          'Everything in Starter, plus:',
-          'Up to 10 pages',
-          'Advanced SEO optimization',
-          'Blog setup & integration',
-          'Google Analytics setup',
-          'Performance optimization',
-          '2 rounds of revisions',
-          '60 days of support',
-          'Social media integration',
-          'Newsletter integration'
+          { name: 'Responsive website (up to 10 pages)', included: true },
+          { name: 'Mobile-friendly design', included: true },
+          { name: 'Advanced contact forms', included: true },
+          { name: 'Advanced SEO optimization', included: true },
+          { name: 'Social media integration', included: true },
+          { name: 'Google Analytics + Search Console', included: true },
+          { name: 'Blog with CMS', included: true },
+          { name: 'Custom animations', included: true },
+          { name: 'E-commerce features', included: false },
+          { name: 'Priority support', included: true },
         ],
-        popular: true
+        popular: true,
+        color: 'indigo'
       },
       {
         id: 'enterprise',
-        name: 'Enterprise Website',
-        description: 'For established businesses requiring advanced solutions',
-        projectPrice: 65000,
-        maintenancePrice: 8000,
+        name: 'Enterprise',
+        tagline: 'For large businesses',
+        icon: <FaCrown className="w-6 h-6" />,
+        oneTime: {
+          price: 75000,
+          deliveryDays: 21,
+        },
+        subscription: {
+          setupFee: 25000,
+          monthly: 9999,
+          includes: ['Enterprise Hosting', 'SSL Certificate', '24/7 Support', 'Unlimited Updates', 'Daily Backup', 'Security Monitoring', 'CDN', 'Dedicated Manager']
+        },
         features: [
-          'Everything in Professional, plus:',
-          'Unlimited pages',
-          'Custom animations & interactions',
-          'Advanced user authentication',
-          'Custom database integration',
-          'Third-party API integration',
-          'E-commerce functionality',
-          'Unlimited revisions',
-          '90 days of support',
-          'Performance monitoring',
-          'Security hardening'
+          { name: 'Unlimited pages', included: true },
+          { name: 'Mobile-friendly design', included: true },
+          { name: 'Advanced forms + CRM integration', included: true },
+          { name: 'Enterprise SEO suite', included: true },
+          { name: 'Full social media integration', included: true },
+          { name: 'Advanced analytics dashboard', included: true },
+          { name: 'Blog + Newsletter system', included: true },
+          { name: 'Premium animations & interactions', included: true },
+          { name: 'E-commerce ready', included: true },
+          { name: '24/7 Priority support', included: true },
         ],
-        popular: false
+        popular: false,
+        color: 'purple'
       }
     ],
     mobile: [
       {
-        id: 'basic',
+        id: 'starter',
         name: 'Starter App',
-        description: 'Entry-level mobile app with essential features',
-        projectPrice: 45000,
-        maintenancePrice: 6000,
+        tagline: 'Single platform',
+        icon: <FaRocket className="w-6 h-6" />,
+        oneTime: {
+          price: 50000,
+          deliveryDays: 30,
+        },
+        subscription: {
+          setupFee: 15000,
+          monthly: 4999,
+          includes: ['App Store Management', 'Bug Fixes', 'Basic Support', '2 Updates/month']
+        },
         features: [
-          'Single platform (iOS or Android)',
-          'Basic UI design',
-          'Up to 5 screens',
-          'User authentication',
-          'Push notifications',
-          'Offline functionality',
-          '30 days of support',
-          'App store submission'
+          { name: 'Single platform (iOS or Android)', included: true },
+          { name: 'Up to 8 screens', included: true },
+          { name: 'User authentication', included: true },
+          { name: 'Push notifications', included: true },
+          { name: 'Basic analytics', included: true },
+          { name: 'App store submission', included: true },
+          { name: 'Cross-platform', included: false },
+          { name: 'In-app purchases', included: false },
+          { name: 'Admin dashboard', included: false },
+          { name: 'Real-time features', included: false },
         ],
-        popular: false
+        popular: false,
+        color: 'blue'
       },
       {
-        id: 'pro',
+        id: 'professional',
         name: 'Professional App',
-        description: 'Feature-rich app for growing user bases',
-        projectPrice: 85000,
-        maintenancePrice: 12000,
+        tagline: 'Cross-platform',
+        icon: <FaStar className="w-6 h-6" />,
+        oneTime: {
+          price: 95000,
+          deliveryDays: 45,
+        },
+        subscription: {
+          setupFee: 30000,
+          monthly: 8999,
+          includes: ['Both App Stores', 'Bug Fixes', 'Priority Support', '5 Updates/month', 'Performance Monitoring', 'Crash Analytics']
+        },
         features: [
-          'Cross-platform (iOS & Android)',
-          'Custom UI/UX design',
-          'Up to 10 screens',
-          'Social media integration',
-          'In-app purchases',
-          'Analytics integration',
-          'Cloud synchronization',
-          'Admin dashboard',
-          '60 days of support',
-          'App store optimization'
+          { name: 'Cross-platform (iOS & Android)', included: true },
+          { name: 'Up to 15 screens', included: true },
+          { name: 'Social login + auth', included: true },
+          { name: 'Advanced notifications', included: true },
+          { name: 'Full analytics suite', included: true },
+          { name: 'App store optimization', included: true },
+          { name: 'Cross-platform', included: true },
+          { name: 'In-app purchases', included: true },
+          { name: 'Admin dashboard', included: true },
+          { name: 'Real-time features', included: false },
         ],
-        popular: true
+        popular: true,
+        color: 'indigo'
       },
       {
         id: 'enterprise',
         name: 'Enterprise App',
-        description: 'Advanced app with complex functionality',
-        projectPrice: 150000,
-        maintenancePrice: 20000,
+        tagline: 'Full-featured',
+        icon: <FaCrown className="w-6 h-6" />,
+        oneTime: {
+          price: 175000,
+          deliveryDays: 60,
+        },
+        subscription: {
+          setupFee: 50000,
+          monthly: 14999,
+          includes: ['Both App Stores', '24/7 Support', 'Unlimited Updates', 'Server Management', 'Security Audits', 'Dedicated Team']
+        },
         features: [
-          'Everything in Professional, plus:',
-          'Unlimited screens',
-          'Third-party API integration',
-          'Complex user roles & permissions',
-          'Real-time data processing',
-          'Advanced security features',
-          'Performance optimization',
-          'Custom animations & interactions',
-          '90 days of support',
-          'Maintenance plan',
-          'Priority support'
+          { name: 'Cross-platform (iOS & Android)', included: true },
+          { name: 'Unlimited screens', included: true },
+          { name: 'Enterprise auth + SSO', included: true },
+          { name: 'Rich notifications + scheduling', included: true },
+          { name: 'Custom analytics dashboard', included: true },
+          { name: 'Full ASO + marketing', included: true },
+          { name: 'Cross-platform', included: true },
+          { name: 'Monetization features', included: true },
+          { name: 'Full admin panel', included: true },
+          { name: 'Real-time + offline sync', included: true },
         ],
-        popular: false
-      }
-    ],
-    design: [
-      {
-        id: 'basic',
-        name: 'Essential Design',
-        description: 'Fundamental design services for startups',
-        projectPrice: 12000,
-        maintenancePrice: 1500,
-        features: [
-          'Logo design',
-          'Basic brand guidelines',
-          'Business card design',
-          'Letterhead design',
-          '2 design concepts',
-          '2 rounds of revisions',
-          'Final files in multiple formats',
-          '30 days of support'
-        ],
-        popular: false
-      },
-      {
-        id: 'pro',
-        name: 'Professional Design',
-        description: 'Complete branding package for businesses',
-        projectPrice: 25000,
-        maintenancePrice: 3000,
-        features: [
-          'Everything in Essential, plus:',
-          'Complete brand identity',
-          'Brand style guide',
-          'Marketing materials design',
-          'Social media templates',
-          'Website mockups',
-          '5 design concepts',
-          '3 rounds of revisions',
-          '60 days of support'
-        ],
-        popular: true
-      },
-      {
-        id: 'enterprise',
-        name: 'Enterprise Design',
-        description: 'Comprehensive design solution for large organizations',
-        projectPrice: 45000,
-        maintenancePrice: 5000,
-        features: [
-          'Everything in Professional, plus:',
-          'Multi-brand management',
-          'Custom illustration',
-          'Packaging design',
-          'Exhibition materials',
-          'Digital asset management',
-          'Unlimited design concepts',
-          'Unlimited revisions',
-          '90 days of support',
-          'Dedicated design team'
-        ],
-        popular: false
+        popular: false,
+        color: 'purple'
       }
     ],
     ecommerce: [
       {
-        id: 'basic',
+        id: 'starter',
         name: 'Starter Store',
-        description: 'Basic online store for small businesses',
-        projectPrice: 25000,
-        maintenancePrice: 3500,
+        tagline: 'Up to 100 products',
+        icon: <FaRocket className="w-6 h-6" />,
+        oneTime: {
+          price: 30000,
+          deliveryDays: 14,
+        },
+        subscription: {
+          setupFee: 10000,
+          monthly: 3999,
+          includes: ['E-commerce Hosting', 'SSL', 'Payment Gateway', '50 Products', 'Basic Support', 'Order Management']
+        },
         features: [
-          'Up to 50 products',
-          'Basic store design',
-          'Payment gateway integration',
-          'Inventory management',
-          'Order management',
-          'Customer accounts',
-          'Basic SEO setup',
-          '30 days of support'
+          { name: 'Up to 100 products', included: true },
+          { name: 'Secure payment gateway', included: true },
+          { name: 'Order management', included: true },
+          { name: 'Inventory tracking', included: true },
+          { name: 'Basic shipping setup', included: true },
+          { name: 'Customer accounts', included: true },
+          { name: 'Multi-vendor support', included: false },
+          { name: 'Advanced analytics', included: false },
+          { name: 'Mobile app', included: false },
+          { name: 'Marketing automation', included: false },
         ],
-        popular: false
+        popular: false,
+        color: 'blue'
       },
       {
-        id: 'pro',
+        id: 'professional',
         name: 'Professional Store',
-        description: 'Feature-rich store for growing businesses',
-        projectPrice: 50000,
-        maintenancePrice: 7000,
+        tagline: 'Up to 1000 products',
+        icon: <FaStar className="w-6 h-6" />,
+        oneTime: {
+          price: 65000,
+          deliveryDays: 21,
+        },
+        subscription: {
+          setupFee: 20000,
+          monthly: 7999,
+          includes: ['Premium Hosting', 'SSL', 'Multi-Gateway', '500 Products', 'Priority Support', 'Advanced Analytics', 'Marketing Tools']
+        },
         features: [
-          'Up to 500 products',
-          'Custom store design',
-          'Multi-payment options',
-          'Advanced inventory management',
-          'Shipping calculator',
-          'Discount & coupon system',
-          'Analytics & reporting',
-          'Mobile app integration',
-          '60 days of support'
+          { name: 'Up to 1000 products', included: true },
+          { name: 'Multi-payment options', included: true },
+          { name: 'Advanced order system', included: true },
+          { name: 'Real-time inventory', included: true },
+          { name: 'Advanced shipping', included: true },
+          { name: 'Customer rewards', included: true },
+          { name: 'Multi-vendor support', included: false },
+          { name: 'Advanced analytics', included: true },
+          { name: 'Mobile app', included: false },
+          { name: 'Marketing automation', included: true },
         ],
-        popular: true
+        popular: true,
+        color: 'indigo'
       },
       {
         id: 'enterprise',
         name: 'Enterprise Store',
-        description: 'Advanced e-commerce solution for large businesses',
-        projectPrice: 95000,
-        maintenancePrice: 15000,
+        tagline: 'Unlimited scale',
+        icon: <FaCrown className="w-6 h-6" />,
+        oneTime: {
+          price: 125000,
+          deliveryDays: 45,
+        },
+        subscription: {
+          setupFee: 40000,
+          monthly: 14999,
+          includes: ['Enterprise Hosting', 'SSL', 'All Gateways', 'Unlimited Products', '24/7 Support', 'Full Analytics', 'All Integrations']
+        },
         features: [
-          'Unlimited products',
-          'Custom functionality',
-          'Multi-vendor support',
-          'Advanced analytics',
-          'Custom integrations',
-          'Multi-language support',
-          'Advanced security',
-          'Dedicated support team',
-          '90 days of support',
-          'Performance optimization'
+          { name: 'Unlimited products', included: true },
+          { name: 'All payment gateways', included: true },
+          { name: 'Enterprise order management', included: true },
+          { name: 'Multi-warehouse inventory', included: true },
+          { name: 'Global shipping + tax', included: true },
+          { name: 'Loyalty + affiliate program', included: true },
+          { name: 'Multi-vendor marketplace', included: true },
+          { name: 'Custom analytics', included: true },
+          { name: 'Mobile app included', included: true },
+          { name: 'Full automation suite', included: true },
         ],
-        popular: false
+        popular: false,
+        color: 'purple'
       }
     ],
     custom: [
       {
-        id: 'basic',
+        id: 'starter',
         name: 'Starter Solution',
-        description: 'Simple custom software for specific needs',
-        projectPrice: 35000,
-        maintenancePrice: 5000,
+        tagline: 'Basic automation',
+        icon: <FaRocket className="w-6 h-6" />,
+        oneTime: {
+          price: 45000,
+          deliveryDays: 21,
+        },
+        subscription: {
+          setupFee: 15000,
+          monthly: 5999,
+          includes: ['Cloud Hosting', 'Bug Fixes', 'Basic Support', 'Security Updates', 'Database Backup']
+        },
         features: [
-          'Basic custom functionality',
-          'Simple user interface',
-          'Database integration',
-          'User authentication',
-          'Basic reporting',
-          'Documentation',
-          '30 days of support',
-          'Source code delivery'
+          { name: 'Custom functionality', included: true },
+          { name: 'Database integration', included: true },
+          { name: 'User management', included: true },
+          { name: 'Basic reporting', included: true },
+          { name: 'API documentation', included: true },
+          { name: 'Source code', included: true },
+          { name: 'Third-party integrations', included: false },
+          { name: 'Advanced workflows', included: false },
+          { name: 'Scalable architecture', included: false },
+          { name: 'Dedicated support', included: false },
         ],
-        popular: false
+        popular: false,
+        color: 'blue'
       },
       {
-        id: 'pro',
+        id: 'professional',
         name: 'Professional Solution',
-        description: 'Advanced custom software for business automation',
-        projectPrice: 75000,
-        maintenancePrice: 10000,
+        tagline: 'Full automation',
+        icon: <FaStar className="w-6 h-6" />,
+        oneTime: {
+          price: 95000,
+          deliveryDays: 45,
+        },
+        subscription: {
+          setupFee: 30000,
+          monthly: 11999,
+          includes: ['Premium Hosting', 'Priority Support', 'All Updates', 'Security Monitoring', 'Performance Tuning', 'API Maintenance']
+        },
         features: [
-          'Everything in Starter, plus:',
-          'Complex business logic',
-          'Advanced user roles',
-          'API integrations',
-          'Advanced reporting & analytics',
-          'Automated workflows',
-          'Admin dashboard',
-          '60 days of support',
-          'Training sessions'
+          { name: 'Complex custom logic', included: true },
+          { name: 'Advanced database', included: true },
+          { name: 'Role-based access', included: true },
+          { name: 'Advanced analytics', included: true },
+          { name: 'Full documentation', included: true },
+          { name: 'Source code + training', included: true },
+          { name: 'Third-party integrations', included: true },
+          { name: 'Advanced workflows', included: true },
+          { name: 'Scalable architecture', included: false },
+          { name: 'Dedicated support', included: true },
         ],
-        popular: true
+        popular: true,
+        color: 'indigo'
       },
       {
         id: 'enterprise',
         name: 'Enterprise Solution',
-        description: 'Comprehensive custom software for large organizations',
-        projectPrice: 150000,
-        maintenancePrice: 25000,
+        tagline: 'Mission critical',
+        icon: <FaCrown className="w-6 h-6" />,
+        oneTime: {
+          price: 200000,
+          deliveryDays: 90,
+        },
+        subscription: {
+          setupFee: 75000,
+          monthly: 24999,
+          includes: ['Enterprise Hosting', '24/7 Support', 'SLA Guarantee', 'Dedicated Team', 'Custom Integrations', 'Compliance Support']
+        },
         features: [
-          'Everything in Professional, plus:',
-          'Enterprise-grade architecture',
-          'Scalable infrastructure',
-          'Advanced security features',
-          'Multi-tenant support',
-          'Custom integrations',
-          'Performance optimization',
-          'Dedicated project manager',
-          '90 days of support',
-          'Ongoing maintenance'
+          { name: 'Enterprise-grade system', included: true },
+          { name: 'Multi-database architecture', included: true },
+          { name: 'Enterprise security', included: true },
+          { name: 'Custom analytics suite', included: true },
+          { name: 'Full documentation + training', included: true },
+          { name: 'Source code + IP transfer', included: true },
+          { name: 'Unlimited integrations', included: true },
+          { name: 'AI/ML capabilities', included: true },
+          { name: 'Auto-scaling architecture', included: true },
+          { name: '24/7 dedicated team', included: true },
         ],
-        popular: false
+        popular: false,
+        color: 'purple'
+      }
+    ],
+    design: [
+      {
+        id: 'starter',
+        name: 'Essential Design',
+        tagline: 'Brand basics',
+        icon: <FaRocket className="w-6 h-6" />,
+        oneTime: {
+          price: 12000,
+          deliveryDays: 7,
+        },
+        subscription: {
+          setupFee: 3000,
+          monthly: 1999,
+          includes: ['2 Design Requests/month', 'Logo Updates', 'Social Media Graphics', 'Basic Support']
+        },
+        features: [
+          { name: 'Logo design (3 concepts)', included: true },
+          { name: 'Business card design', included: true },
+          { name: 'Brand color palette', included: true },
+          { name: 'Typography selection', included: true },
+          { name: 'Social media kit', included: true },
+          { name: 'Source files (AI/PSD)', included: true },
+          { name: 'Brand guidelines', included: false },
+          { name: 'Marketing materials', included: false },
+          { name: 'Website mockups', included: false },
+          { name: 'Unlimited revisions', included: false },
+        ],
+        popular: false,
+        color: 'blue'
+      },
+      {
+        id: 'professional',
+        name: 'Professional Design',
+        tagline: 'Complete branding',
+        icon: <FaStar className="w-6 h-6" />,
+        oneTime: {
+          price: 28000,
+          deliveryDays: 14,
+        },
+        subscription: {
+          setupFee: 8000,
+          monthly: 3999,
+          includes: ['5 Design Requests/month', 'All Brand Materials', 'Priority Support', 'Social Media Management']
+        },
+        features: [
+          { name: 'Logo design (5 concepts)', included: true },
+          { name: 'Complete stationery', included: true },
+          { name: 'Full brand identity', included: true },
+          { name: 'Custom typography', included: true },
+          { name: 'Social media kit + templates', included: true },
+          { name: 'All source files', included: true },
+          { name: 'Brand guidelines book', included: true },
+          { name: 'Marketing materials', included: true },
+          { name: 'Website mockups', included: true },
+          { name: 'Unlimited revisions', included: false },
+        ],
+        popular: true,
+        color: 'indigo'
+      },
+      {
+        id: 'enterprise',
+        name: 'Enterprise Design',
+        tagline: 'Full creative suite',
+        icon: <FaCrown className="w-6 h-6" />,
+        oneTime: {
+          price: 55000,
+          deliveryDays: 21,
+        },
+        subscription: {
+          setupFee: 15000,
+          monthly: 7999,
+          includes: ['Unlimited Design Requests', 'Dedicated Designer', 'Same-Day Support', 'Video + Animation']
+        },
+        features: [
+          { name: 'Unlimited logo concepts', included: true },
+          { name: 'Full brand suite', included: true },
+          { name: 'Multi-brand management', included: true },
+          { name: 'Custom illustrations', included: true },
+          { name: 'Video + motion graphics', included: true },
+          { name: 'Complete asset library', included: true },
+          { name: 'Comprehensive guidelines', included: true },
+          { name: 'All marketing materials', included: true },
+          { name: 'Full website design', included: true },
+          { name: 'Unlimited revisions', included: true },
+        ],
+        popular: false,
+        color: 'purple'
       }
     ]
   };
@@ -333,12 +481,20 @@ const PricingPage = () => {
 
   const currentPlans = pricingPlans[selectedService];
 
+  // Subscription benefits
+  const subscriptionBenefits = [
+    { icon: <IoShieldCheckmark className="w-6 h-6" />, title: 'Security Updates', desc: 'Regular security patches and updates' },
+    { icon: <IoRocket className="w-6 h-6" />, title: 'Performance', desc: 'Continuous optimization and monitoring' },
+    { icon: <IoHeadset className="w-6 h-6" />, title: 'Support', desc: 'Dedicated technical support team' },
+    { icon: <IoSparkles className="w-6 h-6" />, title: 'Updates', desc: 'Regular feature and content updates' },
+  ];
+
   return (
     <>
       <SEOHead 
-        title="AINOR Pricing - Affordable Web Development & Digital Solutions in India"
-        description="Transparent pricing for web development, mobile apps, and digital solutions. Starting from ₹15,000 for basic websites. Custom quotes available for enterprise solutions."
-        keywords="AINOR pricing, web development cost India, mobile app development price, digital solutions pricing, affordable web development"
+        title="AINOR Pricing - Affordable Web Development & Subscription Plans India"
+        description="Transparent pricing for web development, mobile apps, and digital solutions. One-time projects starting from ₹12,000 or monthly subscriptions from ₹1,999. Get free quote today!"
+        keywords="AINOR pricing, web development cost India, mobile app development price, monthly subscription, digital solutions pricing, affordable web development"
         canonicalUrl="https://myainor.com/pricing"
         structuredData={{
           "@context": "https://schema.org",
@@ -347,128 +503,309 @@ const PricingPage = () => {
           "description": "Transparent pricing for professional web development and digital solutions in India.",
           "url": "https://myainor.com/pricing"
         }}
-      />      <div className="min-h-screen bg-white text-gray-900">
+      />
+      
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-900">
         
         {/* Header Section */}
-        <Section className="pb-16 relative bg-gradient-to-b from-blue-50 to-white">
+        <Section className="pt-24 pb-12 relative overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
+            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-100 rounded-full blur-3xl opacity-50"></div>
+          </div>
+          
           <Container>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center max-w-4xl mx-auto px-4"
+              className="text-center max-w-4xl mx-auto px-4 relative z-10"
             >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring" }}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200 rounded-full px-4 py-2 mb-6"
+              >
+                <IoSparkles className="text-blue-600" />
+                <span className="text-sm font-medium text-blue-700">Transparent Pricing • No Hidden Costs</span>
+              </motion.div>
+              
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
-                Transparent <span className="text-blue-600">Pricing</span>
+                Simple, <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Honest</span> Pricing
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-8">
-                Choose the perfect plan for your business needs. All prices in Indian Rupees (₹)
+              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Choose between one-time project pricing or flexible monthly subscriptions. 
+                All prices in Indian Rupees (₹)
               </p>
-              <div className="inline-flex items-center bg-gray-100 rounded-full p-2 mb-8">
+              
+              {/* Download PDF Button */}
+              <a 
+                href="/assets/AINOR-Pricing-Guide-2025.html" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gray-900 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors mb-8"
+              >
+                <FaDownload className="w-4 h-4" />
+                Download Complete Pricing Guide
+              </a>
+              
+              {/* Trust Line */}
+              <p className="text-sm text-gray-500 mb-6">Trusted by startups & growing businesses across India 🇮🇳</p>
+              
+              {/* Billing Toggle - Subscription First */}
+              <div className="inline-flex items-center bg-white rounded-2xl p-2 shadow-lg border border-gray-100">
                 <button
-                  onClick={() => setBillingCycle('project')}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
-                    billingCycle === 'project'
-                      ? 'bg-blue-600 text-white shadow-md'
+                  onClick={() => setBillingCycle('subscription')}
+                  className={`px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+                    billingCycle === 'subscription'
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  Project-based
+                  <span className="text-xs">🔥</span>
+                  Monthly Subscription
                 </button>
                 <button
-                  onClick={() => setBillingCycle('maintenance')}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
-                    billingCycle === 'maintenance'
-                      ? 'bg-blue-600 text-white shadow-md'
+                  onClick={() => setBillingCycle('onetime')}
+                  className={`px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                    billingCycle === 'onetime'
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  Monthly Maintenance
+                  One-Time Project
                 </button>
               </div>
             </motion.div>
           </Container>
         </Section>
 
-        {/* Service Selection */}
-        <Section className="py-16">
+        {/* Service Selection Pills */}
+        <Section className="py-8">
           <Container>
-            <div className="flex flex-wrap justify-center gap-4 mb-12 px-4">
-              {services.map((service) => (
-                <button
+            <div className="flex flex-wrap justify-center gap-3 px-4">
+              {services.map((service, index) => (
+                <motion.button
                   key={service.id}
-                  onClick={() => setSelectedService(service.id)}
-                  className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
-                    selectedService === service.id
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {service.name}
-                </button>
-              ))}
-            </div>
-
-            {/* Pricing Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
-              {currentPlans.map((plan, index) => (
-                <motion.div
-                  key={plan.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative"
+                  transition={{ delay: index * 0.05 }}
+                  onClick={() => setSelectedService(service.id)}
+                  className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
+                    selectedService === service.id
+                      ? 'bg-gray-900 text-white shadow-lg scale-105'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 hover:border-gray-300'
+                  }`}
                 >
-                  {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-medium">
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
-                  
-                  <Card className={`p-8 h-full ${plan.popular ? 'ring-2 ring-blue-500 scale-105' : ''}`}>
-                    <div className="text-center mb-8">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                      <p className="text-gray-600 mb-6">{plan.description}</p>
-                      
-                      <div className="mb-6">
-                        <span className="text-4xl font-bold text-gray-900">
-                          {billingCycle === 'project' 
-                            ? formatPrice(plan.projectPrice)
-                            : formatPrice(plan.maintenancePrice)
-                          }
-                        </span>
-                        <span className="text-gray-600 ml-2">
-                          {billingCycle === 'project' ? 'one-time' : '/month'}
-                        </span>
-                      </div>
-                    </div>
-
-                    <ul className="space-y-4 mb-8">
-                      {plan.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5 mr-3">
-                            <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
-                          </div>
-                          <span className="text-gray-700">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <Button 
-                      href="/contact" 
-                      variant={plan.popular ? "primary" : "outline"}
-                      className="w-full"
-                    >
-                      Get Started
-                    </Button>
-                  </Card>
-                </motion.div>
+                  <span>{service.icon}</span>
+                  {service.name}
+                </motion.button>
               ))}
             </div>
+          </Container>
+        </Section>
+
+        {/* Pricing Cards */}
+        <Section className="py-12">
+          <Container>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+              <AnimatePresence mode="wait">
+                {currentPlans.map((plan, index) => (
+                  <motion.div
+                    key={`${selectedService}-${plan.id}`}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -30 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="relative"
+                  >
+                    {plan.popular && (
+                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-1.5 rounded-full text-sm font-semibold shadow-lg">
+                          ⭐ Most Popular
+                        </span>
+                      </div>
+                    )}
+                    
+                    <div className={`bg-white rounded-3xl p-8 h-full shadow-xl border-2 transition-all duration-300 hover:shadow-2xl ${
+                      plan.popular 
+                        ? 'border-blue-500 scale-[1.02]' 
+                        : 'border-gray-100 hover:border-gray-200'
+                    }`}>
+                      {/* Plan Header */}
+                      <div className="text-center mb-8">
+                        <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4 ${
+                          plan.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+                          plan.color === 'indigo' ? 'bg-indigo-100 text-indigo-600' :
+                          'bg-purple-100 text-purple-600'
+                        }`}>
+                          {plan.icon}
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-1">{plan.name}</h3>
+                        <p className="text-gray-500 text-sm">{plan.tagline}</p>
+                      </div>
+                      
+                      {/* Price Display */}
+                      <div className="text-center mb-8">
+                        {billingCycle === 'onetime' ? (
+                          <>
+                            <div className="flex items-baseline justify-center gap-1">
+                              <span className="text-4xl font-bold text-gray-900">
+                                {formatPrice(plan.oneTime.price)}
+                              </span>
+                            </div>
+                            <p className="text-gray-500 text-sm mt-1">one-time payment</p>
+                            <div className="mt-3 inline-flex items-center gap-1.5 bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
+                              <span>🚀</span> Delivery in {plan.oneTime.deliveryDays} days
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="flex items-baseline justify-center gap-1">
+                              <span className="text-4xl font-bold text-gray-900">
+                                {formatPrice(plan.subscription.monthly)}
+                              </span>
+                              <span className="text-gray-500">/mo</span>
+                            </div>
+                            <p className="text-gray-500 text-sm mt-1">billed monthly</p>
+                            <p className="text-xs text-gray-400 mt-1">No long-term contracts. Cancel anytime.</p>
+                            <div className="mt-3 inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 px-3 py-1.5 rounded-full text-xs font-medium">
+                              <span>💳</span> One-time setup fee: {formatPrice(plan.subscription.setupFee)}
+                            </div>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Subscription Includes */}
+                      {billingCycle === 'subscription' && (
+                        <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl">
+                          <p className="text-xs font-semibold text-blue-700 mb-2 uppercase tracking-wider">Subscription Includes:</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {plan.subscription.includes.map((item, idx) => (
+                              <span key={idx} className="text-xs bg-white px-2 py-1 rounded-md text-gray-700 border border-blue-100">
+                                {item}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Features List */}
+                      <ul className="space-y-3 mb-8">
+                        {plan.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-3">
+                            <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
+                              feature.included 
+                                ? 'bg-green-100 text-green-600' 
+                                : 'bg-gray-100 text-gray-400'
+                            }`}>
+                              {feature.included ? (
+                                <FaCheck className="w-3 h-3" />
+                              ) : (
+                                <FaTimes className="w-3 h-3" />
+                              )}
+                            </div>
+                            <span className={`text-sm ${feature.included ? 'text-gray-700' : 'text-gray-400'}`}>
+                              {feature.name}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* CTA Button */}
+                      <Button 
+                        href="/contact" 
+                        variant={plan.popular ? "primary" : "outline"}
+                        className="w-full py-3"
+                      >
+                        {billingCycle === 'onetime' ? 'Start Project' : 'Subscribe Now'}
+                      </Button>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </Container>
+        </Section>
+
+        {/* Subscription Benefits Section */}
+        {billingCycle === 'subscription' && (
+          <Section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-600">
+            <Container>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-center text-white mb-12 px-4"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Subscription?</h2>
+                <p className="text-xl opacity-90 max-w-2xl mx-auto">
+                  Get continuous value with our monthly subscription plans
+                </p>
+              </motion.div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+                {subscriptionBenefits.map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center text-white"
+                  >
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-xl mb-4">
+                      {benefit.icon}
+                    </div>
+                    <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
+                    <p className="text-sm opacity-80">{benefit.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </Container>
+          </Section>
+        )}
+
+        {/* Comparison Note */}
+        <Section className="py-12">
+          <Container>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto px-4"
+            >
+              <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-200">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                    <FaInfoCircle className="w-6 h-6 text-amber-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-gray-900 mb-2">One-Time vs Subscription: Which is right for you?</h3>
+                    <div className="grid md:grid-cols-2 gap-4 mt-4">
+                      <div>
+                        <p className="font-semibold text-gray-800 mb-2">Choose One-Time if:</p>
+                        <ul className="text-sm text-gray-600 space-y-1">
+                          <li>• You have your own hosting & maintenance team</li>
+                          <li>• You need a one-time delivery with no ongoing costs</li>
+                          <li>• You want full ownership from day one</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-800 mb-2">Choose Subscription if:</p>
+                        <ul className="text-sm text-gray-600 space-y-1">
+                          <li>• You want hassle-free hosting & maintenance</li>
+                          <li>• You need regular updates and support</li>
+                          <li>• You prefer predictable monthly costs</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </Container>
         </Section>
 
@@ -480,41 +817,41 @@ const PricingPage = () => {
                 Frequently Asked Questions
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Everything you need to know about our pricing and services
+                Everything you need to know about our pricing
               </p>
             </div>
 
             <div className="max-w-3xl mx-auto px-4">
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {[
                   {
-                    question: "Are there any hidden costs?",
-                    answer: "No, our pricing is completely transparent. The prices shown include everything mentioned in the feature list. Any additional requirements will be discussed and quoted separately."
+                    question: "What is the one-time setup fee for subscriptions?",
+                    answer: "The setup fee covers the initial development and deployment of your project. It's a one-time payment made at the start, and then you only pay the monthly subscription for ongoing maintenance, hosting, and support."
                   },
                   {
-                    question: "Do you offer payment plans?",
-                    answer: "Yes, we offer flexible payment plans. Typically, we take 50% advance and 50% on completion. For larger projects, we can arrange milestone-based payments."
+                    question: "Can I switch from subscription to one-time ownership?",
+                    answer: "Yes! If you're on a subscription and want to switch to one-time ownership, you can pay the remaining project cost minus the subscription payments made (up to 50% of project cost). Contact us for a custom calculation."
                   },
                   {
-                    question: "What's included in maintenance?",
-                    answer: "Monthly maintenance includes security updates, bug fixes, content updates, performance monitoring, and technical support. It does not include major feature additions or redesigns."
+                    question: "What's included in the monthly subscription?",
+                    answer: "Subscription includes hosting, SSL, security updates, bug fixes, content updates (based on plan), performance monitoring, regular backups, and technical support. Major new features or redesigns are quoted separately."
                   },
                   {
-                    question: "Can I upgrade my plan later?",
-                    answer: "Absolutely! You can upgrade your plan at any time. We'll only charge the difference between your current plan and the new one."
+                    question: "What happens if I cancel my subscription?",
+                    answer: "You can cancel anytime with 30 days notice. We'll provide all source files and help migrate to your own hosting if needed. Your website/app will continue to work, but you'll need to arrange your own hosting and maintenance."
                   },
                   {
-                    question: "Do you provide custom quotes?",
-                    answer: "Yes, for unique requirements or enterprise solutions, we provide custom quotes. Contact us to discuss your specific needs."
+                    question: "Do you offer discounts for startups or yearly payments?",
+                    answer: "Yes! We offer up to 20% discount for registered startups and non-profit organizations. For annual subscriptions, contact us for special pricing. We also offer custom enterprise packages."
                   }
                 ].map((faq, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
                     viewport={{ once: true }}
-                    className="bg-white rounded-lg p-6 shadow-sm"
+                    className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
                   >
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       {faq.question}
@@ -528,6 +865,9 @@ const PricingPage = () => {
             </div>
           </Container>
         </Section>
+        
+        {/* SEO Content Section */}
+        <SEOText page="pricing" />
 
         {/* CTA Section */}
         <Section className="py-16">
@@ -537,21 +877,29 @@ const PricingPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-center bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-12 text-white mx-4"
+              className="text-center bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-12 text-white mx-4 relative overflow-hidden"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Get Started?
-              </h2>
-              <p className="text-xl mb-8 opacity-90">
-                Let's discuss your project and find the perfect solution for your business
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button href="/contact" variant="white" size="lg">
-                  Get Free Consultation
-                </Button>
-                <Button href="/portfolio" variant="outline-white" size="lg">
-                  View Our Work
-                </Button>
+              {/* Background decoration */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
+              </div>
+              
+              <div className="relative z-10">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Need a Custom Quote?
+                </h2>
+                <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+                  Every project is unique. Let's discuss your requirements and create a tailored solution.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button href="/contact" variant="white" size="lg">
+                    Get Free Consultation
+                  </Button>
+                  <Button href="/portfolio" variant="outline-white" size="lg">
+                    View Our Work
+                  </Button>
+                </div>
               </div>
             </motion.div>
           </Container>

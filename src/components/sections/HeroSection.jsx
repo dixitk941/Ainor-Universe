@@ -227,7 +227,7 @@ const HeroSection = () => {
         
           <motion.p 
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-semibold rounded-full border border-blue-100 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-semibold rounded-full border border-blue-100 shadow-sm"
           >
             <span className="flex items-center gap-1">
               <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -238,6 +238,16 @@ const HeroSection = () => {
             <span className="w-px h-4 bg-blue-200"></span>
             Digital Solutions for Modern Businesses
           </motion.p>
+          
+          {/* NEW: First in India Subscription Badge */}
+          <motion.div
+            variants={itemVariants}
+            className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full shadow-lg"
+          >
+            <span className="text-lg">🇮🇳</span>
+            <span className="text-sm">First in India: Subscription-Based Web Services!</span>
+            <span className="animate-pulse">✨</span>
+          </motion.div>
           
           <motion.h1 
             variants={itemVariants}

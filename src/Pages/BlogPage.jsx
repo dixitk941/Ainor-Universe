@@ -14,6 +14,186 @@ const BlogPage = () => {
   // Blog post data (user's original blogs, using previous images)
   const blogPosts = [
     {
+      id: 10,
+      slug: "first-in-india-subscription-based-web-services-ainor",
+      title: "🇮🇳 First in India: AINOR Launches Revolutionary Subscription-Based Web & App Development Services",
+      excerpt: "AINOR becomes the first company in India to offer subscription-based web development, mobile app development, and digital solutions. Learn how this model saves businesses 60-70% compared to traditional one-time projects.",
+      date: "December 31, 2025",
+      author: "Karan Dixit (dixitk941)",
+      category: "announcement",
+      readTime: "8 min read",
+      image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&q=80&w=1000",
+      featured: true,
+      content: `<div class="blog-content">
+        <h1 class="text-4xl font-bold mb-6 text-gray-900">🇮🇳 First in India: AINOR Launches Revolutionary Subscription-Based Web & App Development Services</h1>
+        
+        <div class="mb-6 flex items-center text-gray-600">
+          <span>December 31, 2025</span>
+          <span class="mx-2">•</span>
+          <span>8 min read</span>
+          <span class="mx-2">•</span>
+          <span>Company Announcement</span>
+        </div>
+        
+        <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&q=80&w=1000" alt="AINOR Subscription Services Launch" class="w-full h-64 object-cover rounded-xl mb-8 shadow-lg" />
+        
+        <div class="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl mb-8 border-l-4 border-orange-500">
+          <h3 class="text-2xl font-bold mb-3 text-orange-900">🎉 Breaking News!</h3>
+          <p class="text-lg text-orange-800">AINOR becomes the first company in India to offer subscription-based digital services, revolutionizing how businesses access web development, mobile apps, and custom software solutions.</p>
+        </div>
+        
+        <p class="text-xl leading-relaxed mb-8 text-gray-700">Today marks a historic moment for the Indian tech industry. AINOR, a government-registered MSME company, is proud to announce the launch of India's first subscription-based web and app development services. This groundbreaking model allows businesses of all sizes to access premium digital solutions without the burden of massive upfront investments.</p>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">The Problem with Traditional Pricing</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">For decades, businesses in India have faced a significant barrier when trying to establish their digital presence. A professional website costs ₹35,000 to ₹1,00,000+. A mobile app? That's ₹50,000 to ₹2,00,000 or more. Add hosting, maintenance, updates, and security - the costs keep piling up.</p>
+        
+        <div class="bg-red-50 p-6 rounded-xl mb-8 border border-red-200">
+          <h4 class="text-lg font-semibold mb-3 text-red-800">Traditional Model Problems:</h4>
+          <ul class="space-y-2 text-red-700">
+            <li>❌ Massive upfront investment required</li>
+            <li>❌ Additional costs for hosting, SSL, maintenance</li>
+            <li>❌ Updates and changes charged separately</li>
+            <li>❌ No ongoing support after delivery</li>
+            <li>❌ Risk of outdated technology within months</li>
+            <li>❌ Hidden costs that surprise businesses</li>
+          </ul>
+        </div>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Introducing AINOR's Subscription Model</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">Our revolutionary approach changes everything. Instead of paying lakhs upfront, you pay a small one-time setup fee and a predictable monthly subscription. Here's what makes it special:</p>
+        
+        <div class="bg-green-50 p-6 rounded-xl mb-8 border border-green-200">
+          <h4 class="text-lg font-semibold mb-3 text-green-800">AINOR Subscription Benefits:</h4>
+          <ul class="space-y-2 text-green-700">
+            <li>✅ Low one-time setup fee (60-70% less than full project cost)</li>
+            <li>✅ Affordable monthly subscription</li>
+            <li>✅ Premium hosting included</li>
+            <li>✅ SSL certificate included</li>
+            <li>✅ Regular updates and maintenance</li>
+            <li>✅ 24/7 technical support</li>
+            <li>✅ Security monitoring and patches</li>
+            <li>✅ Cancel anytime with 30 days notice</li>
+          </ul>
+        </div>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Real Cost Comparison</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">Let's compare a Professional Website package:</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-red-100 p-6 rounded-xl border-2 border-red-300">
+            <h4 class="text-xl font-bold text-red-800 mb-4">❌ Traditional Model</h4>
+            <div class="space-y-2 text-red-700">
+              <p><strong>Website:</strong> ₹35,000</p>
+              <p><strong>Hosting (1 year):</strong> ₹5,000</p>
+              <p><strong>Maintenance (1 year):</strong> ₹36,000</p>
+              <p><strong>SSL:</strong> ₹2,000</p>
+              <p class="text-2xl font-bold pt-4 border-t border-red-300">Total Year 1: ₹78,000</p>
+            </div>
+          </div>
+          
+          <div class="bg-green-100 p-6 rounded-xl border-2 border-green-300">
+            <h4 class="text-xl font-bold text-green-800 mb-4">✅ AINOR Subscription</h4>
+            <div class="space-y-2 text-green-700">
+              <p><strong>Setup Fee:</strong> ₹10,000</p>
+              <p><strong>Monthly (12 months):</strong> ₹59,988</p>
+              <p><strong>Hosting:</strong> Included</p>
+              <p><strong>SSL & Support:</strong> Included</p>
+              <p class="text-2xl font-bold pt-4 border-t border-green-300">Total Year 1: ₹69,988</p>
+              <p class="text-sm text-green-600">You SAVE ₹8,012 + get premium support!</p>
+            </div>
+          </div>
+        </div>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Available Subscription Plans</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">We offer subscription plans for all our services:</p>
+        
+        <div class="space-y-4 mb-8">
+          <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
+            <h5 class="font-bold text-gray-900">🌐 Web Development</h5>
+            <p class="text-gray-600">Setup: ₹5,000 - ₹25,000 | Monthly: ₹2,499 - ₹9,999</p>
+          </div>
+          <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
+            <h5 class="font-bold text-gray-900">📱 Mobile Apps</h5>
+            <p class="text-gray-600">Setup: ₹15,000 - ₹50,000 | Monthly: ₹4,999 - ₹14,999</p>
+          </div>
+          <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
+            <h5 class="font-bold text-gray-900">🛒 E-Commerce</h5>
+            <p class="text-gray-600">Setup: ₹10,000 - ₹40,000 | Monthly: ₹3,999 - ₹14,999</p>
+          </div>
+          <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
+            <h5 class="font-bold text-gray-900">⚙️ Custom Software</h5>
+            <p class="text-gray-600">Setup: ₹15,000 - ₹75,000 | Monthly: ₹5,999 - ₹24,999</p>
+          </div>
+          <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
+            <h5 class="font-bold text-gray-900">🎨 UI/UX Design</h5>
+            <p class="text-gray-600">Setup: ₹3,000 - ₹15,000 | Monthly: ₹1,999 - ₹7,999</p>
+          </div>
+        </div>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Who is This For?</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">Our subscription model is perfect for:</p>
+        
+        <ul class="list-disc pl-6 space-y-2 mb-8 text-gray-700">
+          <li><strong>Startups:</strong> Get your MVP live without burning through funding</li>
+          <li><strong>Small Businesses:</strong> Affordable digital presence with professional quality</li>
+          <li><strong>Growing Companies:</strong> Scale your digital assets as your business grows</li>
+          <li><strong>Enterprises:</strong> Predictable IT costs with enterprise-grade support</li>
+          <li><strong>Non-profits:</strong> Stretch your budget further with lower monthly costs</li>
+        </ul>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Flexibility You'll Love</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">Unlike rigid contracts, AINOR's subscription gives you flexibility:</p>
+        
+        <ul class="list-disc pl-6 space-y-2 mb-8 text-gray-700">
+          <li>Cancel anytime with 30 days notice</li>
+          <li>Upgrade or downgrade your plan as needed</li>
+          <li>Convert to one-time ownership if you prefer</li>
+          <li>Pause and resume (for eligible plans)</li>
+        </ul>
+        
+        <blockquote class="border-l-4 border-indigo-500 pl-6 italic text-xl text-gray-700 my-8 bg-indigo-50 p-6 rounded-r-lg">
+          "We're not just changing our pricing - we're changing how businesses in India think about digital investments. Why pay lakhs upfront when you can pay monthly and get better service?" — Karan Dixit, Founder & CEO at AINOR
+        </blockquote>
+        
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Get Started Today</h2>
+        
+        <p class="mb-6 text-lg leading-relaxed text-gray-700">Ready to experience the future of digital services in India? Here's how to get started:</p>
+        
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8 rounded-xl mb-8">
+          <h3 class="text-2xl font-bold mb-4">Start Your Subscription Journey</h3>
+          <ol class="space-y-3 mb-6">
+            <li class="flex items-center gap-3"><span class="bg-white text-indigo-600 w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span> Book a free consultation call</li>
+            <li class="flex items-center gap-3"><span class="bg-white text-indigo-600 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span> Choose your service and plan</li>
+            <li class="flex items-center gap-3"><span class="bg-white text-indigo-600 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span> Pay setup fee and go live!</li>
+          </ol>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/pricing" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-center">View All Plans</a>
+            <a href="/contact" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors text-center">Contact Us</a>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-200 pt-8">
+          <h3 class="text-xl font-bold mb-4 text-gray-900">About the Author</h3>
+          <div class="flex items-start space-x-4">
+            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center">
+              <span class="text-indigo-600 font-bold text-lg">KD</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Karan Dixit</h4>
+              <p class="text-gray-600 text-sm mb-2">Founder & CEO at AINOR</p>
+              <p class="text-gray-700 text-sm">Karan is passionate about making technology accessible to businesses of all sizes. With this subscription model, he aims to democratize access to professional digital services across India.</p>
+            </div>
+          </div>
+        </div>
+      </div>\`
+    },
+    {
       id: 9,
       slug: "sustainable-agriculture-digital-transformation-2025",
       title: "How Digital Transformation is Revolutionizing Sustainable Agriculture and Traditional Crafts Export",
@@ -23,8 +203,8 @@ const BlogPage = () => {
       category: "business",
       readTime: "10 min read",
       image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=1000",
-      featured: true,
-      content: `<div class="blog-content">
+      featured: false,
+      content: \`<div class="blog-content">
         <h1 class="text-4xl font-bold mb-6 text-gray-900">How Digital Transformation is Revolutionizing Sustainable Agriculture and Traditional Crafts Export</h1>
         
         <div class="mb-6 flex items-center text-gray-600">
@@ -873,6 +1053,7 @@ const BlogPage = () => {
   // Categories
   const categories = [
     { id: 'all', name: 'All Posts' },
+    { id: 'announcement', name: '📢 Announcements' },
     { id: 'business', name: 'Business & Export' },
     { id: 'technology', name: 'Technology' },
     { id: 'personal-branding', name: 'Personal Branding' },

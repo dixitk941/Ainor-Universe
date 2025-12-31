@@ -5,6 +5,7 @@ import Button from '../components/ui/Button';
 import Section from '../components/layout/Section';
 import Container from '../components/layout/Container';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -238,7 +239,12 @@ const ContactPage = () => {
               </div> */}
             </motion.div>          </div>
         </Container>
-      </Section>        {/* Extra padding for mobile navigation */}
+      </Section>      
+      
+      {/* SEO Content Section */}
+      <SEOText page="contact" />
+      
+      {/* Extra padding for mobile navigation */}
       <div className="md:hidden h-16"></div>
     </div>
     </>

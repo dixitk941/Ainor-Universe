@@ -35,7 +35,12 @@ const WolfChatbot = () => {
     {
       question: "💰 Pricing",
       fullQuestion: "What are your pricing options?",
-      answer: "**Our Transparent Pricing (INR):**\n\n**🌐 Websites:**\n• Starter: ₹15,000 (5 pages)\n• Professional: ₹35,000 (10 pages)\n• Enterprise: ₹65,000+ (Custom)\n\n**📱 Mobile Apps:**\n• Basic: ₹45,000\n• Cross-platform: ₹85,000\n• Enterprise: ₹1,50,000+\n\n**🎯 Custom Software:** From ₹35,000\n\n✅ Free consultation included!\n💳 50% advance, 50% on delivery"
+      answer: "**🇮🇳 First in India: Subscription-Based Services!**\n\n**📦 SUBSCRIPTION MODEL (Recommended):**\nSetup Fee + Monthly Plan\n\n**🌐 Websites:**\n• Starter: ₹5,000 setup + ₹2,499/mo\n• Professional: ₹10,000 setup + ₹4,999/mo\n• Enterprise: ₹25,000 setup + ₹9,999/mo\n\n**📱 Mobile Apps:**\n• Starter: ₹15,000 setup + ₹4,999/mo\n• Professional: ₹30,000 setup + ₹8,999/mo\n\n**💼 ONE-TIME PROJECTS also available!**\n\n✅ Hosting, SSL, Support included!\n🔄 Cancel anytime!"
+    },
+    {
+      question: "🔄 Subscription",
+      fullQuestion: "Tell me about your subscription plans",
+      answer: "**🇮🇳 AINOR: First in India with Subscription-Based Digital Services!**\n\n**Why Choose Subscription?**\n✅ Low upfront cost (just setup fee)\n✅ Hosting & SSL included\n✅ Regular updates & maintenance\n✅ 24/7 technical support\n✅ No surprise costs\n✅ Cancel anytime\n\n**How it works:**\n1️⃣ Pay one-time setup fee\n2️⃣ Pay monthly subscription\n3️⃣ We handle everything!\n\n**Benefits:**\n💰 Save 40-60% vs traditional\n🚀 Faster time to market\n🛡️ Always secure & updated\n📈 Predictable monthly costs\n\n📞 Get FREE consultation today!"
     },
     {
       question: "⚡ Tech Stack",

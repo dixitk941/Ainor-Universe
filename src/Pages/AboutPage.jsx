@@ -7,6 +7,7 @@ import { HiOutlineBadgeCheck } from 'react-icons/hi';
 import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 
 const AboutPage = () => {// Company milestones with updated timeline
   const milestones = [
@@ -34,6 +35,12 @@ const AboutPage = () => {// Company milestones with updated timeline
       title: 'International Expansion',
       description: 'Expanded our reach to serve clients internationally, bringing our innovative digital solutions to businesses across different markets and industries.',
       image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+    },
+    {
+      year: '2025',
+      title: '🇮🇳 First in India: Subscription Services',
+      description: 'Made history by becoming the first company in India to offer subscription-based web development, mobile app, and digital services — revolutionizing how businesses access technology.',
+      image: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
     },
     {
       year: '2025',
@@ -817,6 +824,9 @@ const AboutPage = () => {// Company milestones with updated timeline
               </div>            </div>
           </Container>
         </Section>
+        
+        {/* SEO Content Section */}
+        <SEOText page="about" />
         
         {/* CTA Section - One UI 7-style with large radius and gradient */}
         <section className="py-20 md:py-24">

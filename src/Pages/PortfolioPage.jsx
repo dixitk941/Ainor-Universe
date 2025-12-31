@@ -5,6 +5,7 @@ import Container from '../components/layout/Container';
 import Section from '../components/layout/Section';
 import Button from '../components/ui/Button';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 
 const PortfolioPage = () => {
   // Categories for filtering
@@ -26,7 +27,7 @@ const PortfolioPage = () => {
       solution: "We designed a clean, elegant website with separate product sections, high-quality imagery, and clear calls-to-action. The site features WhatsApp integration for instant communication, SEO optimization for international keywords, and a mobile-first responsive design.",
       technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "WhatsApp Business API"],
       image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      link: "https://mohangenterprices.com"
+      link: "https://mohangenterprises.com"
     },
     {
       id: 1,
@@ -354,6 +355,9 @@ const PortfolioPage = () => {
               Start Your Project
             </Button>
           </motion.div>        </Container>      </Section>
+      
+      {/* SEO Content Section */}
+      <SEOText page="portfolio" />
       
     </div>
     </>

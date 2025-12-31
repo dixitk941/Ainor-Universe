@@ -56,6 +56,18 @@
   
   <!-- Blog Posts -->
   <url>
+    <loc>https://myainor.com/blog/first-in-india-subscription-based-web-services-ainor</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&amp;fit=crop&amp;q=80&amp;w=1000</image:loc>
+      <image:title>First in India: AINOR Launches Revolutionary Subscription-Based Web &amp; App Development Services</image:title>
+      <image:caption>AINOR introduces India's first subscription-based web development, mobile apps, and digital solutions</image:caption>
+    </image:image>
+  </url>
+  
+  <url>
     <loc>https://myainor.com/blog/sustainable-agriculture-digital-transformation-2025</loc>
     <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
