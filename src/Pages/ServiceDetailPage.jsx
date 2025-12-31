@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaWhatsapp, FaLaptopCode, FaMobileAlt, FaShoppingCart, FaSearch, FaCode } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
+import PageScrollAnimation from '../components/ui/PageScrollAnimation';
 
 // Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
@@ -121,6 +122,15 @@ const ServiceDetailPage = () => {
     }
   };
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <SEOHead
@@ -128,6 +138,8 @@ const ServiceDetailPage = () => {
         description={selectedService.shortDesc}
         canonicalUrl="https://myainor.com/services"
       />
+
+      <PageScrollAnimation type="services-detail" isMobile={isMobile} />
 
       <div className="min-h-screen bg-[#f5f5f5]">
         {/* Hero Section */}

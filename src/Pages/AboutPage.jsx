@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/seo/SEOHead';
+import PageScrollAnimation from '../components/ui/PageScrollAnimation';
 
 // Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
 const AboutPage = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -98,6 +107,9 @@ const AboutPage = () => {
       />
 
       <div className="min-h-screen bg-[#f5f5f5]">
+        {/* Scroll Animation */}
+        <PageScrollAnimation type="about" isMobile={isMobile} />
+        
         {/* Hero Section */}
         <section className="relative pt-32 pb-20 overflow-hidden">
           {/* Decorative arrows */}

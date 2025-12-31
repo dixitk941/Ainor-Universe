@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SEOHead from '../components/seo/SEOHead';
+import PageScrollAnimation from '../components/ui/PageScrollAnimation';
 
 // Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
@@ -139,6 +140,15 @@ const BlogPage = () => {
     }
   };
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <SEOHead
@@ -146,6 +156,8 @@ const BlogPage = () => {
         description="Stay updated with the latest trends in web development, mobile apps, AI, and digital transformation. Expert insights from AINOR's team."
         canonicalUrl="https://myainor.com/blog"
       />
+
+      <PageScrollAnimation type="blog" isMobile={isMobile} />
 
       <div className="min-h-screen bg-[#f5f5f5]">
         {/* Hero Section */}

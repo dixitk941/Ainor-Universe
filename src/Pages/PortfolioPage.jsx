@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
+import PageScrollAnimation from '../components/ui/PageScrollAnimation';
 
 // Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
 const PortfolioPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Animation variants
   const containerVariants = {
@@ -105,6 +114,9 @@ const PortfolioPage = () => {
       />
 
       <div className="min-h-screen bg-[#f5f5f5]">
+        {/* Scroll Animation */}
+        <PageScrollAnimation type="portfolio" isMobile={isMobile} />
+        
         {/* Hero Section */}
         <section className="relative pt-32 pb-16 overflow-hidden">
           {/* Decorative arrows */}

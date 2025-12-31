@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaCheck, FaTimes, FaWhatsapp, FaExclamationTriangle, FaArrowRight, FaCalendarAlt, FaCreditCard, FaRocket, FaShieldAlt } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
+import PricingScrollAnimation from '../components/ui/PricingScrollAnimation';
 
 // Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
 const PricingPage = () => {
   const [billingCycle, setBillingCycle] = useState('subscription');
   const [selectedService, setSelectedService] = useState('web');
-  const { scrollYProgress } = useScroll();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Animation variants
   const containerVariants = {
@@ -265,8 +273,12 @@ const PricingPage = () => {
       />
 
       <div className="min-h-screen bg-[#f5f5f5] relative">
+        {/* Scroll-Connected Journey Animation */}
+        <PricingScrollAnimation isMobile={isMobile} />
+        
         {/* 3D Animated Background Lines - Appears OVER content */}
-        <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+        {!isMobile && (
+        <div className="fixed inset-0 pointer-events-none z-40 overflow-hidden">
           {/* 3D Connector Line - Flows across page */}
           <svg className="absolute w-full h-full" style={{ minHeight: '200vh' }}>
             <motion.path
@@ -328,6 +340,7 @@ const PricingPage = () => {
             </svg>
           </motion.div>
         </div>
+        )}
 
         {/* Hero Section */}
         <section className="relative pt-32 pb-16 overflow-hidden">
@@ -716,72 +729,103 @@ const PricingPage = () => {
                 </ul>
               </motion.div>
 
-              {/* Late Payment Warning Card - Full Width */}
+              {/* Late Payment Policy Card - Full Width */}
               <motion.div
-                className="md:col-span-2 bg-gradient-to-r from-red-50 to-orange-50 rounded-3xl p-8 border-2 border-red-200"
+                className="md:col-span-2 bg-white rounded-3xl p-8 border border-gray-200 shadow-sm"
                 variants={cardVariants}
               >
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <FaExclamationTriangle className="w-6 h-6" />
+                  <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <FaCalendarAlt className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl text-red-700 mb-2">⚠️ Late Payment Policy - Important!</h3>
-                    <p className="text-red-600">Please read carefully to avoid service interruption</p>
+                    <h3 className="font-bold text-xl text-[#1a1a1a] mb-2">📅 Payment Terms & Late Fees</h3>
+                    <p className="text-gray-600">Simple and transparent policy</p>
                   </div>
                 </div>
                 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-white rounded-2xl p-6">
+                <div className="grid md:grid-cols-3 gap-6">
+                  {/* Days 1-3 */}
+                  <div className="bg-gray-50 rounded-2xl p-6">
                     <h4 className="font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
-                      <span className="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-lg flex items-center justify-center text-sm font-bold">1-7</span>
-                      Days 1-7 After Due Date
+                      <span className="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-sm font-bold">1-3</span>
+                      Days 1-3 (Grace Period)
                     </h4>
-                    <ul className="space-y-2 text-sm">
+                    <ul className="space-y-3 text-sm">
                       <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
-                        <span>Grace period - Services continue normally</span>
+                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        <span className="text-[#1a1a1a]">Services continue normally</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
-                        <span>Reminder notifications sent via WhatsApp & Email</span>
+                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        <span className="text-[#1a1a1a]">Reminder sent via WhatsApp & Email</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
-                        <span>No additional charges during this period</span>
+                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        <span className="text-indigo-600 font-medium">No late fees</span>
                       </li>
                     </ul>
                   </div>
                   
-                  <div className="bg-white rounded-2xl p-6">
+                  {/* Days 4+ Late Fee */}
+                  <div className="bg-gray-50 rounded-2xl p-6">
                     <h4 className="font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
-                      <span className="w-8 h-8 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-sm font-bold">7+</span>
-                      After 7 Days (Service Suspension)
+                      <span className="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-sm font-bold">4+</span>
+                      Day 4 Onwards
                     </h4>
-                    <ul className="space-y-2 text-sm">
+                    <ul className="space-y-3 text-sm">
                       <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-red-500"></span>
-                        <span className="text-red-700 font-medium">Website/App will be taken offline</span>
+                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        <span className="text-[#1a1a1a]">Services continue running</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-red-500"></span>
-                        <span>All services including hosting suspended</span>
+                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        <span className="text-[#1a1a1a] font-semibold">₹20/day late fee applies</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-red-500"></span>
-                        <span>Service restored within 24 hours of payment</span>
+                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        <span className="text-[#1a1a1a]">Daily reminders sent</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-red-500"></span>
-                        <span>Data is preserved for 30 days after suspension</span>
+                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        <span className="text-[#1a1a1a]">Late fees add to total due</span>
                       </li>
                     </ul>
                   </div>
+                  
+                  {/* Example Calculation */}
+                  <div className="bg-indigo-50 rounded-2xl p-6 border border-indigo-100">
+                    <h4 className="font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
+                      <span className="w-8 h-8 bg-indigo-500 text-white rounded-lg flex items-center justify-center text-sm">💡</span>
+                      Example Calculation
+                    </h4>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-[#1a1a1a]">Monthly Fee:</span>
+                        <span className="font-semibold text-[#1a1a1a]">₹500</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-[#1a1a1a]">Late by 10 days:</span>
+                        <span className="text-indigo-600 font-semibold">7 × ₹20 = ₹140</span>
+                      </div>
+                      <div className="border-t border-indigo-200 pt-3 flex justify-between">
+                        <span className="font-bold text-[#1a1a1a]">Total Due:</span>
+                        <span className="font-bold text-indigo-600">₹640</span>
+                      </div>
+                      <p className="text-xs text-gray-600 mt-2">(3 days grace + 7 days × ₹20)</p>
+                    </div>
+                  </div>
                 </div>
                 
-                <div className="mt-6 p-4 bg-red-100 rounded-xl">
-                  <p className="text-red-700 text-sm font-medium text-center">
-                    💡 <strong>Pro Tip:</strong> Set up auto-pay or calendar reminders to never miss a payment. We also send reminders 3 days before due date!
+                <div className="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                  <p className="text-[#1a1a1a] text-sm text-center">
+                    💡 <strong>Pro Tip:</strong> Pay on time to avoid late fees! Set up auto-pay or calendar reminders. We send reminders 3 days before & on due date.
+                  </p>
+                </div>
+                
+                <div className="mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                  <p className="text-[#1a1a1a] text-sm text-center">
+                    ✅ <strong>Good News:</strong> Your website/app stays online even with late payments - we just add the late fee to your account.
                   </p>
                 </div>
               </motion.div>
@@ -900,7 +944,7 @@ const PricingPage = () => {
                 },
                 {
                   q: 'What happens if I pay late?',
-                  a: 'You have a 7-day grace period after your due date. After 7 days of non-payment, your website/app will be temporarily taken offline until payment is received. Services are restored within 24 hours of payment.'
+                  a: 'You have a 3-day grace period with no charges. From day 4 onwards, a late fee of ₹20/day is added to your account. Your website/app stays online - we never take your site down. Just pay the subscription + accumulated late fees to clear your dues.'
                 },
                 {
                   q: 'Can I cancel my subscription?',

@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaTwitter, FaLinkedin, FaFacebook } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
+import PageScrollAnimation from '../components/ui/PageScrollAnimation';
 
 // Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
 const BlogPostPage = () => {
   const { slug } = useParams();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Blog posts data (simplified for this component)
   const blogPosts = {
@@ -81,6 +90,8 @@ const BlogPostPage = () => {
         description={post.excerpt}
         canonicalUrl={shareUrl}
       />
+
+      <PageScrollAnimation type="blog" isMobile={isMobile} />
 
       <div className="min-h-screen bg-[#f5f5f5]">
         {/* Hero Section */}

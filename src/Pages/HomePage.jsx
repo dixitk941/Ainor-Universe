@@ -80,11 +80,11 @@ const HomePage = () => {
       <ServiceSchema />
       
       <div className="min-h-screen overflow-hidden relative" style={{backgroundColor: '#f5f5f5'}}>
-        {/* Animated SVG Background */}
+        {/* Animated SVG Background - Desktop only */}
         {isDesktop && <AnimatedBackground />}
         
-        {/* Scroll-Connected Traveling Card */}
-        {isDesktop && <ScrollConnectedCard />}
+        {/* Scroll-Connected Traveling Elements */}
+        <ScrollConnectedCard isMobile={!isDesktop} />
         
         {/* Page content with relative z-index */}
         <div className="relative z-10">

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import PageScrollAnimation from '../components/ui/PageScrollAnimation';
 import { FaWhatsapp } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
 
@@ -42,6 +43,15 @@ const CareersPage = () => {
     { title: 'Work-Life Balance', description: 'Flexibility to thrive professionally and personally.' },
   ];
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <SEOHead 
@@ -49,6 +59,8 @@ const CareersPage = () => {
         description="Join AINOR's team of innovators. We're looking for talented individuals passionate about building exceptional digital solutions. Remote-first culture with growth opportunities."
         canonicalUrl="https://myainor.com/careers"
       />
+
+      <PageScrollAnimation type="careers" isMobile={isMobile} />
 
       <div className="min-h-screen bg-[#f5f5f5]">
         {/* Hero Section */}
