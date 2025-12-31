@@ -7,6 +7,7 @@ import SEOText from '../components/seo/SEOText';
 
 // UI Components
 import AnimatedBackground from '../components/ui/AnimatedBackground';
+import ScrollConnectedCard from '../components/ui/ScrollConnectedCard';
 
 // Section Components
 import HeroSection from '../components/sections/HeroSection';
@@ -81,6 +82,9 @@ const HomePage = () => {
       <div className="min-h-screen overflow-hidden relative" style={{backgroundColor: '#f5f5f5'}}>
         {/* Animated SVG Background */}
         {isDesktop && <AnimatedBackground />}
+        
+        {/* Scroll-Connected Traveling Card */}
+        {isDesktop && <ScrollConnectedCard />}
         
         {/* Page content with relative z-index */}
         <div className="relative z-10">

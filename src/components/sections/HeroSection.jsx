@@ -154,7 +154,7 @@ const HeroSection = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* Card 1 - Subscribe */}
+          {/* Card 1 - All Tasks in One Subscription */}
           <motion.div 
             className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300"
             variants={cardVariants}
@@ -164,29 +164,38 @@ const HeroSection = () => {
             <div className="bg-gray-50 rounded-2xl p-5 mb-6 border border-gray-100">
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-indigo-500 text-lg">✦</span>
-                <span className="font-medium text-[#1a1a1a]">Your Project</span>
-                <div className="ml-auto w-3 h-3 rounded-full bg-indigo-100"></div>
+                <span className="font-medium text-[#1a1a1a]">All Your Tasks</span>
+                <div className="ml-auto w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
               </div>
               <div className="space-y-3">
-                <div className="text-xs text-gray-500">Your dedicated team</div>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-medium">A</div>
-                  <span className="text-sm text-[#1a1a1a]">AINOR Team</span>
-                  <div className="ml-auto h-2 w-16 rounded-full bg-indigo-200"></div>
+                  <div className="w-5 h-5 rounded-full bg-indigo-500 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-xs text-[#1a1a1a]">Website Design</span>
+                  <div className="ml-auto h-2 w-12 rounded-full bg-indigo-200"></div>
                 </div>
-                <div className="text-xs text-gray-500 mt-3">Your design team</div>
-                <div className="flex items-center gap-1">
-                  <div className="w-7 h-7 rounded-full bg-indigo-400 -mr-2 border-2 border-white"></div>
-                  <div className="w-7 h-7 rounded-full bg-indigo-500 -mr-2 border-2 border-white"></div>
-                  <div className="w-7 h-7 rounded-full bg-indigo-600 border-2 border-white"></div>
-                  <span className="text-xs text-gray-600 ml-2">Expert Team</span>
-                  <div className="ml-auto h-2 w-12 rounded-full bg-indigo-100"></div>
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-indigo-500 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-xs text-[#1a1a1a]">Mobile App UI</span>
+                  <div className="ml-auto h-2 w-10 rounded-full bg-indigo-200"></div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-gray-200"></div>
+                  <span className="text-xs text-gray-500">Landing Page</span>
+                  <div className="ml-auto h-2 w-8 rounded-full bg-gray-100"></div>
                 </div>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">Subscribe to your team</h3>
+            <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">All tasks, one subscription</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Meet your handpicked team of experts led by your dedicated Project Manager.
+              Unlimited design & dev tasks every month. No per-project fees, just one flat subscription.
             </p>
           </motion.div>
 
