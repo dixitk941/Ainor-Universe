@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Section from '../layout/Section';
-import Button from '../ui/Button';
 import { FaRupeeSign, FaServer, FaSync, FaHeadset, FaChartLine, FaRocket } from 'react-icons/fa';
-import { BsShieldCheck, BsStars } from 'react-icons/bs';
+import { BsStars } from 'react-icons/bs';
+
+// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
 const subscriptionBenefits = [
   {
@@ -13,10 +13,6 @@ const subscriptionBenefits = [
     title: 'Low Upfront Cost',
     description: 'Pay just the setup fee to get started. No massive initial investment needed.',
     highlight: 'Save 60-70%',
-    color: 'from-blue-500 to-cyan-400',
-    bgColor: 'bg-blue-50',
-    textColor: 'text-blue-600',
-    borderColor: 'border-blue-200'
   },
   {
     id: 2,
@@ -24,10 +20,6 @@ const subscriptionBenefits = [
     title: 'Hosting & SSL Included',
     description: 'Premium hosting, SSL certificates, and security updates all included in your plan.',
     highlight: 'No Extra Cost',
-    color: 'from-indigo-500 to-purple-500',
-    bgColor: 'bg-indigo-50',
-    textColor: 'text-indigo-600',
-    borderColor: 'border-indigo-200'
   },
   {
     id: 3,
@@ -35,10 +27,6 @@ const subscriptionBenefits = [
     title: 'Regular Updates',
     description: 'Content updates, bug fixes, and feature enhancements handled by our team.',
     highlight: '2-5 Updates/mo',
-    color: 'from-green-500 to-emerald-400',
-    bgColor: 'bg-green-50',
-    textColor: 'text-green-600',
-    borderColor: 'border-green-200'
   },
   {
     id: 4,
@@ -46,10 +34,6 @@ const subscriptionBenefits = [
     title: '24/7 Support',
     description: "Dedicated technical support whenever you need it. We're always here to help.",
     highlight: 'Priority Support',
-    color: 'from-rose-500 to-pink-400',
-    bgColor: 'bg-rose-50',
-    textColor: 'text-rose-600',
-    borderColor: 'border-rose-200'
   },
   {
     id: 5,
@@ -57,10 +41,6 @@ const subscriptionBenefits = [
     title: 'Predictable Costs',
     description: 'Fixed monthly payments make budgeting easy. No surprise expenses.',
     highlight: 'Budget Friendly',
-    color: 'from-amber-500 to-yellow-400',
-    bgColor: 'bg-amber-50',
-    textColor: 'text-amber-600',
-    borderColor: 'border-amber-200'
   },
   {
     id: 6,
@@ -68,42 +48,84 @@ const subscriptionBenefits = [
     title: 'Faster Launch',
     description: 'Get your project live quickly with our streamlined subscription model.',
     highlight: '50% Faster',
-    color: 'from-violet-500 to-purple-500',
-    bgColor: 'bg-violet-50',
-    textColor: 'text-violet-600',
-    borderColor: 'border-violet-200'
   },
 ];
 
 const SubscriptionBenefitsSection = () => {
+  // Stagger animation for benefit cards
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
   return (
-    <Section 
-      bgColor="bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden"
-      spacing="py-20 md:py-28"
-    >
-      {/* Background decorations - matching Services Section style */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          className="absolute top-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-blue-100/40 to-indigo-100/40 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute bottom-20 left-10 w-[400px] h-[400px] bg-gradient-to-tr from-purple-100/40 to-pink-100/40 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1, 1.3, 1],
-            y: [0, 60, 0],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
-        />
+    <section className="py-20 md:py-32 relative overflow-hidden">
+      {/* Decorative connecting arrows - showing subscription cycle */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Circular arrows - subscription cycle visual */}
+        <motion.svg
+          className="absolute top-20 right-10 w-32 h-32 opacity-[0.1]"
+          viewBox="0 0 100 100"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        >
+          <path 
+            d="M 50 10 A 40 40 0 1 1 10 50" 
+            stroke="#6366f1" 
+            strokeWidth="3" 
+            fill="none"
+            strokeLinecap="round"
+          />
+          <polygon points="50,5 55,15 45,15" fill="#6366f1" />
+          <path 
+            d="M 50 90 A 40 40 0 1 1 90 50" 
+            stroke="#6366f1" 
+            strokeWidth="3" 
+            fill="none"
+            strokeLinecap="round"
+          />
+          <polygon points="50,95 45,85 55,85" fill="#6366f1" />
+        </motion.svg>
+        
+        {/* Horizontal flow arrows */}
+        <svg className="absolute bottom-32 left-10 w-[200px] h-[60px] opacity-[0.08]" viewBox="0 0 200 60">
+          <motion.line
+            x1="10" y1="30" x2="170" y2="30"
+            stroke="#6366f1"
+            strokeWidth="2.5"
+            strokeDasharray="10 6"
+            initial={{ strokeDashoffset: 80 }}
+            animate={{ strokeDashoffset: 0 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          />
+          <polygon points="165,23 185,30 165,37" fill="#6366f1" />
+          <circle cx="50" cy="30" r="5" fill="#6366f1" />
+          <circle cx="120" cy="30" r="5" fill="#6366f1" />
+        </svg>
       </div>
-      
-      <div className="relative z-10">
+
+      {/* Content directly on background - no card wrapper */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <motion.div
@@ -111,11 +133,11 @@ const SubscriptionBenefitsSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-full mb-6 shadow-lg shadow-indigo-200"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100"
           >
-            <span className="text-xl">🇮🇳</span>
-            <span className="font-bold text-sm">FIRST IN INDIA</span>
-            <BsStars className="h-4 w-4 animate-pulse" />
+            <span className="text-lg">🇮🇳</span>
+            <span className="font-semibold text-sm">FIRST IN INDIA</span>
+            <BsStars className="h-4 w-4" />
           </motion.div>
           
           <motion.h2
@@ -123,10 +145,10 @@ const SubscriptionBenefitsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#1a1a1a]"
           >
             Subscription-Based
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
+            <span className="block mt-2 text-indigo-500">
               Web & App Services
             </span>
           </motion.h2>
@@ -138,138 +160,78 @@ const SubscriptionBenefitsSection = () => {
             viewport={{ once: true }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Why pay lakhs upfront when you can pay monthly? AINOR introduces India's first 
-            subscription model for web development, mobile apps, and digital solutions.
+            Why pay lakhs upfront when you can pay monthly? India's first 
+            subscription model for web development and digital solutions.
           </motion.p>
         </div>
 
-        {/* Pricing Comparison */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        {/* Benefits Grid - Cards */}
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto mb-16"
         >
-          <div className="bg-white rounded-3xl p-8 shadow-xl shadow-gray-200/50 border border-gray-100">
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Traditional Way */}
-              <div className="text-center p-6 rounded-2xl bg-gray-50 border border-gray-200">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-100 text-red-500 mb-4">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </div>
-                <p className="text-red-600 font-semibold mb-2">Traditional Way</p>
-                <p className="text-4xl font-bold text-gray-900 mb-2">₹35,000</p>
-                <p className="text-gray-500 text-sm">One-time payment upfront</p>
-                <ul className="mt-4 text-left text-sm text-gray-600 space-y-2">
-                  <li className="flex items-center gap-2">
-                    <span className="text-red-400">•</span> Hosting extra: ₹5,000/year
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-red-400">•</span> Maintenance extra: ₹3,000/month
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-red-400">•</span> Updates charged separately
-                  </li>
-                </ul>
-              </div>
-              
-              {/* AINOR Way */}
-              <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-indigo-50 to-blue-50 border-2 border-indigo-200 relative">
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
-                  RECOMMENDED
-                </div>
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 mb-4 mt-2">
-                  <BsShieldCheck className="w-6 h-6" />
-                </div>
-                <p className="text-indigo-600 font-semibold mb-2">AINOR Subscription</p>
-                <p className="text-4xl font-bold text-gray-900 mb-1">₹10,000 <span className="text-lg font-normal text-gray-500">setup</span></p>
-                <p className="text-2xl font-semibold text-indigo-600">+ ₹4,999/month</p>
-                <p className="text-xs text-gray-500 mt-1">No long-term contracts. Cancel anytime.</p>
-                <ul className="mt-4 text-left text-sm text-gray-700 space-y-2">
-                  <li className="flex items-center gap-2">
-                    <span className="text-indigo-500">✓</span> Hosting included
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-indigo-500">✓</span> All updates included
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-indigo-500">✓</span> Support included
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-indigo-500">✓</span> Cancel anytime!
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <p className="text-center text-sm text-gray-500 mt-6">Trusted by startups & growing businesses across India 🇮🇳</p>
-          </div>
-        </motion.div>
-
-        {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {subscriptionBenefits.map((benefit, index) => (
             <motion.div
               key={benefit.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className={`${benefit.bgColor} rounded-2xl p-6 border ${benefit.borderColor} hover:shadow-lg transition-all duration-300 group`}
+              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300"
+              variants={cardVariants}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
               <div className="flex items-start gap-4">
-                <div className={`p-3 rounded-xl bg-gradient-to-br ${benefit.color} text-white shadow-lg`}>
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500 flex-shrink-0">
                   {benefit.icon}
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-bold text-lg text-gray-900">{benefit.title}</h3>
+                <div>
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <h3 className="font-bold text-[#1a1a1a]">{benefit.title}</h3>
+                    <span className="text-xs px-2 py-0.5 bg-indigo-50 text-indigo-500 rounded-full font-medium">
+                      {benefit.highlight}
+                    </span>
                   </div>
-                  <p className="text-gray-600 text-sm mb-3">{benefit.description}</p>
-                  <span className={`inline-flex text-xs ${benefit.textColor} bg-white px-3 py-1 rounded-full font-semibold shadow-sm border ${benefit.borderColor}`}>
-                    {benefit.highlight}
-                  </span>
+                  <p className="text-gray-600 text-sm">{benefit.description}</p>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* CTA */}
-        <motion.div
+        <motion.div 
+          className="text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center"
         >
           <p className="text-gray-600 mb-6">
             Join 100+ businesses already saving with AINOR subscriptions
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button
-              as={Link}
-              to="/pricing"
-              variant="primary"
-              size="lg"
-              className="shadow-lg shadow-indigo-200"
-            >
-              View All Plans
-            </Button>
-            <Button
-              as={Link}
-              to="/contact"
-              variant="outline"
-              size="lg"
-            >
-              Get Free Quote
-            </Button>
+            <Link to="/pricing">
+              <motion.button 
+                className="px-8 py-4 bg-[#1a1a1a] text-white rounded-full font-semibold hover:bg-gray-800 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View All Plans
+              </motion.button>
+            </Link>
+            <Link to="/contact">
+              <motion.button 
+                className="px-8 py-4 bg-white text-[#1a1a1a] rounded-full font-semibold border-2 border-gray-200 hover:border-indigo-500 hover:text-indigo-500 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get Free Quote
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       </div>
-    </Section>
+    </section>
   );
 };
 

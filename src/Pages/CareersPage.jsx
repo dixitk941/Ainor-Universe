@@ -1,235 +1,279 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import Container from '../components/layout/Container';
-import Section from '../components/layout/Section';
-import Button from '../components/ui/Button';
-import Card from '../components/ui/Card';
+import { Link } from 'react-router-dom';
+import { FaWhatsapp } from 'react-icons/fa';
+import SEOHead from '../components/seo/SEOHead';
+
+// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
 const CareersPage = () => {
-  const [selectedDepartment, setSelectedDepartment] = useState('all');
-
-  // Job listing data
-  const jobListings = [];
-
-  // Filter jobs based on department
-  const filteredJobs = [];
-
-  // Departments for filter
-  const departments = [
-    { id: 'all', name: 'All Departments' },
-    { id: 'engineering', name: 'Engineering' },
-    { id: 'design', name: 'Design' },
-    { id: 'product', name: 'Product' },
-    { id: 'marketing', name: 'Marketing' }
-  ];
-
-  // Benefits data
-  const benefits = [
-    {
-      icon: "🌎",
-      title: "Remote-First Culture",
-      description: "Work from anywhere in the world with our flexible remote policy."
-    },
-    {
-      icon: "💰",
-      title: "Competitive Compensation",
-      description: "We offer competitive salaries, equity options, and performance bonuses."
-    },
-    {
-      icon: "🏥",
-      title: "Health & Wellness",
-      description: "Comprehensive health insurance, mental health support, and wellness programs."
-    },
-    {
-      icon: "📚",
-      title: "Learning & Development",
-      description: "Annual learning stipend, conference attendance, and mentorship opportunities."
-    },
-    {
-      icon: "⏰",
-      title: "Flexible Hours",
-      description: "Set your own schedule with our flexible working hours policy."
-    },
-    {
-      icon: "✈️",
-      title: "Paid Time Off",
-      description: "Generous PTO policy, paid holidays, and parental leave."
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
     }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: { 
+      opacity: 1, y: 0, scale: 1,
+      transition: { type: "spring", stiffness: 100, damping: 15 }
+    }
+  };
+
+  // Benefits
+  const benefits = [
+    { icon: '🌍', title: 'Remote-First', description: 'Work from anywhere in the world with flexible hours.' },
+    { icon: '💰', title: 'Competitive Pay', description: 'Fair compensation with performance bonuses.' },
+    { icon: '📚', title: 'Learning Budget', description: 'Annual stipend for courses and conferences.' },
+    { icon: '⏰', title: 'Flexible Hours', description: 'Set your own schedule, focus on results.' },
+    { icon: '🚀', title: 'Growth Path', description: 'Clear career progression and mentorship.' },
+    { icon: '🎯', title: 'Impact', description: 'Work on projects that matter and make a difference.' },
   ];
+
+  // Values
+  const values = [
+    { title: 'Innovation First', description: 'We push boundaries and challenge the status quo.' },
+    { title: 'Collaboration', description: 'Our success is built on diverse perspectives.' },
+    { title: 'Growth Mindset', description: 'Continuous learning and professional development.' },
+    { title: 'Work-Life Balance', description: 'Flexibility to thrive professionally and personally.' },
+  ];
+
   return (
     <>
-      
-      {/* Hero Section */}
-      <Section className="pb-16 bg-gradient-to-b from-gray-50 to-white">
-        <Container>
-          <div className="text-center mb-12">
+      <SEOHead 
+        title="Careers at AINOR - Join Our Team"
+        description="Join AINOR's team of innovators. We're looking for talented individuals passionate about building exceptional digital solutions. Remote-first culture with growth opportunities."
+        canonicalUrl="https://myainor.com/careers"
+      />
+
+      <div className="min-h-screen bg-[#f5f5f5]">
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-20 overflow-hidden">
+          {/* Decorative arrows */}
+          <div className="absolute inset-0 pointer-events-none">
+            <motion.svg
+              className="absolute top-24 right-16 w-28 h-28 opacity-[0.1]"
+              viewBox="0 0 100 100"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            >
+              <circle cx="50" cy="50" r="6" fill="#6366f1" />
+              {[0, 120, 240].map((angle, i) => (
+                <g key={i} transform={`rotate(${angle} 50 50)`}>
+                  <line x1="50" y1="50" x2="50" y2="15" stroke="#6366f1" strokeWidth="2" />
+                  <polygon points="45,20 50,8 55,20" fill="#6366f1" />
+                </g>
+              ))}
+            </motion.svg>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              className="text-center mb-16"
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-                Join Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Team</span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
+                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                <span className="font-semibold text-sm">Careers</span>
+              </span>
+              
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1a1a1a] mb-6">
+                Join Our
+                <span className="block mt-2 text-indigo-500">Team</span>
               </h1>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
                 Build the future with us. Discover opportunities to grow, innovate, and make an impact.
               </p>
+
+              <motion.a
+                href="https://wa.me/917579500264?text=Hi%20AINOR!%20I'm%20interested%20in%20career%20opportunities."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-500 text-white rounded-xl font-medium hover:bg-indigo-600 transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <FaWhatsapp className="w-5 h-5" />
+                Get in Touch
+              </motion.a>
             </motion.div>
           </div>
-        </Container>
-      </Section>
+        </section>
 
-      {/* Company Culture */}
-      <Section className="py-12 bg-white">
-        <Container>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-3xl font-bold mb-6 text-gray-900">Our Culture & Values</h2>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 text-gray-800">Innovation First</h3>
-                  <p className="text-gray-600">
-                    We believe in pushing boundaries and challenging the status quo to create exceptional digital experiences.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 text-gray-800">Collaboration & Teamwork</h3>
-                  <p className="text-gray-600">
-                    Our success is built on diverse perspectives and strong collaboration across disciplines.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 text-gray-800">Growth Mindset</h3>
-                  <p className="text-gray-600">
-                    We're committed to continuous learning and professional development for every team member.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 text-gray-800">Work-Life Balance</h3>
-                  <p className="text-gray-600">
-                    We understand the importance of balance and support flexibility to help you thrive professionally and personally.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative h-80 md:h-96 rounded-2xl overflow-hidden shadow-xl"
-            >
-              <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000" 
-                alt="AINOR team collaboration"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/40 to-transparent"></div>
-            </motion.div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Benefits */}
-      <Section className="py-16 bg-gradient-to-b from-white to-gray-50">
-        <Container>
-          <div className="text-center mb-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-3xl font-bold mb-4 text-gray-900">
-                Why Work With Us
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                We offer more than just a job. Join a team that values your growth, well-being, and work-life balance.
-              </p>
-            </motion.div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
+        {/* Culture Section */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
               >
-                <Card className="h-full p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="text-4xl mb-4">{benefit.icon}</div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-900">{benefit.title}</h3>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </Card>
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
+                  <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                  <span className="font-semibold text-sm">Our Culture</span>
+                </span>
+                
+                <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6">
+                  Culture &
+                  <span className="block mt-2 text-indigo-500">Values</span>
+                </h2>
+                
+                <div className="space-y-6">
+                  {values.map((value, index) => (
+                    <motion.div
+                      key={index}
+                      className="flex items-start gap-4"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <div className="w-2 h-2 rounded-full bg-indigo-500 mt-2 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-bold text-[#1a1a1a] mb-1">{value.title}</h3>
+                        <p className="text-gray-600 text-sm">{value.description}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
-            ))}
-          </div>
-        </Container>
-      </Section>
 
-      {/* Open Positions */}
-      <Section className="py-16 bg-white">
-        <Container>
-          <div className="text-center mb-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-3xl font-bold mb-4 text-gray-900">
-                Open for Contributors & Project-Based Freelancers
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                We are not hiring for full-time roles at the moment, but we welcome passionate contributors and skilled freelancers for project-based collaborations. If you love open source, want to contribute to our products, or are interested in freelance opportunities, we'd love to hear from you!
-              </p>
-            </motion.div>
-            <div className="mt-8 flex flex-col items-center gap-4">
-              <Button 
-                href="/contact" 
-                variant="primary" 
-                size="lg"
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="relative"
               >
-                Contact Us to Collaborate
-              </Button>
-              <span className="text-sm text-gray-500">Or reach out on <a href="https://github.com/dixitk941" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">Github</a></span>
+                <div className="aspect-[4/3] rounded-3xl overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" 
+                    alt="AINOR team"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </motion.div>
             </div>
           </div>
-        </Container>
-      </Section>
+        </section>
 
-      {/* CTA */}
-      <Section className="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto">
+        {/* Benefits Section */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
             >
-              <h2 className="text-3xl font-bold mb-4">
-                Don't See the Right Fit?
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
+                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                <span className="font-semibold text-sm">Benefits</span>
+              </span>
+              
+              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a]">
+                Why Work
+                <span className="block mt-2 text-indigo-500">With Us</span>
               </h2>
-              <p className="text-white/80 mb-8">
-                We're always looking for talented individuals to join our team. Send us your resume and we'll keep you in mind for future opportunities.
-              </p>
-              <Button 
-                href="/careers/general-application" 
-                variant="light" 
-                size="lg"
-              >
-                Submit General Application
-              </Button>
+            </motion.div>
+
+            <motion.div 
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {benefits.map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white rounded-2xl p-6 border border-gray-100"
+                  variants={cardVariants}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
+                  <div className="text-4xl mb-4">{benefit.icon}</div>
+                  <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">{benefit.title}</h3>
+                  <p className="text-gray-600 text-sm">{benefit.description}</p>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
-        </Container>
-      </Section>
+        </section>
 
-          </>
+        {/* Open Positions Notice */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-3xl p-12 text-center border border-gray-100"
+            >
+              <div className="text-5xl mb-6">📋</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+                No Open Positions Right Now
+              </h2>
+              <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+                We don't have any open positions at the moment, but we're always looking for talented individuals. Send us your resume and we'll keep you in mind for future opportunities.
+              </p>
+              <motion.a
+                href="mailto:careers@myainor.com"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-500 text-white rounded-xl font-medium hover:bg-indigo-600 transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Send Your Resume
+              </motion.a>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-[#1a1a1a] rounded-3xl p-12 md:p-16 text-center"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                Have Questions?
+              </h2>
+              <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                Want to learn more about working at AINOR? We'd love to hear from you.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.a
+                  href="https://wa.me/917579500264?text=Hi%20AINOR!%20I%20have%20a%20question%20about%20careers."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                  Chat With Us
+                </motion.a>
+                <Link
+                  to="/about"
+                  className="px-8 py-4 bg-white/10 text-white rounded-xl font-medium hover:bg-white/20 transition-colors"
+                >
+                  Learn About Us
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
 
 export default CareersPage;
-

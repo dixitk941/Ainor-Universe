@@ -6,7 +6,7 @@ import ServiceSchema from '../components/seo/ServiceSchema';
 import SEOText from '../components/seo/SEOText';
 
 // UI Components
-import TechLinesBackground from '../components/ui/TechLinesBackground';
+import AnimatedBackground from '../components/ui/AnimatedBackground';
 
 // Section Components
 import HeroSection from '../components/sections/HeroSection';
@@ -78,11 +78,12 @@ const HomePage = () => {
       />
       <ServiceSchema />
       
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-        {/* Use only TechLinesBackground on desktop for improved performance */}
-        {isDesktop && <TechLinesBackground />}
+      <div className="min-h-screen overflow-hidden relative" style={{backgroundColor: '#f5f5f5'}}>
+        {/* Animated SVG Background */}
+        {isDesktop && <AnimatedBackground />}
         
-        {/* Optimized page sections - load in sequence */}
+        {/* Page content with relative z-index */}
+        <div className="relative z-10">
         <HeroSection />
         <SubscriptionBenefitsSection />
         <ServicesSection />
@@ -94,6 +95,7 @@ const HomePage = () => {
         </div>
         <SEOText page="home" />
         <ContactSection />
+        </div>
       </div>
     </>
   );

@@ -1,105 +1,146 @@
 import React from 'react';
-import Section from '../layout/Section';
-import Card from '../ui/Card';
 import { motion } from 'framer-motion';
+
+// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
 const testimonials = [
   {
     id: 1,
-    content: "AINOR delivered an exceptional cab booking platform for GoForCab. Their innovative approach and technical expertise transformed our vision into a user-friendly, scalable solution that has revolutionized our business operations.",
+    content: "AINOR delivered an exceptional cab booking platform for GoForCab. Their innovative approach and technical expertise transformed our vision into a user-friendly, scalable solution.",
     author: "Chetan Aggarwal",
     position: "CEO, GoForCab",
-    avatar: "https://images.unsplash.com/photo-150700321169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
   },
   {
     id: 2,
-    content: "Working with AINOR on Sttrika's digital platform was an outstanding experience. Their team's dedication to quality and attention to detail helped us create a sophisticated solution that perfectly serves our customers' needs.",
+    content: "Working with AINOR on Sttrika's digital platform was outstanding. Their team's dedication to quality and attention to detail helped us create a sophisticated solution.",
     author: "Kajal Dixit",
     position: "CEO, Sttrika",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
   },
   {
     id: 3,
-    content: "AINOR's expertise in web development and digital solutions helped us launch our fintech platform successfully. Their professional approach and timely delivery made the entire process seamless and efficient.",
+    content: "AINOR's expertise in web development helped us launch our platform successfully. Their professional approach and timely delivery made the process seamless.",
     author: "Arjun Sharma",
-    position: "Founder, FinTech Solutions India",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
+    position: "Founder, FinTech Solutions",
   },
 ];
 
 const TestimonialsSection = () => {
   return (
-    <Section id="testimonials" bgColor="bg-gray-50">
-      <div className="text-center mb-16">
-        <motion.span 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-sm font-medium mb-4"
+    <section id="testimonials" className="py-20 md:py-32 relative overflow-hidden">
+      {/* Decorative connecting arrows - feedback loop */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Circular feedback arrows */}
+        <motion.svg
+          className="absolute top-32 left-10 w-24 h-24 opacity-[0.08]"
+          viewBox="0 0 100 100"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         >
-          Testimonials
-        </motion.span>
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900"
-        >
-          What Our Clients Say
-        </motion.h2>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto"
-        >
-          Don't just take our word for it — hear from some of our satisfied clients
-        </motion.p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {testimonials.map((testimonial, index) => (
-          <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
-        ))}
-      </div>
-    </Section>
-  );
-};
-
-const TestimonialCard = ({ testimonial, index }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-    >
-      <Card className="p-8 h-full flex flex-col" hoverEffect>
-        <div className="relative mb-6">
-          <div className="absolute -top-4 -left-4 h-10 w-10 bg-indigo-500 rounded-full flex items-center justify-center text-white">
-            <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-            </svg>
-          </div>
-        </div>
-        <p className="text-gray-700 italic flex-grow">"{testimonial.content}"</p>
-        <div className="mt-6 flex items-center">
-          <img 
-            className="h-12 w-12 rounded-full border-2 border-indigo-100" 
-            src={testimonial.avatar} 
-            alt={testimonial.author}
-            loading="lazy"
+          <path 
+            d="M 50 15 A 35 35 0 1 1 15 50" 
+            stroke="#6366f1" 
+            strokeWidth="2.5" 
+            fill="none"
+            strokeLinecap="round"
           />
-          <div className="ml-4">
-            <p className="text-base font-medium text-gray-900">{testimonial.author}</p>
-            <p className="text-sm text-gray-600">{testimonial.position}</p>
-          </div>
+          <polygon points="50,10 55,20 45,20" fill="#6366f1" />
+        </motion.svg>
+        
+        {/* Quote connection line */}
+        <svg className="absolute bottom-40 right-20 w-[100px] h-[80px] opacity-[0.06]" viewBox="0 0 100 80">
+          <motion.path
+            d="M 10 40 L 45 10 L 45 30 L 90 30"
+            stroke="#6366f1"
+            strokeWidth="2.5"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 1, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.polygon
+            points="85,25 95,30 85,35"
+            fill="#6366f1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 4, repeat: Infinity, times: [0, 0.4, 0.6, 1] }}
+          />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100"
+          >
+            <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+            <span className="font-semibold text-sm">Testimonials</span>
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#1a1a1a]"
+          >
+            What Our
+            <span className="block mt-2 text-indigo-500">
+              Clients Say
+            </span>
+          </motion.h2>
         </div>
-      </Card>
-    </motion.div>
+
+        {/* Testimonials Grid */}
+        <motion.div 
+          className="grid md:grid-cols-3 gap-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={testimonial.id}
+              className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              {/* Stars */}
+              <div className="flex gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-indigo-500">★</span>
+                ))}
+              </div>
+              
+              {/* Quote */}
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                "{testimonial.content}"
+              </p>
+              
+              {/* Author */}
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500 font-bold">
+                  {testimonial.author.charAt(0)}
+                </div>
+                <div>
+                  <div className="font-bold text-[#1a1a1a]">{testimonial.author}</div>
+                  <div className="text-sm text-gray-500">{testimonial.position}</div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 };
 

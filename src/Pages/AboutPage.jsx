@@ -1,862 +1,387 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaLightbulb, FaHandshake, FaTrophy } from 'react-icons/fa';
-import { BsArrowRight } from 'react-icons/bs';
-import { IoBusinessOutline, IoPeopleOutline, IoRocketOutline, IoTimeOutline, IoCalendarOutline, IoGlobeOutline, IoShieldCheckmarkOutline } from 'react-icons/io5';
-import { HiOutlineBadgeCheck } from 'react-icons/hi';
-import Container from '../components/layout/Container';
-import Section from '../components/layout/Section';
+import { Link } from 'react-router-dom';
 import SEOHead from '../components/seo/SEOHead';
-import SEOText from '../components/seo/SEOText';
 
-const AboutPage = () => {// Company milestones with updated timeline
+// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
+
+const AboutPage = () => {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
+  // Company milestones
   const milestones = [
     {
       year: '2023',
       title: 'Our Beginning',
-      description: 'What started in a hostel room with one developer and a big dream is now AINOR — building smart solutions where tech meets business.'
-,
-      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      year: '2023',
-      title: 'First Major Project',
-      description: 'Successfully launched our first major project, establishing our reputation for delivering high-quality, innovative solutions that exceed client expectations.',
-      image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+      description: 'What started in a hostel room with one developer and a big dream is now AINOR — building smart solutions where tech meets business.',
     },
     {
       year: '2024',
       title: 'Remote Excellence',
-      description: 'Started solo with a remote-first mindset, now growing into a distributed team delivering high-quality solutions across time zones.',      
-      image: 'https://images.unsplash.com/photo-1587560699334-cc4ff634909a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      year: '2024',
-      title: 'International Expansion',
-      description: 'Expanded our reach to serve clients internationally, bringing our innovative digital solutions to businesses across different markets and industries.',
-      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+      description: 'Started solo with a remote-first mindset, now growing into a distributed team delivering high-quality solutions across time zones.',
     },
     {
       year: '2025',
-      title: '🇮🇳 First in India: Subscription Services',
-      description: 'Made history by becoming the first company in India to offer subscription-based web development, mobile app, and digital services — revolutionizing how businesses access technology.',
-      image: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+      title: '🇮🇳 First in India',
+      description: 'Made history by becoming the first company in India to offer subscription-based web development, mobile app, and digital services.',
     },
+  ];
+
+  // Team members
+  const teamMembers = [
     {
-      year: '2025',
-      title: 'Today & Beyond',
-      description: 'Continuing to innovate and grow, we focus on emerging technologies and sustainable solutions that help businesses thrive in the digital future.',
-      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-    }
-  ];// Team members data with updated information
-  const teamMembers = [    {
       name: "Karan Dixit",
       position: "Founder & CEO",
-      bio: "A visionary entrepreneur and dedicated technology student, Karan combines academic excellence with practical innovation. His deep passion for coding and web development drives AINOR's mission to deliver cutting-edge digital solutions. As founder and CEO, he leads the company's strategic vision while actively exploring emerging technologies to create meaningful projects that transform businesses and user experiences.",
-      expertise: ["Strategic Planning", "Web Development", "Tech Leadership"],
+      bio: "A visionary entrepreneur combining academic excellence with practical innovation. His passion for coding drives AINOR's mission to deliver cutting-edge digital solutions.",
       image: "https://genzconnect.vercel.app/assets/KaranDixit.jpg"
-    },    {
+    },
+    {
       name: "Mayank Sharma",
       position: "Cyber Security Expert",
-      bio: "A dedicated cybersecurity specialist and technology student, Mayank brings expertise in protecting digital infrastructure and sensitive data. His passion for coding and cybersecurity ensures that all AINOR projects meet the highest security standards. He specializes in implementing robust security protocols and staying ahead of emerging cyber threats to safeguard our clients' digital assets.",      expertise: ["Cybersecurity", "Network Security", "Threat Analysis"],
+      bio: "A dedicated cybersecurity specialist ensuring all AINOR projects meet the highest security standards with robust protocols.",
       image: "/assets/IMG20231016135628.jpg"
     },
     {
       name: "Aakash Dixit",
-      position: "Business Development, Web Developer & Graphic Designer",
-      bio: "A strategic business expert, skilled web developer, and creative graphic designer, Aakash brings a unique combination of technical expertise, design sensibility, and business acumen to AINOR. His comprehensive understanding of market dynamics, development processes, and visual communication enables him to bridge the gap between client requirements and creative solutions. He specializes in business planning, client relations, brand identity design, and delivering web solutions that drive business growth.",
-      expertise: ["Business Development", "Web Development", "Graphic Design", "Strategic Planning"],
+      position: "Business & Design Lead",
+      bio: "A strategic expert combining web development, graphic design, and business acumen to bridge client requirements with creative solutions.",
       image: "/assets/IMG_8027.JPG"
     },
-    {
-      name: "Kushal Sharma",
-      position: "Cyber Security & Web Developer (Freelancer)",
-      bio: "Kushal joined us as a freelancer, bringing strong skills in both cybersecurity and web development. His expertise helps us deliver secure and robust digital solutions for our clients, and his flexible approach makes him a valuable addition to the team.",
-      expertise: ["Cybersecurity", "Web Development", "Freelance Projects"],
-      image: "https://genzconnect.vercel.app/assets/kushal.jpg"
-    }
   ];
 
-  // Company values with expanded information
+  // Company values
   const values = [
-    {
-      icon: <IoRocketOutline className="w-8 h-8" />,
-      color: "bg-blue-100 text-blue-600",
-      title: "Innovation",
-      description: "We constantly explore new technologies and methodologies to deliver cutting-edge solutions that keep our clients ahead of the curve."
-    },
-    {
-      icon: <FaHandshake className="w-8 h-8" />,
-      color: "bg-green-100 text-green-600",
-      title: "Partnership",
-      description: "We build long-term relationships with our clients, becoming trusted advisors who are invested in their success."
-    },
-    {
-      icon: <FaLightbulb className="w-8 h-8" />,
-      color: "bg-amber-100 text-amber-600",
-      title: "Expertise",
-      description: "Our team consists of specialists who are passionate about their craft and committed to delivering excellence in every project."
-    },
-    {
-      icon: <IoPeopleOutline className="w-8 h-8" />,
-      color: "bg-purple-100 text-purple-600",
-      title: "Collaboration",
-      description: "We believe in the power of diverse perspectives and foster an environment where team members work together to create exceptional solutions."
-    },
-    {
-      icon: <IoTimeOutline className="w-8 h-8" />,
-      color: "bg-rose-100 text-rose-600",
-      title: "Reliability",
-      description: "Our clients can depend on us to deliver high-quality work on time and within budget, every time."
-    },
-    {
-      icon: <IoBusinessOutline className="w-8 h-8" />,
-      color: "bg-indigo-100 text-indigo-600",
-      title: "Integrity",
-      description: "We operate with honesty, transparency, and strong ethical principles in all our business dealings."
-    }
+    { icon: '🚀', title: 'Innovation', description: 'Constantly exploring new technologies to deliver cutting-edge solutions.' },
+    { icon: '🤝', title: 'Partnership', description: 'Building long-term relationships as trusted advisors invested in your success.' },
+    { icon: '💡', title: 'Expertise', description: 'Specialists passionate about their craft, committed to excellence.' },
+    { icon: '👥', title: 'Collaboration', description: 'Diverse perspectives working together to create exceptional solutions.' },
   ];
-  // Company achievements data
-  const companyAchievements = {
-    awards: [
-      {
-        title: "Best Tech Innovator 2024",
-        organization: "Tech Excellence Awards",
-        description: "Recognized for our innovative approach to solving complex business challenges through technology."
-      },
-      {
-        title: "Top Web Development Agency",
-        organization: "Digital Design Awards",
-        description: "Ranked among the top web development agencies for creating high-impact digital experiences."
-      },
-      {
-        title: "Best Workplace Culture",
-        organization: "Employer Excellence",
-        description: "Awarded for our inclusive, innovative, and supportive workplace environment."
-      }
-    ],
-    stats: [
-      { number: "20+", label: "Projects Completed" },
-      { number: "15+", label: "Happy Clients" },
-      { number: "100%", label: "Client Satisfaction" },
-      { number: "2+", label: "Years Experience" }
-    ]
-  };// Animation variants for One UI 7 style
-  const fadeIn = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { 
-        duration: 0.5, 
-        ease: [0.25, 0.1, 0.25, 1] // custom cubic bezier for One UI feel
-      }
-    }  };return (
+
+  // Stats
+  const stats = [
+    { number: '50+', label: 'Projects Delivered' },
+    { number: '100%', label: 'Client Satisfaction' },
+    { number: '2+', label: 'Years Experience' },
+    { number: '<48h', label: 'Response Time' },
+  ];
+
+  return (
     <>
       <SEOHead 
-        title="About AINOR - Our Story, Team & Mission | Digital Solutions Company"
-        description="Learn about AINOR's journey, meet our expert team, and discover our mission to transform businesses through innovative digital solutions and cutting-edge technology."
-        keywords="AINOR about, company story, development team, Karan Dixit, Mayank Sharma, Aakash Dixit, digital agency history, technology expertise, business transformation"
+        title="About AINOR - India's First Subscription-Based Web Development Company"
+        description="Learn about AINOR, India's first subscription-based web development company. Our expert team delivers premium digital solutions at affordable monthly rates."
         canonicalUrl="https://myainor.com/about"
-        structuredData={{
-          "@context": "https://schema.org",
-          "@type": "AboutPage",
-          "name": "About AINOR",
-          "description": "Learn about AINOR's journey, team, and mission to transform businesses through innovative digital solutions.",
-          "url": "https://myainor.com/about",
-          "mainEntity": {
-            "@type": "Organization",
-            "name": "AINOR",
-            "foundingDate": "2023",
-            "founders": [
-              {
-                "@type": "Person",
-                "name": "Karan Dixit",
-                "jobTitle": "Founder & CEO"
-              }
-            ]
-          }
-        }}
       />
-      
-      <div className="bg-white text-gray-900">      {/* Hero Section with One UI 7 inspiration - full-width, large, bold typography */}
-      <section className="relative h-screen overflow-hidden mobile-no-top-space">
-        {/* Full width background image with overlay */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30 z-10"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
-            alt="AINOR Team" 
-            className="w-full h-full object-cover object-center"
-          />
-        </div>
-        
-        {/* Content overlay - One UI 7 style with rounded, bold typography */}
-        <div className="relative z-20 h-full flex flex-col justify-center">
-          <Container>
-            <div className="px-4 md:px-8 max-w-5xl">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white">
-                  We create <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">digital experiences</span> that transform businesses
-                </h1>
-                <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl font-light">
-                  Discover the passionate team behind AINOR and our journey to redefine what's possible in the digital world.
-                </p>                <div className="flex flex-wrap gap-5">
-                  <button 
-                    className="inline-flex items-center px-8 py-4 bg-white text-gray-900 font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                    onClick={() => {
-                      const storySection = document.getElementById('story');
-                      if (storySection) {
-                        storySection.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                  >
-                    Our Story
-                  </button>
-                  <a 
-                    href="/contact"
-                    className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300"
-                  >
-                    Work With Us
-                  </a>
-                </div>
-              </motion.div>
-            </div>
-          </Container>
-            {/* Scroll indicator - One UI style with subtle animation */}
-          <motion.div 
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center cursor-pointer"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            onClick={() => {
-              const storySection = document.getElementById('story');
-              if (storySection) {
-                storySection.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-          >
-            <span className="text-white/70 text-sm mb-2 font-light">Scroll to explore</span>
-            <BsArrowRight className="rotate-90 w-5 h-5 text-white/70" />
-          </motion.div>
-        </div>
-      </section>
-      
-      {/* Redesigned About AINOR Section */}
-      <Section className="py-20 md:py-32 bg-white relative overflow-hidden" id="company-overview">
-        {/* Background decoration */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full blur-3xl opacity-50"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-purple-100 to-pink-100 rounded-full blur-3xl opacity-50"></div>
-        </div>
-        
-        <Container>
-          {/* MSME Recognition Badge - Floating Style */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex justify-center mb-12"
-          >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-full shadow-lg shadow-green-500/25">
-              <IoShieldCheckmarkOutline className="w-5 h-5" />
-              <span className="font-semibold text-sm">MSME Registered</span>
-              <span className="text-white/80 text-sm">|</span>
-              <span className="text-sm font-medium">UDYAM-UP-36-0033877</span>
-              <HiOutlineBadgeCheck className="w-5 h-5 text-green-200" />
-            </div>
-          </motion.div>
 
-          {/* Main About Content - Two Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-            {/* Left Column - Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="px-4 md:px-0"
+      <div className="min-h-screen bg-[#f5f5f5]">
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-20 overflow-hidden">
+          {/* Decorative arrows */}
+          <div className="absolute inset-0 pointer-events-none">
+            <motion.svg
+              className="absolute top-20 right-16 w-32 h-32 opacity-[0.1]"
+              viewBox="0 0 120 120"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
             >
-              <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                <IoBusinessOutline className="w-4 h-4" />
-                About AINOR
-              </div>
-              
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                Crafting Digital 
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> Excellence</span> 
-                <br />Since 2023
-              </h2>
-              
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                What started in a hostel room with just a laptop and a dream has grown into <strong className="text-gray-900">AINOR</strong> — a Government of India recognized MSME dedicated to transforming businesses through innovative digital solutions.
-              </p>
-              
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                We specialize in web development, mobile applications, UI/UX design, and cybersecurity. Our mission is to empower startups, enterprises, and global brands with scalable, secure technology solutions that drive real business results.
-              </p>
+              <circle cx="60" cy="60" r="8" fill="#6366f1" />
+              {[0, 90, 180, 270].map((angle, i) => (
+                <g key={i} transform={`rotate(${angle} 60 60)`}>
+                  <line x1="60" y1="60" x2="60" y2="20" stroke="#6366f1" strokeWidth="2" />
+                  <polygon points="55,25 60,12 65,25" fill="#6366f1" />
+                </g>
+              ))}
+            </motion.svg>
+          </div>
 
-              {/* Key Highlights */}
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-2xl border border-blue-100">
-                  <div className="text-3xl font-bold text-blue-600 mb-1">20+</div>
-                  <div className="text-gray-600 text-sm">Projects Delivered</div>
-                </div>
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-2xl border border-green-100">
-                  <div className="text-3xl font-bold text-green-600 mb-1">100%</div>
-                  <div className="text-gray-600 text-sm">Client Satisfaction</div>
-                </div>
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-2xl border border-purple-100">
-                  <div className="text-3xl font-bold text-purple-600 mb-1">15+</div>
-                  <div className="text-gray-600 text-sm">Happy Clients</div>
-                </div>
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-5 rounded-2xl border border-amber-100">
-                  <div className="text-3xl font-bold text-amber-600 mb-1">2+</div>
-                  <div className="text-gray-600 text-sm">Years Experience</div>
-                </div>
-              </div>
-
-              <a 
-                href="/contact" 
-                className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                Start Your Project
-                <BsArrowRight className="w-4 h-4" />
-              </a>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-16"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
+                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                <span className="font-semibold text-sm">About Us</span>
+              </span>
+              
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1a1a1a] mb-6">
+                Building Digital
+                <span className="block mt-2 text-indigo-500">Excellence</span>
+              </h1>
+              
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                AINOR is India's first subscription-based web development company. We help businesses launch and grow their digital presence without massive upfront costs.
+              </p>
             </motion.div>
 
-            {/* Right Column - Visual Element */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative px-4 md:px-0"
+            {/* Stats */}
+            <motion.div 
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
             >
-              {/* Main Image */}
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl transform rotate-3 scale-105 opacity-10"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                  alt="AINOR Team collaborating on digital solutions"
-                  className="relative rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]"
-                />
-                
-                {/* Floating Cards */}
-                <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-gray-100">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
-                      <IoShieldCheckmarkOutline className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-gray-900">Govt. Recognized</div>
-                      <div className="text-xs text-gray-500">MSME Registered</div>
-                    </div>
-                  </div>
-                </div>
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100"
+                  variants={cardVariants}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
+                  <div className="text-3xl md:text-4xl font-bold text-indigo-500 mb-2">{stat.number}</div>
+                  <div className="text-gray-600 text-sm">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
 
-                <div className="absolute -top-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-gray-100">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
-                      <IoGlobeOutline className="w-6 h-6 text-white" />
+        {/* Our Story Section */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <svg className="absolute top-40 left-10 w-20 h-[200px] opacity-[0.08]" viewBox="0 0 60 200">
+              <line x1="30" y1="10" x2="30" y2="180" stroke="#6366f1" strokeWidth="2" strokeDasharray="8 8" />
+              <polygon points="23,170 30,190 37,170" fill="#6366f1" />
+              {[50, 100, 150].map((y, i) => (
+                <circle key={i} cx="30" cy={y} r="5" fill="#6366f1" />
+              ))}
+            </svg>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
+                  <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                  <span className="font-semibold text-sm">Our Story</span>
+                </span>
+                
+                <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6">
+                  From Hostel Room
+                  <span className="block mt-2 text-indigo-500">To Industry First</span>
+                </h2>
+                
+                <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                  What started as a passion project in a college hostel room has evolved into India's first subscription-based web development company. We believed businesses deserved access to premium digital solutions without breaking the bank.
+                </p>
+
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-500 text-white rounded-xl font-medium hover:bg-indigo-600 transition-colors"
+                >
+                  Start Your Journey
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                {milestones.map((milestone, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
+                    whileHover={{ x: 10, transition: { duration: 0.2 } }}
+                  >
+                    <div className="flex items-start gap-4">
+                      <span className="px-3 py-1 bg-indigo-50 text-indigo-500 rounded-lg font-bold text-sm">
+                        {milestone.year}
+                      </span>
+                      <div>
+                        <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">{milestone.title}</h3>
+                        <p className="text-gray-600 text-sm">{milestone.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-sm font-bold text-gray-900">Global Reach</div>
-                      <div className="text-xs text-gray-500">India & Europe</div>
-                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Values Section */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
+                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                <span className="font-semibold text-sm">Our Values</span>
+              </span>
+              
+              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a]">
+                What Drives
+                <span className="block mt-2 text-indigo-500">Our Work</span>
+              </h2>
+            </motion.div>
+
+            <motion.div 
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {values.map((value, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center"
+                  variants={cardVariants}
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                >
+                  <div className="text-4xl mb-4">{value.icon}</div>
+                  <h3 className="text-xl font-bold text-[#1a1a1a] mb-3">{value.title}</h3>
+                  <p className="text-gray-600 text-sm">{value.description}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Team Section */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <motion.svg
+              className="absolute bottom-20 right-10 w-28 h-28 opacity-[0.08]"
+              viewBox="0 0 100 100"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            >
+              <circle cx="50" cy="50" r="6" fill="#6366f1" />
+              {[0, 120, 240].map((angle, i) => (
+                <g key={i} transform={`rotate(${angle} 50 50)`}>
+                  <line x1="50" y1="50" x2="50" y2="15" stroke="#6366f1" strokeWidth="2" />
+                  <polygon points="45,20 50,8 55,20" fill="#6366f1" />
+                </g>
+              ))}
+            </motion.svg>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
+                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                <span className="font-semibold text-sm">Our Team</span>
+              </span>
+              
+              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a]">
+                Meet The
+                <span className="block mt-2 text-indigo-500">Experts</span>
+              </h2>
+            </motion.div>
+
+            <motion.div 
+              className="grid md:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {teamMembers.map((member, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100"
+                  variants={cardVariants}
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                >
+                  <div className="aspect-square overflow-hidden">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{member.name}</h3>
+                    <p className="text-indigo-500 font-medium text-sm mb-3">{member.position}</p>
+                    <p className="text-gray-600 text-sm">{member.bio}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-[#1a1a1a] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
+            >
+              <div className="relative z-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                  Ready to Build Something Amazing?
+                </h2>
+                <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                  Join 50+ businesses who trust AINOR for their digital success. Let's create something extraordinary together.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    to="/contact"
+                    className="px-8 py-4 bg-indigo-500 text-white rounded-xl font-medium hover:bg-indigo-600 transition-colors"
+                  >
+                    Start Your Project
+                  </Link>
+                  <Link
+                    to="/portfolio"
+                    className="px-8 py-4 bg-white/10 text-white rounded-xl font-medium hover:bg-white/20 transition-colors"
+                  >
+                    View Our Work
+                  </Link>
                 </div>
               </div>
             </motion.div>
           </div>
-
-          {/* Services & Industries Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="px-4 md:px-0"
-          >
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Why Choose Us */}
-              <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8 rounded-3xl">
-                <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
-                  <FaTrophy className="w-6 h-6 text-yellow-400" />
-                </div>
-                <h3 className="text-xl font-bold mb-4">Why Choose AINOR?</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-400 mt-1">✓</span>
-                    <span>Proven track record of innovative solutions</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-400 mt-1">✓</span>
-                    <span>Expert team with diverse tech skills</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-400 mt-1">✓</span>
-                    <span>Dedicated cybersecurity for every project</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-400 mt-1">✓</span>
-                    <span>Transparent pricing & communication</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-400 mt-1">✓</span>
-                    <span>Global experience with local expertise</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Our Services */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl border border-blue-100">
-                <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                  <IoRocketOutline className="w-6 h-6 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Our Services</h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Custom Web & Mobile Development
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    UI/UX Design & Branding
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Cloud Solutions & SaaS
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Cybersecurity & Protection
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    SEO & Digital Marketing
-                  </li>
-                </ul>
-              </div>
-
-              {/* Industries */}
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-3xl border border-purple-100">
-                <div className="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                  <IoPeopleOutline className="w-6 h-6 text-purple-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Industries We Serve</h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                    Startups & Entrepreneurs
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                    E-commerce & Retail
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                    Healthcare & Education
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                    Finance & Fintech
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                    Travel & Hospitality
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Detailed MSME Info Box */}
-          <motion.div
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="mt-16 px-4 md:px-0"
-          >
-            <div className="bg-gradient-to-r from-green-50 via-emerald-50 to-teal-50 border border-green-200 rounded-3xl p-8 md:p-10 shadow-sm">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-                <div className="flex items-center gap-5">
-                  <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-2xl shadow-lg shadow-green-500/20">
-                    <IoShieldCheckmarkOutline className="w-10 h-10 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                      Government of India Recognized MSME
-                      <HiOutlineBadgeCheck className="text-green-500 w-6 h-6" />
-                    </h3>
-                    <p className="text-gray-600 mt-1">
-                      AINOR is officially registered under the Ministry of Micro, Small and Medium Enterprises
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-center lg:items-end gap-2 bg-white px-8 py-4 rounded-2xl shadow-sm">
-                  <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Udyam Registration Number</span>
-                  <span className="text-green-700 font-bold text-xl tracking-wide">UDYAM-UP-36-0033877</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </Container>
-      </Section>
-      
-      {/* Main content with seamless scroll sections - One UI 7 style */}
-      <div className="bg-white">
-        {/* Our Story Section - With timeline cards */}
-        <Section className="py-24 md:py-32" id="story">
-          <Container>
-            <motion.div
-              variants={fadeIn}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16 md:mb-24 px-4 md:px-0"
-            >
-              <span className="inline-block text-blue-600 font-medium mb-3 tracking-wide">OUR JOURNEY</span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
-                The Story of AINOR
-              </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                From a small startup to a leading digital agency, our journey has been defined by innovation, growth, and client success.
-              </p>
-            </motion.div>
-            
-            {/* Timeline style cards with One UI 7-inspired design */}
-            <div className="space-y-32 px-4 md:px-8">
-              {milestones.map((milestone, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-                  className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 md:gap-16`}
-                >
-                  {/* Image with One UI 7-style rounded corners */}
-                  <div className="w-full md:w-1/2">
-                    <div className="rounded-[2.5rem] overflow-hidden shadow-xl">
-                      <img
-                        src={milestone.image}
-                        alt={milestone.title}
-                        className="w-full aspect-video object-cover"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Content with One UI 7-style typography */}
-                  <div className="w-full md:w-1/2">
-                    <div className="p-1">
-                      <div className="bg-blue-50 text-blue-600 rounded-full px-5 py-1.5 text-sm font-medium inline-block mb-5">
-                        {milestone.year}
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">{milestone.title}</h3>
-                      <p className="text-gray-600 text-lg mb-8 leading-relaxed">{milestone.description}</p>
-                      
-                      <ul className="space-y-4">
-                        {index === 0 && (
-                          <>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoRocketOutline className="w-5 h-5" /></span>
-                            <span className="text-gray-700">Built alone from scratch, driven by passion and purpose</span>
-
-                            </li>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoBusinessOutline className="w-5 h-5" /></span>
-                             <span className="text-gray-700">First office? Just a laptop and a dream in my hostel room</span>
-
-                            </li>
-                          </>
-                        )}
-                        {index === 1 && (
-                          <>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoBusinessOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Signed major contract with industry leader</span>
-                            </li>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoPeopleOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Expanded team to include diverse expertise</span>
-                            </li>
-                          </>
-                        )}
-                        {index === 2 && (
-                          <>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoRocketOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Pioneered fully remote workflow systems</span>
-                            </li>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoTimeOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Maintained 100% client retention during transition</span>
-                            </li>
-                          </>
-                        )}
-                        {index === 3 && (
-                          <>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoGlobeOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Established European headquarters in Berlin</span>
-                            </li>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoPeopleOutline className="w-5 h-5" /></span>
-                             <span className="text-gray-700">No international team — just local passion and global ambition</span>
-
-                            </li>
-                          </>
-                        )}
-                        {index === 4 && (
-                          <>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><FaLightbulb className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Released AINOR Development Framework</span>
-                            </li>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoRocketOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">First AI-powered client project launched</span>
-                            </li>
-                          </>
-                        )}
-                        {index === 5 && (
-                          <>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoCalendarOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Celebrating 3 years of continuous growth</span>
-                            </li>
-                            <li className="flex items-start">
-                              <span className="text-blue-500 mr-3 mt-1 p-1 bg-blue-50 rounded-full"><IoRocketOutline className="w-5 h-5" /></span>
-                              <span className="text-gray-700">Expanded service offerings to include cutting-edge technologies</span>
-                            </li>
-                          </>
-                        )}
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </Section>
-        
-        {/* Our Values Section - One UI 7-style with rounded cards */}
-        <Section className="py-24 md:py-32 bg-gray-50" id="values">
-          <Container>
-            <motion.div
-              variants={fadeIn}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16 md:mb-24 px-4 md:px-0"
-            >
-              <span className="inline-block text-purple-600 font-medium mb-3 tracking-wide">OUR VALUES</span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
-                What Drives Us
-              </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                These core principles guide our work, our interactions, and our approach to solving problems.
-              </p>
-            </motion.div>
-            
-            {/* One UI 7-style cards with gentle shadows and rounded corners */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-8">
-              {values.map((value, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                >
-                  <div className={`p-8 rounded-[2rem] h-full ${value.color} transition-all duration-300 hover:shadow-lg`}>
-                    <div className="mb-6 bg-white/80 w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm">
-                      <div className="text-2xl">{value.icon}</div>
-                    </div>
-                    <h3 className="text-xl font-bold mb-3">{value.title}</h3>
-                    <p className="text-gray-700">{value.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </Section>
-        
-        {/* Our Team Section - One UI 7-style team cards */}
-        <Section className="py-24 md:py-32" id="team">
-          <Container>
-            <motion.div
-              variants={fadeIn}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16 md:mb-24 px-4 md:px-0"
-            >
-              <span className="inline-block text-green-600 font-medium mb-3 tracking-wide">OUR PEOPLE</span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
-                Meet Our Team
-              </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                The talented professionals who bring creativity, expertise, and passion to every project.
-              </p>
-            </motion.div>
-            {/* One UI 7-style team cards with large rounded corners */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto px-4 md:px-8">
-              {teamMembers.map((member, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="group cursor-pointer"
-                >
-                  <div className="bg-white rounded-[2rem] overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl h-full">
-                    <div className="relative aspect-square overflow-hidden">
-                      <img 
-                        src={member.image} 
-                        alt={member.name}
-                        className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 transition-all duration-300"></div>
-                      
-                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 className="text-xl font-bold">{member.name}</h3>
-                        <p className="text-blue-300 font-medium">{member.position}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="p-6">
-                      <p className="text-gray-600 mb-5 text-sm">{member.bio.substring(0, 100)}...</p>
-                      
-                      <div className="flex flex-wrap gap-2">
-                        {member.expertise.slice(0, 2).map((skill, i) => (
-                          <span key={i} className="inline-block bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-              <div className="text-center mt-16 px-4 md:px-0">
-              <a 
-                href="/careers" 
-                className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-medium rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all duration-300"
-              >
-                Join Our Team
-              </a>
-            </div>
-          </Container>
-        </Section>
-          
-        {/* Achievements Section - One UI 7-style stats and awards */}
-        <Section className="py-24 md:py-32 bg-gray-50" id="achievements">
-          <Container>
-            <motion.div
-              variants={fadeIn}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16 md:mb-24 px-4 md:px-0"
-            >
-              <span className="inline-block text-amber-600 font-medium mb-3 tracking-wide">OUR SUCCESS</span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
-                Achievements & Recognition
-              </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                The milestones and recognition we've earned through our dedication to excellence.
-              </p>
-            </motion.div>
-
-            {/* Key Stats - One UI 7-style with large rounded corners */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-4 md:px-8 mb-20">
-              {companyAchievements.stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                >
-                  <div className="bg-white p-6 rounded-[2rem] shadow-lg text-center h-full flex flex-col justify-center py-10">
-                    <h3 className="text-3xl md:text-4xl font-bold text-blue-600 mb-3">{stat.number}</h3>
-                    <p className="text-gray-600">{stat.label}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            
-            {/* Awards - One UI 7-style cards */}
-            <div className="px-4 md:px-8 mb-20">
-              <h3 className="text-2xl font-bold mb-10 text-center text-gray-900">Awards & Recognition</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {companyAchievements.awards.map((award, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    <div className="bg-white p-8 rounded-[2rem] shadow-lg h-full">
-                      <div className="flex items-center mb-5">
-                        <div className="bg-amber-100 text-amber-600 p-3 rounded-2xl mr-4">
-                          <FaTrophy className="h-6 w-6" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-gray-900">{award.title}</h4>
-                          <p className="text-blue-600 text-sm">{award.organization}</p>
-                        </div>
-                      </div>
-                      <p className="text-gray-600">{award.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>            </div>
-          </Container>
-        </Section>
-        
-        {/* SEO Content Section */}
-        <SEOText page="about" />
-        
-        {/* CTA Section - One UI 7-style with large radius and gradient */}
-        <section className="py-20 md:py-24">
-          <Container>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-              className="px-6 py-16 md:p-16 bg-gradient-to-br from-blue-500 to-indigo-700 rounded-[2.5rem] text-white shadow-xl mx-4 md:mx-8"
-            >
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between max-w-6xl mx-auto">
-                <div className="mb-10 md:mb-0 md:max-w-xl">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-5">Ready to transform your digital presence?</h2>
-                  <p className="text-xl text-blue-100">Let's discuss how we can help bring your vision to life with innovative solutions.</p>
-                </div>                <div>
-                  <a 
-                    href="/contact" 
-                    className="inline-flex items-center text-lg px-8 py-4 bg-white text-gray-900 font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                  >
-                    <span className="flex items-center">
-                      Get Started <BsArrowRight className="ml-2" />
-                    </span>
-                  </a>
-                </div>              </div>
-            </motion.div>
-          </Container>
         </section>
       </div>
-    </div>
     </>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Section from '../layout/Section';
 import { motion } from 'framer-motion';
-import Button from '../ui/Button';
-import { FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa';
+
+// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -17,10 +17,7 @@ const ContactSection = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -31,9 +28,7 @@ const ContactSection = () => {
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: '4b29b417-55d1-4ac8-8c6e-9ac8097097f8',
           name: `${formData.firstName} ${formData.lastName}`,
@@ -45,7 +40,6 @@ const ContactSection = () => {
       });
 
       const result = await response.json();
-
       if (result.success) {
         setSubmitStatus('success');
         setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
@@ -59,197 +53,188 @@ const ContactSection = () => {
       setIsSubmitting(false);
     }
   };
+
   return (
-    <Section id="contact" bgColor="bg-gradient-to-b from-white to-gray-50">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-50 to-blue-50 text-indigo-700 text-sm font-semibold mb-4 border border-indigo-100">
-            Get In Touch
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
-            Let's Discuss Your Project
-          </h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-lg leading-relaxed">
-            Ready to elevate your digital presence? Get in touch with our team to discuss your project and discover how we can help you achieve your business goals.
-          </p>
+    <section id="contact" className="py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100"
+          >
+            <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+            <span className="font-semibold text-sm">Get In Touch</span>
+          </motion.div>
           
-          <div className="space-y-4 mb-10">
-            {/* <ContactInfo 
-              icon={<FaMapMarkerAlt />} 
-              title="Our Location" 
-              content="123 Innovation Street, San Francisco, CA 94103" 
-            /> */}
-            <ContactInfo 
-              icon={<FaEnvelope />} 
-              title="Email Us" 
-              content="dixitk941@gmail.com" 
-            />
-            <ContactInfo 
-              icon={<FaPhone />} 
-              title="Call Us" 
-              content="+919528202892" 
-            />
-          </div>
-          
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-2xl border border-gray-200/50">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Our Business Hours</h3>
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex justify-between">
-                <span>Monday - Friday:</span>
-                <span className="font-medium">9:00 AM - 6:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Saturday:</span>
-                <span className="font-medium">10:00 AM - 4:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Sunday:</span>
-                <span className="font-medium">Closed</span>
-              </li>
-            </ul>
-          </div>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >          <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h3>
-            
-            {/* Success Message */}
-            {submitStatus === 'success' && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-green-800 text-sm">
-                  Thank you! Your message has been sent successfully. We'll get back to you soon.
-                </p>
-              </div>
-            )}
-            
-            {/* Error Message */}
-            {submitStatus === 'error' && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-red-800 text-sm">
-                  Sorry, there was an error sending your message. Please try again or contact us directly.
-                </p>
-              </div>
-            )}
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#1a1a1a]"
+          >
+            Let's Discuss
+            <span className="block mt-2 text-indigo-500">
+              Your Project
+            </span>
+          </motion.h2>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Left - Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+              Ready to start your project? Get in touch with us through WhatsApp for the fastest response, or send us a message.
+            </p>
+
+            {/* WhatsApp CTA */}
+            <a 
+              href="https://wa.me/917579500264?text=Hi%20AINOR!%20I'd%20like%20to%20discuss%20a%20project."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mb-8"
+            >
+              <motion.div 
+                className="bg-green-500 text-white rounded-2xl p-6 flex items-center gap-4 hover:bg-green-600 transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <FaWhatsapp className="w-10 h-10" />
                 <div>
-                  <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 mb-1">First name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    id="first-name"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
-                    placeholder="John"
-                  />
+                  <div className="font-bold text-lg">Chat on WhatsApp</div>
+                  <div className="text-green-100 text-sm">Fastest response • Usually within 1 hour</div>
+                </div>
+              </motion.div>
+            </a>
+
+            {/* Contact Cards */}
+            <div className="space-y-4">
+              <div className="bg-white rounded-xl p-5 border border-gray-100 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500">
+                  <FaEnvelope className="w-5 h-5" />
                 </div>
                 <div>
-                  <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 mb-1">Last name</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    id="last-name"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
-                    placeholder="Doe"
-                  />
+                  <div className="text-sm text-gray-500">Email Us</div>
+                  <div className="font-medium text-[#1a1a1a]">dixitk941@gmail.com</div>
                 </div>
               </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
-                  placeholder="john.doe@example.com"
-                />
+              
+              <div className="bg-white rounded-xl p-5 border border-gray-100 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500">
+                  <FaPhone className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-sm text-gray-500">Call Us</div>
+                  <div className="font-medium text-[#1a1a1a]">+91 9528202892</div>
+                </div>
               </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone (optional)</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
-                  placeholder="+1 (555) 000-0000"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Project details</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
-                  placeholder="Tell us about your project, goals, and timeline..."
-                ></textarea>
-              </div>
-              <div>
-                <label className="flex items-center">
+            </div>
+          </motion.div>
+
+          {/* Right - Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+              {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-xl border border-green-200">
+                  Thank you! We'll get back to you soon.
+                </div>
+              )}
+              {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-xl border border-red-200">
+                  Something went wrong. Please try again.
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                   <input
-                    type="checkbox"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
                     required
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                   />
-                  <span className="ml-2 text-sm text-gray-600">
-                    I agree to the <a href="/privacy-policy" className="text-indigo-600 hover:text-indigo-800">Privacy Policy</a>
-                  </span>
-                </label>
-              </div>
-              <div>
-                <Button 
-                  type="submit" 
-                  variant="primary" 
-                  size="lg" 
-                  className="w-full"
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all resize-none"
+                    required
+                  />
+                </div>
+
+                <motion.button
+                  type="submit"
                   disabled={isSubmitting}
+                  className="w-full py-4 bg-[#1a1a1a] text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
-                </Button>
-              </div>
-            </form>
-          </div>
-        </motion.div>
+                </motion.button>
+              </form>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </Section>
-  );
-};
-
-const ContactInfo = ({ icon, title, content }) => {
-  return (
-    <div className="flex items-start">
-      <div className="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 mr-4 flex-shrink-0">
-        {React.cloneElement(icon, { className: 'h-5 w-5' })}
-      </div>
-      <div>
-        <h3 className="text-lg font-medium text-gray-900">{title}</h3>
-        <p className="text-gray-600">{content}</p>
-      </div>
-    </div>
+    </section>
   );
 };
 

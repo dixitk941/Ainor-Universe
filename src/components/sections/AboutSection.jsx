@@ -1,88 +1,138 @@
 import React from 'react';
-import Section from '../layout/Section';
-import AnimatedImage from '../ui/AnimatedImage';
 import { motion } from 'framer-motion';
-import { HiOutlineCode, HiOutlineCube } from 'react-icons/hi';
-import { RiTeamLine } from 'react-icons/ri';
+
+// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
+
+const stats = [
+  { value: '50+', label: 'Projects Delivered' },
+  { value: '100%', label: 'Client Satisfaction' },
+  { value: '2+', label: 'Years Experience' },
+  { value: '<48h', label: 'Response Time' },
+];
 
 const AboutSection = () => {
-  const stats = [
-    { id: 1, icon: <HiOutlineCode />, value: '200+', label: 'Projects Delivered' },
-    { id: 2, icon: <RiTeamLine />, value: '30+', label: 'Team Members' },
-    { id: 3, icon: <HiOutlineCube />, value: '15+', label: 'Years Experience' },
-  ];
-
   return (
-    <Section id="about" bgColor="bg-gray-50">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative"
+    <section id="about" className="py-20 md:py-32 relative overflow-hidden">
+      {/* Decorative connecting elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Team connection arrows */}
+        <motion.svg
+          className="absolute top-20 right-10 w-24 h-24 opacity-[0.1]"
+          viewBox="0 0 100 100"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-300 rounded-full blur-3xl opacity-20 -z-10"></div>
-          <AnimatedImage
-            src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-            alt="Our Team"
-            className="rounded-2xl shadow-xl"
+          <circle cx="50" cy="50" r="6" fill="#6366f1" />
+          {[0, 120, 240].map((angle, i) => (
+            <g key={i} transform={`rotate(${angle} 50 50)`}>
+              <line x1="50" y1="50" x2="50" y2="15" stroke="#6366f1" strokeWidth="2" />
+              <polygon points="45,20 50,8 55,20" fill="#6366f1" />
+            </g>
+          ))}
+        </motion.svg>
+        
+        {/* Connecting curved arrow */}
+        <svg className="absolute bottom-32 left-1/2 w-[150px] h-[80px] opacity-[0.06]" viewBox="0 0 150 80">
+          <motion.path
+            d="M 10 40 Q 75 0 140 40"
+            stroke="#6366f1"
+            strokeWidth="2.5"
+            fill="none"
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 1, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
-          <div className="absolute -bottom-10 -right-10 bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl max-w-xs">
-            <div className="flex space-x-2 mb-2">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
+          <motion.polygon
+            points="135,35 145,40 135,45"
+            fill="#6366f1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 4, repeat: Infinity, times: [0, 0.4, 0.6, 1] }}
+          />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Two Column Layout */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left - Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="aspect-square rounded-3xl overflow-hidden bg-white shadow-lg border border-gray-100">
+              <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                alt="Our Team"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            {/* Quote Card */}
+            <motion.div 
+              className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-lg max-w-xs border border-gray-100"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex space-x-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-indigo-500">★</span>
+                ))}
+              </div>
+              <p className="text-[#1a1a1a] font-medium text-sm">
+                "We don't just build websites and apps. We create digital experiences that transform businesses."
+              </p>
+              <p className="mt-3 text-indigo-500 font-bold text-sm">— AINOR Team</p>
+            </motion.div>
+          </motion.div>
+
+          {/* Right - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
+              <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+              <span className="font-semibold text-sm">About Us</span>
+            </span>
+            
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6">
+              Digital Excellence
+              <span className="block mt-2 text-indigo-500">Since 2023</span>
+            </h2>
+            
+            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+              AINOR is India's first subscription-based web development company. We help businesses launch and grow their digital presence without massive upfront costs. Our team of expert designers and developers deliver premium quality at affordable monthly rates.
+            </p>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 gap-6">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center p-4 bg-white rounded-xl border border-gray-100"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="text-3xl font-bold text-indigo-500">{stat.value}</div>
+                  <div className="text-gray-600 text-sm mt-1">{stat.label}</div>
+                </motion.div>
               ))}
             </div>
-            <p className="text-gray-800 dark:text-white font-medium">
-              "We don't just build websites and apps. We create digital experiences that transform businesses."
-            </p>
-            <p className="mt-2 text-indigo-600 dark:text-indigo-400 font-bold">- CEO, Ainor </p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <span className="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-sm font-medium mb-4">
-            About Us
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Digital Excellence <br />Since 2023
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            At Ainor , we're passionate about creating digital experiences that transform businesses. Our team of experts combines technical skill with creative innovation to deliver solutions that not only meet but exceed client expectations.
-          </p>
-          <p className="text-lg text-gray-600 mb-10">
-            We believe in a collaborative approach, working closely with our clients to understand their unique challenges and goals. This partnership allows us to create tailored solutions that drive real business results.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stats.map((stat) => (
-              <motion.div
-                key={stat.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: stat.id * 0.1 }}
-                viewport={{ once: true }}
-                className="border border-gray-200 rounded-xl p-6 text-center bg-white shadow-sm"
-              >
-                <div className="text-indigo-600 mx-auto mb-2 flex justify-center">
-                  {React.cloneElement(stat.icon, { className: 'h-8 w-8' })}
-                </div>
-                <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-                <p className="text-sm text-gray-500">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 };
 

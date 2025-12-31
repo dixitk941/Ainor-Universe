@@ -1,527 +1,334 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React from 'react';
+import { motion } from 'framer-motion';
 import Typewriter from 'typewriter-effect';
 import { Link } from 'react-router-dom';
 
-import Section from '../layout/Section';
-import Button from '../ui/Button';
-import heroImage from '../../assets/hero-image.jpg';
+// Color palette:
+// Dark: #1a1a1a (text)
+// Light: #f5f5f5 (background) 
+// Accent: #6366f1 (indigo)
 
 const HeroSection = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
-
-  const controls = useAnimation();
-  const [hovered, setHovered] = useState(false);
-  
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-  }, [controls, inView]);
-  // Mobile animations are controlled via CSS classes with responsive breakpoints
-
-  // Variants for animations
-  const mobileShapeVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { 
-        type: "spring", 
-        stiffness: 100, 
-        damping: 15 
-      }
-    }
-  };
-
-  const mobilePulseVariants = {
-    initial: { scale: 1, opacity: 0.5 },
-    pulse: { 
-      scale: [1, 1.05, 1], 
-      opacity: [0.5, 0.7, 0.5],
-      transition: { 
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut" 
-      }
-    }
-  };
-
+  // Stagger animation for cards
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        duration: 0.8,
-      },
-    },
+        staggerChildren: 0.15,
+        delayChildren: 0.6
+      }
+    }
   };
-  
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-    // Animation for floating elements
-  const floatingAnimation = {
-    y: [0, -10, 0],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      }
     }
   };
 
   return (
-    <Section 
-      id="hero" 
-      className="min-h-[90vh] flex items-center relative overflow-hidden"
-      bgColor="bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50"
-      spacing="py-12 md:py-28"
-    >
-      {/* Mobile-specific animated shapes (only visible on mobile) */}
-      <div className="md:hidden">
-        <motion.div 
-          className="absolute top-6 right-6 w-20 h-20 rounded-full bg-blue-400/10 z-0"
-          variants={mobileShapeVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.3 }}
-        />
-        <motion.div 
-          className="absolute bottom-32 left-4 w-16 h-16 rounded-full bg-indigo-400/10 z-0"
-          variants={mobileShapeVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.5 }}
-        />
-        <motion.div 
-          className="absolute top-40 left-[-20px] w-14 h-14 rounded-full border border-blue-200 z-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-        />
-        
-        {/* Mobile animated grid patterns */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <motion.div
-              key={`mobile-grid-${i}`}
-              className="absolute h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"
-              style={{ 
-                top: `${20 + i * 12}%`,
-                left: 0,
-                width: '100%',
-              }}
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 0.3, x: 0 }}
-              transition={{ duration: 1.5, delay: 0.1 * i }}
-            />
+    <section className="relative min-h-screen pt-32 pb-20 overflow-hidden">
+      {/* Decorative connecting arrows for hero */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Rotating connection arrows - top right */}
+        <motion.svg
+          className="absolute top-24 right-16 w-36 h-36 opacity-[0.12]"
+          viewBox="0 0 120 120"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+        >
+          <circle cx="60" cy="60" r="8" fill="#6366f1" />
+          {[0, 90, 180, 270].map((angle, i) => (
+            <g key={i} transform={`rotate(${angle} 60 60)`}>
+              <line x1="60" y1="60" x2="60" y2="20" stroke="#6366f1" strokeWidth="2" />
+              <polygon points="55,25 60,12 65,25" fill="#6366f1" />
+            </g>
           ))}
-        </div>
+        </motion.svg>
         
-        {/* Mobile corner accent */}
-        <svg className="absolute top-0 right-0 h-24 w-24 opacity-30 text-blue-500" viewBox="0 0 100 100">
-          <motion.path 
-            d="M0,0 L100,0 L100,100" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2"
+        {/* Flowing arrow path */}
+        <svg className="absolute top-40 right-[30%] w-[200px] h-[100px] opacity-[0.08]" viewBox="0 0 200 100">
+          <motion.path
+            d="M 10 50 C 50 10 100 10 140 50 S 180 90 190 50"
+            stroke="#6366f1"
+            strokeWidth="2.5"
+            fill="none"
+            strokeLinecap="round"
             initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.5, delay: 0.5 }}
+            animate={{ pathLength: [0, 1, 1, 0] }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              times: [0, 0.45, 0.55, 1]
+            }}
+          />
+          <motion.polygon
+            points="185,45 195,50 185,55"
+            fill="#6366f1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 5, repeat: Infinity, times: [0, 0.4, 0.6, 1] }}
           />
         </svg>
-        
-        {/* Mobile floating elements */}
-        <motion.div
-          className="absolute bottom-20 right-6 w-10 h-10 z-0"
-          animate={{
-            y: [0, -10, 0],
-            opacity: [0.5, 0.8, 0.5]
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-blue-400/70">
-            <motion.path 
-              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" 
-              stroke="currentColor" 
-              strokeWidth="1.5"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 2 }}
-            />
-          </svg>
-        </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* Background shapes */}
-        <motion.div 
-          className="absolute -top-40 -left-40 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 z-0"
-          animate={{
-            x: [0, 10, 0],
-            y: [0, 15, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute -bottom-40 -right-40 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 z-0"
-          animate={{
-            x: [0, -10, 0],
-            y: [0, -15, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
-        />
+      {/* Content directly on background - no card */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Content Column */}
+        {/* Badge */}
         <motion.div
-          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-8"
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 text-sm font-medium border border-indigo-100">
+            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+            How it works
+          </span>
+        </motion.div>
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          
+          {/* Left Column - Headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1a1a1a] leading-[1.1] tracking-tight mb-6">
+              We make it
+              <br />
+              <span className="inline-flex items-center gap-3">
+                super
+                <motion.span 
+                  className="inline-block text-indigo-500"
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  🚀
+                </motion.span>
+                <span className="text-indigo-500">
+                  <Typewriter
+                    options={{
+                      strings: ['easy', 'fast', 'simple'],
+                      autoStart: true,
+                      loop: true,
+                      deleteSpeed: 50,
+                      delay: 80,
+                    }}
+                  />
+                </span>
+              </span>
+            </h1>
+          </motion.div>
+
+          {/* Right Column - Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="lg:pt-8"
+          >
+            <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
+              Working with us is like having a full team of top designers, developers and project managers in-house. Always ready to go.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Feature Cards Row */}
+        <motion.div 
+          className="grid md:grid-cols-3 gap-6 mt-20"
           variants={containerVariants}
           initial="hidden"
-          animate={controls}
-          className="max-w-xl relative z-10"
+          animate="visible"
         >
-          <motion.div
-            className="absolute -z-10 inset-0 overflow-hidden"
-            variants={itemVariants}
-          >
-            <div className="w-full h-full opacity-10">
-              {Array.from({ length: 10 }).map((_, index) => (
-                <div 
-                  key={index}
-                  className="absolute h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"
-                  style={{ 
-                    top: `${Math.random() * 100}%`,
-                    left: 0,
-                    width: '100%',
-                    opacity: Math.random() * 0.3 + 0.1,
-                    transform: `rotate(${Math.random() * 5 - 2.5}deg)`,
-                    filter: 'blur(1px)'
-                  }}
-                />
-              ))}
-            </div>
-          </motion.div>
-        
-          <motion.p 
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-semibold rounded-full border border-blue-100 shadow-sm"
-          >
-            <span className="flex items-center gap-1">
-              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              <span className="text-green-600 text-xs">MSME Registered</span>
-            </span>
-            <span className="w-px h-4 bg-blue-200"></span>
-            Digital Solutions for Modern Businesses
-          </motion.p>
-          
-          {/* NEW: First in India Subscription Badge */}
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full shadow-lg"
-          >
-            <span className="text-lg">🇮🇳</span>
-            <span className="text-sm">First in India: Subscription-Based Web Services!</span>
-            <span className="animate-pulse">✨</span>
-          </motion.div>
-          
-          <motion.h1 
-            variants={itemVariants}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight tracking-tight"
-          >
-            We Build
-            <span className="block mt-2">
-              <motion.span 
-                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 inline-block"
-                animate={{
-                  backgroundPosition: ['0% center', '100% center', '0% center'],
-                }}
-                transition={{
-                  duration: 10,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-              >
-                <Typewriter
-                  options={{
-                    strings: [
-                      'Innovative Websites',
-                      'Powerful Applications',
-                      'Digital Experiences',
-                      'Business Solutions'
-                    ],
-                    autoStart: true,
-                    loop: true,
-                    delay: 70,
-                    deleteSpeed: 40,
-                  }}
-                />
-              </motion.span>
-            </span>
-          </motion.h1>
-          
-          <motion.p 
-            variants={itemVariants}
-            className="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg"
-          >
-            Transform your digital presence with our expert team. We deliver 
-            <motion.span 
-              className="font-semibold text-blue-700 mx-1"
-              animate={{ opacity: [1, 0.8, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              cutting-edge solutions
-            </motion.span> 
-            that help your business thrive in the digital world.
-          </motion.p>
-            <motion.div 
-            variants={itemVariants}
-            className="flex flex-wrap gap-4"
-          >
-            <Button 
-              variant="primary" 
-              size="lg"
-              as={Link}
-              to="/contact"
-              className="group relative overflow-hidden shadow-lg hover:shadow-blue-500/30"
-            >
-              {/* Mobile pulse effect for button */}
-              <motion.span 
-                className="absolute inset-0 rounded-md bg-blue-400/20 md:hidden"
-                variants={mobilePulseVariants}
-                initial="initial"
-                animate="pulse"
-              />
-              <span className="relative z-10">Get Started</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 transition-all duration-300 group-hover:scale-105"></span>
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              size="lg"
-              as={Link}
-              to="/services"
-              className="relative overflow-hidden hover:shadow-md hover:shadow-blue-500/10 group"
-            >
-              <span className="relative z-10">Our Services</span>
-              <span className="absolute bottom-0 left-0 h-[2px] w-full bg-blue-500 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
-            </Button>
-          </motion.div>
-          
-          {/* Mobile-only image - Simplified version of desktop image */}
+          {/* Card 1 - Subscribe */}
           <motion.div 
-            className="mt-12 rounded-xl overflow-hidden shadow-xl md:hidden relative"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300"
+            variants={cardVariants}
+            whileHover={{ y: -8, transition: { duration: 0.3 } }}
           >
-            <div className="relative">
-              {/* Animated border for mobile image */}
-              <motion.div 
-                className="absolute -inset-[2px] rounded-xl z-20 pointer-events-none"
-                initial={{ background: "linear-gradient(90deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0) 100%)" }}
-                animate={{ 
-                  background: ["linear-gradient(0deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
-                              "linear-gradient(90deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
-                              "linear-gradient(180deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
-                              "linear-gradient(270deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
-                              "linear-gradient(0deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)"]
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              />
-              
-              {/* Mobile-specific decorative elements */}
-              <div className="absolute inset-0 z-20 mix-blend-overlay opacity-30 pointer-events-none">
-                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <pattern id="mobile-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" strokeWidth="0.5" />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#mobile-grid)" />
-                </svg>
+            {/* Mock UI Card */}
+            <div className="bg-gray-50 rounded-2xl p-5 mb-6 border border-gray-100">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-indigo-500 text-lg">✦</span>
+                <span className="font-medium text-[#1a1a1a]">Your Project</span>
+                <div className="ml-auto w-3 h-3 rounded-full bg-indigo-100"></div>
               </div>
-              
-              <img 
-                src={heroImage} 
-                alt="AINOR Digital Solutions Team" 
-                className="w-full h-[220px] object-cover object-center"
-                loading="lazy"            
-              />
-              
-              {/* Overlay gradient for better text visibility */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 to-transparent z-0"></div>
+              <div className="space-y-3">
+                <div className="text-xs text-gray-500">Your dedicated team</div>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-medium">A</div>
+                  <span className="text-sm text-[#1a1a1a]">AINOR Team</span>
+                  <div className="ml-auto h-2 w-16 rounded-full bg-indigo-200"></div>
+                </div>
+                <div className="text-xs text-gray-500 mt-3">Your design team</div>
+                <div className="flex items-center gap-1">
+                  <div className="w-7 h-7 rounded-full bg-indigo-400 -mr-2 border-2 border-white"></div>
+                  <div className="w-7 h-7 rounded-full bg-indigo-500 -mr-2 border-2 border-white"></div>
+                  <div className="w-7 h-7 rounded-full bg-indigo-600 border-2 border-white"></div>
+                  <span className="text-xs text-gray-600 ml-2">Expert Team</span>
+                  <div className="ml-auto h-2 w-12 rounded-full bg-indigo-100"></div>
+                </div>
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">Subscribe to your team</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Meet your handpicked team of experts led by your dedicated Project Manager.
+            </p>
+          </motion.div>
+
+          {/* Card 2 - Create Request */}
+          <motion.div 
+            className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300"
+            variants={cardVariants}
+            whileHover={{ y: -8, transition: { duration: 0.3 } }}
+          >
+            {/* Mock UI Card */}
+            <div className="bg-gray-50 rounded-2xl p-5 mb-6 border border-gray-100">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-indigo-500 text-lg">✦</span>
+                <span className="font-medium text-[#1a1a1a]">Create new design</span>
+              </div>
+              <div className="space-y-2">
+                <div className="h-3 w-full rounded-full bg-gray-200"></div>
+                <div className="h-3 w-4/5 rounded-full bg-gray-200"></div>
+                <div className="h-3 w-3/5 rounded-full bg-gray-200"></div>
+              </div>
+              <motion.button 
+                className="w-full mt-5 py-3 bg-indigo-500 text-white rounded-xl font-medium text-sm hover:bg-indigo-600 transition-colors flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Create a request
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                </svg>
+              </motion.button>
+            </div>
+            <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">Create requests</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Simply submit your design & development request. We will straight away get to work.
+            </p>
+          </motion.div>
+
+          {/* Card 3 - Review */}
+          <motion.div 
+            className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+            variants={cardVariants}
+            whileHover={{ y: -8, transition: { duration: 0.3 } }}
+          >
+            {/* Decorative elements */}
+            <div className="absolute -top-6 -right-6">
+              <motion.div
+                animate={{ rotate: [0, 15, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <svg className="w-24 h-24 text-indigo-500 opacity-80" viewBox="0 0 100 100" fill="currentColor">
+                  <path d="M50 10 L55 30 L75 30 L60 42 L65 62 L50 50 L35 62 L40 42 L25 30 L45 30 Z" />
+                </svg>
+              </motion.div>
             </div>
             
-            {/* Interactive dots for mobile image */}
-            <motion.div 
-              className="absolute bottom-3 right-3 flex space-x-1.5 z-30"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 }}
-            >
-              {[1, 2, 3].map((i) => (
-                <motion.div 
-                  key={`mobile-dot-${i}`}
-                  className="w-2 h-2 rounded-full bg-white/80"
-                  animate={{ opacity: [0.4, 1, 0.4] }}
-                  transition={{ 
-                    duration: 2, 
-                    repeat: Infinity, 
-                    delay: i * 0.3,
-                    ease: "easeInOut"
-                  }}
-                />
-              ))}
-            </motion.div>
+            {/* Mock UI Card */}
+            <div className="bg-gray-50 rounded-2xl p-5 mb-6 border border-gray-100 relative z-10">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-indigo-500 text-lg">✦</span>
+                <span className="font-medium text-[#1a1a1a]">Your project scope</span>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-indigo-500 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div className="h-2 flex-1 rounded-full bg-gray-200"></div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-indigo-500 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div className="h-2 flex-1 rounded-full bg-gray-200"></div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-gray-200"></div>
+                  <div className="h-2 flex-1 rounded-full bg-gray-200"></div>
+                </div>
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">Review & Complete</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Check the work we have done for you and give us your feedback to improve.
+            </p>
           </motion.div>
         </motion.div>
-        
-        {/* Image Column */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="hidden md:block relative z-10"
-          whileHover={{ scale: 1.02 }}
-          onHoverStart={() => setHovered(true)}
-          onHoverEnd={() => setHovered(false)}
-        >          
-          <div className="relative overflow-hidden rounded-xl shadow-2xl">
-            {/* Animated border */}
-            <motion.div 
-              className="absolute -inset-[2px] rounded-xl z-20 pointer-events-none"
-              initial={{ background: "linear-gradient(90deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0) 100%)" }}
-              animate={{ 
-                background: ["linear-gradient(0deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
-                             "linear-gradient(90deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
-                             "linear-gradient(180deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
-                             "linear-gradient(270deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)",
-                             "linear-gradient(0deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.2) 50%, rgba(59,130,246,0) 100%)"]
-              }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-            />
-            
-            {/* Decorative elements */}
-            <motion.div 
-              className="absolute -top-4 -left-4 w-24 h-24 bg-blue-100 rounded-full opacity-60 z-10"
-              animate={floatingAnimation}
-            />
-            <motion.div 
-              className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-200 rounded-full opacity-60 z-10"
-              animate={{
-                ...floatingAnimation,
-                transition: { ...floatingAnimation.transition, delay: 1.5 }
-              }}
-            />
-            
-            {/* Tech pattern overlay */}
-            <div className="absolute inset-0 z-20 mix-blend-overlay opacity-20 pointer-events-none">
-              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid)" />
-              </svg>
-            </div>
-            
-            {/* Main image - Team Photo */}            
-            <motion.img 
-              src={heroImage} 
-              alt="AINOR Digital Solutions Team" 
-              className="w-full h-[450px] object-cover object-center relative z-0 transition-all duration-700"
-              loading="lazy"
-              animate={{ scale: hovered ? 1.05 : 1 }}
-              transition={{ duration: 0.5 }}            
-            />
-            
-            {/* Overlay gradient for better text visibility if needed */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 to-transparent z-0"></div>
-            
-            {/* Interactive elements */}
-            <motion.div 
-              className="absolute bottom-5 right-5 flex space-x-2 z-30"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
+
+        {/* CTA Section */}
+        <motion.div 
+          className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+        >
+          <Link to="/pricing">
+            <motion.button 
+              className="px-8 py-4 bg-[#1a1a1a] text-white rounded-full font-semibold text-lg hover:bg-gray-800 transition-colors flex items-center gap-2 shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {[1, 2, 3].map((i) => (
-                <motion.div 
-                  key={i}
-                  className="w-3 h-3 rounded-full bg-white/70"
-                  animate={{ opacity: [0.4, 1, 0.4] }}
-                  transition={{ 
-                    duration: 2, 
-                    repeat: Infinity, 
-                    delay: i * 0.3,
-                    ease: "easeInOut"
-                  }}
-                />
-              ))}
-            </motion.div>
+              View Pricing
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </motion.button>
+          </Link>
+          <a 
+            href="https://wa.me/917579500264?text=Hi%20AINOR!%20I'd%20like%20to%20book%20a%20demo."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <motion.button 
+              className="px-8 py-4 bg-white text-[#1a1a1a] rounded-full font-semibold text-lg border-2 border-gray-200 hover:border-indigo-500 hover:text-indigo-500 transition-colors flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Book a demo
+            </motion.button>
+          </a>
+        </motion.div>
+
+        {/* Trust Indicators */}
+        <motion.div 
+          className="mt-20 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <p className="text-sm text-gray-500 mb-6">Trusted by growing businesses</p>
+          <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
+            <div className="text-2xl font-bold text-gray-400">Sttrika</div>
+            <div className="text-2xl font-bold text-gray-400">GoForCab</div>
+            <div className="text-2xl font-bold text-gray-400">HiiHive</div>
+            <div className="text-2xl font-bold text-gray-400">HBWeb</div>
           </div>
         </motion.div>
       </div>
-      
-      {/* Mobile-only floating accent elements */}
-      <motion.div 
-        className="absolute bottom-12 right-0 md:hidden"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-      >
-        <svg width="80" height="80" viewBox="0 0 100 100" className="text-blue-500/20">
-          <motion.circle 
-            cx="50" 
-            cy="50" 
-            r="40" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="1"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, delay: 1 }}
-          />
-          <motion.circle 
-            cx="50" 
-            cy="50" 
-            r="30" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="1"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, delay: 1.3 }}
-          />
-        </svg>
-      </motion.div>
-    </Section>
+    </section>
   );
 };
 
