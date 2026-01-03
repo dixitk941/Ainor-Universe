@@ -1,47 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaTwitter, FaLinkedin, FaFacebook } from 'react-icons/fa';
+import { FaArrowLeft, FaClock, FaUser, FaCalendar, FaShareAlt, FaTwitter, FaLinkedin, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
-import PageScrollAnimation from '../components/ui/PageScrollAnimation';
-
-// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
+import ModernPageLayout from '../components/layout/ModernPageLayout';
 
 const BlogPostPage = () => {
   const { slug } = useParams();
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Blog posts data (simplified for this component)
+  // Sample blog posts data (would come from API/CMS)
   const blogPosts = {
     "first-in-india-subscription-based-web-services-ainor": {
       id: 10,
-      title: "🇮🇳 First in India: AINOR Launches Revolutionary Subscription-Based Web & App Development Services",
+      slug: "first-in-india-subscription-based-web-services-ainor",
+      title: "🇮🇳 First in India: AINOR Launches Revolutionary Subscription-Based Web & App Development",
       excerpt: "AINOR becomes the first company in India to offer subscription-based web development, mobile app development, and digital solutions.",
       date: "December 31, 2025",
       author: "Karan Dixit",
       category: "announcement",
       readTime: "8 min read",
       image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&q=80&w=1000",
-    },
-    "sustainable-agriculture-digital-transformation-2025": {
-      id: 9,
-      title: "How Digital Transformation is Revolutionizing Sustainable Agriculture",
-      excerpt: "Discover how businesses are leveraging digital platforms to export organic products to global markets.",
-      date: "December 31, 2025",
-      author: "Karan Dixit",
-      category: "business",
-      readTime: "10 min read",
-      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=1000",
+      content: `
+        <h2>A New Era of Digital Solutions</h2>
+        <p>AINOR is proud to announce the launch of India's first subscription-based web development and digital solutions service. This revolutionary model allows businesses of all sizes to access premium digital services without the burden of large upfront costs.</p>
+        
+        <h2>How It Works</h2>
+        <p>Instead of paying a large sum upfront for your website or mobile app, you can now subscribe to our services for a fixed monthly fee. This includes:</p>
+        <ul>
+          <li>Custom website development and maintenance</li>
+          <li>Mobile app development for iOS and Android</li>
+          <li>Ongoing updates and feature additions</li>
+          <li>24/7 technical support</li>
+          <li>Security updates and monitoring</li>
+        </ul>
+        
+        <h2>Benefits of the Subscription Model</h2>
+        <p>Our subscription model offers several advantages:</p>
+        <ul>
+          <li><strong>Save 60-70%</strong> compared to traditional development costs</li>
+          <li><strong>No large upfront investment</strong> required</li>
+          <li><strong>Predictable monthly costs</strong> for better budgeting</li>
+          <li><strong>Continuous improvements</strong> to your digital assets</li>
+          <li><strong>Risk-free</strong> - cancel anytime</li>
+        </ul>
+        
+        <h2>Our Subscription Plans</h2>
+        <p>We offer three tiers of subscription plans to meet different business needs:</p>
+        <ul>
+          <li><strong>Starter:</strong> Perfect for small businesses and startups</li>
+          <li><strong>Professional:</strong> Ideal for growing businesses</li>
+          <li><strong>Enterprise:</strong> Custom solutions for large organizations</li>
+        </ul>
+        
+        <h2>Get Started Today</h2>
+        <p>Ready to transform your digital presence? Contact us to learn more about our subscription plans and how we can help your business grow in the digital age.</p>
+      `
     },
     "ai-powered-web-development-2025-trends": {
       id: 8,
+      slug: "ai-powered-web-development-2025-trends",
       title: "AI-Powered Web Development: 10 Game-Changing Trends in 2025",
       excerpt: "Discover how artificial intelligence is revolutionizing web development.",
       date: "September 4, 2025",
@@ -49,254 +66,212 @@ const BlogPostPage = () => {
       category: "technology",
       readTime: "8 min read",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
-    },
-    "progressive-web-apps-future-2025": {
-      id: 7,
-      title: "Progressive Web Apps: The Future of Mobile Web Experiences",
-      excerpt: "PWAs are revolutionizing how businesses deliver mobile experiences.",
-      date: "September 2, 2025",
-      author: "Karan Dixit",
-      category: "technology",
-      readTime: "7 min read",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=1000",
-    },
+      content: `
+        <h2>The AI Revolution in Web Development</h2>
+        <p>Artificial Intelligence is no longer just a buzzword - it's transforming how we build websites and applications. From AI-powered design tools to intelligent chatbots, here are the top 10 trends shaping web development in 2025.</p>
+        
+        <h2>1. AI-Driven Design Tools</h2>
+        <p>Design tools powered by AI can now generate complete UI designs from simple text descriptions. This dramatically speeds up the design process and helps developers visualize ideas quickly.</p>
+        
+        <h2>2. Intelligent Code Assistants</h2>
+        <p>AI coding assistants like GitHub Copilot have become indispensable. They suggest code completions, catch bugs, and even write entire functions based on comments.</p>
+        
+        <h2>3. Personalized User Experiences</h2>
+        <p>AI enables websites to adapt content, layout, and recommendations based on user behavior and preferences in real-time.</p>
+        
+        <h2>4. Advanced Chatbots and Virtual Assistants</h2>
+        <p>Modern AI chatbots can handle complex conversations, understand context, and provide genuinely helpful responses to users.</p>
+        
+        <h2>5. Automated Testing and QA</h2>
+        <p>AI-powered testing tools can automatically identify bugs, test edge cases, and ensure website quality without manual intervention.</p>
+        
+        <h2>Looking Forward</h2>
+        <p>The integration of AI in web development is just beginning. As these technologies mature, we can expect even more innovative applications that will continue to transform the digital landscape.</p>
+      `
+    }
   };
 
-  const post = blogPosts[slug];
+  const post = blogPosts[slug] || {
+    title: "Blog Post Not Found",
+    content: "<p>The requested blog post could not be found.</p>",
+    date: "",
+    author: "",
+    readTime: "",
+    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=1000",
+    category: "general"
+  };
 
-  if (!post) {
-    return (
-      <div className="min-h-screen bg-[#f5f5f5] flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-6xl mb-4">📝</div>
-          <h1 className="text-2xl font-bold text-[#1a1a1a] mb-4">Post Not Found</h1>
-          <Link 
-            to="/blog" 
-            className="text-indigo-500 hover:text-indigo-600 font-medium"
-          >
-            ← Back to Blog
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  const categoryColors = {
+    technology: 'bg-blue-100 text-blue-700',
+    business: 'bg-green-100 text-green-700',
+    design: 'bg-purple-100 text-purple-700',
+    announcement: 'bg-orange-100 text-orange-700',
+    general: 'bg-gray-100 text-gray-700',
+  };
 
   const shareUrl = `https://myainor.com/blog/${slug}`;
 
   return (
     <>
-      <SEOHead
+      <SEOHead 
         title={`${post.title} | AINOR Blog`}
         description={post.excerpt}
-        canonicalUrl={shareUrl}
+        canonicalUrl={`https://myainor.com/blog/${slug}`}
       />
 
-      <PageScrollAnimation type="blog" isMobile={isMobile} />
+      <ModernPageLayout>
+        {/* Back Button */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <Link 
+            to="/blog" 
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-primary transition-colors mb-4"
+          >
+            <FaArrowLeft /> Back to Blog
+          </Link>
+        </motion.div>
 
-      <div className="min-h-screen bg-[#f5f5f5]">
-        {/* Hero Section */}
-        <section className="relative pt-32 pb-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Article */}
+        <article className="bg-white rounded-3xl shadow-soft overflow-hidden">
+          {/* Hero Image */}
+          <div className="aspect-video md:aspect-[3/1] overflow-hidden">
+            <img
+              src={post.image}
+              alt={post.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="p-6 md:p-10 lg:p-12">
+            {/* Meta */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              className="mb-6"
             >
-              {/* Back link */}
-              <Link 
-                to="/blog"
-                className="inline-flex items-center gap-2 text-gray-600 hover:text-indigo-500 mb-8 transition-colors"
-              >
-                ← Back to Blog
-              </Link>
-
-              {/* Category & Meta */}
-              <div className="flex items-center gap-3 mb-6">
-                <span className="px-3 py-1 bg-indigo-50 text-indigo-500 rounded-full text-sm font-medium capitalize">
-                  {post.category}
+              <div className="flex flex-wrap items-center gap-4 mb-4">
+                <span className={`text-xs font-bold px-3 py-1 rounded-full ${categoryColors[post.category]}`}>
+                  {post.category?.charAt(0).toUpperCase() + post.category?.slice(1)}
                 </span>
-                <span className="text-gray-400">•</span>
-                <span className="text-gray-500 text-sm">{post.readTime}</span>
-                <span className="text-gray-400">•</span>
-                <span className="text-gray-500 text-sm">{post.date}</span>
+                {post.date && (
+                  <span className="flex items-center gap-1 text-sm text-gray-400">
+                    <FaCalendar className="text-xs" /> {post.date}
+                  </span>
+                )}
+                {post.readTime && (
+                  <span className="flex items-center gap-1 text-sm text-gray-400">
+                    <FaClock className="text-xs" /> {post.readTime}
+                  </span>
+                )}
               </div>
-
-              {/* Title */}
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-8 leading-tight">
+              
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#111318] mb-4">
                 {post.title}
               </h1>
-
-              {/* Author */}
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
-                    <span className="text-indigo-600 font-bold">KD</span>
-                  </div>
-                  <div>
-                    <p className="font-medium text-[#1a1a1a]">{post.author}</p>
-                    <p className="text-gray-500 text-sm">Founder & CEO at AINOR</p>
-                  </div>
-                </div>
-
-                {/* Share buttons */}
-                <div className="hidden sm:flex items-center gap-2">
-                  <span className="text-gray-500 text-sm mr-2">Share:</span>
-                  <a 
-                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.title)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:text-indigo-500 hover:border-indigo-500 transition-colors"
-                  >
-                    <FaTwitter className="w-4 h-4" />
-                  </a>
-                  <a 
-                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:text-indigo-500 hover:border-indigo-500 transition-colors"
-                  >
-                    <FaLinkedin className="w-4 h-4" />
-                  </a>
-                  <a 
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:text-indigo-500 hover:border-indigo-500 transition-colors"
-                  >
-                    <FaFacebook className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Featured Image */}
-              <div className="rounded-3xl overflow-hidden mb-12">
-                <img 
-                  src={post.image} 
-                  alt={post.title}
-                  className="w-full aspect-[21/9] object-cover"
-                />
-              </div>
+              
+              {post.author && (
+                <p className="flex items-center gap-2 text-gray-500">
+                  <FaUser className="text-sm" /> By {post.author}
+                </p>
+              )}
             </motion.div>
-          </div>
-        </section>
 
-        {/* Content Section */}
-        <section className="pb-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Share Buttons */}
+            <div className="flex items-center gap-3 pb-6 border-b border-gray-100 mb-8">
+              <span className="text-sm text-gray-500 flex items-center gap-1">
+                <FaShareAlt /> Share:
+              </span>
+              <a
+                href={`https://twitter.com/intent/tweet?url=${shareUrl}&text=${post.title}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center hover:bg-blue-100 transition-colors"
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href={`https://www.linkedin.com/shareArticle?mini=true&url=${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center hover:bg-blue-100 transition-colors"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-100 transition-colors"
+              >
+                <FaFacebook />
+              </a>
+              <a
+                href={`https://wa.me/?text=${post.title}%20${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-green-50 text-green-500 flex items-center justify-center hover:bg-green-100 transition-colors"
+              >
+                <FaWhatsapp />
+              </a>
+            </div>
+
+            {/* Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="bg-white rounded-3xl p-8 md:p-12 border border-gray-100"
-            >
-              {/* Blog content placeholder - in real app, this would come from CMS */}
-              <div className="prose prose-lg max-w-none">
-                <p className="text-xl text-gray-700 leading-relaxed mb-8">
-                  {post.excerpt}
-                </p>
+              transition={{ delay: 0.1 }}
+              className="prose prose-lg max-w-none
+                prose-headings:font-bold prose-headings:text-[#111318]
+                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+                prose-p:text-gray-600 prose-p:leading-relaxed
+                prose-ul:text-gray-600
+                prose-li:mb-2
+                prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-[#111318]"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
 
-                <div className="bg-indigo-50 rounded-2xl p-6 mb-8 border border-indigo-100">
-                  <h3 className="text-xl font-bold text-indigo-900 mb-3">📌 Key Highlights</h3>
-                  <ul className="space-y-2 text-indigo-800">
-                    <li>• Revolutionary subscription model for digital services</li>
-                    <li>• Save 60-70% compared to traditional pricing</li>
-                    <li>• Premium hosting and SSL included</li>
-                    <li>• 24/7 technical support and maintenance</li>
-                    <li>• Flexible plans with cancel anytime option</li>
-                  </ul>
-                </div>
-
-                <h2 className="text-2xl font-bold text-[#1a1a1a] mb-4">The Problem with Traditional Pricing</h2>
-                <p className="text-gray-700 mb-6">
-                  For decades, businesses have faced significant barriers when establishing their digital presence. A professional website costs ₹35,000 to ₹1,00,000+. A mobile app? That's ₹50,000 to ₹2,00,000 or more. Add hosting, maintenance, updates, and security - the costs keep piling up.
-                </p>
-
-                <h2 className="text-2xl font-bold text-[#1a1a1a] mb-4">Our Solution</h2>
-                <p className="text-gray-700 mb-6">
-                  AINOR's subscription model changes everything. Instead of paying lakhs upfront, you pay a small one-time setup fee and a predictable monthly subscription that includes everything you need.
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
-                  <div className="bg-red-50 rounded-xl p-6 border border-red-100">
-                    <h4 className="font-bold text-red-800 mb-3">❌ Traditional Model</h4>
-                    <ul className="text-red-700 text-sm space-y-1">
-                      <li>• Massive upfront investment</li>
-                      <li>• Additional costs for hosting</li>
-                      <li>• Updates charged separately</li>
-                      <li>• No ongoing support</li>
-                    </ul>
-                  </div>
-                  <div className="bg-green-50 rounded-xl p-6 border border-green-100">
-                    <h4 className="font-bold text-green-800 mb-3">✅ AINOR Subscription</h4>
-                    <ul className="text-green-700 text-sm space-y-1">
-                      <li>• Low setup fee</li>
-                      <li>• Hosting included</li>
-                      <li>• Free updates & maintenance</li>
-                      <li>• 24/7 support included</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <blockquote className="border-l-4 border-indigo-500 pl-6 italic text-xl text-gray-700 my-8 bg-gray-50 py-4 pr-4 rounded-r-lg">
-                  "We're not just changing our pricing - we're changing how businesses in India think about digital investments."
-                  <footer className="text-sm text-gray-500 mt-2 not-italic">— Karan Dixit, Founder & CEO at AINOR</footer>
-                </blockquote>
-
-                <h2 className="text-2xl font-bold text-[#1a1a1a] mb-4">Get Started Today</h2>
-                <p className="text-gray-700 mb-6">
-                  Ready to experience the future of digital services? Contact us for a free consultation and discover how our subscription model can help your business grow.
-                </p>
-              </div>
-
-              {/* CTA */}
-              <div className="bg-[#1a1a1a] rounded-2xl p-8 mt-12 text-center">
-                <h3 className="text-xl font-bold text-white mb-4">Ready to Get Started?</h3>
-                <p className="text-gray-400 mb-6">Contact us for a free consultation about your project.</p>
-                <motion.a
-                  href="https://wa.me/917579500264?text=Hi%20AINOR!%20I%20just%20read%20your%20blog%20and%20I'm%20interested%20in%20your%20services."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <FaWhatsapp className="w-5 h-5" />
-                  Chat on WhatsApp
-                </motion.a>
-              </div>
-
-              {/* Author Bio */}
-              <div className="border-t border-gray-200 mt-12 pt-8">
-                <h3 className="text-lg font-bold text-[#1a1a1a] mb-4">About the Author</h3>
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
-                    <span className="text-indigo-600 font-bold text-lg">KD</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-[#1a1a1a]">{post.author}</h4>
-                    <p className="text-gray-500 text-sm mb-2">Founder & CEO at AINOR</p>
-                    <p className="text-gray-600 text-sm">
-                      Karan is passionate about making technology accessible to businesses of all sizes. With this subscription model, he aims to democratize access to professional digital services across India.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            {/* CTA */}
+            <div className="mt-12 p-6 md:p-8 bg-gradient-to-r from-primary to-blue-600 rounded-2xl text-center text-white">
+              <h3 className="text-xl md:text-2xl font-bold mb-2">Ready to Start Your Project?</h3>
+              <p className="text-white/80 mb-4">Let's discuss how AINOR can help transform your business.</p>
+              <a
+                href="https://wa.me/919667047128?text=Hi%20AINOR!%20I%20read%20your%20blog%20and%20I'm%20interested%20in%20your%20services."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white text-primary font-bold px-6 py-3 rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <FaWhatsapp /> Chat on WhatsApp
+              </a>
+            </div>
           </div>
-        </section>
+        </article>
 
-        {/* Related Posts CTA */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-[#1a1a1a] mb-8">More from Our Blog</h2>
-            <Link 
-              to="/blog"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-500 text-white rounded-xl font-medium hover:bg-indigo-600 transition-colors"
-            >
-              View All Posts →
-            </Link>
+        {/* Related Posts */}
+        <div className="bg-white rounded-3xl p-6 md:p-8 shadow-soft">
+          <h2 className="text-2xl font-bold mb-6">More Articles</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {Object.values(blogPosts).slice(0, 2).map((relatedPost) => (
+              relatedPost.slug !== slug && (
+                <Link key={relatedPost.id} to={`/blog/${relatedPost.slug}`}>
+                  <div className="flex gap-4 group p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                    <img
+                      src={relatedPost.image}
+                      alt={relatedPost.title}
+                      className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                    />
+                    <div>
+                      <h3 className="font-semibold line-clamp-2 group-hover:text-primary transition-colors">
+                        {relatedPost.title}
+                      </h3>
+                      <p className="text-sm text-gray-400 mt-1">{relatedPost.date}</p>
+                    </div>
+                  </div>
+                </Link>
+              )
+            ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </ModernPageLayout>
     </>
   );
 };

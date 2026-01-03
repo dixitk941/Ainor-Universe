@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaHome, FaLaptopCode, FaBriefcase, FaInfoCircle, FaBookOpen, FaTag, FaUserTie, FaQuestion, FaEnvelope } from 'react-icons/fa';
+import { FaHome, FaLaptopCode, FaBriefcase, FaInfoCircle, FaBookOpen, FaTag, FaUserTie, FaQuestion, FaEnvelope, FaRobot } from 'react-icons/fa';
 import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import logo from '../../assets/logo.png';
 
@@ -30,6 +30,7 @@ const Navbar = () => {
   const navItems = [
     { path: '/', label: 'Home', icon: <FaHome /> },
     { path: '/services', label: 'Services', icon: <FaLaptopCode /> },
+    { path: '/ai-services', label: 'AI Services', icon: <FaRobot /> },
     { path: '/portfolio', label: 'Portfolio', icon: <FaBriefcase /> },
     { path: '/about', label: 'About', icon: <FaInfoCircle /> },
     { path: '/blog', label: 'Blog', icon: <FaBookOpen /> },
@@ -38,8 +39,14 @@ const Navbar = () => {
     { path: '/faq', label: 'FAQ', icon: <FaQuestion /> },
     { path: '/contact', label: 'Contact', icon: <FaEnvelope /> },
   ];
-  // For mobile menu, primary items shown directly
-  const primaryNavItems = navItems.slice(0, 5);
+  // For mobile bottom bar - key navigation items
+  const bottomBarItems = [
+    { path: '/', label: 'Home', icon: <FaHome /> },
+    { path: '/services', label: 'Services', icon: <FaLaptopCode /> },
+    { path: '/ai-services', label: 'AI', icon: <FaRobot /> },
+    { path: '/portfolio', label: 'Portfolio', icon: <FaBriefcase /> },
+    { path: '/pricing', label: 'Pricing', icon: <FaTag /> },
+  ];
 
   // Smooth spring config for animations
   const smoothSpring = {
@@ -327,11 +334,16 @@ const Navbar = () => {
         </AnimatePresence>
       </motion.nav>
 
-      {/* Bottom Tab Bar for Mobile - One UI 7 Style */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe px-2 sm:px-3">
-        <div className="mx-auto my-1.5 sm:my-2 rounded-[1.5rem] bg-gray-900/95 backdrop-blur-lg border border-gray-800/30 shadow-lg">
-          <div className="grid grid-cols-5 gap-0.5 sm:gap-1 py-1 sm:py-1.5">
-            {primaryNavItems.map((item) => (
+      {/* Bottom Tab Bar for Mobile - Floating Style matching Header */}
+      <motion.div 
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-4"
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div className="mx-auto rounded-2xl bg-white/95 backdrop-blur-md shadow-lg border border-gray-200/50">
+          <div className="grid grid-cols-5 gap-1 py-2 px-2">
+            {bottomBarItems.map((item) => (
               <MobileNavTab 
                 key={item.path}
                 to={item.path}
@@ -341,10 +353,7 @@ const Navbar = () => {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Add bottom padding to content to accommodate the mobile nav bar */}
-      <div className="md:hidden h-14"></div>
+      </motion.div>
     </>
   );
 };
@@ -354,10 +363,8 @@ const NavLink = ({ to, children }) => {
   const isActive = location.pathname === to;
   
   const handleClick = () => {
-    // Scroll to top when navigating to a new page
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
+    // Scroll to top immediately when navigating
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
   
   return (
@@ -401,10 +408,8 @@ const MobileNavLink = ({ to, icon, label }) => {
   const isActive = location.pathname === to;
   
   const handleClick = () => {
-    // Scroll to top when navigating to a new page
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
+    // Scroll to top immediately when navigating
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
   
   return (
@@ -439,30 +444,34 @@ const MobileNavTab = ({ to, icon, label }) => {
   const isActive = location.pathname === to;
   
   const handleClick = () => {
-    // Scroll to top when navigating to a new page
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
+    // Scroll to top immediately when navigating
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
-    return (
+  
+  return (
     <Link 
       to={to} 
       onClick={handleClick}
-      className="flex flex-col items-center justify-center py-1.5 text-white"
+      className="flex flex-col items-center justify-center py-1"
     >
       <motion.div 
-        className={`p-1.5 rounded-xl ${isActive ? 'bg-blue-500/20 text-blue-300' : ''}`}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        className={`p-2 rounded-xl transition-colors ${
+          isActive 
+            ? 'bg-blue-500 text-white shadow-md shadow-blue-500/30' 
+            : 'text-gray-600 hover:bg-gray-100'
+        }`}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
-        {React.cloneElement(icon, { className: "h-4 w-4" })}
+        {React.cloneElement(icon, { className: "h-5 w-5" })}
       </motion.div>
       <motion.span 
-        className="text-xs mt-0.5 font-medium"
+        className={`text-[10px] mt-1 font-medium transition-colors ${
+          isActive ? 'text-blue-600' : 'text-gray-500'
+        }`}
         animate={{ 
           scale: isActive ? 1.05 : 1,
-          fontWeight: isActive ? 600 : 500
         }}
         transition={{ duration: 0.2 }}
       >

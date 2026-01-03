@@ -1,258 +1,208 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaChevronDown, FaWhatsapp } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaChevronDown, FaWhatsapp, FaQuestionCircle } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
-import PageScrollAnimation from '../components/ui/PageScrollAnimation';
-
-// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
+import ModernPageLayout from '../components/layout/ModernPageLayout';
 
 const FAQPage = () => {
   const [activeCategory, setActiveCategory] = useState('general');
-  const [expandedFaqs, setExpandedFaqs] = useState({});
-  const [isMobile, setIsMobile] = useState(false);
-  
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const [openIndex, setOpenIndex] = useState(null);
 
-  const toggleFaq = (id) => {
-    setExpandedFaqs(prev => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.2 }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, y: 0,
-      transition: { type: "spring", stiffness: 100, damping: 15 }
-    }
-  };
-
-  // Categories
   const categories = [
     { id: 'general', name: 'General' },
+    { id: 'subscription', name: 'Subscription Model' },
     { id: 'services', name: 'Services' },
     { id: 'pricing', name: 'Pricing' },
-    { id: 'process', name: 'Process' },
+    { id: 'support', name: 'Support' },
   ];
 
-  // FAQ Data
-  const faqData = {
+  const faqs = {
     general: [
       {
-        id: 'g1',
         question: "What is AINOR?",
-        answer: "AINOR is India's first subscription-based web development company. We help businesses launch and grow their digital presence without massive upfront costs through affordable monthly subscriptions."
+        answer: "AINOR is India's first subscription-based web development and digital solutions company. We offer website development, mobile app development, UI/UX design, and digital marketing services through flexible subscription plans."
       },
       {
-        id: 'g2',
-        question: "What makes AINOR different?",
-        answer: "We're the first in India to offer subscription-based digital services. Instead of paying lakhs upfront, you pay a small setup fee and affordable monthly subscription that includes hosting, SSL, updates, and support."
+        question: "Where is AINOR located?",
+        answer: "AINOR is based in India and serves clients globally. We work remotely and can collaborate with clients from anywhere in the world."
       },
       {
-        id: 'g3',
-        question: "Do you work with international clients?",
-        answer: "Yes! We work with clients globally. Our remote-first approach and flexible communication ensures seamless project management regardless of geographic location."
+        question: "What makes AINOR different from other agencies?",
+        answer: "We are the first in India to offer subscription-based digital services. This means you get premium services without large upfront costs, with ongoing support and updates included in your monthly subscription."
       },
       {
-        id: 'g4',
-        question: "How experienced is your team?",
-        answer: "Our team consists of skilled professionals with expertise in web development, mobile apps, UI/UX design, and digital strategy. We continuously invest in training to stay at the forefront of technology."
+        question: "Do you work with startups and small businesses?",
+        answer: "Absolutely! Our subscription model is designed to make professional digital services accessible to businesses of all sizes, from startups to enterprises."
+      },
+    ],
+    subscription: [
+      {
+        question: "How does the subscription model work?",
+        answer: "Instead of paying a large one-time fee, you subscribe to our services for a fixed monthly amount. This includes development, maintenance, updates, and support. You can cancel anytime with no long-term commitments."
+      },
+      {
+        question: "What's included in my subscription?",
+        answer: "Your subscription includes: custom development, design work, hosting assistance, regular updates, security patches, bug fixes, and priority support. The exact inclusions vary by plan."
+      },
+      {
+        question: "Can I switch plans?",
+        answer: "Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle."
+      },
+      {
+        question: "Is there a minimum commitment period?",
+        answer: "No minimum commitment! You can cancel your subscription at any time. However, we recommend at least 3 months to see the full value of our services."
+      },
+      {
+        question: "What happens if I cancel?",
+        answer: "If you cancel, you keep all the work we've done for you. We'll provide you with all source code and assets. You can always re-subscribe in the future."
       },
     ],
     services: [
       {
-        id: 's1',
-        question: "What services does AINOR offer?",
-        answer: "We offer web development, mobile app development (iOS & Android), e-commerce solutions, UI/UX design, custom software development, and ongoing maintenance services."
+        question: "What services do you offer?",
+        answer: "We offer: Website Development, Mobile App Development (iOS & Android), UI/UX Design, E-commerce Solutions, Web Applications, Digital Marketing, SEO, and Custom Software Development."
       },
       {
-        id: 's2',
-        question: "Do you build mobile apps?",
-        answer: "Yes! We develop native and cross-platform mobile apps for iOS and Android using React Native, Flutter, and native technologies. We can recommend the best approach based on your requirements."
+        question: "Do you develop mobile apps?",
+        answer: "Yes! We develop native and cross-platform mobile applications for both iOS and Android using technologies like React Native and Flutter."
       },
       {
-        id: 's3',
-        question: "What technologies do you use?",
-        answer: "We work with modern technologies including React, Next.js, Node.js, Python, React Native, Flutter, MongoDB, PostgreSQL, Firebase, and more. Our tech stack is selected based on project requirements."
+        question: "Can you redesign my existing website?",
+        answer: "Absolutely! Website redesign is one of our popular services. We can modernize your existing website while preserving your content and improving user experience."
       },
       {
-        id: 's4',
-        question: "Do you provide website maintenance?",
-        answer: "Yes! All our subscription plans include ongoing maintenance, updates, security patches, and technical support. We ensure your digital products remain secure and up-to-date."
+        question: "Do you provide hosting services?",
+        answer: "We help you set up hosting on reliable platforms and manage it for you. Hosting costs are typically separate from the subscription unless specified in your plan."
+      },
+      {
+        question: "Can you help with SEO?",
+        answer: "Yes! All our websites are built with SEO best practices. We also offer dedicated SEO services for improving your search engine rankings."
       },
     ],
     pricing: [
       {
-        id: 'p1',
-        question: "How does subscription pricing work?",
-        answer: "You pay a one-time setup fee (60-70% less than traditional pricing) and then a fixed monthly subscription. This includes hosting, SSL, regular updates, maintenance, and support."
+        question: "How much do your services cost?",
+        answer: "Our subscription plans start at ₹12,999/month. Pricing varies based on the services you need. We also offer one-time project pricing for specific requirements."
       },
       {
-        id: 'p2',
-        question: "Can I pay one-time instead?",
-        answer: "Yes! We offer both subscription and one-time payment options. However, with one-time payment, hosting and maintenance would be additional costs. Subscription often works out more economical long-term."
+        question: "Do you offer custom quotes?",
+        answer: "Yes! For enterprise clients or unique requirements, we provide custom quotes tailored to your specific needs. Contact us for a free consultation."
       },
       {
-        id: 'p3',
-        question: "What's included in the monthly subscription?",
-        answer: "Monthly subscription includes premium hosting, SSL certificate, regular content updates, security monitoring, performance optimization, technical support, and bug fixes."
+        question: "Are there any hidden fees?",
+        answer: "No hidden fees! Your subscription price includes everything mentioned in your plan. Any additional services or third-party costs (like premium plugins or hosting) will be discussed upfront."
       },
       {
-        id: 'p4',
-        question: "Can I cancel my subscription?",
-        answer: "Yes, you can cancel anytime with 30 days notice. There are no long-term contracts. You own your content, and we'll help transfer it if you decide to move."
+        question: "Do you offer discounts?",
+        answer: "We offer discounts for annual subscriptions (save up to 20%) and for startups/non-profits. Contact us to learn about current offers."
       },
     ],
-    process: [
+    support: [
       {
-        id: 'pr1',
-        question: "How long does a project take?",
-        answer: "Timelines vary by complexity. A simple website takes 1-2 weeks, while complex web apps or mobile apps take 4-12 weeks. We'll provide an accurate timeline after understanding your requirements."
+        question: "How do I contact support?",
+        answer: "You can reach us via WhatsApp for the fastest response, or through email at contact@myainor.com. Subscription clients get priority support."
       },
       {
-        id: 'pr2',
-        question: "What's your development process?",
-        answer: "We follow an agile methodology: Discovery & Planning → Design → Development → Testing → Deployment → Support. We maintain regular communication and present work at key milestones for feedback."
+        question: "What are your support hours?",
+        answer: "We provide support during business hours (10 AM - 7 PM IST, Monday-Saturday). Emergency support for critical issues is available 24/7 for Pro and Enterprise clients."
       },
       {
-        id: 'pr3',
-        question: "How do you communicate during projects?",
-        answer: "We use WhatsApp for quick communication, email for documentation, and video calls for detailed discussions. You'll have a dedicated point of contact throughout your project."
+        question: "How quickly do you respond?",
+        answer: "We aim to respond within 2-4 hours during business hours. Pro and Enterprise clients receive responses within 1 hour."
       },
       {
-        id: 'pr4',
-        question: "Can I make changes during development?",
-        answer: "Absolutely! Our agile approach allows flexibility. We present work at milestones for feedback and make adjustments as needed. Significant scope changes may affect timeline and cost, which we discuss transparently."
+        question: "Do you provide training?",
+        answer: "Yes! We provide training on how to use and manage your website or application. Training sessions can be conducted via video call."
       },
     ],
   };
 
-  const currentFaqs = faqData[activeCategory] || faqData.general;
+  const currentFaqs = faqs[activeCategory] || [];
 
   return (
     <>
       <SEOHead 
-        title="FAQ - AINOR | Frequently Asked Questions"
-        description="Find answers to common questions about AINOR's web development services, pricing, subscription model, and development process."
+        title="FAQ - Frequently Asked Questions | AINOR"
+        description="Find answers to common questions about AINOR's subscription-based web development services, pricing, support, and more."
         canonicalUrl="https://myainor.com/faq"
       />
 
-      <div className="min-h-screen bg-[#f5f5f5]">        {/* Scroll Animation */}
-        <PageScrollAnimation type="faq" isMobile={isMobile} />
-                {/* Hero Section */}
-        <section className="relative pt-32 pb-16 overflow-hidden">
-          {/* Decorative arrows */}
-          <div className="absolute inset-0 pointer-events-none">
-            <motion.svg
-              className="absolute top-24 right-20 w-24 h-24 opacity-[0.1]"
-              viewBox="0 0 100 100"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            >
-              <circle cx="50" cy="50" r="6" fill="#6366f1" />
-              {[0, 90, 180, 270].map((angle, i) => (
-                <g key={i} transform={`rotate(${angle} 50 50)`}>
-                  <line x1="50" y1="50" x2="50" y2="15" stroke="#6366f1" strokeWidth="2" />
-                  <polygon points="45,20 50,8 55,20" fill="#6366f1" />
-                </g>
-              ))}
-            </motion.svg>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-12"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
-                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                <span className="font-semibold text-sm">FAQ</span>
-              </span>
+      <ModernPageLayout>
+        {/* Hero Section */}
+        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft relative overflow-hidden">
+          <div className="absolute -top-20 -right-20 w-96 h-96 bg-yellow-50 rounded-full blur-3xl opacity-60" />
+          
+          <div className="relative z-10 text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-6">
+                <FaQuestionCircle className="text-3xl" />
+              </div>
               
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1a1a1a] mb-6">
-                Frequently Asked
-                <span className="block mt-2 text-indigo-500">Questions</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#111318] mb-4">
+                Frequently Asked <span className="text-primary">Questions</span>
               </h1>
               
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Find answers to common questions about our services, pricing, and process.
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+                Got questions? We've got answers. Find everything you need to know about AINOR and our services.
               </p>
             </motion.div>
-
-            {/* Category Tabs */}
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
-              {categories.map((cat) => (
-                <motion.button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`px-5 py-3 rounded-xl font-medium transition-all ${
-                    activeCategory === cat.id
-                      ? 'bg-indigo-500 text-white'
-                      : 'bg-white text-[#1a1a1a] border border-gray-200 hover:border-indigo-200'
-                  }`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {cat.name}
-                </motion.button>
-              ))}
-            </div>
           </div>
         </section>
 
-        {/* FAQ List */}
-        <section className="pb-20">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div 
-              className="space-y-4"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              key={activeCategory}
+        {/* Category Tabs */}
+        <div className="flex flex-wrap justify-center gap-2">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => {
+                setActiveCategory(category.id);
+                setOpenIndex(null);
+              }}
+              className={`px-4 py-2.5 rounded-full font-medium text-sm transition-all ${
+                activeCategory === category.id
+                  ? 'bg-black text-white shadow-lg'
+                  : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+              }`}
             >
-              {currentFaqs.map((faq) => (
+              {category.name}
+            </button>
+          ))}
+        </div>
+
+        {/* FAQ Accordion */}
+        <div className="bg-white rounded-3xl p-6 md:p-8 shadow-soft">
+          <div className="space-y-3">
+            <AnimatePresence mode="wait">
+              {currentFaqs.map((faq, idx) => (
                 <motion.div
-                  key={faq.id}
-                  className="bg-white rounded-2xl border border-gray-100 overflow-hidden"
-                  variants={cardVariants}
+                  key={`${activeCategory}-${idx}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ delay: idx * 0.03 }}
+                  className="border border-gray-100 rounded-2xl overflow-hidden"
                 >
                   <button
-                    onClick={() => toggleFaq(faq.id)}
-                    className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                    onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                    className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors"
                   >
-                    <span className="font-semibold text-[#1a1a1a] pr-4">{faq.question}</span>
-                    <motion.div
-                      animate={{ rotate: expandedFaqs[faq.id] ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex-shrink-0"
-                    >
-                      <FaChevronDown className="w-4 h-4 text-indigo-500" />
-                    </motion.div>
+                    <span className="font-semibold text-[#111318] pr-4">{faq.question}</span>
+                    <FaChevronDown 
+                      className={`text-gray-400 flex-shrink-0 transition-transform ${
+                        openIndex === idx ? 'rotate-180' : ''
+                      }`}
+                    />
                   </button>
                   
                   <AnimatePresence>
-                    {expandedFaqs[faq.id] && (
+                    {openIndex === idx && (
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                        <div className="px-5 pb-5 text-gray-600">
                           {faq.answer}
                         </div>
                       </motion.div>
@@ -260,48 +210,33 @@ const FAQPage = () => {
                   </AnimatePresence>
                 </motion.div>
               ))}
-            </motion.div>
+            </AnimatePresence>
           </div>
-        </section>
+        </div>
 
-        {/* Still Have Questions */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-[#1a1a1a] rounded-3xl p-12 md:p-16 text-center"
+        {/* Still Have Questions CTA */}
+        <section className="bg-gradient-to-r from-primary to-blue-600 rounded-3xl p-6 md:p-10 text-center text-white relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full" />
+            <div className="absolute bottom-10 right-10 w-32 h-32 border-2 border-white rounded-full" />
+          </div>
+          
+          <div className="relative z-10">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3">Still Have Questions?</h2>
+            <p className="text-white/80 mb-6 max-w-xl mx-auto">
+              Can't find what you're looking for? Our team is here to help. Reach out to us on WhatsApp for instant answers.
+            </p>
+            <a
+              href="https://wa.me/919667047128?text=Hi%20AINOR!%20I%20have%20a%20question%20about%20your%20services."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Still Have Questions?
-              </h2>
-              <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-                Can't find what you're looking for? Our team is here to help. Reach out and we'll get back to you within 2 hours.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.a
-                  href="https://wa.me/917579500264?text=Hi%20AINOR!%20I%20have%20a%20question."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <FaWhatsapp className="w-5 h-5" />
-                  Chat on WhatsApp
-                </motion.a>
-                <Link
-                  to="/contact"
-                  className="px-8 py-4 bg-white/10 text-white rounded-xl font-medium hover:bg-white/20 transition-colors"
-                >
-                  Contact Us
-                </Link>
-              </div>
-            </motion.div>
+              <FaWhatsapp className="text-green-500" /> Chat With Us
+            </a>
           </div>
         </section>
-      </div>
+      </ModernPageLayout>
     </>
   );
 };

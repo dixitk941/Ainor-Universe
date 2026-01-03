@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { FaArrowRight, FaClock, FaUser } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
-import PageScrollAnimation from '../components/ui/PageScrollAnimation';
-
-// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
+import ModernPageLayout from '../components/layout/ModernPageLayout';
 
 const BlogPage = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
-  // Blog posts data
   const blogPosts = [
     {
       id: 10,
@@ -83,30 +81,6 @@ const BlogPage = () => {
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
       featured: false
     },
-    {
-      id: 4,
-      slug: "ecommerce-trends-2025-complete-guide",
-      title: "E-Commerce Trends 2025: A Complete Guide for Online Businesses",
-      excerpt: "The e-commerce landscape is evolving rapidly. Stay ahead of the competition with these essential trends and strategies for 2025.",
-      date: "August 20, 2025",
-      author: "Karan Dixit",
-      category: "business",
-      readTime: "10 min read",
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=1000",
-      featured: false
-    },
-    {
-      id: 3,
-      slug: "cybersecurity-best-practices-businesses-2025",
-      title: "Cybersecurity Best Practices for Businesses in 2025",
-      excerpt: "Protect your business from cyber threats with these essential security practices. Learn how to safeguard your digital assets.",
-      date: "August 15, 2025",
-      author: "Karan Dixit",
-      category: "technology",
-      readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000",
-      featured: false
-    },
   ];
 
   const categories = [
@@ -123,279 +97,149 @@ const BlogPage = () => {
 
   const featuredPost = blogPosts.find(post => post.featured);
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-    }
+  const categoryColors = {
+    technology: 'bg-blue-100 text-blue-700',
+    business: 'bg-green-100 text-green-700',
+    design: 'bg-purple-100 text-purple-700',
+    announcement: 'bg-orange-100 text-orange-700',
   };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: { 
-      opacity: 1, y: 0, scale: 1,
-      transition: { type: "spring", stiffness: 100, damping: 15 }
-    }
-  };
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <>
-      <SEOHead
-        title="Blog - AINOR Digital Solutions | Web Development Insights"
-        description="Stay updated with the latest trends in web development, mobile apps, AI, and digital transformation. Expert insights from AINOR's team."
+      <SEOHead 
+        title="Blog - AINOR | Web Development & Digital Insights"
+        description="Explore AINOR's blog for insights on web development, digital transformation, mobile apps, and technology trends."
         canonicalUrl="https://myainor.com/blog"
       />
 
-      <PageScrollAnimation type="blog" isMobile={isMobile} />
-
-      <div className="min-h-screen bg-[#f5f5f5]">
+      <ModernPageLayout>
         {/* Hero Section */}
-        <section className="relative pt-32 pb-16 overflow-hidden">
-          {/* Decorative arrows */}
-          <div className="absolute inset-0 pointer-events-none">
-            <motion.svg
-              className="absolute top-24 right-16 w-28 h-28 opacity-[0.08]"
-              viewBox="0 0 100 100"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-            >
-              <circle cx="50" cy="50" r="6" fill="#6366f1" />
-              {[0, 120, 240].map((angle, i) => (
-                <g key={i} transform={`rotate(${angle} 50 50)`}>
-                  <line x1="50" y1="50" x2="50" y2="15" stroke="#6366f1" strokeWidth="2" />
-                  <polygon points="45,20 50,8 55,20" fill="#6366f1" />
-                </g>
-              ))}
-            </motion.svg>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-12"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
-                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                <span className="font-semibold text-sm">Blog</span>
-              </span>
+        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft relative overflow-hidden">
+          <div className="absolute -top-20 -right-20 w-96 h-96 bg-indigo-50 rounded-full blur-3xl opacity-60" />
+          
+          <div className="relative z-10 text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="inline-flex items-center gap-2 bg-gray-50 border border-gray-100 px-3 py-1.5 rounded-full mb-6">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
+                </span>
+                <span className="text-xs font-semibold text-gray-600 tracking-wide uppercase">Our Blog</span>
+              </div>
               
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1a1a1a] mb-6">
-                Insights &
-                <span className="block mt-2 text-indigo-500">Ideas</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#111318] mb-4">
+                Insights & <span className="text-primary">Updates</span>
               </h1>
               
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Expert insights on web development, digital transformation, and technology trends.
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-8">
+                Stay updated with the latest trends in web development, digital transformation, and technology.
               </p>
+
+              {/* Category Filter */}
+              <div className="flex flex-wrap justify-center gap-3">
+                {categories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => setActiveCategory(category.id)}
+                    className={`px-4 py-2.5 rounded-full font-medium text-sm transition-all ${
+                      activeCategory === category.id
+                        ? 'bg-black text-white shadow-lg'
+                        : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                    }`}
+                  >
+                    {category.name}
+                  </button>
+                ))}
+              </div>
             </motion.div>
           </div>
         </section>
 
         {/* Featured Post */}
-        {featuredPost && (
-          <section className="pb-16">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <Link 
-                  to={`/blog/${featuredPost.slug}`}
-                  className="block group"
-                >
-                  <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all">
-                    <div className="grid lg:grid-cols-2 gap-0">
-                      <div className="aspect-[16/10] lg:aspect-auto overflow-hidden">
-                        <img 
-                          src={featuredPost.image} 
-                          alt={featuredPost.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      <div className="p-8 lg:p-12 flex flex-col justify-center">
-                        <div className="flex items-center gap-3 mb-4">
-                          <span className="px-3 py-1 bg-indigo-50 text-indigo-500 rounded-full text-sm font-medium capitalize">
-                            {featuredPost.category}
-                          </span>
-                          <span className="text-gray-400">•</span>
-                          <span className="text-gray-500 text-sm">{featuredPost.readTime}</span>
-                        </div>
-                        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4 group-hover:text-indigo-500 transition-colors">
-                          {featuredPost.title}
-                        </h2>
-                        <p className="text-gray-600 mb-6">
-                          {featuredPost.excerpt}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center">
-                              <span className="text-indigo-600 font-semibold text-sm">KD</span>
-                            </div>
-                            <div>
-                              <p className="font-medium text-[#1a1a1a] text-sm">{featuredPost.author}</p>
-                              <p className="text-gray-500 text-xs">{featuredPost.date}</p>
-                            </div>
-                          </div>
-                          <span className="text-indigo-500 font-medium group-hover:translate-x-1 transition-transform">
-                            Read More →
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+        {featuredPost && activeCategory === 'all' && (
+          <Link to={`/blog/${featuredPost.slug}`}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white rounded-3xl shadow-soft overflow-hidden card-hover group"
+            >
+              <div className="grid md:grid-cols-2 gap-0">
+                <div className="aspect-video md:aspect-auto overflow-hidden">
+                  <img
+                    src={featuredPost.image}
+                    alt={featuredPost.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6 md:p-8 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${categoryColors[featuredPost.category]}`}>
+                      {featuredPost.category.charAt(0).toUpperCase() + featuredPost.category.slice(1)}
+                    </span>
+                    <span className="text-xs font-bold px-3 py-1 bg-primary text-white rounded-full">Featured</span>
                   </div>
-                </Link>
-              </motion.div>
-            </div>
-          </section>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-primary transition-colors">
+                    {featuredPost.title}
+                  </h2>
+                  <p className="text-gray-500 mb-4 line-clamp-2">{featuredPost.excerpt}</p>
+                  <div className="flex items-center gap-4 text-sm text-gray-400">
+                    <span className="flex items-center gap-1">
+                      <FaUser className="text-xs" />
+                      {featuredPost.author}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <FaClock className="text-xs" />
+                      {featuredPost.readTime}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </Link>
         )}
 
-        {/* Category Filter */}
-        <section className="pb-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap gap-3 justify-center">
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
-                  className={`px-5 py-2 rounded-xl font-medium transition-all ${
-                    activeCategory === category.id
-                      ? 'bg-[#1a1a1a] text-white'
-                      : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
-                  }`}
-                >
-                  {category.name}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Blog Grid */}
-        <section className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div 
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              key={activeCategory}
-            >
-              {filteredPosts.map((post) => (
-                <motion.div
-                  key={post.id}
-                  variants={cardVariants}
-                >
-                  <Link 
-                    to={`/blog/${post.slug}`}
-                    className="block group h-full"
-                  >
-                    <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 h-full flex flex-col hover:border-indigo-200 transition-all">
-                      <div className="aspect-[16/10] overflow-hidden">
-                        <img 
-                          src={post.image} 
-                          alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      <div className="p-6 flex flex-col flex-grow">
-                        <div className="flex items-center gap-2 mb-3">
-                          <span className="px-2 py-1 bg-indigo-50 text-indigo-500 rounded-md text-xs font-medium capitalize">
-                            {post.category}
-                          </span>
-                          <span className="text-gray-400 text-xs">•</span>
-                          <span className="text-gray-500 text-xs">{post.readTime}</span>
-                        </div>
-                        <h3 className="text-lg font-bold text-[#1a1a1a] mb-3 group-hover:text-indigo-500 transition-colors line-clamp-2">
-                          {post.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">
-                          {post.excerpt}
-                        </p>
-                        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                          <span className="text-gray-500 text-xs">{post.date}</span>
-                          <span className="text-indigo-500 text-sm font-medium group-hover:translate-x-1 transition-transform">
-                            Read →
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {filteredPosts.length === 0 && (
-              <div className="text-center py-20">
-                <div className="text-5xl mb-4">📝</div>
-                <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">No posts found</h3>
-                <p className="text-gray-600">Try selecting a different category.</p>
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* Newsletter CTA */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Blog Posts Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredPosts.filter(p => !p.featured || activeCategory !== 'all').map((post, idx) => (
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-[#1a1a1a] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
+              key={post.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.05 }}
             >
-              {/* Decorative element */}
-              <motion.svg
-                className="absolute top-8 right-8 w-24 h-24 opacity-10"
-                viewBox="0 0 100 100"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-              >
-                <circle cx="50" cy="50" r="6" fill="white" />
-                {[0, 90, 180, 270].map((angle, i) => (
-                  <g key={i} transform={`rotate(${angle} 50 50)`}>
-                    <line x1="50" y1="50" x2="50" y2="15" stroke="white" strokeWidth="2" />
-                    <polygon points="45,20 50,8 55,20" fill="white" />
-                  </g>
-                ))}
-              </motion.svg>
-
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Stay Updated
-              </h2>
-              <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-                Get the latest insights on web development, AI, and digital transformation delivered to your inbox.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-6 py-4 rounded-xl bg-white/10 text-white placeholder-gray-400 border border-white/20 focus:border-indigo-500 focus:outline-none"
-                />
-                <motion.button
-                  className="px-8 py-4 bg-indigo-500 text-white rounded-xl font-medium hover:bg-indigo-600 transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Subscribe
-                </motion.button>
-              </div>
+              <Link to={`/blog/${post.slug}`}>
+                <div className="bg-white rounded-2xl shadow-soft overflow-hidden card-hover group h-full">
+                  <div className="aspect-video overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className={`text-xs font-bold px-2 py-1 rounded ${categoryColors[post.category]}`}>
+                        {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
+                      </span>
+                      <span className="text-xs text-gray-400">{post.date}</span>
+                    </div>
+                    <h3 className="font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 mb-3 line-clamp-2">{post.excerpt}</p>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-gray-400">{post.readTime}</span>
+                      <span className="text-primary font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Read More <FaArrowRight className="text-xs" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </motion.div>
-          </div>
-        </section>
-      </div>
+          ))}
+        </div>
+      </ModernPageLayout>
     </>
   );
 };

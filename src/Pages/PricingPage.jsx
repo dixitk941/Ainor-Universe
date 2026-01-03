@@ -1,54 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaCheck, FaTimes, FaWhatsapp, FaExclamationTriangle, FaArrowRight, FaCalendarAlt, FaCreditCard, FaRocket, FaShieldAlt } from 'react-icons/fa';
+import { 
+  FaCheck, FaTimes, FaWhatsapp, FaArrowRight, FaQuestionCircle,
+  FaRocket, FaStar, FaCrown, FaShieldAlt, FaClock, FaHeadset,
+  FaCode, FaMobile, FaShoppingCart, FaBolt, FaGift
+} from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
-import PricingScrollAnimation from '../components/ui/PricingScrollAnimation';
-
-// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
+import ModernPageLayout from '../components/layout/ModernPageLayout';
+import TiltCard from '../components/ui/TiltCard';
+import { BlurReveal, AnimatedCounter, MagneticButton } from '../components/ui/AnimationComponents';
+import { GradientText, SpotlightCard, MorphingBackground } from '../components/ui/ScrollAnimations';
 
 const PricingPage = () => {
   const [billingCycle, setBillingCycle] = useState('subscription');
   const [selectedService, setSelectedService] = useState('web');
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: { 
-      opacity: 1, y: 0, scale: 1,
-      transition: { type: "spring", stiffness: 100, damping: 15 }
-    }
-  };
-
-  // Service types
   const services = [
-    { id: 'web', name: 'Web Development', icon: '🌐' },
-    { id: 'mobile', name: 'Mobile Apps', icon: '📱' },
-    { id: 'ecommerce', name: 'E-Commerce', icon: '🛒' },
+    { id: 'web', name: 'Web Development', icon: FaCode, emoji: '🌐' },
+    { id: 'mobile', name: 'Mobile Apps', icon: FaMobile, emoji: '📱' },
+    { id: 'ecommerce', name: 'E-Commerce', icon: FaShoppingCart, emoji: '🛒' },
   ];
 
-  // Pricing plans
   const pricingPlans = {
     web: [
       {
         name: 'Starter',
         tagline: 'Perfect for small businesses & startups',
+        icon: FaRocket,
         oneTime: { price: 15000 },
         subscription: { setupFee: 5000, monthly: 2499 },
         deliveryTime: '7-10 days',
@@ -62,13 +41,15 @@ const PricingPage = () => {
           { name: '2 content updates/month', included: true },
           { name: 'Blog integration', included: false },
           { name: 'Custom animations', included: false },
-          { name: 'E-commerce features', included: false },
+          { name: 'Priority support', included: false },
         ],
         popular: false,
+        color: 'from-gray-500 to-gray-600'
       },
       {
         name: 'Professional',
         tagline: 'Most popular for growing businesses',
+        icon: FaStar,
         oneTime: { price: 35000 },
         subscription: { setupFee: 10000, monthly: 4999 },
         deliveryTime: '14-21 days',
@@ -82,13 +63,15 @@ const PricingPage = () => {
           { name: '5 content updates/month', included: true },
           { name: 'Blog with CMS', included: true },
           { name: 'Custom animations', included: true },
-          { name: 'Basic e-commerce', included: false },
+          { name: 'Priority support', included: false },
         ],
         popular: true,
+        color: 'from-primary to-blue-600'
       },
       {
         name: 'Enterprise',
         tagline: 'Complete solution for large businesses',
+        icon: FaCrown,
         isCustom: true,
         deliveryTime: 'Custom timeline',
         features: [
@@ -99,944 +82,904 @@ const PricingPage = () => {
           { name: 'Enterprise hosting', included: true },
           { name: 'Advanced security', included: true },
           { name: 'Unlimited updates', included: true },
-          { name: 'Full CMS platform', included: true },
-          { name: 'Premium animations', included: true },
-          { name: 'E-commerce ready', included: true },
+          { name: 'Dedicated support', included: true },
+          { name: 'Priority development', included: true },
+          { name: 'SLA guarantee', included: true },
         ],
         popular: false,
+        color: 'from-purple-500 to-pink-500'
       },
     ],
     mobile: [
       {
-        name: 'Starter App',
-        tagline: 'Single platform solution',
+        name: 'MVP',
+        tagline: 'Launch your idea fast',
+        icon: FaRocket,
         oneTime: { price: 50000 },
-        subscription: { setupFee: 15000, monthly: 4999 },
-        deliveryTime: '30-45 days',
+        subscription: { setupFee: 15000, monthly: 7999 },
+        deliveryTime: '4-6 weeks',
         features: [
-          { name: 'iOS or Android', included: true },
-          { name: 'Up to 8 screens', included: true },
-          { name: 'User authentication', included: true },
+          { name: 'Single platform (iOS or Android)', included: true },
+          { name: 'Core features only', included: true },
+          { name: 'Basic UI design', included: true },
           { name: 'Push notifications', included: true },
-          { name: 'App store submission', included: true },
           { name: 'Basic analytics', included: true },
-          { name: 'Bug fixes & updates', included: true },
+          { name: 'App store submission', included: true },
           { name: 'Cross-platform', included: false },
           { name: 'Admin dashboard', included: false },
-          { name: 'Payment integration', included: false },
+          { name: 'Advanced integrations', included: false },
         ],
         popular: false,
+        color: 'from-gray-500 to-gray-600'
       },
       {
-        name: 'Professional App',
-        tagline: 'Cross-platform excellence',
-        oneTime: { price: 100000 },
-        subscription: { setupFee: 30000, monthly: 9999 },
-        deliveryTime: '45-60 days',
+        name: 'Standard',
+        tagline: 'Full-featured mobile app',
+        icon: FaStar,
+        oneTime: { price: 120000 },
+        subscription: { setupFee: 35000, monthly: 14999 },
+        deliveryTime: '8-12 weeks',
         features: [
-          { name: 'iOS and Android', included: true },
-          { name: 'Up to 15 screens', included: true },
-          { name: 'Advanced authentication', included: true },
-          { name: 'Push + In-app notifications', included: true },
-          { name: 'Both app stores', included: true },
+          { name: 'Cross-platform (iOS + Android)', included: true },
+          { name: 'Full feature set', included: true },
+          { name: 'Premium UI/UX design', included: true },
+          { name: 'Push notifications', included: true },
           { name: 'Advanced analytics', included: true },
-          { name: 'Priority bug fixes', included: true },
-          { name: 'Cross-platform native', included: true },
+          { name: 'App store optimization', included: true },
           { name: 'Admin dashboard', included: true },
-          { name: 'Payment gateway', included: false },
+          { name: 'API integrations', included: true },
+          { name: 'Priority support', included: false },
         ],
         popular: true,
+        color: 'from-primary to-blue-600'
       },
       {
-        name: 'Enterprise App',
-        tagline: 'Full mobile ecosystem',
+        name: 'Enterprise',
+        tagline: 'Custom enterprise solution',
+        icon: FaCrown,
         isCustom: true,
         deliveryTime: 'Custom timeline',
         features: [
-          { name: 'iOS and Android', included: true },
-          { name: 'Unlimited screens', included: true },
-          { name: 'Enterprise auth + SSO', included: true },
-          { name: 'Real-time features', included: true },
-          { name: 'Full ecosystem', included: true },
+          { name: 'Custom platform strategy', included: true },
+          { name: 'Unlimited features', included: true },
+          { name: 'Custom UI/UX design', included: true },
+          { name: 'Advanced push notifications', included: true },
           { name: 'Enterprise analytics', included: true },
-          { name: 'Dedicated support', included: true },
-          { name: 'Cross-platform', included: true },
-          { name: 'Full admin suite', included: true },
-          { name: 'All integrations', included: true },
+          { name: 'Multi-app ecosystem', included: true },
+          { name: 'Full admin dashboard', included: true },
+          { name: 'Enterprise integrations', included: true },
+          { name: 'Dedicated team', included: true },
         ],
         popular: false,
+        color: 'from-purple-500 to-pink-500'
       },
     ],
     ecommerce: [
       {
         name: 'Starter Store',
-        tagline: 'Perfect for small catalogs',
+        tagline: 'Start selling online',
+        icon: FaRocket,
         oneTime: { price: 25000 },
         subscription: { setupFee: 8000, monthly: 3999 },
-        deliveryTime: '14-21 days',
+        deliveryTime: '10-14 days',
         features: [
           { name: 'Up to 50 products', included: true },
+          { name: 'Responsive storefront', included: true },
+          { name: 'Secure checkout', included: true },
           { name: 'Payment gateway', included: true },
           { name: 'Order management', included: true },
-          { name: 'Basic SEO', included: true },
-          { name: 'SSL secure checkout', included: true },
-          { name: 'Mobile responsive', included: true },
           { name: 'Basic inventory', included: true },
-          { name: 'Advanced inventory', included: false },
           { name: 'Multi-vendor', included: false },
-          { name: 'Subscription products', included: false },
+          { name: 'Advanced analytics', included: false },
+          { name: 'Custom integrations', included: false },
         ],
         popular: false,
+        color: 'from-gray-500 to-gray-600'
       },
       {
-        name: 'Business Store',
-        tagline: 'For growing businesses',
+        name: 'Growth Store',
+        tagline: 'Scale your online business',
+        icon: FaStar,
         oneTime: { price: 60000 },
-        subscription: { setupFee: 20000, monthly: 7999 },
-        deliveryTime: '21-30 days',
+        subscription: { setupFee: 18000, monthly: 7999 },
+        deliveryTime: '3-4 weeks',
         features: [
-          { name: 'Up to 500 products', included: true },
+          { name: 'Unlimited products', included: true },
+          { name: 'Custom storefront', included: true },
           { name: 'Multiple payment options', included: true },
-          { name: 'Advanced order system', included: true },
-          { name: 'Advanced SEO', included: true },
-          { name: 'SSL + CDN', included: true },
-          { name: 'PWA support', included: true },
-          { name: 'Full inventory system', included: true },
           { name: 'Advanced inventory', included: true },
-          { name: 'Multi-vendor ready', included: false },
-          { name: 'Subscription products', included: false },
+          { name: 'Customer accounts', included: true },
+          { name: 'Marketing tools', included: true },
+          { name: 'Advanced analytics', included: true },
+          { name: 'CRM integration', included: true },
+          { name: 'Multi-vendor', included: false },
         ],
         popular: true,
+        color: 'from-primary to-blue-600'
       },
       {
-        name: 'Enterprise Store',
-        tagline: 'Full marketplace solution',
+        name: 'Enterprise',
+        tagline: 'Enterprise e-commerce',
+        icon: FaCrown,
         isCustom: true,
         deliveryTime: 'Custom timeline',
         features: [
-          { name: 'Unlimited products', included: true },
-          { name: 'All payment methods', included: true },
-          { name: 'Enterprise order system', included: true },
-          { name: 'Enterprise SEO suite', included: true },
+          { name: 'Unlimited everything', included: true },
+          { name: 'Custom platform', included: true },
           { name: 'Enterprise security', included: true },
-          { name: 'Full PWA + Apps', included: true },
-          { name: 'Full inventory', included: true },
-          { name: 'Warehouse management', included: true },
-          { name: 'Multi-vendor platform', included: true },
-          { name: 'Subscription + recurring', included: true },
+          { name: 'Multi-vendor support', included: true },
+          { name: 'B2B features', included: true },
+          { name: 'Advanced marketing', included: true },
+          { name: 'Enterprise analytics', included: true },
+          { name: 'Full integrations', included: true },
+          { name: 'Dedicated support', included: true },
         ],
         popular: false,
+        color: 'from-purple-500 to-pink-500'
       },
     ],
   };
 
-  // Subscription process steps
-  const subscriptionSteps = [
-    {
-      step: 1,
-      icon: <FaCreditCard className="w-6 h-6" />,
-      title: 'Pay Setup Fee',
-      description: 'Pay the one-time setup fee as advance to start your project. This covers initial development costs and secures your project slot.',
-      highlight: 'Pay upfront to begin',
-    },
-    {
-      step: 2,
-      icon: <FaRocket className="w-6 h-6" />,
-      title: 'Development & Launch',
-      description: 'Our team builds your project. You review, provide feedback, and we make revisions until you\'re 100% satisfied. Then we go live!',
-      highlight: 'No monthly fees during development',
-    },
-    {
-      step: 3,
-      icon: <FaCalendarAlt className="w-6 h-6" />,
-      title: 'Subscription Starts',
-      description: 'Monthly subscription begins from the GO-LIVE date. This includes hosting, SSL, updates, security, backups, and priority support.',
-      highlight: 'Billing starts only after launch',
-    },
-    {
-      step: 4,
-      icon: <FaShieldAlt className="w-6 h-6" />,
-      title: 'Ongoing Support',
-      description: 'Enjoy continuous maintenance, regular updates, security monitoring, and dedicated support. Your website stays fast, secure, and up-to-date.',
-      highlight: 'Pay monthly, stay protected',
-    },
+  const benefits = [
+    { icon: FaShieldAlt, title: 'No Hidden Fees', desc: 'What you see is what you pay. Period.' },
+    { icon: FaClock, title: 'Fast Delivery', desc: 'Quick turnaround without compromising quality.' },
+    { icon: FaHeadset, title: '24/7 Support', desc: 'We\'re always just a WhatsApp away.' },
+    { icon: FaGift, title: 'Free Maintenance', desc: 'Updates and fixes included in subscription.' },
+  ];
+
+  const faqs = [
+    { q: 'What\'s included in the subscription?', a: 'Everything! Hosting, SSL, maintenance, updates, and support are all included in your monthly fee.' },
+    { q: 'Can I cancel anytime?', a: 'Yes, you can cancel your subscription at any time with 30 days notice. No long-term contracts.' },
+    { q: 'What\'s the setup fee for?', a: 'The one-time setup fee covers initial development, design, and deployment of your project.' },
+    { q: 'Do you offer custom solutions?', a: 'Absolutely! Contact us for enterprise solutions tailored to your specific needs.' },
   ];
 
   const currentPlans = pricingPlans[selectedService] || pricingPlans.web;
+  const currentService = services.find(s => s.id === selectedService);
 
   return (
     <>
       <SEOHead 
-        title="Pricing - AINOR | India's First Subscription-Based Web Development"
-        description="Transparent subscription pricing for web development, mobile apps, and e-commerce. Pay setup fee upfront, monthly subscription after go-live. Save up to 60% compared to traditional pricing."
+        title="Pricing - AINOR | Affordable Web Development & Digital Services"
+        description="Explore AINOR's affordable pricing plans for web development, mobile apps, and e-commerce. India's first subscription-based development agency."
         canonicalUrl="https://myainor.com/pricing"
       />
 
-      <div className="min-h-screen bg-[#f5f5f5] relative">
-        {/* Scroll-Connected Journey Animation */}
-        <PricingScrollAnimation isMobile={isMobile} />
-        
-        {/* 3D Animated Background Lines - Appears OVER content */}
-        {!isMobile && (
-        <div className="fixed inset-0 pointer-events-none z-40 overflow-hidden">
-          {/* 3D Connector Line - Flows across page */}
-          <svg className="absolute w-full h-full" style={{ minHeight: '200vh' }}>
-            <motion.path
-              d="M -50 100 Q 200 50 400 150 T 800 100 T 1200 180 T 1600 100"
-              stroke="url(#gradient3d)"
-              strokeWidth="3"
-              fill="none"
-              strokeLinecap="round"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.4 }}
-              transition={{ duration: 3, ease: "easeInOut" }}
-              style={{ filter: 'drop-shadow(0 4px 6px rgba(99, 102, 241, 0.3))' }}
-            />
-            <defs>
-              <linearGradient id="gradient3d" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#6366f1" stopOpacity="0" />
-                <stop offset="30%" stopColor="#6366f1" stopOpacity="0.6" />
-                <stop offset="70%" stopColor="#6366f1" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-
-          {/* Floating 3D Arrow */}
-          <motion.div
-            className="absolute top-32 right-[15%]"
-            style={{
-              filter: 'drop-shadow(0 8px 16px rgba(99, 102, 241, 0.4))',
-            }}
-            animate={{ 
-              y: [0, -20, 0],
-              rotateY: [0, 180, 360],
-            }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <svg width="60" height="60" viewBox="0 0 60 60" className="opacity-50">
-              <polygon points="30,5 55,50 30,40 5,50" fill="#6366f1" />
-            </svg>
-          </motion.div>
-
-          {/* Rotating 3D Hub */}
-          <motion.div
-            className="absolute top-[60%] left-[5%]"
-            style={{
-              filter: 'drop-shadow(0 6px 12px rgba(99, 102, 241, 0.3))',
-              perspective: '500px',
-            }}
-            animate={{ rotateY: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
-            <svg width="80" height="80" viewBox="0 0 80 80" className="opacity-40">
-              <circle cx="40" cy="40" r="6" fill="#6366f1" />
-              {[0, 90, 180, 270].map((angle, i) => (
-                <g key={i} transform={`rotate(${angle} 40 40)`}>
-                  <line x1="40" y1="40" x2="40" y2="10" stroke="#6366f1" strokeWidth="2.5" />
-                  <polygon points="35,15 40,5 45,15" fill="#6366f1" />
-                </g>
-              ))}
-            </svg>
-          </motion.div>
-        </div>
-        )}
-
+      <ModernPageLayout>
         {/* Hero Section */}
-        <section className="relative pt-32 pb-16 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <section className="relative bg-white rounded-3xl p-6 md:p-12 lg:p-16 shadow-soft overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-green-100 to-emerald-100 rounded-full blur-3xl opacity-60" />
+          <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full blur-3xl opacity-60" />
+          
+          <div className="relative z-10 text-center max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-12"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
-                <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                <span className="font-semibold text-sm">🇮🇳 FIRST IN INDIA - Subscription Model</span>
-              </span>
-              
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1a1a1a] mb-6">
-                Simple, Transparent
-                <span className="block mt-2 text-indigo-500">Subscription Pricing</span>
-              </h1>
-              
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
-                Pay a small setup fee to start, then affordable monthly subscriptions after your project goes live. 
-                No massive upfront costs, no hidden fees.
-              </p>
-              
-              <div className="flex flex-wrap justify-center gap-4 mt-6">
-                <div className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-medium">
-                  <FaCheck className="w-4 h-4" />
-                  Save 60-70% vs One-Time
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-600 rounded-full text-sm font-medium">
-                  <FaShieldAlt className="w-4 h-4" />
-                  Hosting & SSL Included
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-full text-sm font-medium">
-                  <FaRocket className="w-4 h-4" />
-                  Go Live in Days
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Service Tabs */}
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {services.map((service) => (
-                <motion.button
-                  key={service.id}
-                  onClick={() => setSelectedService(service.id)}
-                  className={`px-6 py-3 rounded-xl font-medium transition-all ${
-                    selectedService === service.id
-                      ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25'
-                      : 'bg-white text-[#1a1a1a] border border-gray-200 hover:border-indigo-300 hover:shadow-md'
-                  }`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span className="mr-2">{service.icon}</span>
-                  {service.name}
-                </motion.button>
-              ))}
-            </div>
-
-            {/* Billing Toggle */}
-            <div className="flex justify-center items-center gap-4 mb-12">
-              <span className={`font-medium transition-colors ${billingCycle === 'onetime' ? 'text-[#1a1a1a]' : 'text-gray-400'}`}>
-                One-Time Payment
-              </span>
-              <motion.button
-                onClick={() => setBillingCycle(billingCycle === 'subscription' ? 'onetime' : 'subscription')}
-                className="relative w-16 h-8 bg-indigo-500 rounded-full p-1 shadow-lg"
-                whileTap={{ scale: 0.95 }}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 }}
+                className="inline-flex items-center gap-2 bg-green-50 border border-green-100 px-4 py-2 rounded-full mb-6"
               >
-                <motion.div
-                  className="w-6 h-6 bg-white rounded-full shadow"
-                  animate={{ x: billingCycle === 'subscription' ? 32 : 0 }}
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                />
-              </motion.button>
-              <span className={`font-medium transition-colors ${billingCycle === 'subscription' ? 'text-[#1a1a1a]' : 'text-gray-400'}`}>
-                Subscription
-                <span className="ml-2 px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-bold">
-                  RECOMMENDED
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
                 </span>
-              </span>
-            </div>
+                <span className="text-sm font-semibold text-green-700 tracking-wide uppercase">Simple & Transparent</span>
+              </motion.div>
+              
+              <BlurReveal delay={0.2}>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#111318] mb-6">
+                  Choose Your Perfect{' '}
+                  <GradientText from="#135bec" to="#10b981" className="font-bold">
+                    Plan
+                  </GradientText>
+                </h1>
+              </BlurReveal>
+              
+              <BlurReveal delay={0.4}>
+                <p className="text-lg md:text-xl text-gray-500 mb-10 max-w-2xl mx-auto">
+                  Transparent pricing with no hidden fees. Pay one-time or subscribe monthly and save up to 60%.
+                </p>
+              </BlurReveal>
+
+              {/* Billing Toggle */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="flex justify-center mb-8"
+              >
+                <div className="inline-flex items-center bg-gray-100 rounded-full p-1.5">
+                  <button
+                    onClick={() => setBillingCycle('subscription')}
+                    className={`relative px-6 py-3 rounded-full font-semibold text-sm transition-all ${
+                      billingCycle === 'subscription'
+                        ? 'bg-black text-white shadow-lg'
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    Subscription
+                    {billingCycle === 'subscription' && (
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute -top-2 -right-2 text-[10px] bg-green-500 text-white px-2 py-0.5 rounded-full font-bold"
+                      >
+                        Save 60%
+                      </motion.span>
+                    )}
+                  </button>
+                  <button
+                    onClick={() => setBillingCycle('oneTime')}
+                    className={`px-6 py-3 rounded-full font-semibold text-sm transition-all ${
+                      billingCycle === 'oneTime'
+                        ? 'bg-black text-white shadow-lg'
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    One-Time
+                  </button>
+                </div>
+              </motion.div>
+
+              {/* Service Selector */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="flex flex-wrap justify-center gap-3"
+              >
+                {services.map((service) => {
+                  const ServiceIcon = service.icon;
+                  return (
+                    <button
+                      key={service.id}
+                      onClick={() => setSelectedService(service.id)}
+                      className={`flex items-center gap-2 px-5 py-3 rounded-full font-semibold text-sm transition-all ${
+                        selectedService === service.id
+                          ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-105'
+                          : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                      }`}
+                    >
+                      <ServiceIcon className="text-lg" />
+                      <span>{service.name}</span>
+                    </button>
+                  );
+                })}
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Pricing Cards */}
-        <section className="pb-20 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Pricing Cards with Animation */}
+        <section className="py-4">
+          <AnimatePresence mode="wait">
             <motion.div 
-              className="grid md:grid-cols-3 gap-8"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              key={`${selectedService}-${billingCycle}`}
+              key={selectedService}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid md:grid-cols-3 gap-6"
             >
-              {currentPlans.map((plan, index) => (
+              {currentPlans.map((plan, idx) => (
                 <motion.div
-                  key={index}
-                  className={`bg-white rounded-3xl p-8 border-2 transition-all duration-300 relative ${
-                    plan.popular 
-                      ? 'border-indigo-500 shadow-2xl shadow-indigo-500/10' 
-                      : 'border-gray-100 hover:border-indigo-200 hover:shadow-xl'
-                  }`}
-                  variants={cardVariants}
-                  whileHover={{ y: -8 }}
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
                 >
-                  {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="px-4 py-1.5 bg-indigo-500 text-white text-sm font-bold rounded-full shadow-lg">
-                        ⭐ Most Popular
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="text-center mb-8">
-                    <h3 className="text-2xl font-bold text-[#1a1a1a] mb-2">{plan.name}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{plan.tagline}</p>
-                    
-                    {plan.deliveryTime && (
-                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-xs font-medium">
-                        <FaRocket className="w-3 h-3" />
-                        Delivery: {plan.deliveryTime}
-                      </div>
-                    )}
-                    
-                    <div className="mt-6">
-                      {plan.isCustom ? (
-                        <div>
-                          <div className="text-3xl font-bold text-[#1a1a1a]">Custom Quote</div>
-                          <p className="text-gray-500 text-sm mt-2">Tailored to your needs</p>
+                  <TiltCard tiltAmount={plan.popular ? 10 : 6} scale={plan.popular ? 1.03 : 1.02}>
+                    <SpotlightCard 
+                      className={`bg-white rounded-3xl p-6 md:p-8 shadow-soft relative overflow-hidden h-full ${
+                        plan.popular ? 'ring-2 ring-primary' : ''
+                      }`}
+                    >
+                      {/* Popular Badge */}
+                      {plan.popular && (
+                        <motion.div
+                          initial={{ x: 100 }}
+                          animate={{ x: 0 }}
+                          className="absolute top-4 right-4"
+                        >
+                          <span className="bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full flex items-center gap-1">
+                            <FaStar className="text-yellow-300" /> Most Popular
+                          </span>
+                        </motion.div>
+                      )}
+                      
+                      {/* Plan Header */}
+                      <div className="mb-6">
+                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${plan.color} text-white flex items-center justify-center mb-4`}>
+                          <plan.icon className="text-2xl" />
                         </div>
-                      ) : billingCycle === 'subscription' ? (
-                        <div>
-                          <div className="text-sm text-gray-500 mb-2">
-                            Setup Fee (One-time): <span className="font-bold text-[#1a1a1a]">₹{plan.subscription.setupFee.toLocaleString()}</span>
-                          </div>
-                          <div className="flex items-baseline justify-center gap-1">
-                            <span className="text-4xl font-bold text-indigo-500">
-                              ₹{plan.subscription.monthly.toLocaleString()}
-                            </span>
-                            <span className="text-gray-500">/month</span>
-                          </div>
-                          <p className="text-xs text-gray-400 mt-2">After project goes live</p>
+                        <h3 className="text-2xl font-bold mb-1">{plan.name}</h3>
+                        <p className="text-sm text-gray-500">{plan.tagline}</p>
+                      </div>
+                      
+                      {/* Price */}
+                      {plan.isCustom ? (
+                        <div className="mb-6">
+                          <span className="text-4xl font-bold">Custom</span>
+                          <p className="text-sm text-gray-500 mt-1">Contact us for quote</p>
                         </div>
                       ) : (
-                        <div>
-                          <div className="flex items-baseline justify-center gap-1">
-                            <span className="text-4xl font-bold text-[#1a1a1a]">
-                              ₹{plan.oneTime.price.toLocaleString()}
-                            </span>
-                          </div>
-                          <p className="text-gray-500 text-sm mt-2">One-time payment</p>
+                        <div className="mb-6">
+                          {billingCycle === 'subscription' ? (
+                            <>
+                              <div className="flex items-baseline gap-1">
+                                <span className="text-4xl font-bold">
+                                  ₹<AnimatedCounter target={plan.subscription.monthly} duration={0.5} />
+                                </span>
+                                <span className="text-gray-500">/month</span>
+                              </div>
+                              <p className="text-sm text-gray-500 mt-1">
+                                + ₹{plan.subscription.setupFee.toLocaleString()} one-time setup
+                              </p>
+                            </>
+                          ) : (
+                            <div className="flex items-baseline gap-1">
+                              <span className="text-4xl font-bold">
+                                ₹<AnimatedCounter target={plan.oneTime.price} duration={0.5} />
+                              </span>
+                              <span className="text-gray-500">one-time</span>
+                            </div>
+                          )}
                         </div>
                       )}
-                    </div>
-                  </div>
 
-                  <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-3">
-                        {feature.included ? (
-                          <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
-                            <FaCheck className="w-3 h-3 text-indigo-500" />
-                          </div>
-                        ) : (
-                          <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-                            <FaTimes className="w-3 h-3 text-gray-400" />
-                          </div>
-                        )}
-                        <span className={feature.included ? 'text-[#1a1a1a]' : 'text-gray-400'}>
-                          {feature.name}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                      {/* Delivery Time */}
+                      <div className="flex items-center gap-2 mb-6 text-sm">
+                        <FaClock className="text-gray-400" />
+                        <span className="text-gray-600">Delivery: {plan.deliveryTime}</span>
+                      </div>
 
-                  <motion.a
-                    href={`https://wa.me/917579500264?text=Hi%20AINOR!%20I'm%20interested%20in%20the%20${plan.name}%20${selectedService}%20plan%20(${billingCycle}).`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center justify-center gap-2 w-full py-4 rounded-xl font-medium transition-all ${
-                      plan.popular
-                        ? 'bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg shadow-indigo-500/25'
-                        : 'bg-[#f5f5f5] text-[#1a1a1a] hover:bg-indigo-500 hover:text-white'
-                    }`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <FaWhatsapp className="w-5 h-5" />
-                    {plan.isCustom ? 'Get Custom Quote' : 'Get Started'}
-                  </motion.a>
+                      {/* Features */}
+                      <div className="space-y-3 mb-8">
+                        {plan.features.map((feature, fidx) => (
+                          <motion.div 
+                            key={fidx}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: fidx * 0.05 }}
+                            className="flex items-center gap-3"
+                          >
+                            {feature.included ? (
+                              <div className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0">
+                                <FaCheck className="text-[10px]" />
+                              </div>
+                            ) : (
+                              <div className="w-5 h-5 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center flex-shrink-0">
+                                <FaTimes className="text-[10px]" />
+                              </div>
+                            )}
+                            <span className={`text-sm ${feature.included ? 'text-gray-700' : 'text-gray-400'}`}>
+                              {feature.name}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      {/* CTA */}
+                      <MagneticButton>
+                        <a
+                          href={`https://wa.me/917579500264?text=Hi%20AINOR!%20I'm%20interested%20in%20the%20${encodeURIComponent(plan.name)}%20${encodeURIComponent(currentService?.name || '')}%20plan.`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold transition-all text-lg ${
+                            plan.popular
+                              ? 'bg-gradient-to-r from-primary to-blue-600 text-white hover:shadow-lg hover:shadow-primary/30'
+                              : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                          }`}
+                        >
+                          Get Started
+                          <FaArrowRight className="text-sm" />
+                        </a>
+                      </MagneticButton>
+                    </SpotlightCard>
+                  </TiltCard>
                 </motion.div>
               ))}
             </motion.div>
-          </div>
+          </AnimatePresence>
         </section>
 
-        {/* How Subscription Works - Detailed */}
-        <section className="py-20 bg-white relative overflow-hidden">
-          {/* 3D Background Element */}
-          <motion.div
-            className="absolute top-20 right-10 opacity-20"
-            animate={{ rotate: 360, scale: [1, 1.1, 1] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            style={{ filter: 'drop-shadow(0 4px 8px rgba(99, 102, 241, 0.3))' }}
-          >
-            <svg width="150" height="150" viewBox="0 0 150 150">
-              <circle cx="75" cy="75" r="60" stroke="#6366f1" strokeWidth="2" fill="none" strokeDasharray="10 5" />
-              <circle cx="75" cy="75" r="40" stroke="#6366f1" strokeWidth="2" fill="none" strokeDasharray="5 5" />
-            </svg>
-          </motion.div>
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
-                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                <span className="font-semibold text-sm">How It Works</span>
-              </span>
-              
-              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-4">
-                Subscription Model
-                <span className="block mt-2 text-indigo-500">Step by Step</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Our subscription model is designed to be fair, transparent, and affordable. Here's exactly how it works.
-              </p>
-            </motion.div>
-
-            {/* Process Steps with Connecting Lines */}
-            <div className="relative">
-              {/* Connecting Line */}
-              <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-indigo-200 via-indigo-500 to-indigo-200 transform -translate-y-1/2 z-0" />
-              
-              <motion.div 
-                className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
+        {/* Benefits Section */}
+        <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-6 md:p-12 text-white relative overflow-hidden">
+          <MorphingBackground className="absolute inset-0 opacity-20" />
+          
+          <div className="relative z-10">
+            <div className="text-center mb-10">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                {subscriptionSteps.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    className="bg-[#f5f5f5] rounded-3xl p-8 text-center relative"
-                    variants={cardVariants}
-                    whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(99, 102, 241, 0.15)' }}
-                  >
-                    {/* Step Number */}
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
-                      {item.step}
-                    </div>
-                    
-                    <div className="mt-4 mb-4 w-16 h-16 mx-auto bg-indigo-100 text-indigo-500 rounded-2xl flex items-center justify-center">
-                      {item.icon}
-                    </div>
-                    
-                    <h3 className="font-bold text-xl text-[#1a1a1a] mb-3">{item.title}</h3>
-                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">{item.description}</p>
-                    
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-xs font-bold">
-                      {item.highlight}
-                    </div>
-                  </motion.div>
-                ))}
+                <span className="text-sm font-semibold text-blue-400 tracking-wider uppercase mb-2 block">Why Subscribe</span>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Every Plan Includes</h2>
               </motion.div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {benefits.map((benefit, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <TiltCard tiltAmount={10} scale={1.03}>
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center h-full">
+                      <div className="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mx-auto mb-4">
+                        <benefit.icon className="text-2xl" />
+                      </div>
+                      <h3 className="font-bold text-lg mb-2">{benefit.title}</h3>
+                      <p className="text-sm text-gray-400">{benefit.desc}</p>
+                    </div>
+                  </TiltCard>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Important Payment Terms */}
-        <section className="py-20 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-full mb-6 border border-red-100">
-                <FaExclamationTriangle className="w-4 h-4" />
-                <span className="font-semibold text-sm">Important Terms</span>
-              </span>
-              
-              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a]">
-                Payment Terms &
-                <span className="block mt-2 text-indigo-500">Service Policy</span>
-              </h2>
-            </motion.div>
-
-            <motion.div 
-              className="grid md:grid-cols-2 gap-8"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {/* Setup Fee Card */}
-              <motion.div
-                className="bg-white rounded-3xl p-8 border border-gray-100"
-                variants={cardVariants}
-              >
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <FaCreditCard className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-[#1a1a1a] mb-2">Setup Fee (Advance Payment)</h3>
-                    <p className="text-gray-600">Required to start your project</p>
-                  </div>
-                </div>
-                
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-3">
-                    <FaCheck className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-[#1a1a1a]">
-                      <strong>100% Advance:</strong> Setup fee must be paid in full before project development begins.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <FaCheck className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-[#1a1a1a]">
-                      <strong>One-Time Only:</strong> This is a non-recurring fee that covers initial development costs.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <FaCheck className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-[#1a1a1a]">
-                      <strong>Secures Your Slot:</strong> Payment confirms your project slot in our development queue.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <FaCheck className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-[#1a1a1a]">
-                      <strong>No Monthly Fees:</strong> You don't pay any subscription until your project goes live.
-                    </span>
-                  </li>
-                </ul>
-              </motion.div>
-
-              {/* Monthly Subscription Card */}
-              <motion.div
-                className="bg-white rounded-3xl p-8 border border-gray-100"
-                variants={cardVariants}
-              >
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <FaCalendarAlt className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-[#1a1a1a] mb-2">Monthly Subscription</h3>
-                    <p className="text-gray-600">Starts after project goes live</p>
-                  </div>
-                </div>
-                
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-3">
-                    <FaCheck className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-[#1a1a1a]">
-                      <strong>Billing Start Date:</strong> Subscription begins exactly from the GO-LIVE date of your project.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <FaCheck className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-[#1a1a1a]">
-                      <strong>Monthly Cycle:</strong> Payment is due on the same date each month (e.g., if you go live on 15th, pay by 15th each month).
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <FaCheck className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-[#1a1a1a]">
-                      <strong>All-Inclusive:</strong> Hosting, SSL, updates, security, backups, and support included.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <FaCheck className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-[#1a1a1a]">
-                      <strong>Cancel Anytime:</strong> No long-term contracts. Cancel with 30 days notice.
-                    </span>
-                  </li>
-                </ul>
-              </motion.div>
-
-              {/* Late Payment Policy Card - Full Width */}
-              <motion.div
-                className="md:col-span-2 bg-white rounded-3xl p-8 border border-gray-200 shadow-sm"
-                variants={cardVariants}
-              >
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <FaCalendarAlt className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-[#1a1a1a] mb-2">📅 Payment Terms & Late Fees</h3>
-                    <p className="text-gray-600">Simple and transparent policy</p>
-                  </div>
-                </div>
-                
-                <div className="grid md:grid-cols-3 gap-6">
-                  {/* Days 1-3 */}
-                  <div className="bg-gray-50 rounded-2xl p-6">
-                    <h4 className="font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
-                      <span className="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-sm font-bold">1-3</span>
-                      Days 1-3 (Grace Period)
-                    </h4>
-                    <ul className="space-y-3 text-sm">
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                        <span className="text-[#1a1a1a]">Services continue normally</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                        <span className="text-[#1a1a1a]">Reminder sent via WhatsApp & Email</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                        <span className="text-indigo-600 font-medium">No late fees</span>
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  {/* Days 4+ Late Fee */}
-                  <div className="bg-gray-50 rounded-2xl p-6">
-                    <h4 className="font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
-                      <span className="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-sm font-bold">4+</span>
-                      Day 4 Onwards
-                    </h4>
-                    <ul className="space-y-3 text-sm">
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                        <span className="text-[#1a1a1a]">Services continue running</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                        <span className="text-[#1a1a1a] font-semibold">₹20/day late fee applies</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                        <span className="text-[#1a1a1a]">Daily reminders sent</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                        <span className="text-[#1a1a1a]">Late fees add to total due</span>
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  {/* Example Calculation */}
-                  <div className="bg-indigo-50 rounded-2xl p-6 border border-indigo-100">
-                    <h4 className="font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
-                      <span className="w-8 h-8 bg-indigo-500 text-white rounded-lg flex items-center justify-center text-sm">💡</span>
-                      Example Calculation
-                    </h4>
-                    <div className="space-y-3 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-[#1a1a1a]">Monthly Fee:</span>
-                        <span className="font-semibold text-[#1a1a1a]">₹500</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-[#1a1a1a]">Late by 10 days:</span>
-                        <span className="text-indigo-600 font-semibold">7 × ₹20 = ₹140</span>
-                      </div>
-                      <div className="border-t border-indigo-200 pt-3 flex justify-between">
-                        <span className="font-bold text-[#1a1a1a]">Total Due:</span>
-                        <span className="font-bold text-indigo-600">₹640</span>
-                      </div>
-                      <p className="text-xs text-gray-600 mt-2">(3 days grace + 7 days × ₹20)</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                  <p className="text-[#1a1a1a] text-sm text-center">
-                    💡 <strong>Pro Tip:</strong> Pay on time to avoid late fees! Set up auto-pay or calendar reminders. We send reminders 3 days before & on due date.
-                  </p>
-                </div>
-                
-                <div className="mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                  <p className="text-[#1a1a1a] text-sm text-center">
-                    ✅ <strong>Good News:</strong> Your website/app stays online even with late payments - we just add the late fee to your account.
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* What's Included Every Month */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
-                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                <span className="font-semibold text-sm">Subscription Benefits</span>
-              </span>
-              
-              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a]">
-                Everything Included
-                <span className="block mt-2 text-indigo-500">In Your Monthly Plan</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-4">
-                No hidden costs. Your subscription includes everything you need to keep your digital presence running smoothly.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {[
-                { icon: '🖥️', title: 'Premium Hosting', desc: 'Fast, reliable servers with 99.9% uptime', value: '₹3,000+/year value' },
-                { icon: '🔒', title: 'SSL Certificate', desc: 'Secure HTTPS connection for your site', value: '₹2,000+/year value' },
-                { icon: '🔄', title: 'Content Updates', desc: '2-5 updates per month based on plan', value: '₹5,000+/month value' },
-                { icon: '🛡️', title: 'Security Monitoring', desc: '24/7 threat detection & protection', value: '₹4,000+/year value' },
-                { icon: '📊', title: 'Analytics & Reports', desc: 'Monthly performance insights', value: '₹2,000+/month value' },
-                { icon: '💾', title: 'Daily Backups', desc: 'Automatic backups with easy restore', value: '₹3,000+/year value' },
-                { icon: '📞', title: 'Priority Support', desc: 'WhatsApp support with fast response', value: 'Priceless!' },
-                { icon: '🚀', title: 'Speed Optimization', desc: 'Regular performance tuning', value: '₹5,000+/month value' },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-[#f5f5f5] rounded-2xl p-6 text-center hover:shadow-lg transition-shadow"
-                  variants={cardVariants}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="text-4xl mb-4">{item.icon}</div>
-                  <h3 className="font-bold text-[#1a1a1a] mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm mb-3">{item.desc}</p>
-                  <span className="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
-                    {item.value}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* Total Value Calculation */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-12 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-3xl p-8 text-center text-white"
-            >
-              <h3 className="text-2xl font-bold mb-2">Total Value You Get Every Month</h3>
-              <div className="text-5xl font-bold my-4">₹15,000+</div>
-              <p className="text-indigo-100 mb-4">Worth of services included in your subscription</p>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-sm font-medium">
-                Starting at just ₹2,499/month
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        {/* Comparison Sticky Scroll */}
+        <PricingComparison billingCycle={billingCycle} />
 
         {/* FAQ Section */}
-        <section className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
-                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                <span className="font-semibold text-sm">Common Questions</span>
-              </span>
-              
-              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a]">
-                Frequently Asked
-                <span className="block mt-2 text-indigo-500">Questions</span>
-              </h2>
-            </motion.div>
+        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <FaQuestionCircle className="text-4xl text-primary mx-auto mb-4" />
+                <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p className="text-gray-500">Got questions? We've got answers.</p>
+              </motion.div>
+            </div>
 
-            <motion.div 
-              className="space-y-4"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {[
-                {
-                  q: 'When do I need to pay the setup fee?',
-                  a: 'The setup fee is due before we begin working on your project. Once received, we schedule your project and begin development within 2-3 business days.'
-                },
-                {
-                  q: 'When does my monthly subscription start?',
-                  a: 'Your monthly subscription begins exactly from the GO-LIVE date - the day your website or app is launched and made public. You pay nothing during the development phase.'
-                },
-                {
-                  q: 'What happens if I pay late?',
-                  a: 'You have a 3-day grace period with no charges. From day 4 onwards, a late fee of ₹20/day is added to your account. Your website/app stays online - we never take your site down. Just pay the subscription + accumulated late fees to clear your dues.'
-                },
-                {
-                  q: 'Can I cancel my subscription?',
-                  a: 'Yes, you can cancel anytime with 30 days notice. After cancellation, you\'ll receive all your files and data. Note that your website will go offline as hosting is included in the subscription.'
-                },
-                {
-                  q: 'What if I want to switch to one-time payment later?',
-                  a: 'Yes! You can convert to one-time ownership anytime by paying the remaining balance (one-time price minus setup fee paid). Contact us for a personalized quote.'
-                },
-                {
-                  q: 'Are there any hidden fees?',
-                  a: 'Absolutely not! The prices shown include everything - hosting, SSL, updates, security, and support. The only additional costs would be for major feature additions or redesigns, which are quoted separately.'
-                },
-              ].map((faq, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-white rounded-2xl p-6 border border-gray-100"
-                  variants={cardVariants}
-                >
-                  <h3 className="font-bold text-lg text-[#1a1a1a] mb-2">{faq.q}</h3>
-                  <p className="text-gray-600">{faq.a}</p>
-                </motion.div>
+            <div className="space-y-4">
+              {faqs.map((faq, idx) => (
+                <FAQItem key={idx} faq={faq} index={idx} />
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="bg-gradient-to-r from-primary via-blue-600 to-purple-600 rounded-3xl p-8 md:p-12 shadow-soft text-center text-white relative overflow-hidden">
+          <MorphingBackground className="absolute inset-0 opacity-20" />
+          
+          <div className="relative z-10">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-[#1a1a1a] rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
             >
-              {/* Background decoration */}
-              <div className="absolute inset-0 opacity-10">
-                <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <motion.circle
-                    cx="80" cy="20" r="40"
-                    fill="#6366f1"
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 10, repeat: Infinity }}
-                  />
-                  <motion.circle
-                    cx="20" cy="80" r="30"
-                    fill="#6366f1"
-                    animate={{ scale: [1, 1.3, 1] }}
-                    transition={{ duration: 8, repeat: Infinity }}
-                  />
-                </svg>
-              </div>
-              
-              <div className="relative z-10">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-                  Ready to Get Started?
-                </h2>
-                <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-                  Join 50+ businesses already growing with AINOR's subscription model. 
-                  Let's discuss your project and find the perfect plan for you.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <motion.a
-                    href="https://wa.me/917579500264?text=Hi%20AINOR!%20I%20want%20to%20discuss%20subscription%20pricing%20for%20my%20project."
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Still Have Questions?</h2>
+              <p className="text-white/80 mb-8 max-w-xl mx-auto">
+                Our team is here to help you choose the perfect plan for your business needs.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <MagneticButton>
+                  <Link
+                    to="/faq"
+                    className="px-8 py-4 bg-white/20 border-2 border-white text-white rounded-full font-bold hover:bg-white/30 transition-colors inline-block"
+                  >
+                    View Full FAQ
+                  </Link>
+                </MagneticButton>
+                <MagneticButton>
+                  <a
+                    href="https://wa.me/917579500264?text=Hi%20AINOR!%20I%20have%20questions%20about%20pricing."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-colors"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center justify-center gap-2 px-8 py-4 bg-green-500 text-white rounded-full font-bold hover:bg-green-600 transition-colors"
                   >
-                    <FaWhatsapp className="w-5 h-5" />
-                    Chat on WhatsApp
-                  </motion.a>
-                  
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/10 text-white rounded-xl font-medium hover:bg-white/20 transition-colors border border-white/20"
-                    >
-                      Schedule a Call
-                      <FaArrowRight className="w-4 h-4" />
-                    </Link>
-                  </motion.div>
-                </div>
+                    <FaWhatsapp className="text-xl" />
+                    Chat with Us
+                  </a>
+                </MagneticButton>
               </div>
             </motion.div>
           </div>
         </section>
-      </div>
+      </ModernPageLayout>
     </>
+  );
+};
+
+// Helper components for PricingComparison - Scroll Lock Version
+const PricingStickyCard = ({ currentIndex, totalItems }) => {
+  return (
+    <div className="relative">
+      <TiltCard tiltAmount={5}>
+        <div className="bg-gradient-to-br from-primary to-purple-600 rounded-3xl p-8 text-white">
+          <FaBolt className="text-5xl mb-6 text-yellow-300" />
+          <h3 className="text-3xl font-bold mb-4">Why Our Pricing Works</h3>
+          <p className="text-white/80 mb-6">
+            We've designed our pricing to be transparent, flexible, and accessible for businesses of all sizes.
+          </p>
+          <div className="space-y-3">
+            {['No hidden fees', 'Flexible options', 'Premium quality', 'Fast delivery'].map((item, idx) => (
+              <div key={idx} className="flex items-center gap-3">
+                <FaCheck className="text-green-300" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+          {/* Progress indicators */}
+          <div className="flex gap-2 mt-8">
+            {Array.from({ length: totalItems }).map((_, idx) => (
+              <div
+                key={idx}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === currentIndex 
+                    ? 'w-8 bg-white' 
+                    : idx < currentIndex 
+                      ? 'w-4 bg-white/60'
+                      : 'w-4 bg-white/30'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </TiltCard>
+    </div>
+  );
+};
+
+// Scroll-Locking Pricing Comparison Section
+const PricingComparison = ({ billingCycle }) => {
+  const sectionRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLocked, setIsLocked] = useState(false);
+  const [hasCompletedForward, setHasCompletedForward] = useState(false);
+  const isScrolling = useRef(false);
+  const lastScrollY = useRef(0);
+
+  const comparisonItems = [
+    {
+      title: 'Subscription vs One-Time',
+      description: 'With our subscription model, you get continuous support, regular updates, and included hosting. One-time payments are great for those who prefer owning their project outright.',
+      subscriptionPros: ['Monthly payments spread cost', 'All maintenance included', 'Free hosting & SSL', 'Priority support'],
+      oneTimePros: ['Own your project', 'No recurring costs', 'Full source code', 'One-time investment']
+    },
+    {
+      title: 'What\'s Included',
+      description: 'Every plan comes packed with features to help your business succeed online. From design to deployment, we\'ve got you covered.',
+      features: ['Custom Design', 'Mobile Responsive', 'SEO Optimization', 'Analytics Setup', 'Security Features', 'Performance Optimization']
+    },
+    {
+      title: 'Our Guarantee',
+      description: 'We stand behind our work with a satisfaction guarantee. If you\'re not happy within the first 30 days, we\'ll make it right or refund your setup fee.',
+      guarantees: ['30-day satisfaction guarantee', '99.9% uptime SLA', 'Dedicated support team', 'No hidden fees ever']
+    }
+  ];
+
+  const totalItems = comparisonItems.length;
+
+  // Handle wheel events when locked
+  const handleWheel = useCallback((e) => {
+    if (!isLocked) return;
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (isScrolling.current) return;
+    isScrolling.current = true;
+
+    const direction = e.deltaY > 0 ? 1 : -1;
+    
+    setCurrentIndex(prev => {
+      const newIndex = prev + direction;
+      
+      // Scrolling down, reached end
+      if (newIndex >= totalItems) {
+        setIsLocked(false);
+        setHasCompletedForward(true);
+        setTimeout(() => {
+          window.scrollBy({ top: 150, behavior: 'smooth' });
+        }, 100);
+        return totalItems - 1;
+      }
+      
+      // Scrolling up, reached beginning
+      if (newIndex < 0) {
+        setIsLocked(false);
+        setHasCompletedForward(false);
+        setTimeout(() => {
+          window.scrollBy({ top: -150, behavior: 'smooth' });
+        }, 100);
+        return 0;
+      }
+      
+      return newIndex;
+    });
+
+    setTimeout(() => {
+      isScrolling.current = false;
+    }, 600);
+  }, [isLocked, totalItems]);
+
+  // Observe when section enters/exits viewport
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const handleScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const scrollingDown = window.scrollY > lastScrollY.current;
+      lastScrollY.current = window.scrollY;
+
+      // Check if section is visible and centered
+      const isInView = rect.top < viewportHeight * 0.5 && rect.bottom > viewportHeight * 0.5;
+
+      if (isInView && !isLocked) {
+        // Entering from top (scrolling down)
+        if (scrollingDown && !hasCompletedForward && currentIndex < totalItems - 1) {
+          setIsLocked(true);
+        }
+        // Entering from bottom (scrolling up)  
+        if (!scrollingDown && hasCompletedForward && currentIndex > 0) {
+          setIsLocked(true);
+          setCurrentIndex(totalItems - 1);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [currentIndex, totalItems, hasCompletedForward, isLocked]);
+
+  // Lock/unlock body scroll
+  useEffect(() => {
+    if (isLocked) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('wheel', handleWheel, { passive: false });
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, [isLocked, handleWheel]);
+
+  // Touch support
+  const touchStartY = useRef(0);
+  
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchMove = useCallback((e) => {
+    if (!isLocked) return;
+    
+    e.preventDefault();
+    
+    if (isScrolling.current) return;
+    
+    const touchY = e.touches[0].clientY;
+    const diff = touchStartY.current - touchY;
+    
+    if (Math.abs(diff) > 50) {
+      isScrolling.current = true;
+      const direction = diff > 0 ? 1 : -1;
+      
+      setCurrentIndex(prev => {
+        const newIndex = prev + direction;
+        
+        if (newIndex >= totalItems) {
+          setIsLocked(false);
+          setHasCompletedForward(true);
+          return totalItems - 1;
+        }
+        
+        if (newIndex < 0) {
+          setIsLocked(false);
+          setHasCompletedForward(false);
+          return 0;
+        }
+        
+        return newIndex;
+      });
+      
+      touchStartY.current = touchY;
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 600);
+    }
+  }, [isLocked, totalItems]);
+
+  useEffect(() => {
+    if (isLocked) {
+      window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    }
+    return () => {
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [isLocked, handleTouchMove]);
+
+  const currentItem = comparisonItems[currentIndex];
+
+  return (
+    <section 
+      ref={sectionRef}
+      className="relative min-h-screen bg-gray-50 rounded-3xl"
+      onTouchStart={handleTouchStart}
+    >
+      <div className="h-screen flex items-center py-8">
+        <div className="w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            {/* Sticky Side */}
+            <div className="hidden lg:block">
+              <PricingStickyCard currentIndex={currentIndex} totalItems={totalItems} />
+            </div>
+
+            {/* Scrolling Content */}
+            <div className="relative overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, y: 80 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -80 }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                  className="w-full"
+                >
+                  <div className="bg-white rounded-3xl p-8 shadow-soft">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4">{currentItem.title}</h3>
+                    <p className="text-gray-500 mb-6">{currentItem.description}</p>
+                    
+                    {currentItem.subscriptionPros && (
+                      <div className="grid sm:grid-cols-2 gap-6">
+                        <div className={`p-4 rounded-xl ${billingCycle === 'subscription' ? 'bg-primary/10 ring-2 ring-primary' : 'bg-gray-50'}`}>
+                          <h4 className="font-bold mb-3 flex items-center gap-2">
+                            <span className={billingCycle === 'subscription' ? 'text-primary' : ''}>Subscription</span>
+                            {billingCycle === 'subscription' && <span className="text-xs bg-primary text-white px-2 py-0.5 rounded-full">Selected</span>}
+                          </h4>
+                          <ul className="space-y-2">
+                            {currentItem.subscriptionPros.map((pro, pIdx) => (
+                              <li key={pIdx} className="flex items-center gap-2 text-sm">
+                                <FaCheck className="text-green-500" />
+                                {pro}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className={`p-4 rounded-xl ${billingCycle === 'oneTime' ? 'bg-primary/10 ring-2 ring-primary' : 'bg-gray-50'}`}>
+                          <h4 className="font-bold mb-3 flex items-center gap-2">
+                            <span className={billingCycle === 'oneTime' ? 'text-primary' : ''}>One-Time</span>
+                            {billingCycle === 'oneTime' && <span className="text-xs bg-primary text-white px-2 py-0.5 rounded-full">Selected</span>}
+                          </h4>
+                          <ul className="space-y-2">
+                            {currentItem.oneTimePros.map((pro, pIdx) => (
+                              <li key={pIdx} className="flex items-center gap-2 text-sm">
+                                <FaCheck className="text-green-500" />
+                                {pro}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+
+                    {currentItem.features && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        {currentItem.features.map((feature, fIdx) => (
+                          <motion.div 
+                            key={fIdx} 
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: fIdx * 0.05 }}
+                            className="flex items-center gap-2 p-3 bg-gray-50 rounded-xl"
+                          >
+                            <FaCheck className="text-green-500" />
+                            <span className="text-sm">{feature}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    )}
+
+                    {currentItem.guarantees && (
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        {currentItem.guarantees.map((guarantee, gIdx) => (
+                          <motion.div 
+                            key={gIdx} 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: gIdx * 0.1 }}
+                            className="flex items-center gap-3 p-4 bg-green-50 rounded-xl"
+                          >
+                            <FaShieldAlt className="text-green-500 text-xl" />
+                            <span className="font-medium">{guarantee}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Lock Indicator */}
+      {isLocked && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50"
+        >
+          <div className="px-5 py-3 rounded-full bg-black/80 text-white text-sm font-medium backdrop-blur-sm">
+            <span className="flex items-center gap-3">
+              <motion.span
+                animate={{ y: [0, -4, 0] }}
+                transition={{ repeat: Infinity, duration: 1.2 }}
+                className="text-lg"
+              >
+                ↕
+              </motion.span>
+              Scroll to explore • {currentIndex + 1}/{totalItems}
+            </span>
+          </div>
+        </motion.div>
+      )}
+    </section>
+  );
+};
+
+// FAQ Item Component
+const FAQItem = ({ faq, index }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+    >
+      <TiltCard tiltAmount={3}>
+        <div 
+          className="bg-gray-50 rounded-2xl overflow-hidden cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <div className="flex items-center justify-between p-5">
+            <h3 className="font-bold">{faq.q}</h3>
+            <motion.div
+              animate={{ rotate: isOpen ? 45 : 0 }}
+              className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center flex-shrink-0 ml-4"
+            >
+              <span className="text-xl font-light">+</span>
+            </motion.div>
+          </div>
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <p className="px-5 pb-5 text-gray-500">{faq.a}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </TiltCard>
+    </motion.div>
   );
 };
 

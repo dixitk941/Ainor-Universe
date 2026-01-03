@@ -1,49 +1,25 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { motion } from 'framer-motion';
 
 // SEO Component
 import SEOHead from '../components/seo/SEOHead';
 import ServiceSchema from '../components/seo/ServiceSchema';
 import SEOText from '../components/seo/SEOText';
 
-// UI Components
-import AnimatedBackground from '../components/ui/AnimatedBackground';
-import ScrollConnectedCard from '../components/ui/ScrollConnectedCard';
+// Layout Components
+import FloatingNav from '../components/layout/FloatingNav';
+import ModernFooter from '../components/layout/ModernFooter';
 
-// Section Components
-import HeroSection from '../components/sections/HeroSection';
-import ServicesSection from '../components/sections/ServicesSection';
-import AboutSection from '../components/sections/AboutSection';
-import WorkSection from '../components/sections/WorkSection';
+// Section Components - Modern Design
+import ModernHeroSection from '../components/sections/ModernHeroSection';
+import ModernServicesSection from '../components/sections/ModernServicesSection';
+import WhyAinorBentoSection from '../components/sections/WhyAinorBentoSection';
+import HowItWorksSection from '../components/sections/HowItWorksSection';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
 import ContactSection from '../components/sections/ContactSection';
-import FeaturesSection from '../components/sections/FeaturesSection';
-import SubscriptionBenefitsSection from '../components/sections/SubscriptionBenefitsSection';
 
 const HomePage = () => {
-  const [isDesktop, setIsDesktop] = useState(false);
-  
-  // Better detect desktop with throttled resize handler
-  useEffect(() => {
-    // Initial check
-    setIsDesktop(window.innerWidth > 768);
-    
-    // Optimized resize handler with debouncing
-    let resizeTimer;
-    const handleResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        setIsDesktop(window.innerWidth > 768);
-      }, 250); // Wait 250ms after resize finishes
-    };
-    
-    window.addEventListener('resize', handleResize);
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(resizeTimer);
-    };
-  }, []);
-    // Memoize structured data to prevent unnecessary re-renders
+  // Memoize structured data to prevent unnecessary re-renders
   const homePageStructuredData = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -79,28 +55,33 @@ const HomePage = () => {
       />
       <ServiceSchema />
       
-      <div className="min-h-screen overflow-hidden relative" style={{backgroundColor: '#f5f5f5'}}>
-        {/* Animated SVG Background - Desktop only */}
-        {isDesktop && <AnimatedBackground />}
-        
-        {/* Scroll-Connected Traveling Elements */}
-        <ScrollConnectedCard isMobile={!isDesktop} />
-        
-        {/* Page content with relative z-index */}
-        <div className="relative z-10">
-        <HeroSection />
-        <SubscriptionBenefitsSection />
-        <ServicesSection />
-        <FeaturesSection />
-        <WorkSection />
-        <AboutSection />
-        <div id="testimonials">
-          <TestimonialsSection />
-        </div>
-        <SEOText page="home" />
-        <ContactSection />
-        </div>
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        style={{ backgroundColor: '#F5F5F5' }}
+        className="min-h-screen"
+      >
+        {/* Floating Navigation */}
+        <FloatingNav />
+
+        {/* Main Content Container */}
+        <main className="w-full max-w-[1300px] mx-auto pt-28 px-4 flex flex-col gap-6 pb-12">
+          <ModernHeroSection />
+          <ModernServicesSection />
+          <WhyAinorBentoSection />
+          <HowItWorksSection />
+          
+          <div id="testimonials">
+            <TestimonialsSection />
+          </div>
+          
+          <SEOText page="home" />
+          <ContactSection />
+          
+          <ModernFooter />
+        </main>
+      </motion.div>
     </>
   );
 };

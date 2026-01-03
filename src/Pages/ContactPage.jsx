@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaWhatsapp, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
-import PageScrollAnimation from '../components/ui/PageScrollAnimation';
-
-// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
+import ModernPageLayout from '../components/layout/ModernPageLayout';
 
 const ContactPage = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -60,47 +49,38 @@ const ContactPage = () => {
     }
   };
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: { 
-      opacity: 1, y: 0, scale: 1,
-      transition: { type: "spring", stiffness: 100, damping: 15 }
-    }
-  };
-
   const contactMethods = [
     {
-      icon: <FaWhatsapp className="w-6 h-6" />,
+      icon: <FaWhatsapp className="text-2xl" />,
       title: 'WhatsApp',
       description: 'Quick response within minutes',
       action: 'Chat Now',
       link: 'https://wa.me/917579500264?text=Hi%20AINOR!%20I%27m%20interested%20in%20your%20services.',
-      primary: true,
+      color: 'green',
     },
     {
-      icon: <FaEnvelope className="w-6 h-6" />,
+      icon: <FaEnvelope className="text-2xl" />,
       title: 'Email',
       description: 'support@myainor.com',
       action: 'Send Email',
       link: 'mailto:support@myainor.com',
+      color: 'blue',
     },
     {
-      icon: <FaPhone className="w-6 h-6" />,
+      icon: <FaPhone className="text-2xl" />,
       title: 'Phone',
       description: '+91 75795 00264',
       action: 'Call Now',
       link: 'tel:+917579500264',
+      color: 'purple',
     },
   ];
+
+  const colorMap = {
+    green: { bg: 'bg-green-50', text: 'text-green-600' },
+    blue: { bg: 'bg-blue-50', text: 'text-primary' },
+    purple: { bg: 'bg-purple-50', text: 'text-purple-600' },
+  };
 
   return (
     <>
@@ -110,263 +90,193 @@ const ContactPage = () => {
         canonicalUrl="https://myainor.com/contact"
       />
 
-      <div className="min-h-screen bg-[#f5f5f5]">        {/* Scroll Animation */}
-        <PageScrollAnimation type="contact" isMobile={isMobile} />
-                {/* Hero Section */}
-        <section className="relative pt-32 pb-20 overflow-hidden">
-          {/* Decorative arrows */}
-          <div className="absolute inset-0 pointer-events-none">
-            <motion.svg
-              className="absolute top-24 right-20 w-28 h-28 opacity-[0.1]"
-              viewBox="0 0 100 100"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            >
-              <circle cx="50" cy="50" r="6" fill="#6366f1" />
-              {[0, 90, 180, 270].map((angle, i) => (
-                <g key={i} transform={`rotate(${angle} 50 50)`}>
-                  <line x1="50" y1="50" x2="50" y2="15" stroke="#6366f1" strokeWidth="2" />
-                  <polygon points="45,20 50,8 55,20" fill="#6366f1" />
-                </g>
-              ))}
-            </motion.svg>
-
-            <svg className="absolute bottom-20 left-10 w-[150px] h-[80px] opacity-[0.06]" viewBox="0 0 150 80">
-              <motion.path
-                d="M 10 40 Q 75 0 140 40"
-                stroke="#6366f1"
-                strokeWidth="2.5"
-                fill="none"
-                strokeLinecap="round"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: [0, 1, 1, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.polygon
-                points="135,35 145,40 135,45"
-                fill="#6366f1"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 1, 1, 0] }}
-                transition={{ duration: 4, repeat: Infinity, times: [0, 0.4, 0.6, 1] }}
-              />
-            </svg>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-16"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
-                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                <span className="font-semibold text-sm">Contact Us</span>
-              </span>
+      <ModernPageLayout>
+        {/* Hero Section */}
+        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft relative overflow-hidden">
+          <div className="absolute -top-20 -right-20 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-60" />
+          
+          <div className="relative z-10 text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="inline-flex items-center gap-2 bg-gray-50 border border-gray-100 px-3 py-1.5 rounded-full mb-6">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+                </span>
+                <span className="text-xs font-semibold text-gray-600 tracking-wide uppercase">Get in Touch</span>
+              </div>
               
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1a1a1a] mb-6">
-                Let's Build
-                <span className="block mt-2 text-indigo-500">Together</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#111318] mb-4">
+                Let's <span className="text-primary">Talk</span>
               </h1>
               
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Have a project in mind? We'd love to hear from you. Reach out and let's create something extraordinary.
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+                Have a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
               </p>
             </motion.div>
-
-            {/* Quick Contact Cards */}
-            <motion.div 
-              className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {contactMethods.map((method, index) => (
-                <motion.a
-                  key={index}
-                  href={method.link}
-                  target={method.link.startsWith('http') ? '_blank' : undefined}
-                  rel={method.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className={`rounded-2xl p-6 text-center border transition-all duration-300 ${
-                    method.primary 
-                      ? 'bg-indigo-500 text-white border-indigo-500 hover:bg-indigo-600' 
-                      : 'bg-white text-[#1a1a1a] border-gray-100 hover:border-indigo-200 hover:shadow-lg'
-                  }`}
-                  variants={cardVariants}
-                  whileHover={{ y: -8 }}
-                >
-                  <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 ${
-                    method.primary ? 'bg-white/20' : 'bg-indigo-50 text-indigo-500'
-                  }`}>
-                    {method.icon}
-                  </div>
-                  <h3 className="text-lg font-bold mb-1">{method.title}</h3>
-                  <p className={`text-sm mb-4 ${method.primary ? 'text-indigo-100' : 'text-gray-600'}`}>
-                    {method.description}
-                  </p>
-                  <span className={`text-sm font-medium ${method.primary ? 'text-white' : 'text-indigo-500'}`}>
-                    {method.action} →
-                  </span>
-                </motion.a>
-              ))}
-            </motion.div>
           </div>
         </section>
 
-        {/* Contact Form Section */}
-        <section className="py-20 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-16 items-start">
-              {/* Form */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-gray-100"
-              >
-                <h2 className="text-2xl font-bold text-[#1a1a1a] mb-6">Send Us a Message</h2>
-                
-                {submitStatus === 'success' && (
-                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl">
-                    <p className="text-green-800 text-sm">
-                      ✓ Thank you! Your message has been sent successfully.
-                    </p>
-                  </div>
-                )}
-                
-                {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-                    <p className="text-red-800 text-sm">
-                      Sorry, there was an error. Please try again or contact us directly.
-                    </p>
-                  </div>
-                )}
+        {/* Contact Methods */}
+        <div className="grid md:grid-cols-3 gap-4">
+          {contactMethods.map((method, idx) => (
+            <motion.a
+              key={idx}
+              href={method.link}
+              target={method.link.startsWith('http') ? '_blank' : undefined}
+              rel={method.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-white rounded-2xl p-6 shadow-soft card-hover text-center group"
+            >
+              <div className={`w-14 h-14 mx-auto rounded-xl ${colorMap[method.color].bg} ${colorMap[method.color].text} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                {method.icon}
+              </div>
+              <h3 className="font-bold text-lg mb-1">{method.title}</h3>
+              <p className="text-sm text-gray-500 mb-3">{method.description}</p>
+              <span className="text-sm font-semibold text-primary">{method.action} →</span>
+            </motion.a>
+          ))}
+        </div>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Your Name</label>
-                    <input 
-                      type="text" 
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 bg-[#f5f5f5] border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-[#1a1a1a] transition-all"
-                      placeholder="John Doe"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Email Address</label>
-                    <input 
-                      type="email" 
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 bg-[#f5f5f5] border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-[#1a1a1a] transition-all"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Subject</label>
-                    <input 
-                      type="text" 
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 bg-[#f5f5f5] border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-[#1a1a1a] transition-all"
-                      placeholder="Project Inquiry"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Message</label>
-                    <textarea 
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 bg-[#f5f5f5] border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-[#1a1a1a] transition-all resize-none"
-                      placeholder="Tell us about your project..."
-                    />
-                  </div>
-                  
-                  <motion.button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-4 bg-indigo-500 text-white rounded-xl font-medium hover:bg-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </motion.button>
-                </form>
-              </motion.div>
-
-              {/* Info */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="space-y-8"
-              >
+        {/* Contact Form & Info */}
+        <div className="grid lg:grid-cols-5 gap-4">
+          {/* Form */}
+          <div className="lg:col-span-3 bg-white rounded-3xl p-8 shadow-soft">
+            <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
+            
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100">
-                    <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-                    <span className="font-semibold text-sm">Why Choose Us</span>
-                  </span>
-                  
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-6">
-                    Fast Response,
-                    <span className="block text-indigo-500">Real Results</span>
-                  </h2>
-                  
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    We typically respond within 2 hours during business hours. Our team is ready to discuss your project and provide a free consultation.
-                  </p>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                    placeholder="Your name"
+                  />
                 </div>
-
-                <div className="space-y-4">
-                  {[
-                    { icon: '⚡', title: 'Quick Response', desc: 'Get a reply within 2 hours' },
-                    { icon: '💬', title: 'Free Consultation', desc: 'No commitment, just helpful advice' },
-                    { icon: '🎯', title: 'Custom Solutions', desc: 'Tailored to your specific needs' },
-                    { icon: '💰', title: 'Transparent Pricing', desc: 'No hidden fees, ever' },
-                  ].map((item, index) => (
-                    <motion.div
-                      key={index}
-                      className="flex items-start gap-4 bg-white rounded-xl p-4 border border-gray-100"
-                      whileHover={{ x: 5 }}
-                    >
-                      <span className="text-2xl">{item.icon}</span>
-                      <div>
-                        <h4 className="font-bold text-[#1a1a1a]">{item.title}</h4>
-                        <p className="text-gray-600 text-sm">{item.desc}</p>
-                      </div>
-                    </motion.div>
-                  ))}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                    placeholder="your@email.com"
+                  />
                 </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                  placeholder="How can we help?"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                  rows={5}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none"
+                  placeholder="Tell us about your project..."
+                />
+              </div>
+              
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-black hover:bg-gray-800 text-white py-3 rounded-xl font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
+              
+              {submitStatus === 'success' && (
+                <div className="p-4 bg-green-50 text-green-700 rounded-xl text-center">
+                  Message sent successfully! We'll get back to you soon.
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="p-4 bg-red-50 text-red-700 rounded-xl text-center">
+                  Something went wrong. Please try again or contact us directly.
+                </div>
+              )}
+            </form>
+          </div>
 
-                {/* WhatsApp CTA */}
-                <motion.a
-                  href="https://wa.me/917579500264?text=Hi%20AINOR!%20I%27m%20interested%20in%20your%20services."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-3 w-full py-4 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <FaWhatsapp className="w-5 h-5" />
-                  Chat on WhatsApp - Fastest Response
-                </motion.a>
-              </motion.div>
+          {/* Info Cards */}
+          <div className="lg:col-span-2 space-y-4">
+            {/* Quick Contact */}
+            <div className="bg-[#111318] rounded-3xl p-6 shadow-soft text-white">
+              <h3 className="font-bold text-lg mb-4">Prefer a quick chat?</h3>
+              <p className="text-gray-400 text-sm mb-4">
+                WhatsApp is the fastest way to reach us. We typically respond within minutes.
+              </p>
+              <a
+                href="https://wa.me/917579500264?text=Hi%20AINOR!%20I%27m%20interested%20in%20your%20services."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold transition-colors"
+              >
+                <FaWhatsapp className="text-lg" />
+                Chat on WhatsApp
+              </a>
+            </div>
+
+            {/* Location */}
+            <div className="bg-white rounded-3xl p-6 shadow-soft">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+                  <FaMapMarkerAlt />
+                </div>
+                <div>
+                  <h3 className="font-bold">Our Location</h3>
+                  <p className="text-sm text-gray-500">Remote-first company</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-600">
+                We're a remote-first company with team members across India. We serve clients globally.
+              </p>
+            </div>
+
+            {/* Response Time */}
+            <div className="bg-white rounded-3xl p-6 shadow-soft">
+              <h3 className="font-bold mb-2">Response Time</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-500">WhatsApp</span>
+                  <span className="font-medium text-green-600">~5 minutes</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Email</span>
+                  <span className="font-medium">Within 24 hours</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Phone</span>
+                  <span className="font-medium">9 AM - 9 PM IST</span>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </ModernPageLayout>
     </>
   );
 };

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Modern Design System - Inspired by Space Grotesk */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 /* Reset default browser spacing */
 * {
   margin: 0;
@@ -13,15 +16,16 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #1f2937; /* bg-gray-900 to match the navbar background color */
+  background-color: #F5F5F5; /* Light background for modern look */
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #111318;
 }
 
 code {
@@ -29,30 +33,39 @@ code {
     monospace;
 }
 
-/* Adding keyframes for floating effect */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+/* Card Hover Effect */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
 }
 
-/* Custom animation utility class for floating */
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
 }
 
-/* Custom styles for a futuristic feel */
-body {
-  background: linear-gradient(to right, #1a1a1a, #2a2a2a);
-  color: #eaeaea;
+/* Custom Shadow Utilities */
+.shadow-soft {
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 20px -5px rgba(0, 0, 0, 0.02);
 }
 
-/* Ensuring smooth transitions on hover */
-button:hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.shadow-floating {
+  box-shadow: 0 30px 60px -12px rgba(19, 91, 236, 0.15), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Selection Styling */
+::selection {
+  background-color: rgba(19, 91, 236, 0.2);
+  color: #135bec;
+}
+
+::-moz-selection {
+  background-color: rgba(19, 91, 236, 0.2);
+  color: #135bec;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Hide scrollbar but keep functionality */
@@ -63,11 +76,4 @@ button:hover {
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-/* Background grid pattern */
-.bg-grid-pattern {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
 }
