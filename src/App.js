@@ -11,7 +11,7 @@ import BlogPostPage from './Pages/BlogPostPage';
 import CareersPage from './Pages/CareersPage';
 import FAQPage from './Pages/FAQPage';
 import PricingPage from './Pages/PricingPage';
-import SplashScreen from './components/ui/SplashScreen';
+import { EntranceAnimationProvider } from './components/ui/PageEntranceAnimation';
 import CookieConsent from './components/ui/CookieConsent';
 import BackToTop from './components/ui/BackToTop';
 import WolfChatbot from './components/ui/WolfChatbot';
@@ -38,9 +38,9 @@ function App() {
     <HelmetProvider>
       <Router>
         <ScrollToTop />
-        <div className="min-h-screen relative m-0 p-0" style={{ backgroundColor: '#F5F5F5' }}>
-          <SplashScreen />
-          <Routes>
+        <EntranceAnimationProvider>
+          <div className="min-h-screen relative m-0 p-0" style={{ backgroundColor: '#F5F5F5' }}>
+            <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServiceDetailPage />} />
             <Route path="/contact" element={<ContactPage />} />
@@ -53,10 +53,11 @@ function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/ai-services" element={<AiServicesPage />} />
           </Routes>
-          <BackToTop />
-          <CookieConsent />
-          <WolfChatbot />
-        </div>
+            <BackToTop />
+            <CookieConsent />
+            <WolfChatbot />
+          </div>
+        </EntranceAnimationProvider>
       </Router>
     </HelmetProvider>
   );

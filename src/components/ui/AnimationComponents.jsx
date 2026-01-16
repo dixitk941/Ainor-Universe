@@ -201,48 +201,47 @@ export const MagneticButton = ({ children, className = '', strength = 0.3 }) => 
 };
 
 // Counter animation - accepts both 'value' and 'target' props for flexibility
-export const AnimatedCounter = ({ value, target, duration = 2, className = '', prefix = '', suffix = '' }) => {
+export const AnimatedCounter = ({ value, target, duration = 0.5, className = '', prefix = '', suffix = '' }) => {
   const [count, setCount] = React.useState(0);
-  const [hasAnimated, setHasAnimated] = React.useState(false);
   const ref = React.useRef(null);
+  const animationRef = React.useRef(null);
   
   // Support both 'value' and 'target' props
   const targetValue = value ?? target ?? 0;
 
   React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let start = 0;
-          const end = parseInt(targetValue) || 0;
-          if (end === 0) {
-            setCount(0);
-            return;
-          }
-          const increment = end / (duration * 60);
-          const timer = setInterval(() => {
-            start += increment;
-            if (start >= end) {
-              setCount(end);
-              clearInterval(timer);
-            } else {
-              setCount(Math.floor(start));
-            }
-          }, 1000 / 60);
-          return () => clearInterval(timer);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [targetValue, duration, hasAnimated]);
+    const end = parseInt(targetValue) || 0;
+    
+    // Clear any existing animation
+    if (animationRef.current) {
+      clearInterval(animationRef.current);
+    }
+    
+    // Start fresh animation
+    let start = 0;
+    const totalFrames = duration * 60;
+    const increment = end / totalFrames;
+    
+    animationRef.current = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(animationRef.current);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 1000 / 60);
+    
+    return () => {
+      if (animationRef.current) {
+        clearInterval(animationRef.current);
+      }
+    };
+  }, [targetValue, duration]);
 
   return (
     <span ref={ref} className={className}>
-      {prefix}{count}{suffix}
+      {prefix}{count.toLocaleString('en-IN')}{suffix}
     </span>
   );
 };

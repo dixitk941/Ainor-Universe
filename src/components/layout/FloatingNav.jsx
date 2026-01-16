@@ -4,11 +4,13 @@ import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { FaArrowRight, FaBars, FaTimes, FaHome, FaLaptopCode, FaRobot, FaBriefcase, FaTag } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
 import { MagneticButton } from '../ui/AnimationComponents';
+import { useEntranceAnimation } from '../ui/PageEntranceAnimation';
 
 const FloatingNav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { triggerAnimation } = useEntranceAnimation();
   
   // Scroll progress
   const { scrollYProgress } = useScroll();
@@ -50,14 +52,29 @@ const FloatingNav = () => {
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-primary z-[100] origin-left"
         style={{ scaleX }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: triggerAnimation ? 1 : 0 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
       />
 
       {/* Floating Navigation */}
       <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
         <motion.nav
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          initial={{ y: -120, opacity: 0, filter: 'blur(10px)' }}
+          animate={triggerAnimation ? { 
+            y: 0, 
+            opacity: 1, 
+            filter: 'blur(0px)'
+          } : { 
+            y: -120, 
+            opacity: 0, 
+            filter: 'blur(10px)'
+          }}
+          transition={{ 
+            duration: 0.9, 
+            ease: [0.22, 1, 0.36, 1],
+            delay: 0.1
+          }}
           className={`w-full max-w-[1100px] bg-white/90 backdrop-blur-xl border border-white/50 shadow-soft rounded-full px-6 py-3 flex items-center justify-between transition-all duration-300 ${
             isScrolled ? 'shadow-lg bg-white/95' : ''
           }`}

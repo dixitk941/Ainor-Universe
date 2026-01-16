@@ -50,7 +50,7 @@ const PricingPage = () => {
         name: 'Professional',
         tagline: 'Most popular for growing businesses',
         icon: FaStar,
-        oneTime: { price: 35000 },
+        oneTime: { price: 30000 },
         subscription: { setupFee: 10000, monthly: 4999 },
         deliveryTime: '14-21 days',
         features: [
@@ -96,7 +96,7 @@ const PricingPage = () => {
         tagline: 'Launch your idea fast',
         icon: FaRocket,
         oneTime: { price: 50000 },
-        subscription: { setupFee: 15000, monthly: 7999 },
+        subscription: { setupFee: 15000, monthly: 5000 },
         deliveryTime: '4-6 weeks',
         features: [
           { name: 'Single platform (iOS or Android)', included: true },
@@ -117,7 +117,7 @@ const PricingPage = () => {
         tagline: 'Full-featured mobile app',
         icon: FaStar,
         oneTime: { price: 120000 },
-        subscription: { setupFee: 35000, monthly: 14999 },
+        subscription: { setupFee: 35000, monthly: 7000 },
         deliveryTime: '8-12 weeks',
         features: [
           { name: 'Cross-platform (iOS + Android)', included: true },
@@ -159,7 +159,7 @@ const PricingPage = () => {
         name: 'Starter Store',
         tagline: 'Start selling online',
         icon: FaRocket,
-        oneTime: { price: 25000 },
+        oneTime: { price: 15000 },
         subscription: { setupFee: 8000, monthly: 3999 },
         deliveryTime: '10-14 days',
         features: [
@@ -180,7 +180,7 @@ const PricingPage = () => {
         name: 'Growth Store',
         tagline: 'Scale your online business',
         icon: FaStar,
-        oneTime: { price: 60000 },
+        oneTime: { price: 30000 },
         subscription: { setupFee: 18000, monthly: 7999 },
         deliveryTime: '3-4 weeks',
         features: [

@@ -12,6 +12,7 @@ import ModernFooter from '../components/layout/ModernFooter';
 
 // Section Components - Modern Design
 import ModernHeroSection from '../components/sections/ModernHeroSection';
+import ProjectsCarouselSection from '../components/sections/ProjectsCarouselSection';
 import ModernServicesSection from '../components/sections/ModernServicesSection';
 import WhyAinorBentoSection from '../components/sections/WhyAinorBentoSection';
 import HowItWorksSection from '../components/sections/HowItWorksSection';
@@ -68,6 +69,7 @@ const HomePage = () => {
         {/* Main Content Container */}
         <main className="w-full max-w-[1300px] mx-auto pt-28 px-4 flex flex-col gap-6 pb-12">
           <ModernHeroSection />
+          <ProjectsCarouselSection />
           <ModernServicesSection />
           <WhyAinorBentoSection />
           <HowItWorksSection />
