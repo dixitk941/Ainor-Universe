@@ -89,7 +89,7 @@ const FloatingNav = () => {
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}
               />
-              <span className="text-xl font-bold tracking-tight text-gray-900">Ainor</span>
+              <span className="text-xl font-bold tracking-tight text-gray-900">AINOR</span>
             </Link>
           </MagneticButton>
 

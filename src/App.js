@@ -13,6 +13,8 @@ import BlogPostPage from './Pages/BlogPostPage';
 import CareersPage from './Pages/CareersPage';
 import FAQPage from './Pages/FAQPage';
 import PricingPage from './Pages/PricingPage';
+import PrivacyPage from './Pages/PrivacyPage';
+import TermsPage from './Pages/TermsPage';
 import { EntranceAnimationProvider } from './components/ui/PageEntranceAnimation';
 import CookieConsent from './components/ui/CookieConsent';
 import BackToTop from './components/ui/BackToTop';
@@ -56,6 +58,8 @@ function App() {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/ai-services" element={<AiServicesPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
           </Routes>
             <BackToTop />
             <CookieConsent />

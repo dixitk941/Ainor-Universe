@@ -12,7 +12,7 @@ const ModernFooter = () => {
         <div className="flex flex-col gap-4 text-center md:text-left">
           <div className="flex items-center justify-center md:justify-start gap-3">
             <img src={logo} alt="Ainor Logo" className="w-8 h-8 rounded-full object-cover" />
-            <span className="text-xl font-bold text-[#111318]">Ainor</span>
+            <span className="text-xl font-bold text-[#111318]">AINOR</span>
           </div>
           <p className="text-gray-500 text-sm max-w-xs">
             Building the future of digital products, one subscription at a time.

@@ -322,4 +322,20 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- Privacy Policy Page -->
+  <url>
+    <loc>https://myainor.com/privacy</loc>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Terms of Service Page -->
+  <url>
+    <loc>https://myainor.com/terms</loc>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
 </urlset>
