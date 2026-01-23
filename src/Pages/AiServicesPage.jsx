@@ -8,6 +8,7 @@ import {
   FaGlobe, FaChartBar, FaMicrochip
 } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 import ModernPageLayout from '../components/layout/ModernPageLayout';
 import TiltCard from '../components/ui/TiltCard';
 import { BlurReveal, AnimatedCounter, MagneticButton } from '../components/ui/AnimationComponents';
@@ -424,6 +425,9 @@ const AiServicesPage = () => {
             </motion.div>
           </div>
         </section>
+
+        {/* SEO Text Section */}
+        <SEOText page="ai-services" />
       </ModernPageLayout>
     </>
   );

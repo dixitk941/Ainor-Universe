@@ -2,9 +2,9 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEOHead = ({ 
-  title = "AINOR - MSME Registered Digital Solutions & Web Development Company",
-  description = "AINOR is India's first subscription-based web development company. MSME registered (UDYAM-UP-36-0033877), we offer affordable monthly plans for websites, mobile apps, and custom software. No long-term contracts. Cancel anytime.",
-  keywords = "AINOR, MSME registered, Udyam certified, Government of India recognized, web development, digital solutions, mobile apps, custom software, React development, website design, digital transformation, technology company, software development, India, subscription web development, monthly website plans, first in India subscription services, affordable web development, no upfront cost website, cancel anytime web service",
+  title = "AINOR - Affordable Web Development from ₹9,999/mo | Subscription-Based Agency",
+  description = "🚀 Affordable web development trusted by 50+ startups. Flat monthly pricing, no upfront costs. Websites, apps, e-commerce. MSME registered. Get FREE consultation!",
+  keywords = "affordable web development India, subscription web development, monthly payment website, cost-effective web developer, best web development company India, mobile app cost, AINOR, flat pricing website, no upfront cost",
   canonicalUrl = "https://myainor.com/",
   ogImage = "https://myainor.com/hero-image.jpg",
   structuredData = null,

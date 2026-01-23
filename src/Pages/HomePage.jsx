@@ -48,9 +48,9 @@ const HomePage = () => {
     return (
     <>
       <SEOHead 
-        title="AINOR - Digital Solutions & Web Development Company | Transform Your Business"
-        description="Leading digital solutions company specializing in web development, mobile apps, and custom software development. Transform your business with innovative technology solutions by AINOR."
-        keywords="AINOR, digital solutions, web development, mobile apps, custom software, React development, JavaScript, website design, digital transformation, technology company, software development, business automation"        
+        title="AINOR - Affordable Web Development from ₹9,999/mo | Subscription-Based Agency"
+        description="🚀 Affordable web development trusted by 50+ startups. Flat monthly pricing from ₹9,999/mo. No upfront costs. Sttrika, GoForCab, ExamBulletin built by us. Get FREE consultation!"
+        keywords="affordable web development India, subscription web development, website monthly payment, cheap web development, best web developer India, mobile app development cost, AINOR, flat pricing website, no upfront cost website"        
         canonicalUrl="https://myainor.com/"
         structuredData={homePageStructuredData}
       />

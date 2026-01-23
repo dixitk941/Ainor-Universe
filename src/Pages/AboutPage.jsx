@@ -7,6 +7,7 @@ import {
   FaShieldAlt, FaAward, FaChartLine, FaBrain
 } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 import ModernPageLayout from '../components/layout/ModernPageLayout';
 import TiltCard from '../components/ui/TiltCard';
 import { BlurReveal, AnimatedCounter, MagneticButton, StaggerContainer, StaggerItem } from '../components/ui/AnimationComponents';
@@ -147,8 +148,8 @@ const AboutPage = () => {
   return (
     <>
       <SEOHead 
-        title="About AINOR - India's First Subscription-Based Development Agency"
-        description="Learn about AINOR, India's first subscription-based web development company. Meet our team and discover our mission to democratize digital services."
+        title="About AINOR | MSME Registered Web Agency | Trusted by 50+ Businesses"
+        description="🇮🇳 Meet AINOR - subscription-based web development agency. MSME registered (UDYAM-UP-36-0033877). 50+ projects delivered. Trusted by Sttrika, GoForCab, ExamBulletin."
         canonicalUrl="https://myainor.com/about"
       />
 
@@ -518,6 +519,9 @@ const AboutPage = () => {
             </div>
           </div>
         </section>
+
+        {/* SEO Text Section */}
+        <SEOText page="about" />
       </ModernPageLayout>
     </>
   );

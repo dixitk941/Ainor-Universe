@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import HomePage from './Pages/HomePage';
 import ServiceDetailPage from './Pages/ServiceDetailPage';
+import ServicesListPage from './Pages/ServicesListPage';
+import ServicePage from './Pages/ServicePage';
 import ContactPage from './Pages/ContactPage';
 import AboutPage from './Pages/AboutPage';
 import PortfolioPage from './Pages/PortfolioPage';
@@ -43,6 +45,8 @@ function App() {
             <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServiceDetailPage />} />
+            <Route path="/all-services" element={<ServicesListPage />} />
+            <Route path="/service/:serviceId" element={<ServicePage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />

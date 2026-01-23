@@ -85,8 +85,8 @@ const ContactPage = () => {
   return (
     <>
       <SEOHead 
-        title="Contact AINOR - Get in Touch for Digital Solutions"
-        description="Contact AINOR for professional web development, digital solutions, and custom software services. Get in touch via WhatsApp, email, or phone."
+        title="Contact AINOR | Get FREE Project Quote | WhatsApp Available 24/7"
+        description="📞 Get your FREE project consultation within 2 hours. WhatsApp: +91-7579500264. No commitment required. 50+ happy clients. Start your project today!"
         canonicalUrl="https://myainor.com/contact"
       />
 

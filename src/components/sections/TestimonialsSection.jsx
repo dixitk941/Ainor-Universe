@@ -7,7 +7,7 @@ const testimonials = [
   {
     id: 1,
     content: "AINOR delivered an exceptional cab booking platform for GoForCab. Their innovative approach and technical expertise transformed our vision into a user-friendly, scalable solution.",
-    author: "Chetan Aggarwal",
+    author: "Vivek Aggarwal",
     position: "CEO, GoForCab",
   },
   {

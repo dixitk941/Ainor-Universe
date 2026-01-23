@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaLaptopCode, FaMobileAlt, FaShoppingCart, FaSearch, FaCode } from 'react-icons/fa';
+import { FaLaptopCode, FaMobileAlt, FaShoppingCart, FaSearch, FaCode, FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import FloatingElements from '../ui/FloatingElements';
 
@@ -11,6 +11,7 @@ const services = [
     id: 1,
     icon: <FaLaptopCode className="h-7 w-7" />,
     title: 'Website Design',
+    slug: 'website-design-development',
     description: 'Stunning, high-performance websites built with cutting-edge technologies.',
     features: ['Responsive Design', 'Performance Optimization', 'SEO-friendly'],
   },
@@ -18,6 +19,7 @@ const services = [
     id: 2,
     icon: <FaCode className="h-7 w-7" />,
     title: 'Custom Software',
+    slug: 'custom-software-development',
     description: 'Tailored software solutions designed to solve your unique business challenges.',
     features: ['Bespoke Solutions', 'Scalable Architecture', 'System Integration'],
   },
@@ -25,6 +27,7 @@ const services = [
     id: 3,
     icon: <FaMobileAlt className="h-7 w-7" />,
     title: 'Mobile Apps',
+    slug: 'mobile-app-development',
     description: 'Powerful, feature-rich mobile apps for iOS and Android platforms.',
     features: ['Native Development', 'Cross-platform', 'Store Optimization'],
   },
@@ -32,6 +35,7 @@ const services = [
     id: 4,
     icon: <FaShoppingCart className="h-7 w-7" />,
     title: 'E-Commerce',
+    slug: 'ecommerce-website-development',
     description: 'Robust online stores that drive conversions with secure transactions.',
     features: ['Secure Payments', 'Inventory Management', 'Analytics'],
   },
@@ -39,6 +43,7 @@ const services = [
     id: 5,
     icon: <FaSearch className="h-7 w-7" />,
     title: 'SEO Services',
+    slug: 'seo-services-india',
     description: 'Strategic optimization to improve visibility and drive organic traffic.',
     features: ['Keyword Research', 'On-page SEO', 'Content Strategy'],
   }
@@ -175,7 +180,7 @@ const ServicesSection = () => {
               <p className="text-gray-600 mb-5">{service.description}</p>
               
               {/* Features */}
-              <ul className="space-y-2">
+              <ul className="space-y-2 mb-6">
                 {service.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-2 text-sm text-gray-600">
                     <svg className="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -185,6 +190,14 @@ const ServicesSection = () => {
                   </li>
                 ))}
               </ul>
+
+              {/* Learn More Link */}
+              <Link 
+                to={`/service/${service.slug}`}
+                className="inline-flex items-center gap-2 text-indigo-500 font-semibold hover:text-indigo-700 transition-colors"
+              >
+                Learn More <FaArrowRight className="text-sm" />
+              </Link>
             </motion.div>
           ))}
         </motion.div>
@@ -197,7 +210,7 @@ const ServicesSection = () => {
           transition={{ delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <Link to="/ai-services">
+          <Link to="/all-services">
             <motion.button 
               className="px-8 py-4 bg-[#1a1a1a] text-white rounded-full font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2"
               whileHover={{ scale: 1.05 }}

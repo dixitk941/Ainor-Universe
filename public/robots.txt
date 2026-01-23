@@ -1,7 +1,7 @@
 # https://www.robotstxt.org/robotstxt.html
 # AINOR Digital Solutions - Robots.txt Configuration
 # MSME Registered | UDYAM Registration No: UDYAM-UP-36-0033877
-# Updated: 2025-12-31
+# Updated: 2026-01-23
 
 User-agent: *
 Allow: /
@@ -11,8 +11,14 @@ Allow: /static/
 Allow: /assets/
 Allow: /images/
 Allow: /blog/
+Allow: /blog/web-development-cost-india-2026-save-70-percent
+Allow: /blog/ecommerce-website-development-case-study-sttrika
+Allow: /blog/mobile-app-development-cost-breakdown-india-2026
+Allow: /blog/seo-case-study-ranking-1-google-exambulletin
+Allow: /blog/best-web-development-company-india-portfolio-2026
 Allow: /blog/sustainable-agriculture-digital-transformation-2025
 Allow: /blog/ai-powered-web-development-2025-trends
+Allow: /blog/first-in-india-subscription-based-web-services-ainor
 Allow: /services/
 Allow: /portfolio/
 Allow: /about/

@@ -17,7 +17,7 @@ const ModernHeroSection = () => {
   const smoothEase = [0.22, 1, 0.36, 1];
 
   return (
-    <TiltCard tiltAmount={3} scale={1} glareEnable={false} className="w-full">
+    <div className="w-full">
       <motion.section 
         initial={{ opacity: 0, scale: 0.98 }}
         animate={triggerAnimation ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
@@ -141,22 +141,18 @@ const ModernHeroSection = () => {
               transition={{ duration: 0.8, delay: 0.7, ease: smoothEase }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2"
             >
-              <MagneticButton strength={0.2}>
-                <Link
-                  to="/pricing"
-                  className="bg-black text-white h-12 px-8 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-gray-200"
-                >
-                  View Plans
-                </Link>
-              </MagneticButton>
-              <MagneticButton strength={0.2}>
-                <Link
-                  to="/contact"
-                  className="bg-white border border-gray-200 text-[#111318] h-12 px-8 rounded-xl font-bold flex items-center justify-center transition-all"
-                >
-                  Book a Call
-                </Link>
-              </MagneticButton>
+              <button
+                onClick={() => window.location.href = '/pricing'}
+                className="bg-black text-white h-12 px-8 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-gray-200 cursor-pointer hover:bg-gray-800 border-none"
+              >
+                View Plans
+              </button>
+              <button
+                onClick={() => window.location.href = '/contact'}
+                className="bg-white border border-gray-200 text-[#111318] h-12 px-8 rounded-xl font-bold flex items-center justify-center transition-all cursor-pointer hover:bg-gray-50"
+              >
+                Book a Call
+              </button>
             </motion.div>
 
             {/* Trust Indicators */}
@@ -297,7 +293,7 @@ const ModernHeroSection = () => {
           </motion.div>
         </div>
       </motion.section>
-    </TiltCard>
+    </div>
   );
 };
 

@@ -75,14 +75,16 @@ const TiltCard = ({
           transformStyle: 'preserve-3d',
         }}
         transition={{ duration: transitionSpeed / 1000 }}
-        className="w-full h-full"
+        className="w-full h-full relative"
       >
-        {children}
+        <div className="relative z-10">
+          {children}
+        </div>
         
         {/* Glare Effect */}
         {glareEnable && (
           <motion.div
-            className="absolute inset-0 pointer-events-none rounded-[inherit] overflow-hidden"
+            className="absolute inset-0 pointer-events-none rounded-[inherit] overflow-hidden z-0"
             style={{
               opacity: isHovered ? glareMaxOpacity : 0,
               background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.8) 0%, transparent 50%)`,

@@ -110,6 +110,24 @@ export const projects = [
     bgGradient: 'from-violet-400 to-purple-500',
     tags: ["React", "Node.js", "WebSocket"],
   },
+  {
+    id: 7,
+    title: "ExamBulletin",
+    category: "web",
+    description: "Your trusted source for Sarkari Result, Government Jobs, Online Form, Admit Card, and Answer Key updates. सरकारी रिजल्ट - A comprehensive platform for government exam notifications from official sources with zero spam.",
+    shortDesc: "Government Exam Notification Portal",
+    technologies: ["React", "Node.js", "MongoDB", "TailwindCSS", "SEO"],
+    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    link: "https://exambulletin.com",
+    stats: { forms: '5+', results: '5+', users: '100%' },
+    features: ['Live Updates', 'Exam Results', 'Admit Cards', 'Official Sources'],
+    color: 'from-teal-500 to-cyan-500',
+    // Additional fields for carousel
+    icon: FaGlobe,
+    accentColor: '#14B8A6',
+    bgGradient: 'from-teal-400 to-cyan-500',
+    tags: ["React", "MongoDB", "SEO"],
+  },
 ];
 
 export const categories = [

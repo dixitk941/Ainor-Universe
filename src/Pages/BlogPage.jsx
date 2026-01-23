@@ -3,12 +3,73 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaClock, FaUser } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 import ModernPageLayout from '../components/layout/ModernPageLayout';
 
 const BlogPage = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
   const blogPosts = [
+    {
+      id: 15,
+      slug: "web-development-cost-india-2026-save-70-percent",
+      title: "💰 Web Development Cost in India 2026: How to Save 70% Without Compromising Quality",
+      excerpt: "Discover the REAL cost of web development in India. Our subscription model helped 50+ businesses save ₹5-10 lakhs. Get pricing breakdown + FREE consultation inside!",
+      date: "January 23, 2026",
+      author: "Karan Dixit",
+      category: "business",
+      readTime: "12 min read",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+      featured: true
+    },
+    {
+      id: 14,
+      slug: "ecommerce-website-development-case-study-sttrika",
+      title: "🚀 From Zero to 5K Users: Sttrika E-Commerce Success Story & Development Blueprint",
+      excerpt: "How we built a fashion e-commerce platform that generated ₹10L+ revenue in 6 months. Complete tech stack, timeline, and cost breakdown revealed!",
+      date: "January 23, 2026",
+      author: "Karan Dixit",
+      category: "business",
+      readTime: "9 min read",
+      image: "https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?auto=format&fit=crop&q=80&w=1000",
+      featured: true
+    },
+    {
+      id: 13,
+      slug: "mobile-app-development-cost-breakdown-india-2026",
+      title: "📱 Mobile App Development Cost Breakdown 2026: iOS vs Android [Real Project Data]",
+      excerpt: "Planning an app like GoForCab? See actual costs, timelines & tech stack for building ride-hailing apps. 500+ drivers, 10K+ rides - here's how we did it.",
+      date: "January 23, 2026",
+      author: "Karan Dixit",
+      category: "technology",
+      readTime: "11 min read",
+      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000",
+      featured: true
+    },
+    {
+      id: 12,
+      slug: "seo-case-study-ranking-1-google-exambulletin",
+      title: "🎯 SEO Case Study: How We Ranked #1 on Google for Government Job Keywords in 90 Days",
+      excerpt: "ExamBulletin went from 0 to 100K monthly visitors. Step-by-step SEO strategy, keyword research, and technical optimization that you can replicate today.",
+      date: "January 23, 2026",
+      author: "Karan Dixit",
+      category: "technology",
+      readTime: "10 min read",
+      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1000",
+      featured: false
+    },
+    {
+      id: 11,
+      slug: "best-web-development-company-india-portfolio-2026",
+      title: "🏆 Top 10 Web Development Companies in India 2026: Portfolio & Pricing Comparison",
+      excerpt: "Choosing the right web development agency? Compare portfolios, pricing, and client reviews. See why AINOR is rated #1 for subscription-based development.",
+      date: "January 23, 2026",
+      author: "Karan Dixit",
+      category: "business",
+      readTime: "8 min read",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000",
+      featured: false
+    },
     {
       id: 10,
       slug: "first-in-india-subscription-based-web-services-ainor",
@@ -19,7 +80,7 @@ const BlogPage = () => {
       category: "announcement",
       readTime: "8 min read",
       image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&q=80&w=1000",
-      featured: true
+      featured: false
     },
     {
       id: 9,
@@ -85,8 +146,8 @@ const BlogPage = () => {
 
   const categories = [
     { id: 'all', name: 'All Posts' },
-    { id: 'technology', name: 'Technology' },
     { id: 'business', name: 'Business' },
+    { id: 'technology', name: 'Technology' },
     { id: 'design', name: 'Design' },
     { id: 'announcement', name: 'Announcements' },
   ];
@@ -107,8 +168,8 @@ const BlogPage = () => {
   return (
     <>
       <SEOHead 
-        title="Blog - AINOR | Web Development & Digital Insights"
-        description="Explore AINOR's blog for insights on web development, digital transformation, mobile apps, and technology trends."
+        title="Blog | Web Development Cost Guides | Case Studies | FREE Resources | AINOR"
+        description="📚 FREE guides on web development costs, SEO strategies, and real case studies. Learn how startups built successful products. Actionable tips inside!"
         canonicalUrl="https://myainor.com/blog"
       />
 
@@ -239,6 +300,9 @@ const BlogPage = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* SEO Text Section */}
+        <SEOText page="blog" />
       </ModernPageLayout>
     </>
   );

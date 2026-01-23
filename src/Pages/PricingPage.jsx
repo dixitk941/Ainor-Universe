@@ -7,6 +7,7 @@ import {
   FaCode, FaMobile, FaShoppingCart, FaBolt, FaGift
 } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 import ModernPageLayout from '../components/layout/ModernPageLayout';
 import TiltCard from '../components/ui/TiltCard';
 import { BlurReveal, AnimatedCounter, MagneticButton } from '../components/ui/AnimationComponents';
@@ -240,8 +241,8 @@ const PricingPage = () => {
   return (
     <>
       <SEOHead 
-        title="Pricing - AINOR | Affordable Web Development & Digital Services"
-        description="Explore AINOR's affordable pricing plans for web development, mobile apps, and e-commerce. India's first subscription-based development agency."
+        title="Pricing: Websites from ₹9,999/mo | Apps from ₹19,999/mo | Flat Monthly Plans | AINOR"
+        description="💰 Cost-effective web development with transparent pricing. Websites ₹9,999/mo, apps ₹19,999/mo. All-inclusive: hosting, SSL, support. No hidden fees. First month 50% OFF!"
         canonicalUrl="https://myainor.com/pricing"
       />
 
@@ -590,6 +591,9 @@ const PricingPage = () => {
             </motion.div>
           </div>
         </section>
+
+        {/* SEO Text Section */}
+        <SEOText page="pricing" />
       </ModernPageLayout>
     </>
   );

@@ -304,7 +304,7 @@ export const SpotlightCard = ({ children, className = '' }) => {
     >
       {/* Spotlight overlay */}
       <motion.div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-0"
         animate={{
           opacity: isHovered ? 1 : 0,
         }}
@@ -313,7 +313,9 @@ export const SpotlightCard = ({ children, className = '' }) => {
           background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(19, 91, 236, 0.06), transparent 40%)`,
         }}
       />
-      {children}
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
   );
 };

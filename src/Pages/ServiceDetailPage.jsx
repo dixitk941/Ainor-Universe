@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   FaWhatsapp, FaLaptopCode, FaMobileAlt, FaShoppingCart, FaSearch, FaCode, 
   FaCheck, FaArrowRight, FaRocket, FaStar, FaClock, FaShieldAlt,
@@ -16,6 +16,7 @@ import { GradientText, SpotlightCard, MorphingBackground } from '../components/u
 const servicesData = [
   {
     id: 1,
+    slug: 'website-design-development',
     icon: FaLaptopCode,
     title: 'Website Design',
     shortDesc: 'Stunning, high-performance websites built with cutting-edge technologies.',
@@ -47,6 +48,7 @@ const servicesData = [
   },
   {
     id: 2,
+    slug: 'custom-software-development',
     icon: FaCode,
     title: 'Custom Software',
     shortDesc: 'Tailored software solutions designed for your unique business challenges.',
@@ -78,6 +80,7 @@ const servicesData = [
   },
   {
     id: 3,
+    slug: 'mobile-app-development',
     icon: FaMobileAlt,
     title: 'Mobile Apps',
     shortDesc: 'Powerful, feature-rich mobile apps for optimal user engagement.',
@@ -109,6 +112,7 @@ const servicesData = [
   },
   {
     id: 4,
+    slug: 'ecommerce-website-development',
     icon: FaShoppingCart,
     title: 'E-Commerce',
     shortDesc: 'Robust online stores that drive conversions and enhance experiences.',
@@ -140,6 +144,7 @@ const servicesData = [
   },
   {
     id: 5,
+    slug: 'seo-services-india',
     icon: FaSearch,
     title: 'SEO Services',
     shortDesc: 'Strategic optimization for better search engine visibility.',
@@ -171,6 +176,7 @@ const servicesData = [
   },
   {
     id: 6,
+    slug: 'ai-solutions-india',
     icon: FaBrain,
     title: 'AI Solutions',
     shortDesc: 'Intelligent automation and AI-powered business solutions.',
@@ -391,32 +397,27 @@ const ServiceDetailPage = () => {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <TiltCard tiltAmount={8} scale={1.02}>
-                    <SpotlightCard 
-                      className={`bg-white p-6 rounded-2xl shadow-soft cursor-pointer border-2 transition-all h-full ${
-                        selectedService.id === service.id 
-                          ? `${colorMap[service.color].border} ${colorMap[service.color].ring} ring-2` 
-                          : 'border-transparent hover:border-gray-100'
-                      }`}
-                      onClick={() => {
-                        setSelectedService(service);
-                        window.scrollTo({ top: 400, behavior: 'smooth' });
-                      }}
-                    >
-                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} text-white flex items-center justify-center mb-5`}>
-                        <ServiceIcon className="text-2xl" />
-                      </div>
-                      <h3 className="font-bold text-xl mb-2">{service.title}</h3>
-                      <p className="text-sm text-gray-500 mb-4">{service.shortDesc}</p>
-                      
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <span className="text-xs text-gray-400">{service.timeline}</span>
-                        <span className={`text-sm font-semibold ${colorMap[service.color].text}`}>
-                          Learn More →
-                        </span>
-                      </div>
-                    </SpotlightCard>
-                  </TiltCard>
+                  <div 
+                    onClick={() => window.location.href = `/service/${service.slug}`}
+                    className={`bg-white p-6 rounded-2xl shadow-soft border-2 transition-all h-full cursor-pointer hover:shadow-lg hover:-translate-y-1 ${
+                      selectedService.id === service.id 
+                        ? `${colorMap[service.color].border} ${colorMap[service.color].ring} ring-2` 
+                        : 'border-transparent hover:border-gray-200'
+                    }`}
+                  >
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} text-white flex items-center justify-center mb-5`}>
+                      <ServiceIcon className="text-2xl" />
+                    </div>
+                    <h3 className="font-bold text-xl mb-2">{service.title}</h3>
+                    <p className="text-sm text-gray-500 mb-4">{service.shortDesc}</p>
+                    
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <span className="text-xs text-gray-400">{service.timeline}</span>
+                      <span className={`text-sm font-semibold ${colorMap[service.color].text} flex items-center gap-1`}>
+                        Learn More <FaArrowRight className="text-xs" />
+                      </span>
+                    </div>
+                  </div>
                 </motion.div>
               );
             })}

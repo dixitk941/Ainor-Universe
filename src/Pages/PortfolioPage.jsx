@@ -5,6 +5,7 @@ import {
   FaExternalLinkAlt, FaTimes, FaArrowRight, FaWhatsapp, FaRocket, FaStar, FaEye
 } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
+import SEOText from '../components/seo/SEOText';
 import ModernPageLayout from '../components/layout/ModernPageLayout';
 import TiltCard from '../components/ui/TiltCard';
 import { BlurReveal, AnimatedCounter, MagneticButton, StaggerContainer, StaggerItem } from '../components/ui/AnimationComponents';
@@ -29,8 +30,8 @@ const PortfolioPage = () => {
   return (
     <>
       <SEOHead 
-        title="Portfolio - AINOR | Web Development & Digital Solutions Projects"
-        description="Explore AINOR's portfolio of web development projects, mobile apps, and digital solutions. See our work for clients like GoForCab, Sttrika, HiiHive, and more."
+        title="Portfolio | 50+ Projects | Sttrika, GoForCab, ExamBulletin Case Studies | AINOR"
+        description="🚀 Explore 50+ successful projects with real results. Sttrika: ₹10L revenue. GoForCab: 10K rides. ExamBulletin: 100K visitors. View case studies & start your project!"
         canonicalUrl="https://myainor.com/portfolio"
       />
 
@@ -322,6 +323,9 @@ const PortfolioPage = () => {
             <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
           )}
         </AnimatePresence>
+
+        {/* SEO Text Section */}
+        <SEOText page="portfolio" />
       </ModernPageLayout>
     </>
   );
