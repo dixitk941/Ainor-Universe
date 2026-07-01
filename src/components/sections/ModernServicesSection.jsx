@@ -2,145 +2,89 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaLaptopCode, FaMobileAlt, FaPalette, FaRobot, FaShoppingCart, FaSearch, FaArrowRight } from 'react-icons/fa';
-import TiltCard from '../ui/TiltCard';
-import { FadeUp, StaggerContainer, StaggerItem, DrawLine, MagneticButton } from '../ui/AnimationComponents';
-import { SpotlightCard } from '../ui/ScrollAnimations';
+import { AnimatedMesh, ChapterMark, ChapterLabel } from '../ui/CinematicEffects';
 
 const services = [
-  {
-    id: 1,
-    icon: <FaLaptopCode className="text-[28px]" />,
-    title: 'Web Development',
-    slug: 'website-design-development',
-    description: 'Scalable, high-performance websites tailored to your brand using Next.js & React.',
-    color: 'blue',
-    hoverColor: 'blue-100',
-  },
-  {
-    id: 2,
-    icon: <FaMobileAlt className="text-[28px]" />,
-    title: 'Mobile Apps',
-    slug: 'mobile-app-development',
-    description: 'Native and cross-platform mobile applications for iOS and Android.',
-    color: 'purple',
-    hoverColor: 'purple-100',
-  },
-  {
-    id: 3,
-    icon: <FaPalette className="text-[28px]" />,
-    title: 'UI/UX Design',
-    slug: 'website-design-development',
-    description: 'Intuitive, user-centric interfaces with premium aesthetics and smooth flows.',
-    color: 'pink',
-    hoverColor: 'pink-100',
-  },
-  {
-    id: 4,
-    icon: <FaRobot className="text-[28px]" />,
-    title: 'AI & Automation',
-    slug: 'ai-solutions-india',
-    description: 'Smart automation workflows and AI integration to optimize your operations.',
-    color: 'green',
-    hoverColor: 'green-100',
-  },
-  {
-    id: 5,
-    icon: <FaShoppingCart className="text-[28px]" />,
-    title: 'E-Commerce',
-    slug: 'ecommerce-website-development',
-    description: 'Robust online stores that drive conversions with secure transactions.',
-    color: 'orange',
-    hoverColor: 'orange-100',
-  },
-  {
-    id: 6,
-    icon: <FaSearch className="text-[28px]" />,
-    title: 'SEO Services',
-    slug: 'seo-services-india',
-    description: 'Strategic optimization to improve visibility and drive organic traffic.',
-    color: 'indigo',
-    hoverColor: 'indigo-100',
-  },
+  { num:'01', Icon:FaLaptopCode, title:'Web Development',  slug:'website-design-development',    desc:'Scalable, high-performance websites using Next.js & React — built to last.', accent:'#6366f1' },
+  { num:'02', Icon:FaMobileAlt,  title:'Mobile Apps',      slug:'mobile-app-development',         desc:'Cross-platform iOS & Android apps that feel native and perform brilliantly.', accent:'#a855f7' },
+  { num:'03', Icon:FaPalette,    title:'UI/UX Design',     slug:'website-design-development',     desc:"Interfaces so intuitive, users don't even notice they're being guided.", accent:'#ec4899' },
+  { num:'04', Icon:FaRobot,      title:'AI & Automation',  slug:'ai-solutions-india',             desc:'Smart workflows and AI integrations that take the grunt work off your plate.', accent:'#22c55e' },
+  { num:'05', Icon:FaShoppingCart,title:'E-Commerce',      slug:'ecommerce-website-development',  desc:'Online stores engineered for conversions, built for scale.', accent:'#f97316' },
+  { num:'06', Icon:FaSearch,     title:'SEO Services',     slug:'seo-services-india',             desc:'Organic traffic that compounds — strategy, content, and technical SEO.', accent:'#38bdf8' },
 ];
 
-const colorMap = {
-  blue: { bg: 'bg-blue-50', text: 'text-primary' },
-  purple: { bg: 'bg-purple-50', text: 'text-purple-600' },
-  pink: { bg: 'bg-pink-50', text: 'text-pink-600' },
-  green: { bg: 'bg-green-50', text: 'text-green-600' },
-  orange: { bg: 'bg-orange-50', text: 'text-orange-600' },
-  indigo: { bg: 'bg-indigo-50', text: 'text-indigo-600' },
-};
+const ModernServicesSection = () => (
+  <section id="services" className="relative bg-white overflow-hidden py-24 md:py-32">
+    <AnimatedMesh light />
+    <ChapterMark num={4} light />
 
-const ModernServicesSection = () => {
-  return (
-    <section className="pt-10" id="services">
-      {/* Section Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 px-2">
-        <FadeUp>
-          <h2 className="text-3xl font-bold tracking-tight">Our Expertise</h2>
-        </FadeUp>
-        <FadeUp delay={0.1}>
-          <p className="text-gray-500 max-w-md text-left md:text-right mt-2 md:mt-0">
-            Comprehensive digital solutions. One subscription.
+    <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+      <ChapterLabel num={4} title="What We Build" light />
+
+      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+          className="text-[clamp(2.4rem,5.5vw,4rem)] font-black leading-[1.08] tracking-tight text-gray-900"
+        >
+          Everything You
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+            Need to Ship.
+          </span>
+        </motion.h2>
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
+          className="lg:text-right lg:max-w-xs">
+          <p className="text-gray-500 text-base leading-relaxed">
+            One subscription. Every capability.
           </p>
-        </FadeUp>
+          <Link to="/all-services"
+            className="inline-flex items-center gap-1.5 text-indigo-600 hover:text-indigo-500 text-sm font-semibold mt-2 transition-colors">
+            All services <FaArrowRight size={10} />
+          </Link>
+        </motion.div>
       </div>
 
-      {/* Decorative Line */}
-      <DrawLine className="mb-8" />
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
+        {services.map((s, i) => (
+          <motion.div key={s.num}
+            initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.55, delay: i * 0.07 }}
+            onClick={() => window.location.href = `/service/${s.slug}`}
+            className="group relative bg-gray-50 border border-gray-200 hover:bg-white
+                       hover:border-gray-300 hover:shadow-md rounded-2xl p-4 sm:p-6 cursor-pointer transition-all duration-300 overflow-hidden"
+          >
+            {/* Hover glow */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
+              style={{ background: `radial-gradient(circle at 0% 0%, ${s.accent}08 0%, transparent 60%)` }} />
 
-      {/* Services Grid */}
-      <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {services.map((service) => (
-          <StaggerItem key={service.id}>
-            <div 
-              onClick={() => window.location.href = `/service/${service.slug}`}
-              className="bg-white p-6 rounded-2xl shadow-soft flex flex-col gap-4 h-full border border-gray-50 cursor-pointer hover:shadow-lg hover:border-gray-200 hover:-translate-y-1 transition-all duration-300"
-            >
-              {/* Icon */}
-              <motion.div
-                initial={{ scale: 1 }}
-                whileInView={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                viewport={{ once: true }}
-                className={`w-12 h-12 rounded-xl ${colorMap[service.color].bg} ${colorMap[service.color].text} flex items-center justify-center`}
-              >
-                {service.icon}
-              </motion.div>
-
-              {/* Content */}
-              <div>
-                <h3 className="font-bold text-lg mb-2">{service.title}</h3>
-                <p className="text-sm text-gray-500 leading-normal mb-3">{service.description}</p>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                  Learn More <FaArrowRight className="text-xs" />
+            <div className="relative z-10 flex flex-col gap-5 h-full">
+              <div className="flex items-start justify-between">
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundColor: `${s.accent}15`, color: s.accent }}>
+                  <s.Icon size={20} />
+                </div>
+                <span className="text-xs font-bold text-gray-300 tracking-widest group-hover:text-gray-400 transition-colors">
+                  {s.num}
                 </span>
               </div>
+              <div>
+                <h3 className="text-gray-900 font-bold text-sm sm:text-lg mb-1 sm:mb-2">{s.title}</h3>
+                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed group-hover:text-gray-600 transition-colors hidden sm:block">{s.desc}</p>
+                <p className="text-gray-400 text-[11px] leading-snug sm:hidden line-clamp-2">{s.desc}</p>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs font-semibold mt-auto opacity-0 group-hover:opacity-100
+                             transition-all duration-300 translate-y-1 group-hover:translate-y-0"
+                style={{ color: s.accent }}>
+                Learn more <FaArrowRight size={10} />
+              </div>
             </div>
-          </StaggerItem>
+          </motion.div>
         ))}
-      </StaggerContainer>
-
-      {/* View All Services CTA */}
-      <FadeUp delay={0.4} className="flex justify-center mt-8">
-        <MagneticButton strength={0.3}>
-          <Link
-            to="/all-services"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 transition-colors"
-          >
-            <span>View All Services</span>
-            <motion.span
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              →
-            </motion.span>
-          </Link>
-        </MagneticButton>
-      </FadeUp>
-    </section>
-  );
-};
+      </div>
+    </div>
+  </section>
+);
 
 export default ModernServicesSection;

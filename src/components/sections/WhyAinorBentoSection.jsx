@@ -1,186 +1,146 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCreditCard, FaBolt, FaChartLine, FaUsers, FaCode } from 'react-icons/fa';
-import TiltCard from '../ui/TiltCard';
-import { FadeUp, StaggerContainer, StaggerItem, AnimatedCounter, BlurReveal } from '../ui/AnimationComponents';
-import { SpotlightCard } from '../ui/ScrollAnimations';
+import { AnimatedMesh, ChapterMark, ChapterLabel } from '../ui/CinematicEffects';
+import { AnimatedCounter } from '../ui/AnimationComponents';
 
-const WhyAinorBentoSection = () => {
-  return (
-    <section className="pt-10" id="why-ainor">
-      <FadeUp>
-        <h2 className="text-3xl font-bold tracking-tight mb-8 px-2">Why Ainor?</h2>
-      </FadeUp>
+const fw = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, delay },
+});
 
-      <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[200px]">
-        {/* Feature 1: Subscription (Large) */}
-        <StaggerItem className="md:col-span-2">
-          <TiltCard tiltAmount={5} scale={1.01} glareMaxOpacity={0.08}>
-            <SpotlightCard className="h-full">
-              <div className="bg-white rounded-3xl p-8 shadow-soft relative overflow-hidden h-full flex flex-col justify-between">
-                <div className="relative z-10 max-w-sm">
-                  <motion.div
-                    initial={{ rotate: -10, scale: 0 }}
-                    whileInView={{ rotate: 0, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', delay: 0.2 }}
-                    className="w-10 h-10 bg-black rounded-lg flex items-center justify-center text-white mb-4"
-                  >
-                    <FaCreditCard />
-                  </motion.div>
-                  <BlurReveal delay={0.1}>
-                    <h3 className="text-2xl font-bold mb-2">Subscription-based Model</h3>
-                  </BlurReveal>
-                  <BlurReveal delay={0.2}>
-                    <p className="text-gray-500">
-                      No hourly billing or fixed quotes. Pay a flat monthly fee and get unlimited requests.
-                    </p>
-                  </BlurReveal>
-                </div>
-                
-                {/* Animated Background */}
-                <motion.div 
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3]
-                  }}
-                  transition={{ duration: 8, repeat: Infinity }}
-                  className="absolute right-0 bottom-0 w-1/2 h-full opacity-10 bg-gradient-radial from-blue-400 via-gray-100 to-transparent" 
-                />
-                <motion.div 
-                  animate={{ 
-                    x: [0, 10, 0],
-                    y: [0, -10, 0]
-                  }}
-                  transition={{ duration: 6, repeat: Infinity }}
-                  className="absolute -right-6 -bottom-6 w-32 h-32 bg-blue-100 rounded-full blur-2xl opacity-50" 
-                />
-              </div>
-            </SpotlightCard>
-          </TiltCard>
-        </StaggerItem>
+const WhyAinorBentoSection = () => (
+  <section id="why-ainor" className="relative bg-[#f8f8f2] overflow-hidden py-16 md:py-32">
+    <AnimatedMesh light />
+    <ChapterMark num={6} light />
 
-        {/* Feature 2: Speed */}
-        <StaggerItem>
-          <TiltCard tiltAmount={10} scale={1.02} glareMaxOpacity={0.1}>
-            <SpotlightCard className="h-full">
-              <div className="bg-white rounded-3xl p-6 shadow-soft h-full flex flex-col justify-between border border-gray-50">
-                <div className="flex justify-between items-start">
-                  <motion.div
-                    animate={{ 
-                      boxShadow: ['0 0 0 0 rgba(234, 179, 8, 0)', '0 0 0 8px rgba(234, 179, 8, 0.2)', '0 0 0 0 rgba(234, 179, 8, 0)']
-                    }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-10 h-10 bg-yellow-50 text-yellow-600 rounded-lg flex items-center justify-center"
-                  >
-                    <FaBolt />
-                  </motion.div>
-                  <motion.span 
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', delay: 0.3 }}
-                    className="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded"
-                  >
-                    Fast
-                  </motion.span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-1">Lightning Fast</h3>
-                  <p className="text-sm text-gray-500">
-                    Initial designs in <AnimatedCounter value={48} suffix=" hours" className="font-bold text-yellow-600" />. Updates every 2 days.
-                  </p>
-                </div>
-              </div>
-            </SpotlightCard>
-          </TiltCard>
-        </StaggerItem>
+    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
+      <ChapterLabel num={6} title="Why Us" light />
 
-        {/* Feature 3: Scalable */}
-        <StaggerItem>
-          <TiltCard tiltAmount={10} scale={1.02} glareMaxOpacity={0.1}>
-            <SpotlightCard className="h-full">
-              <div className="bg-white rounded-3xl p-6 shadow-soft h-full flex flex-col justify-between border border-gray-50">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center mb-4"
-                >
-                  <FaChartLine />
-                </motion.div>
-                <div>
-                  <h3 className="text-xl font-bold mb-1">Scalable Solutions</h3>
-                  <p className="text-sm text-gray-500">
-                    Built to grow with your business from day one.
-                  </p>
-                </div>
-              </div>
-            </SpotlightCard>
-          </TiltCard>
-        </StaggerItem>
+      <motion.h2 {...fw(0)}
+        className="text-[clamp(2rem,5.5vw,4rem)] font-black leading-[1.08] tracking-tight text-gray-900 mb-3">
+        Built Different.
+        <br />
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+          For a Reason.
+        </span>
+      </motion.h2>
+      <motion.p {...fw(0.12)}
+        className="text-gray-500 text-sm sm:text-lg max-w-xl mb-8 md:mb-14 leading-relaxed">
+        Ek agency nahi — ek model jo actually kaam karta hai.
+      </motion.p>
 
-        {/* Feature 4: Team (Large) */}
-        <StaggerItem className="md:col-span-2">
-          <TiltCard tiltAmount={5} scale={1.01} glareMaxOpacity={0.05}>
-            <div className="bg-[#111318] rounded-3xl p-8 shadow-soft relative overflow-hidden h-full text-white flex flex-col justify-between">
-              <div className="relative z-10">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: 'spring', delay: 0.2 }}
-                  className="w-10 h-10 bg-white/10 backdrop-blur rounded-lg flex items-center justify-center text-white mb-4"
-                >
-                  <FaUsers />
-                </motion.div>
-                <BlurReveal delay={0.1}>
-                  <h3 className="text-2xl font-bold mb-2">Your Dedicated Tech Team</h3>
-                </BlurReveal>
-                <BlurReveal delay={0.2}>
-                  <p className="text-gray-400 max-w-md">
-                    Senior developers and designers at your fingertips. It's like having an in-house team without the hiring headaches.
-                  </p>
-                </BlurReveal>
-              </div>
-              
-              <motion.div 
-                animate={{ rotate: [0, 5, 0], scale: [1, 1.05, 1] }}
-                transition={{ duration: 10, repeat: Infinity }}
-                className="absolute top-0 right-0 p-8 opacity-20"
-              >
-                <FaCode className="text-[120px]" />
-              </motion.div>
-            </div>
-          </TiltCard>
-        </StaggerItem>
+      {/* Bento grid — 2-col on mobile, 3-col on md+ */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 auto-rows-auto">
 
-        {/* Feature 5: Predictable Costs */}
-        <StaggerItem>
-          <TiltCard tiltAmount={10} scale={1.02} glareMaxOpacity={0.15}>
-            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-6 shadow-soft h-full flex flex-col justify-between text-white">
-              <motion.div
-                animate={{ 
-                  boxShadow: ['0 0 0 0 rgba(255, 255, 255, 0)', '0 0 0 8px rgba(255, 255, 255, 0.1)', '0 0 0 0 rgba(255, 255, 255, 0)']
-                }}
-                transition={{ duration: 2.5, repeat: Infinity }}
-                className="w-10 h-10 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center mb-4"
-              >
-                <FaCreditCard />
-              </motion.div>
-              <div>
-                <h3 className="text-xl font-bold mb-1">Predictable Costs</h3>
-                <p className="text-sm text-white/80">
-                  Fixed monthly payments. No surprise expenses or hidden fees.
-                </p>
-              </div>
-            </div>
-          </TiltCard>
-        </StaggerItem>
-      </StaggerContainer>
-    </section>
-  );
-};
+        {/* Subscription — always full width */}
+        <motion.div {...fw(0.05)}
+          className="col-span-2 bg-white border border-gray-200 rounded-2xl p-5 sm:p-8
+                     relative overflow-hidden hover:shadow-md transition-all duration-300 group">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/60 via-transparent to-transparent pointer-events-none rounded-2xl" />
+          <motion.div initial={{ rotate: -12, scale: 0 }} whileInView={{ rotate: 0, scale: 1 }}
+            viewport={{ once: true }} transition={{ type: 'spring', delay: 0.2 }}
+            className="w-9 h-9 sm:w-10 sm:h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-3 sm:mb-5">
+            <FaCreditCard size={16} />
+          </motion.div>
+          <h3 className="text-base sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">Subscription-based Model</h3>
+          <p className="text-gray-500 text-xs sm:text-base max-w-sm leading-relaxed">
+            <span className="hidden sm:inline">No hourly billing, no surprise invoices. Pay a flat monthly fee — get unlimited requests.</span>
+            <span className="sm:hidden">Flat monthly fee. Unlimited requests. No surprises.</span>
+          </p>
+          <motion.div animate={{ scale:[1,1.4,1], opacity:[0.06,0.12,0.06] }} transition={{ duration:9, repeat:Infinity }}
+            className="absolute -right-12 -bottom-12 w-52 h-52 bg-indigo-400 rounded-full blur-3xl pointer-events-none" />
+        </motion.div>
+
+        {/* Speed */}
+        <motion.div {...fw(0.1)}
+          className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6
+                     relative overflow-hidden hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+          <div className="flex justify-between items-start mb-4 sm:mb-8">
+            <motion.div animate={{ boxShadow:['0 0 0 0 rgba(234,179,8,0)','0 0 0 10px rgba(234,179,8,0.15)','0 0 0 0 rgba(234,179,8,0)'] }}
+              transition={{ duration:2, repeat:Infinity }}
+              className="w-9 h-9 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-500">
+              <FaBolt size={13} />
+            </motion.div>
+            <span className="text-[9px] sm:text-[10px] font-bold bg-yellow-50 text-yellow-600 border border-yellow-200 px-2 py-1 rounded-full tracking-wider">
+              FAST
+            </span>
+          </div>
+          <div>
+            <h3 className="text-sm sm:text-xl font-bold text-gray-900 mb-0.5 sm:mb-1">Lightning Fast</h3>
+            <p className="text-xs text-gray-500">
+              Designs in{' '}
+              <span className="text-yellow-500 font-bold"><AnimatedCounter value={48} suffix="h" /></span>
+              <span className="hidden sm:inline">. Updates every 2 days.</span>
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Scalable */}
+        <motion.div {...fw(0.15)}
+          className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6
+                     relative hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+          <div className="w-9 h-9 bg-green-50 rounded-xl flex items-center justify-center text-green-600 mb-4 sm:mb-8">
+            <FaChartLine size={13} />
+          </div>
+          <div>
+            <h3 className="text-sm sm:text-xl font-bold text-gray-900 mb-0.5 sm:mb-1">Scalable</h3>
+            <p className="text-xs text-gray-500 hidden sm:block">Built from day one to grow with you — no re-architecting later.</p>
+            <p className="text-xs text-gray-500 sm:hidden">Grows with you, always.</p>
+          </div>
+        </motion.div>
+
+        {/* Predictable — small square on mobile, sits beside team on md */}
+        <motion.div {...fw(0.25)}
+          className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-4 sm:p-6 relative overflow-hidden flex flex-col justify-between md:hidden">
+          <motion.div animate={{ boxShadow:['0 0 0 0 rgba(255,255,255,0)','0 0 0 10px rgba(255,255,255,0.12)','0 0 0 0 rgba(255,255,255,0)'] }}
+            transition={{ duration:2.5, repeat:Infinity }}
+            className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center text-white mb-4">
+            <FaCreditCard size={13} />
+          </motion.div>
+          <div>
+            <h3 className="text-sm font-bold text-white mb-0.5">Fixed Costs</h3>
+            <p className="text-xs text-white/70">No surprises, ever.</p>
+          </div>
+        </motion.div>
+
+        {/* Team — full width on mobile, 2/3 on desktop */}
+        <motion.div {...fw(0.2)}
+          className="col-span-2 md:col-span-2 bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100
+                     rounded-2xl p-5 sm:p-8 relative overflow-hidden hover:shadow-md transition-all duration-300">
+          <motion.div animate={{ rotate:[0,6,0], scale:[1,1.06,1] }} transition={{ duration:14, repeat:Infinity }}
+            className="absolute -right-6 -top-6 opacity-[0.07] pointer-events-none">
+            <FaCode className="text-[180px] text-indigo-600" />
+          </motion.div>
+          <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white rounded-xl flex items-center justify-center text-indigo-600 mb-3 sm:mb-5 shadow-sm">
+            <FaUsers size={15} />
+          </div>
+          <h3 className="text-base sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">Your Dedicated Tech Team</h3>
+          <p className="text-gray-600 text-xs sm:text-base max-w-md leading-relaxed">
+            <span className="hidden sm:inline">Senior developers and designers at your fingertips — jaise in-house team, minus the HR headaches.</span>
+            <span className="sm:hidden">Senior devs & designers on demand. No HR, no overhead.</span>
+          </p>
+        </motion.div>
+
+        {/* Predictable — desktop only (hidden on mobile, shown above) */}
+        <motion.div {...fw(0.25)}
+          className="hidden md:flex bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-6 relative overflow-hidden flex-col justify-between">
+          <motion.div animate={{ boxShadow:['0 0 0 0 rgba(255,255,255,0)','0 0 0 10px rgba(255,255,255,0.12)','0 0 0 0 rgba(255,255,255,0)'] }}
+            transition={{ duration:2.5, repeat:Infinity }}
+            className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white mb-8">
+            <FaCreditCard size={15} />
+          </motion.div>
+          <div>
+            <h3 className="text-xl font-bold text-white mb-1">Predictable Costs</h3>
+            <p className="text-sm text-white/70">Fixed monthly price. No surprises, ever.</p>
+          </div>
+        </motion.div>
+
+      </div>
+    </div>
+  </section>
+);
 
 export default WhyAinorBentoSection;

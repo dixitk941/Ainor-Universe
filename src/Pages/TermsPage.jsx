@@ -7,7 +7,7 @@ import {
   FaTimesCircle, FaUserTie, FaGavel, FaFileAlt
 } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
-import ModernPageLayout from '../components/layout/ModernPageLayout';
+import { PageShell, PageHero, SectionLabel, GradientWord } from '../components/layout/PageShell';
 
 const TermsPage = () => {
   const lastUpdated = "January 23, 2026";
@@ -201,15 +201,15 @@ If any provision of this Agreement is found to be unenforceable, the remaining p
     }
   ];
 
-  return (
-    <ModernPageLayout>
-      {/* AINOR Watermark */}
-      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-0">
-        <span className="text-[15vw] md:text-[12vw] lg:text-[10vw] font-black text-gray-200/30 select-none tracking-widest">
-          AINOR
-        </span>
-      </div>
+  const summary = [
+    { k: 'Ownership', v: 'You own all deliverables after full payment' },
+    { k: 'Confidentiality', v: 'Your data is protected and never shared' },
+    { k: 'Flexibility', v: 'Pause or cancel subscriptions anytime' },
+    { k: 'Support', v: 'Maintenance available under separate agreement' },
+  ];
 
+  return (
+    <>
       <SEOHead
         title="Terms of Service | AINOR - Software Development Agency India"
         description="Read AINOR's Terms of Service for software development projects. Understand our service agreements, payment terms, intellectual property rights, and client responsibilities."
@@ -217,126 +217,103 @@ If any provision of this Agreement is found to be unenforceable, the remaining p
         canonicalUrl="https://myainor.com/terms"
       />
 
-      {/* Hero Section */}
-      <section className="bg-white rounded-3xl p-8 md:p-16 shadow-soft relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-50 to-blue-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2" />
-        
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-600 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <FaFileContract />
-              Legal Agreement
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Terms of Service
-            </h1>
-            <p className="text-lg text-gray-600 mb-4">
-              These terms govern the engagement of AINOR's software development services. Please read them carefully before engaging our services.
-            </p>
-            <p className="text-sm text-gray-400">
-              Last Updated: {lastUpdated}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageShell>
+        <PageHero
+          badge="Legal Agreement"
+          badgeIcon={<FaFileContract className="text-indigo-500" size={12} />}
+          bgWord="TERMS"
+          title={<>Terms of <GradientWord>Service.</GradientWord></>}
+          subtitle="These terms govern the engagement of AINOR's software development services. Please read them carefully before engaging our services."
+        />
 
-      {/* Quick Summary */}
-      <section className="bg-gradient-to-r from-indigo-500 to-blue-600 rounded-3xl p-8 md:p-10 text-white mt-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xl font-bold mb-4">📋 Quick Summary</h2>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div className="bg-white/10 rounded-xl p-4">
-              <strong>Ownership:</strong> You own all deliverables after full payment
-            </div>
-            <div className="bg-white/10 rounded-xl p-4">
-              <strong>Confidentiality:</strong> Your data is protected and never shared
-            </div>
-            <div className="bg-white/10 rounded-xl p-4">
-              <strong>Flexibility:</strong> Pause or cancel subscriptions anytime
-            </div>
-            <div className="bg-white/10 rounded-xl p-4">
-              <strong>Support:</strong> Maintenance available under separate agreement
+        {/* Quick summary */}
+        <section className="relative bg-[#f5f5f5] py-16 md:py-20 overflow-hidden">
+          <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
+            <SectionLabel num={1} title={`Quick Summary · Updated ${lastUpdated}`} />
+            <div className="grid md:grid-cols-2 gap-3">
+              {summary.map((s, idx) => (
+                <motion.div key={idx}
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ delay: idx * 0.08 }}
+                  className="bg-white border border-gray-200 rounded-2xl p-5">
+                  <strong className="text-gray-900">{s.k}:</strong>{' '}
+                  <span className="text-gray-600">{s.v}</span>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Content Sections */}
-      <section className="bg-white rounded-3xl p-8 md:p-12 shadow-soft mt-6">
-        <div className="max-w-4xl mx-auto">
-          {sections.map((section, idx) => {
-            const IconComponent = section.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className={`${idx !== 0 ? 'border-t border-gray-100 pt-8 mt-8' : ''}`}
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center text-white flex-shrink-0 mt-1">
-                    <IconComponent className="text-lg" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-gray-900 mb-3">{section.title}</h2>
-                    <div className="text-gray-600 leading-relaxed whitespace-pre-line">
-                      {section.content}
+        {/* Content sections */}
+        <section className="relative bg-white py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
+            <SectionLabel num={2} title="The Details" />
+            <div className="bg-gray-50 border border-gray-200 rounded-3xl p-6 md:p-10">
+              {sections.map((section, idx) => {
+                const IconComponent = section.icon;
+                return (
+                  <motion.div key={idx}
+                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }} transition={{ delay: idx * 0.04 }}
+                    className={idx !== 0 ? 'border-t border-gray-200 pt-8 mt-8' : ''}>
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center flex-shrink-0 mt-1">
+                        <IconComponent className="text-lg" />
+                      </div>
+                      <div>
+                        <h2 className="text-xl font-bold text-gray-900 mb-3">{section.title}</h2>
+                        <div className="text-gray-600 leading-relaxed whitespace-pre-line">{section.content}</div>
+                      </div>
                     </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact & acceptance */}
+        <section className="relative bg-[#f5f5f5] py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
+            <div className="relative rounded-[2rem] bg-[#111318] p-8 md:p-12 text-white overflow-hidden">
+              <div className="absolute -top-24 -right-24 w-72 h-72 bg-indigo-600/30 rounded-full blur-3xl" />
+              <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-600/30 rounded-full blur-3xl" />
+              <div className="relative z-10 grid md:grid-cols-2 gap-8">
+                <div>
+                  <h2 className="text-2xl font-black tracking-tight mb-4">Contact Information</h2>
+                  <div className="bg-white/10 rounded-2xl p-6">
+                    <h3 className="font-semibold mb-2">AINOR</h3>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      Software Development Agency<br />
+                      Mathura, Uttar Pradesh, India<br />
+                      Email: neocodenex@gmail.com<br />
+                      Phone: +91 9528202892<br />
+                      Website: www.myainor.com
+                    </p>
                   </div>
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Contact & Acceptance */}
-      <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 text-white mt-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
-              <div className="bg-white/10 rounded-xl p-6">
-                <h3 className="font-semibold mb-2">AINOR</h3>
-                <p className="text-gray-300 text-sm">
-                  Software Development Agency<br />
-                  Mathura, Uttar Pradesh, India<br />
-                  Email: neocodenex@gmail.com<br />
-                  Phone: +91 9528202892<br />
-                  Website: www.myainor.com
-                </p>
-              </div>
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Acceptance of Terms</h2>
-              <p className="text-gray-300 mb-4">
-                By engaging our services, submitting a project inquiry, or signing a project agreement, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
-              </p>
-              <div className="flex gap-4">
-                <Link
-                  to="/contact"
-                  className="bg-white text-gray-900 px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition-colors"
-                >
-                  Contact Us
-                </Link>
-                <Link
-                  to="/privacy"
-                  className="border border-white/30 text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors"
-                >
-                  Privacy Policy
-                </Link>
+                <div>
+                  <h2 className="text-2xl font-black tracking-tight mb-4">Acceptance of Terms</h2>
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    By engaging our services, submitting a project inquiry, or signing a project agreement, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <Link to="/contact"
+                      className="bg-white text-gray-900 px-6 h-11 inline-flex items-center rounded-xl font-bold text-sm hover:bg-gray-100 transition-colors">
+                      Contact Us
+                    </Link>
+                    <Link to="/privacy"
+                      className="border border-white/30 text-white px-6 h-11 inline-flex items-center rounded-xl font-bold text-sm hover:bg-white/10 transition-colors">
+                      Privacy Policy
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </ModernPageLayout>
+        </section>
+      </PageShell>
+    </>
   );
 };
 

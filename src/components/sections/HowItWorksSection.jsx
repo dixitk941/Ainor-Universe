@@ -1,116 +1,107 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaClipboardList, FaTasks, FaRocket } from 'react-icons/fa';
-import TiltCard from '../ui/TiltCard';
-import { FadeUp, StaggerContainer, StaggerItem, MaskReveal, DrawLine } from '../ui/AnimationComponents';
-import { SpotlightCard } from '../ui/ScrollAnimations';
+import { ChapterMark, ChapterLabel } from '../ui/CinematicEffects';
 
 const steps = [
-  {
-    id: 1,
-    icon: <FaClipboardList className="text-gray-300 text-5xl" />,
-    title: 'Subscribe to a plan',
-    description: 'Choose a monthly plan that fits your needs. No contracts, cancel anytime.',
-  },
-  {
-    id: 2,
-    icon: <FaTasks className="text-gray-300 text-5xl" />,
-    title: 'Request as you go',
-    description: "Add unlimited requests to your board. We'll work on them one by one.",
-  },
-  {
-    id: 3,
-    icon: <FaRocket className="text-gray-300 text-5xl" />,
-    title: 'Receive delivery',
-    description: 'Get regular updates and fast turnarounds. Approve and move to the next task.',
-  },
+  { num: '01', Icon: FaClipboardList, title: 'Subscribe to a Plan',
+    body: 'Choose a monthly plan that fits your needs. No long-term contracts — cancel anytime.',
+    from: '#6366f1', to: '#818cf8' },
+  { num: '02', Icon: FaTasks, title: 'Request as You Go',
+    body: "Add unlimited tasks to your board. We'll work through them one by one — fast.",
+    from: '#a855f7', to: '#c084fc' },
+  { num: '03', Icon: FaRocket, title: 'Receive Delivery',
+    body: 'Get updates every 48 hours. Review, approve, and move to the next — endlessly.',
+    from: '#ec4899', to: '#f472b6' },
 ];
 
-const HowItWorksSection = () => {
-  return (
-    <section className="pt-10" id="process">
-      <FadeUp>
-        <h2 className="text-3xl font-bold tracking-tight mb-8 px-2 text-center md:text-left">
-          How It Works
-        </h2>
-      </FadeUp>
+const HowItWorksSection = () => (
+  <section id="process" className="relative bg-[#f8f8f2] overflow-hidden py-16 md:py-32">
+    <ChapterMark num={5} light />
 
-      {/* Connecting Line */}
-      <div className="hidden md:block relative mb-4">
-        <DrawLine className="absolute top-1/2 left-0 right-0" />
+    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
+      <ChapterLabel num={5} title="The Process" light />
+
+      <motion.h2
+        initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.7 }}
+        className="text-[clamp(2rem,5.5vw,4rem)] font-black leading-[1.08] tracking-tight text-[#0d0d14] mb-3"
+      >
+        Simple by Design.
+        <br />
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+          Powerful in Practice.
+        </span>
+      </motion.h2>
+      <motion.p
+        initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}
+        className="text-[#0d0d14]/40 text-sm sm:text-lg max-w-xl mb-10 md:mb-16 leading-relaxed"
+      >
+        Teen steps. Zero confusion. Subscribe aur shuru karo.
+      </motion.p>
+
+      {/* Mobile: horizontal scroll strip */}
+      <div className="md:hidden -mx-4 px-4 overflow-x-auto pb-4 flex gap-3 snap-x snap-mandatory scrollbar-none">
+        {steps.map((s, i) => (
+          <motion.div key={s.num}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+            className="snap-start flex-shrink-0 w-[72vw] max-w-[280px] flex flex-col gap-4"
+          >
+            <div className="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-black text-sm shadow-lg"
+              style={{ background: `linear-gradient(135deg, ${s.from}, ${s.to})`,
+                       boxShadow: `0 6px 20px ${s.from}30` }}>
+              {s.num}
+            </div>
+            <div className="bg-white rounded-2xl p-5 border border-gray-100 flex flex-col gap-3 shadow-sm flex-1">
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                style={{ backgroundColor: `${s.from}15` }}>
+                <s.Icon size={16} style={{ color: s.from }} />
+              </div>
+              <h3 className="text-sm font-bold text-[#0d0d14]">{s.title}</h3>
+              <p className="text-xs text-gray-500 leading-relaxed">{s.body}</p>
+            </div>
+          </motion.div>
+        ))}
+        {/* Scroll hint fade */}
+        <div className="flex-shrink-0 w-4" />
       </div>
 
-      <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {steps.map((step, index) => (
-          <StaggerItem key={step.id}>
-            <TiltCard tiltAmount={8} scale={1.02} glareMaxOpacity={0.1}>
-              <SpotlightCard>
-                <div className="bg-white rounded-2xl p-6 shadow-soft relative h-full">
-                  {/* Step Number Badge */}
-                  <motion.span
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', delay: index * 0.15 + 0.2, stiffness: 200 }}
-                    className="absolute -top-3 -left-3 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg border-2 border-[#F5F5F5] z-10"
-                  >
-                    {step.id}
-                  </motion.span>
+      {/* Desktop: 3-col grid */}
+      <div className="hidden md:grid grid-cols-3 gap-6 relative">
+        {/* Connector line */}
+        <div className="absolute top-[50px] left-[calc(16.67%+20px)] right-[calc(16.67%+20px)] h-px
+                        bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 pointer-events-none" />
 
-                  {/* Icon Area with Animation */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
-                    className="h-40 bg-gray-50 rounded-xl mb-6 flex items-center justify-center overflow-hidden relative"
-                  >
-                    <motion.div
-                      animate={{ 
-                        y: [0, -8, 0],
-                        scale: [1, 1.05, 1]
-                      }}
-                      transition={{ 
-                        duration: 3 + index * 0.5, 
-                        repeat: Infinity,
-                        ease: 'easeInOut'
-                      }}
-                    >
-                      {step.icon}
-                    </motion.div>
-                    
-                    {/* Subtle pulse background */}
-                    <motion.div
-                      animate={{ 
-                        scale: [1, 1.5, 1],
-                        opacity: [0.1, 0.2, 0.1]
-                      }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                      className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-xl"
-                    />
-                  </motion.div>
-
-                  {/* Content */}
-                  <MaskReveal>
-                    <h3 className="text-lg font-bold mb-2">{step.title}</h3>
-                  </MaskReveal>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15 + 0.5 }}
-                    className="text-sm text-gray-500"
-                  >
-                    {step.description}
-                  </motion.p>
-                </div>
-              </SpotlightCard>
-            </TiltCard>
-          </StaggerItem>
+        {steps.map((s, i) => (
+          <motion.div key={s.num}
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.12 }}
+            className="flex flex-col gap-5"
+          >
+            <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-black text-sm shadow-lg"
+              style={{ background: `linear-gradient(135deg, ${s.from}, ${s.to})`,
+                       boxShadow: `0 8px 24px ${s.from}30` }}>
+              {s.num}
+            </div>
+            <div className="bg-white rounded-2xl p-6 border border-gray-100 flex flex-col gap-4 shadow-sm
+                           hover:shadow-md transition-shadow duration-300 group">
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 3 + i, repeat: Infinity, ease: 'easeInOut' }}
+                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                style={{ backgroundColor: `${s.from}15` }}>
+                <s.Icon size={18} style={{ color: s.from }} />
+              </motion.div>
+              <h3 className="text-lg font-bold text-[#0d0d14]">{s.title}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">{s.body}</p>
+            </div>
+          </motion.div>
         ))}
-      </StaggerContainer>
-    </section>
-  );
-};
+      </div>
+    </div>
+  </section>
+);
 
 export default HowItWorksSection;

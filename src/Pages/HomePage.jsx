@@ -1,89 +1,81 @@
 import React, { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
-// SEO Component
 import SEOHead from '../components/seo/SEOHead';
 import ServiceSchema from '../components/seo/ServiceSchema';
 import SEOText from '../components/seo/SEOText';
 
-// Layout Components
-import FloatingNav from '../components/layout/FloatingNav';
-import ModernFooter from '../components/layout/ModernFooter';
+import FloatingNav           from '../components/layout/FloatingNav';
+import ModernFooter          from '../components/layout/ModernFooter';
 
-// Section Components - Modern Design
-import ModernHeroSection from '../components/sections/ModernHeroSection';
+import ModernHeroSection       from '../components/sections/ModernHeroSection';
+import OurClientsSection       from '../components/sections/OurClientsSection';
+import ClientStoriesSection    from '../components/sections/ClientStoriesSection';
 import ProjectsCarouselSection from '../components/sections/ProjectsCarouselSection';
-import ModernServicesSection from '../components/sections/ModernServicesSection';
-import WhyAinorBentoSection from '../components/sections/WhyAinorBentoSection';
-import HowItWorksSection from '../components/sections/HowItWorksSection';
-import TestimonialsSection from '../components/sections/TestimonialsSection';
-import ContactSection from '../components/sections/ContactSection';
+import ModernServicesSection   from '../components/sections/ModernServicesSection';
+import HowItWorksSection       from '../components/sections/HowItWorksSection';
+import WhyAinorBentoSection    from '../components/sections/WhyAinorBentoSection';
+import TechStackSection        from '../components/sections/TechStackSection';
+import ContactSection          from '../components/sections/ContactSection';
+
+import BookDemoPopup  from '../components/ui/BookDemoPopup';
+import { FilmGrain }  from '../components/ui/CinematicEffects';
+
+const ScrollProgress = () => {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  return (
+    <motion.div
+      style={{ scaleX }}
+      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 z-[9999] origin-left"
+    />
+  );
+};
 
 const HomePage = () => {
-  // Memoize structured data to prevent unnecessary re-renders
-  const homePageStructuredData = useMemo(() => ({
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "AINOR - Digital Solutions & Web Development Company",
-    "description": "Leading digital solutions company specializing in web development, mobile apps, and custom software development. Transform your business with innovative technology solutions.",
-    "url": "https://myainor.com/",
-    "mainEntity": {
-      "@type": "Organization",
-      "name": "AINOR",
-      "url": "https://myainor.com",
-      "logo": "https://myainor.com/logo512.png"
-    },
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://myainor.com/"
-        }
-      ]
-    }
+  const structuredData = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'AINOR - Digital Solutions & Web Development Company',
+    description: 'Subscription-based development agency. Flat pricing. No contracts.',
+    url: 'https://myainor.com/',
+    mainEntity: { '@type': 'Organization', name: 'AINOR', url: 'https://myainor.com' },
   }), []);
-    return (
+
+  return (
     <>
-      <SEOHead 
+      <SEOHead
         title="AINOR - Affordable Web Development from ₹9,999/mo | Subscription-Based Agency"
-        description="🚀 Affordable web development trusted by 50+ startups. Flat monthly pricing from ₹9,999/mo. No upfront costs. Sttrika, GoForCab, ExamBulletin built by us. Get FREE consultation!"
-        keywords="affordable web development India, subscription web development, website monthly payment, cheap web development, best web developer India, mobile app development cost, AINOR, flat pricing website, no upfront cost website"        
+        description="🚀 Affordable web development trusted by 50+ startups. Flat monthly pricing from ₹9,999/mo."
+        keywords="affordable web development India, subscription web development"
         canonicalUrl="https://myainor.com/"
-        structuredData={homePageStructuredData}
+        structuredData={structuredData}
       />
       <ServiceSchema />
-      
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        style={{ backgroundColor: '#F5F5F5' }}
-        className="min-h-screen"
-      >
-        {/* Floating Navigation */}
+
+      {/* Global VFX */}
+      <FilmGrain />
+      <ScrollProgress />
+      <BookDemoPopup />
+
+      {/* Page: light base — contact/footer stay dark */}
+      <div className="bg-[#f5f5f5] min-h-screen overflow-x-hidden">
         <FloatingNav />
 
-        {/* Main Content Container */}
-        <main className="w-full max-w-[1300px] mx-auto pt-28 px-4 flex flex-col gap-6 pb-12">
+        <main className="w-full flex flex-col">
           <ModernHeroSection />
+          <OurClientsSection />
+          <ClientStoriesSection />
           <ProjectsCarouselSection />
           <ModernServicesSection />
-          <WhyAinorBentoSection />
           <HowItWorksSection />
-          
-          <div id="testimonials">
-            <TestimonialsSection />
-          </div>
-          
+          <WhyAinorBentoSection />
+          <TechStackSection />
           <SEOText page="home" />
           <ContactSection />
-          
           <ModernFooter />
         </main>
-      </motion.div>
+      </div>
     </>
   );
 };

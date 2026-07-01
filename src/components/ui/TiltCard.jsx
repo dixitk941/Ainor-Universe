@@ -4,11 +4,11 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 const TiltCard = ({ 
   children, 
   className = '', 
-  tiltAmount = 10, 
-  scale = 1.02,
+  tiltAmount = 0, // Disabled - was 10
+  scale = 1, // Disabled - was 1.02
   perspective = 1000,
-  glareEnable = true,
-  glareMaxOpacity = 0.15,
+  glareEnable = false, // Disabled - was true
+  glareMaxOpacity = 0,
   transitionSpeed = 400,
   ...props 
 }) => {

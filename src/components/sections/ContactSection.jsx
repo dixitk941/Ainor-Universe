@@ -1,236 +1,150 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaWhatsapp, FaArrowRight } from 'react-icons/fa';
+import { AnimatedMesh, ScanLines, ChapterMark, ChapterLabel } from '../ui/CinematicEffects';
 
-// Color palette: Dark (#1a1a1a), Light (#f5f5f5), Accent (indigo-500)
+const inputClass = `w-full px-4 py-3 rounded-xl bg-white/[0.06] border border-white/[0.1]
+  text-white placeholder-white/25 focus:border-indigo-500/60 focus:bg-white/[0.09]
+  outline-none transition-all text-sm`;
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState('');
+  const [form, setForm] = useState({ firstName:'', lastName:'', email:'', phone:'', message:'' });
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState('');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  const update = (e) => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
 
-  const handleSubmit = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('');
-
+    setSubmitting(true);
+    setStatus('');
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: '4b29b417-55d1-4ac8-8c6e-9ac8097097f8',
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
+          name: `${form.firstName} ${form.lastName}`,
+          email: form.email, phone: form.phone, message: form.message,
           from_name: 'AINOR Website Contact Form',
         }),
       });
-
-      const result = await response.json();
-      if (result.success) {
-        setSubmitStatus('success');
-        setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
+      const data = await res.json();
+      if (data.success) {
+        setStatus('success');
+        setForm({ firstName:'', lastName:'', email:'', phone:'', message:'' });
+      } else { setStatus('error'); }
+    } catch { setStatus('error'); }
+    finally { setSubmitting(false); }
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-500 rounded-full mb-6 border border-indigo-100"
-          >
-            <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-            <span className="font-semibold text-sm">Get In Touch</span>
-          </motion.div>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#1a1a1a]"
-          >
-            Let's Discuss
-            <span className="block mt-2 text-indigo-500">
-              Your Project
+    <section id="contact" className="relative bg-[#07070f] overflow-hidden py-16 md:py-32">
+      <AnimatedMesh />
+      <ScanLines />
+      <ChapterMark num={8} />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+        <ChapterLabel num={8} title="Join The Family" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+          className="mb-16"
+        >
+          <h2 className="text-[clamp(2.4rem,5.5vw,4rem)] font-black leading-[1.08] tracking-tight text-white mb-4">
+            Let's Build
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+              Something Together.
             </span>
-          </motion.h2>
-        </div>
+          </h2>
+          <p className="text-white/35 text-base sm:text-lg max-w-lg leading-relaxed">
+            Ready to start? WhatsApp pe message karo for the fastest response — ya form bharo.
+          </p>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left - Contact Info */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-20">
+          {/* Left */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6 }}
+            className="flex flex-col gap-5"
           >
-            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-              Ready to start your project? Get in touch with us through WhatsApp for the fastest response, or send us a message.
-            </p>
-
-            {/* WhatsApp CTA */}
-            <a 
-              href="https://wa.me/917579500264?text=Hi%20AINOR!%20I'd%20like%20to%20discuss%20a%20project."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block mb-8"
-            >
-              <motion.div 
-                className="bg-green-500 text-white rounded-2xl p-6 flex items-center gap-4 hover:bg-green-600 transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <FaWhatsapp className="w-10 h-10" />
+            {/* WhatsApp */}
+            <a href="https://wa.me/917579500264?text=Hi%20AINOR!%20I'd%20like%20to%20discuss%20a%20project."
+              target="_blank" rel="noopener noreferrer">
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                className="bg-green-500 hover:bg-green-400 transition-colors rounded-2xl p-6 flex items-center gap-4">
+                <FaWhatsapp size={32} className="text-white flex-shrink-0" />
                 <div>
-                  <div className="font-bold text-lg">Chat on WhatsApp</div>
-                  <div className="text-green-100 text-sm">Fastest response • Usually within 1 hour</div>
+                  <div className="font-bold text-white text-lg">Chat on WhatsApp</div>
+                  <div className="text-green-100/70 text-sm">Fastest · Usually within 1 hour</div>
                 </div>
+                <FaArrowRight className="text-white/50 ml-auto" />
               </motion.div>
             </a>
 
-            {/* Contact Cards */}
-            <div className="space-y-4">
-              <div className="bg-white rounded-xl p-5 border border-gray-100 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500">
-                  <FaEnvelope className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-sm text-gray-500">Email Us</div>
-                  <div className="font-medium text-[#1a1a1a]">dixitk941@gmail.com</div>
-                </div>
+            {/* Email */}
+            <div className="flex items-center gap-4 bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5">
+              <div className="w-11 h-11 rounded-xl bg-indigo-500/15 flex items-center justify-center text-indigo-400 flex-shrink-0">
+                <FaEnvelope size={16} />
               </div>
-              
-              <div className="bg-white rounded-xl p-5 border border-gray-100 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500">
-                  <FaPhone className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-sm text-gray-500">Call Us</div>
-                  <div className="font-medium text-[#1a1a1a]">+91 9528202892</div>
-                </div>
+              <div>
+                <div className="text-white/40 text-xs uppercase tracking-wider mb-0.5">Email</div>
+                <div className="text-white font-medium text-sm">dixitk941@gmail.com</div>
+              </div>
+            </div>
+
+            {/* Phone */}
+            <div className="flex items-center gap-4 bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5">
+              <div className="w-11 h-11 rounded-xl bg-indigo-500/15 flex items-center justify-center text-indigo-400 flex-shrink-0">
+                <FaPhone size={15} />
+              </div>
+              <div>
+                <div className="text-white/40 text-xs uppercase tracking-wider mb-0.5">Phone</div>
+                <div className="text-white font-medium text-sm">+91 9528202892</div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right - Contact Form */}
+          {/* Right — form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-              {submitStatus === 'success' && (
-                <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-xl border border-green-200">
-                  Thank you! We'll get back to you soon.
-                </div>
-              )}
-              {submitStatus === 'error' && (
-                <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-xl border border-red-200">
-                  Something went wrong. Please try again.
-                </div>
-              )}
+            {status === 'success' && (
+              <div className="mb-5 p-4 bg-green-500/10 text-green-400 rounded-xl border border-green-500/20 text-sm">
+                Thank you! We'll get back to you soon.
+              </div>
+            )}
+            {status === 'error' && (
+              <div className="mb-5 p-4 bg-red-500/10 text-red-400 rounded-xl border border-red-500/20 text-sm">
+                Something went wrong. Please try again.
+              </div>
+            )}
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all resize-none"
-                    required
-                  />
-                </div>
+            <form onSubmit={submit} className="flex flex-col gap-3">
+              <div className="grid grid-cols-2 gap-3">
+                <input name="firstName" value={form.firstName} onChange={update}
+                  placeholder="First Name" className={inputClass} required />
+                <input name="lastName"  value={form.lastName}  onChange={update}
+                  placeholder="Last Name"  className={inputClass} required />
+              </div>
+              <input name="email" type="email" value={form.email} onChange={update}
+                placeholder="Email Address" className={inputClass} required />
+              <input name="phone" type="tel" value={form.phone} onChange={update}
+                placeholder="Phone Number" className={inputClass} />
+              <textarea name="message" value={form.message} onChange={update} rows={4}
+                placeholder="Tell us about your project..." className={`${inputClass} resize-none`} required />
 
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-[#1a1a1a] text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </motion.button>
-              </form>
-            </div>
+              <motion.button type="submit" disabled={submitting}
+                whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500
+                           text-white rounded-xl font-bold text-sm transition-all disabled:opacity-50 shadow-lg shadow-indigo-900/30 mt-1">
+                {submitting ? 'Sending...' : 'Send Message'}
+              </motion.button>
+            </form>
           </motion.div>
         </div>
       </div>

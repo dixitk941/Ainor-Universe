@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaShieldAlt, FaLock, FaUserShield, FaDatabase, FaCookie, FaEnvelope } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
-import ModernPageLayout from '../components/layout/ModernPageLayout';
+import { PageShell, PageHero, SectionLabel, GradientWord } from '../components/layout/PageShell';
 
 const PrivacyPage = () => {
   const lastUpdated = "January 23, 2026";
@@ -115,14 +115,7 @@ const PrivacyPage = () => {
   ];
 
   return (
-    <ModernPageLayout>
-      {/* AINOR Watermark */}
-      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-0">
-        <span className="text-[15vw] md:text-[12vw] lg:text-[10vw] font-black text-gray-200/30 select-none tracking-widest">
-          AINOR
-        </span>
-      </div>
-
+    <>
       <SEOHead
         title="Privacy Policy | AINOR - Software Development Agency India"
         description="Learn how AINOR protects your data and privacy. Our privacy policy outlines how we collect, use, and safeguard your information during software development projects."
@@ -130,88 +123,74 @@ const PrivacyPage = () => {
         canonicalUrl="https://myainor.com/privacy"
       />
 
-      {/* Hero Section */}
-      <section className="bg-white rounded-3xl p-8 md:p-16 shadow-soft relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2" />
-        
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <FaShieldAlt />
-              Your Privacy Matters
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Privacy Policy
-            </h1>
-            <p className="text-lg text-gray-600 mb-4">
-              At AINOR, we are committed to protecting your privacy and ensuring the security of your personal and business information. This policy explains how we collect, use, and safeguard your data.
-            </p>
-            <p className="text-sm text-gray-400">
-              Last Updated: {lastUpdated}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageShell>
+        <PageHero
+          badge="Your Privacy Matters"
+          badgeIcon={<FaShieldAlt className="text-indigo-500" size={12} />}
+          bgWord="PRIVACY"
+          title={<>Privacy <GradientWord>Policy.</GradientWord></>}
+          subtitle="At AINOR, we're committed to protecting your privacy and the security of your personal and business information. This policy explains how we collect, use, and safeguard your data."
+        />
 
-      {/* Content Sections */}
-      <section className="bg-white rounded-3xl p-8 md:p-12 shadow-soft mt-6">
-        <div className="max-w-4xl mx-auto">
-          {sections.map((section, idx) => {
-            const IconComponent = section.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={`${idx !== 0 ? 'border-t border-gray-100 pt-10 mt-10' : ''}`}
-              >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white">
-                    <IconComponent className="text-xl" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-900">{section.title}</h2>
-                </div>
-
-                <div className="space-y-6 pl-16">
-                  {section.content.map((item, itemIdx) => (
-                    <div key={itemIdx}>
-                      <h3 className="font-semibold text-gray-800 mb-2">{item.subtitle}</h3>
-                      <p className="text-gray-600 leading-relaxed">{item.text}</p>
+        {/* Content sections */}
+        <section className="relative bg-[#f5f5f5] py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
+            <SectionLabel num={1} title={`Last Updated · ${lastUpdated}`} />
+            <div className="bg-white border border-gray-200 rounded-3xl p-6 md:p-10">
+              {sections.map((section, idx) => {
+                const IconComponent = section.icon;
+                return (
+                  <motion.div key={idx}
+                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }} transition={{ delay: idx * 0.06 }}
+                    className={idx !== 0 ? 'border-t border-gray-100 pt-10 mt-10' : ''}>
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                        <IconComponent className="text-xl" />
+                      </div>
+                      <h2 className="text-2xl font-black tracking-tight text-gray-900">{section.title}</h2>
                     </div>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Governing Law */}
-      <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 text-white mt-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4">Governing Law & Jurisdiction</h2>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            This Privacy Policy shall be governed by and construed in accordance with the laws of India. Any disputes arising from this policy shall be subject to the exclusive jurisdiction of the courts located in Mathura, Uttar Pradesh, India.
-          </p>
-          <div className="bg-white/10 rounded-xl p-6 mt-6">
-            <h3 className="font-semibold mb-2">AINOR</h3>
-            <p className="text-gray-300 text-sm">
-              Software Development Agency<br />
-              Mathura, Uttar Pradesh, India<br />
-              Email: neocodenex@gmail.com<br />
-              Phone: +91 9528202892<br />
-              Website: www.myainor.com
-            </p>
+                    <div className="space-y-6 sm:pl-16">
+                      {section.content.map((item, itemIdx) => (
+                        <div key={itemIdx}>
+                          <h3 className="font-semibold text-gray-800 mb-2">{item.subtitle}</h3>
+                          <p className="text-gray-600 leading-relaxed">{item.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
-    </ModernPageLayout>
+        </section>
+
+        {/* Governing law */}
+        <section className="relative bg-white py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
+            <div className="relative rounded-[2rem] bg-[#111318] p-8 md:p-12 text-white overflow-hidden">
+              <div className="absolute -top-24 -right-24 w-72 h-72 bg-indigo-600/30 rounded-full blur-3xl" />
+              <div className="relative z-10">
+                <h2 className="text-2xl font-black tracking-tight mb-4">Governing Law &amp; Jurisdiction</h2>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  This Privacy Policy shall be governed by and construed in accordance with the laws of India. Any disputes arising from this policy shall be subject to the exclusive jurisdiction of the courts located in Mathura, Uttar Pradesh, India.
+                </p>
+                <div className="bg-white/10 rounded-2xl p-6 mt-6">
+                  <h3 className="font-semibold mb-2">AINOR</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Software Development Agency<br />
+                    Mathura, Uttar Pradesh, India<br />
+                    Email: neocodenex@gmail.com<br />
+                    Phone: +91 9528202892<br />
+                    Website: www.myainor.com
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </PageShell>
+    </>
   );
 };
 

@@ -1,15 +1,25 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  FaLaptopCode, FaMobileAlt, FaShoppingCart, FaSearch, FaCode, 
+import {
+  FaLaptopCode, FaMobileAlt, FaShoppingCart, FaSearch, FaCode,
   FaBrain, FaArrowRight, FaCheck, FaWhatsapp, FaClock, FaStar,
   FaShieldAlt, FaHeadset
 } from 'react-icons/fa';
 import SEOHead from '../components/seo/SEOHead';
-import ModernPageLayout from '../components/layout/ModernPageLayout';
 import SEOText from '../components/seo/SEOText';
-import TiltCard from '../components/ui/TiltCard';
+import {
+  PageShell, PageHero, SectionLabel, GradientWord, ease,
+} from '../components/layout/PageShell';
+
+const accentById = {
+  'website-design-development': '#6366f1',
+  'custom-software-development': '#a855f7',
+  'mobile-app-development': '#22c55e',
+  'ecommerce-website-development': '#f97316',
+  'seo-services-india': '#ec4899',
+  'ai-solutions-india': '#38bdf8',
+};
 
 // Comprehensive service data with SEO-rich content
 const servicesData = {
@@ -277,306 +287,227 @@ const ServicePage = () => {
   }
 
   const Icon = service.icon;
+  const accent = accentById[serviceId] || '#6366f1';
 
   return (
     <>
-      <SEOHead 
+      <SEOHead
         title={service.metaTitle}
         description={service.metaDescription}
         canonicalUrl={`https://myainor.com/service/${serviceId}`}
       />
 
-      <ModernPageLayout>
-        {/* Hero Section */}
-        <section className="relative bg-white rounded-3xl p-6 md:p-12 lg:p-16 shadow-soft overflow-hidden mb-8">
-          <div className={`absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-br ${service.gradient} rounded-full blur-3xl opacity-20`} />
-          
-          <div className="relative z-10">
-            <div className="flex flex-col lg:flex-row items-start gap-8">
-              <div className="flex-1">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-4 mb-6"
-                >
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} text-white flex items-center justify-center`}>
-                    <Icon className="text-3xl" />
-                  </div>
-                  <div>
-                    <span className="text-sm text-primary font-medium">AINOR Services</span>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">{service.heroTitle}</h1>
-                  </div>
-                </motion.div>
+      <PageShell>
+        <PageHero
+          badge="AINOR Services"
+          badgeIcon={<Icon style={{ color: accent }} size={13} />}
+          bgWord={service.shortTitle.toUpperCase()}
+          title={<>{service.heroTitle.split(' ').slice(0, -1).join(' ')}{' '}<GradientWord>{service.heroTitle.split(' ').slice(-1)}.</GradientWord></>}
+          subtitle={service.description}
+          actions={
+            <>
+              <Link to="/contact"
+                className="inline-flex items-center gap-2 bg-[#111318] text-white h-11 px-7 rounded-xl font-bold text-sm hover:bg-gray-800 transition-colors shadow-md shadow-gray-900/10">
+                Get Free Quote <FaArrowRight size={11} />
+              </Link>
+              <a href="https://wa.me/917579500264" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-green-500 text-white h-11 px-7 rounded-xl font-bold text-sm hover:bg-green-600 transition-colors">
+                <FaWhatsapp size={14} /> WhatsApp
+              </a>
+            </>
+          }
+        />
 
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-xl text-gray-600 mb-6"
-                >
-                  {service.heroSubtitle}
-                </motion.p>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-gray-600 mb-8"
-                >
-                  {service.description}
-                </motion.p>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="flex flex-wrap gap-4"
-                >
-                  <Link to="/contact">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-8 py-4 bg-primary text-white rounded-full font-semibold flex items-center gap-2"
-                    >
-                      Get Free Quote <FaArrowRight />
-                    </motion.button>
-                  </Link>
-                  <a 
-                    href="https://wa.me/917579500264"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-8 py-4 bg-green-500 text-white rounded-full font-semibold flex items-center gap-2"
-                    >
-                      <FaWhatsapp /> WhatsApp
-                    </motion.button>
-                  </a>
-                </motion.div>
-              </div>
-
-              {/* Pricing Card */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="w-full lg:w-80"
-              >
-                <TiltCard tiltAmount={5}>
-                  <div className={`bg-gradient-to-br ${service.gradient} rounded-2xl p-6 text-white`}>
-                    <h3 className="text-lg font-semibold mb-2">Starting From</h3>
-                    <div className="text-4xl font-bold mb-1">
-                      {service.price.starting}
-                      <span className="text-lg opacity-80">{service.price.period}</span>
+        {/* Pricing + features */}
+        <section className="relative bg-[#f5f5f5] py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+            <SectionLabel num={1} title="What's Included" />
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Pricing card */}
+              <div className="lg:sticky lg:top-28 self-start">
+                <div className="relative rounded-3xl p-8 text-white overflow-hidden"
+                  style={{ background: `linear-gradient(135deg, ${accent}, ${accent}bb)` }}>
+                  <div className="absolute -top-20 -right-20 w-52 h-52 bg-white/10 rounded-full blur-3xl" />
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
+                      <Icon className="text-2xl text-white" />
                     </div>
-                    <p className="text-sm opacity-80 mb-6">All-inclusive subscription</p>
-                    
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center gap-2">
-                        <FaClock className="opacity-80" />
-                        <span>Timeline: {service.timeline}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <FaShieldAlt className="opacity-80" />
-                        <span>Hosting & SSL included</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <FaHeadset className="opacity-80" />
-                        <span>24/7 Support</span>
-                      </div>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-2">Starting From</h3>
+                    <div className="text-4xl font-black mb-1">
+                      {service.price.starting}<span className="text-lg font-bold opacity-80">{service.price.period}</span>
                     </div>
-
-                    <Link to="/pricing">
-                      <button className="w-full py-3 bg-white text-gray-900 rounded-xl font-semibold hover:bg-gray-100 transition-colors">
-                        View All Pricing
-                      </button>
+                    <p className="text-sm text-white/80 mb-6">All-inclusive subscription</p>
+                    <div className="space-y-3 mb-6 text-sm">
+                      <div className="flex items-center gap-2"><FaClock className="opacity-80" /> Timeline: {service.timeline}</div>
+                      <div className="flex items-center gap-2"><FaShieldAlt className="opacity-80" /> Hosting &amp; SSL included</div>
+                      <div className="flex items-center gap-2"><FaHeadset className="opacity-80" /> 24/7 Support</div>
+                    </div>
+                    <Link to="/pricing"
+                      className="block w-full py-3 bg-white text-gray-900 rounded-xl font-bold text-sm text-center hover:bg-gray-100 transition-colors">
+                      View All Pricing
                     </Link>
                   </div>
-                </TiltCard>
-              </motion.div>
+                </div>
+              </div>
+
+              {/* Features */}
+              <div className="lg:col-span-2 grid sm:grid-cols-2 gap-3">
+                {service.features.map((feature, idx) => (
+                  <motion.div key={idx}
+                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }} transition={{ duration: 0.45, delay: idx * 0.06, ease }}
+                    className="flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-2xl hover:shadow-md transition-all">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-white"
+                      style={{ backgroundColor: accent }}>
+                      <FaCheck className="text-sm" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold mb-1 text-gray-900">{feature.title}</h3>
+                      <p className="text-sm text-gray-500">{feature.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft mb-8">
-          <h2 className="text-3xl font-bold text-center mb-10">What's Included</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {service.features.map((feature, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl"
-              >
-                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${service.gradient} text-white flex items-center justify-center flex-shrink-0`}>
-                  <FaCheck />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">{feature.title}</h3>
-                  <p className="text-sm text-gray-600">{feature.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+        {/* Process */}
+        <section className="relative bg-white py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+            <SectionLabel num={2} title="Our Process" />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {service.process.map((step, idx) => (
+                <motion.div key={idx}
+                  initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07, ease }}
+                  className="bg-gray-50 border border-gray-200 rounded-2xl p-6 hover:shadow-md transition-all">
+                  <div className="text-3xl mb-4">{step.icon}</div>
+                  <div className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: accent }}>Step {idx + 1}</div>
+                  <h3 className="font-bold text-lg mb-2 text-gray-900">{step.step}</h3>
+                  <p className="text-sm text-gray-500">{step.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Process Section */}
-        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft mb-8">
-          <h2 className="text-3xl font-bold text-center mb-10">Our Process</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {service.process.map((step, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="text-center p-6 bg-gray-50 rounded-2xl"
-              >
-                <div className="text-4xl mb-4">{step.icon}</div>
-                <div className="text-sm text-primary font-medium mb-2">Step {idx + 1}</div>
-                <h3 className="font-bold text-lg mb-2">{step.step}</h3>
-                <p className="text-sm text-gray-600">{step.desc}</p>
-              </motion.div>
-            ))}
+        {/* Technologies */}
+        <section className="relative bg-[#f5f5f5] py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+            <SectionLabel num={3} title="Technologies We Use" />
+            <div className="flex flex-wrap gap-2.5">
+              {service.technologies.map((tech, idx) => (
+                <motion.span key={idx}
+                  initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }} transition={{ duration: 0.4, delay: idx * 0.04, ease }}
+                  className="px-5 py-3 bg-white border border-gray-200 rounded-xl font-semibold text-gray-700 text-sm hover:shadow-md hover:border-gray-300 transition-all">
+                  {tech}
+                </motion.span>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Technologies Section */}
-        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft mb-8">
-          <h2 className="text-3xl font-bold text-center mb-10">Technologies We Use</h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {service.technologies.map((tech, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="px-6 py-3 bg-gray-100 rounded-full font-medium text-gray-700"
-              >
-                {tech}
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* Case Studies Section */}
-        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft mb-8">
-          <h2 className="text-3xl font-bold text-center mb-10">Case Studies</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {service.caseStudies.map((cs, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <TiltCard tiltAmount={3}>
-                  <div className="p-6 bg-gray-50 rounded-2xl">
-                    <div className="flex items-center gap-2 mb-3">
-                      <FaStar className="text-yellow-500" />
-                      <span className="font-semibold">{cs.client}</span>
-                    </div>
-                    <div className={`text-2xl font-bold bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent mb-2`}>
-                      {cs.result}
-                    </div>
-                    <p className="text-gray-600">{cs.desc}</p>
+        {/* Case studies */}
+        <section className="relative bg-white py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+            <SectionLabel num={4} title="Case Studies" />
+            <div className="grid md:grid-cols-2 gap-3">
+              {service.caseStudies.map((cs, idx) => (
+                <motion.div key={idx}
+                  initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.08, ease }}
+                  className="p-6 bg-gray-50 border border-gray-200 rounded-2xl hover:shadow-md transition-all">
+                  <div className="flex items-center gap-2 mb-3">
+                    <FaStar className="text-yellow-500" />
+                    <span className="font-semibold text-gray-900">{cs.client}</span>
                   </div>
-                </TiltCard>
-              </motion.div>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link to="/portfolio" className="text-primary font-semibold hover:underline">
-              View Full Portfolio →
-            </Link>
-          </div>
-        </section>
-
-        {/* FAQs Section */}
-        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft mb-8">
-          <h2 className="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
-          <div className="max-w-3xl mx-auto space-y-4">
-            {service.faqs.map((faq, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="p-6 bg-gray-50 rounded-2xl"
-              >
-                <h3 className="font-bold mb-2">{faq.q}</h3>
-                <p className="text-gray-600">{faq.a}</p>
-              </motion.div>
-            ))}
+                  <div className="text-2xl font-black mb-2" style={{ color: accent }}>{cs.result}</div>
+                  <p className="text-gray-500">{cs.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+            <div className="mt-8">
+              <Link to="/portfolio" className="inline-flex items-center gap-1.5 font-semibold hover:underline" style={{ color: accent }}>
+                View Full Portfolio <FaArrowRight className="text-xs" />
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* Related Services */}
-        <section className="bg-white rounded-3xl p-6 md:p-12 shadow-soft mb-8">
-          <h2 className="text-3xl font-bold text-center mb-10">Related Services</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {service.relatedServices.map((relatedId, idx) => {
-              const relatedService = servicesData[relatedId];
-              if (!relatedService) return null;
-              const RelatedIcon = relatedService.icon;
-              return (
-                <Link key={idx} to={`/service/${relatedId}`}>
-                  <motion.div
-                    whileHover={{ y: -5 }}
-                    className="p-6 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-colors"
-                  >
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${relatedService.gradient} text-white flex items-center justify-center mb-4`}>
+        {/* FAQs */}
+        <section className="relative bg-[#f5f5f5] py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
+            <SectionLabel num={5} title="FAQs" />
+            <div className="space-y-3">
+              {service.faqs.map((faq, idx) => (
+                <motion.div key={idx}
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.45, delay: idx * 0.06, ease }}
+                  className="p-6 bg-white border border-gray-200 rounded-2xl">
+                  <h3 className="font-bold mb-2 text-gray-900">{faq.q}</h3>
+                  <p className="text-gray-500 leading-relaxed">{faq.a}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Related services */}
+        <section className="relative bg-white py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+            <SectionLabel num={6} title="Related Services" />
+            <div className="grid md:grid-cols-3 gap-3">
+              {service.relatedServices.map((relatedId, idx) => {
+                const relatedService = servicesData[relatedId];
+                if (!relatedService) return null;
+                const RelatedIcon = relatedService.icon;
+                const rAccent = accentById[relatedId] || '#6366f1';
+                return (
+                  <Link key={idx} to={`/service/${relatedId}`}
+                    className="group bg-gray-50 border border-gray-200 rounded-2xl p-6 hover:shadow-md hover:border-gray-300 transition-all">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                      style={{ backgroundColor: `${rAccent}18`, color: rAccent }}>
                       <RelatedIcon className="text-xl" />
                     </div>
-                    <h3 className="font-bold mb-2">{relatedService.shortTitle}</h3>
-                    <p className="text-sm text-primary">{relatedService.price.starting}{relatedService.price.period}</p>
-                  </motion.div>
-                </Link>
-              );
-            })}
+                    <h3 className="font-bold mb-1 text-gray-900">{relatedService.shortTitle}</h3>
+                    <p className="text-sm font-semibold" style={{ color: rAccent }}>{relatedService.price.starting}{relatedService.price.period}</p>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className={`bg-gradient-to-r ${service.gradient} rounded-3xl p-8 md:p-12 text-center text-white`}>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
-          <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-            Get a FREE consultation and detailed quote within 2 hours. No commitment required.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/contact">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white text-gray-900 rounded-full font-semibold flex items-center gap-2"
-              >
-                Get Free Quote <FaArrowRight />
-              </motion.button>
-            </Link>
-            <Link to="/pricing">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white/10 text-white border border-white/30 rounded-full font-semibold"
-              >
-                View Pricing
-              </motion.button>
-            </Link>
+        {/* CTA */}
+        <section className="relative bg-[#f5f5f5] py-16 md:py-24 overflow-hidden">
+          <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12">
+            <div className="relative rounded-[2rem] bg-[#111318] p-10 md:p-14 text-center text-white overflow-hidden">
+              <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: `${accent}4d` }} />
+              <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-600/30 rounded-full blur-3xl" />
+              <div className="relative z-10">
+                <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4">Ready to Get Started?</h2>
+                <p className="text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+                  Get a FREE consultation and detailed quote within 2 hours. No commitment required.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Link to="/contact"
+                    className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 px-7 h-12 rounded-xl font-bold text-sm hover:bg-gray-100 transition-colors">
+                    Get Free Quote <FaArrowRight size={12} />
+                  </Link>
+                  <Link to="/pricing"
+                    className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-7 h-12 rounded-xl font-bold text-sm hover:bg-white/20 transition-colors">
+                    View Pricing
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* SEO Text */}
         <SEOText page="services" />
-      </ModernPageLayout>
+      </PageShell>
     </>
   );
 };

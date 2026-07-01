@@ -128,6 +128,24 @@ export const projects = [
     bgGradient: 'from-teal-400 to-cyan-500',
     tags: ["React", "MongoDB", "SEO"],
   },
+  {
+    id: 8,
+    title: "Freelysta",
+    category: "web",
+    description: "A revolutionary freelancing platform connecting talented professionals with businesses worldwide. Freelysta offers seamless project management, secure payments, and AI-powered matching to help freelancers and clients succeed together.",
+    shortDesc: "Next-Gen Freelancing Platform",
+    technologies: ["React", "Next.js", "Node.js", "PostgreSQL", "Stripe", "AI/ML"],
+    image: "https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    link: "https://freelysta.com",
+    stats: { freelancers: '1K+', projects: '500+', rating: '4.9' },
+    features: ['AI Matching', 'Escrow Payments', 'Project Management', 'Real-time Chat'],
+    color: 'from-indigo-500 to-purple-500',
+    // Additional fields for carousel
+    icon: FaGlobe,
+    accentColor: '#6366F1',
+    bgGradient: 'from-indigo-400 to-purple-500',
+    tags: ["React", "Next.js", "AI/ML"],
+  },
 ];
 
 export const categories = [

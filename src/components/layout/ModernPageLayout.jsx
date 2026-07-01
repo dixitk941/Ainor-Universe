@@ -26,9 +26,10 @@ const ModernPageLayout = ({ children, className = '' }) => {
         >
           {children}
         </motion.div>
-        
-        <ModernFooter />
       </main>
+
+      {/* Full-bleed footer — matches the homepage */}
+      <ModernFooter />
     </motion.div>
   );
 };
