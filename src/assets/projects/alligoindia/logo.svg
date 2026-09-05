@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48">
+  <rect x="2" y="10" width="28" height="28" rx="8" fill="#10b981"/>
+  <path d="M11 24c0-4 3-7 5-7s5 3 5 7-3 7-5 7-5-3-5-7z" fill="#fff"/>
+  <text x="40" y="31" font-family="Poppins, Arial, sans-serif" font-size="20" font-weight="700" fill="#0f766e">AlligoIndia</text>
+</svg>

@@ -9,6 +9,7 @@ import goforcabLogo     from '../../assets/projects/goforcab/logo.png';
 import exambulletinLogo from '../../assets/projects/exambulletin/favicon.svg';
 import mohangLogo       from '../../assets/projects/mohangenterprises/logo.png';
 import livestayyLogo    from '../../assets/projects/livestayy/ic_launcher.png';
+import alligoindiaLogo  from '../../assets/projects/alligoindia/logo.svg';
 
 const reviews = [
   { name: 'Karan Dixit',   role: 'Founder, Freelysta',         logo: freelystaLogo,    avatar: 'KD', from: '#6366f1', to: '#818cf8',
@@ -23,6 +24,8 @@ const reviews = [
     review: 'Lakhs of users ek saath visit karte hain, aur abhi tak crash nahi hua. Inki dedication ne humein woh bana diya jo hum aaj hain. Dil se shukriya!' },
   { name: 'Mohan Gupta',   role: 'Owner, Mohan G Enterprises', logo: mohangLogo,       avatar: 'MG', from: '#f59e0b', to: '#fcd34d',
     review: 'AINOR ne na sirf website banayi, poori digital journey samjhaayi. Jo result mila woh expectation se kaafi zyada tha. Sachchi dil lagate hain ye log.' },
+  { name: 'Krishna',       role: 'Founder, AlligoIndia',       logo: alligoindiaLogo,  avatar: 'K',  from: '#10b981', to: '#34d399',
+    review: 'AINOR ne project ko apne khud ke personal project ki tarah handle kiya — bilkul ek family ki tarah. Har chhoti detail pe dhyaan diya aur humara skincare store exactly waisa banaya jaisa humne socha tha.' },
 ];
 
 const AUTO_MS = 4000;

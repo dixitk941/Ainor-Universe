@@ -146,6 +146,24 @@ export const projects = [
     bgGradient: 'from-indigo-400 to-purple-500',
     tags: ["React", "Next.js", "AI/ML"],
   },
+  {
+    id: 9,
+    title: "AlligoIndia Shop",
+    category: "ecommerce",
+    description: "An online e-commerce store for skincare products, offering a curated range of skin care essentials with a clean shopping experience, secure checkout, and fast delivery.",
+    shortDesc: "Skincare Products E-commerce Store",
+    technologies: ["React", "Node.js", "MongoDB", "TailwindCSS", "Payment Gateway"],
+    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    link: "https://alligoindia.shop/",
+    stats: { products: '100+', orders: '500+', rating: '4.8' },
+    features: ['Product Catalog', 'Secure Checkout', 'Order Tracking', 'Fast Delivery'],
+    color: 'from-emerald-500 to-teal-500',
+    // Additional fields for carousel
+    icon: FaShoppingCart,
+    accentColor: '#10B981',
+    bgGradient: 'from-emerald-400 to-teal-500',
+    tags: ["React", "Node.js", "MongoDB"],
+  },
 ];
 
 export const categories = [
